@@ -1,0 +1,1 @@
+from Layo.wsgi import application

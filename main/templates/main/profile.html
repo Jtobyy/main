@@ -1,0 +1,92 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+tailorProfile
+{% endblock %}
+{% block random %}
+<form id="form" class="nodisplay" enctype="multipart/form-data">
+    {% csrf_token %}
+</form>
+{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+{% endblock %}
+
+{% block main %}
+    <section class="profile-section">
+        <div class="profile">
+            <a title="background" onclick="profileBackground('{{ profileinfo.user.id }}')"><img id="backgroundImage" class="background-image" src="{{ profileinfo.background_image.url }}"></a>
+            <div class="profile-info">
+                <div class="profile-image"  tabindex="0">
+                    <a title="profile image" onclick="profileImage('{{ profileinfo.user.id }}')"><img id="profileImage" src="{{ profileinfo.profile_image.url }}"></a>
+                </div>
+                <div class="user-info">
+                    <div class="profile-user-name" title="username">
+                        <h1>{{ profileinfo.user }}</h1>
+                    </div>
+                    <p class="spec-info"> Specification: <span>{{ profileinfo.gender_spec }}</span></p>
+                    <div class="user-contact"> 
+                        <h3>Contact</h3>
+                        <table class="contact-table">
+                            <tr>
+                                <td>Location: </td>
+                                <td><span>{{ profileinfo.location }}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Phone number: </td> 
+                                <td><span>{{ profileinfo.phone_no }}</span></td>
+                            </tr>
+                            {% if profileinfo.email %}
+                                <tr>
+                                    <td>email address: </td>
+                                    <td><span>mememe@email.com</span></td>
+                                </tr>
+                            {% endif %}
+                            {% if profileinfo.facebook %}
+                                <tr>
+                                    <td>facebook address: </td>
+                                    <td><span>memyselfi</span></td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+        <!-- End of profile section -->
+    </section>
+
+    <div class="mmain-container">
+        <div class="grid">
+            <div class="grid-header">
+                <div class="grid-header-item" tabindex="0">
+                    <i class="bi-grid-3x3-gap"></i>
+                    <h3> Posts </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% if clothes %}
+            {% for obj in clothes %}
+                <div class="col-sm-4 showitem">
+                    <a href="{% url 'main:clothe_sample' clothe_id=obj.id %}"><img class="grid-item" src="{{ obj.image.url }}" alt=" " ></a>
+                    <div class="info">
+                        <span class="price"> {{ obj.price }} </span>
+                        <span class="category"> {{ obj.category }} </span>
+                    </div>
+                </div>
+
+            {% endfor %}
+            {% else %}
+                <div class="empty">
+                    <p class="empty-text"> You have no posts yet. </p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/profile.js' %}"></script>
+<script src="{% static 'main/js/jquery-3.6.0.min.js' %}"></script>
+{% endblock %}

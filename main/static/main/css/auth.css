@@ -1,0 +1,89 @@
+:root {  
+  --themecolor: rgb(203 83 83);
+  --headercolor: rgb(82,232,217);
+}
+
+body{
+  /*background: url(../images/static-4bc0d4e4-bf2d-11eb-b207-4201c0a80002.jfif) no-repeat;*/
+  background: white;
+  background-size: cover;
+  background-position:center;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+  height: 4em;
+  position: relative;
+  border-bottom: 1px solid black;
+  transition: all 0.5s;
+  padding: 0 2em;
+}
+
+.link-icon {
+  color: rgb(251,237,211);
+  transition: all 0.15s;
+}
+  .link-icon:hover {
+    color: rgb(250,218,217);
+  }
+
+
+.form-container {
+    margin: 30px;
+    border: 1px solid black;
+    width: fit-content;
+}
+
+.form-container form {
+    padding: 30px 50px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family:sans-serif;
+    color: black;
+    font-size: 1.07em;
+}
+.form-container label {
+  font-weight: 400;
+}
+input {
+  width: 250px !important;
+  height: 34px !important;
+  font-size: 1.05em !important;
+}
+
+#forgot_pass{
+    position: relative;
+    top: 40px;
+    font-weight: 400;
+    font-size: small;
+ }
+
+ #forgot_pass a
+ {
+    color: rgb(139 101 100);
+ }
+
+ .alt-sign
+ {
+  padding:20px;
+  text-align: center;
+ }
+
+ .sign-up, .sign-in {
+    background-color:  transparent;
+    transition: all 1s;
+  }
+ .sign-in:hover {
+   background-color: rgb(209,244,239);
+ }
+ 
+ .sign-up:hover {
+   background-color: rgb(251,237,212);
+ }
+
+ .mbtn {
+   margin-top: 12px;
+ }

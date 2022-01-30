@@ -1,0 +1,20 @@
+
+<form id="sign-in" class="sign-in" action="{% url 'main:login' %}" method="POST">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="user_id">Username</label>
+            <input type="username" name="username" id="user_id" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pass_id">Password</label>    
+            <input type="password" name="password" id="pass_id" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-dark mbtn">Submit</button>
+        <div class="form-group" id="forgot_pass">
+            <a href="#">Forgot Password</a>
+        </div>
+        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+    </form>
+    <div class="alt-sign">
+        New member?  <button type="button" class="btn btn-outline-dark" onclick="signUp()">Sign Up</button>
+</div>

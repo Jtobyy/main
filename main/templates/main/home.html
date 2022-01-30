@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container mmain-container">
+    <div class="row theme_cover">
+        <div class="col">
+            <div class="cover_img"></div>
+        </div>
+    </div>
+    <div class="row" id="image_show">
+        {% if query_obj %}.
+        {% for obj in query_obj %}
+            <div class="col-sm-6">
+                <div class="img">
+                    <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+                </div>
+                <div class="info">
+                    <span class="price"> {{ obj.price }} </span>
+                    <a href='{% url "main:tailorProfile" tailor=obj.company_name.id %}'><span class="company"> {{ obj.company_name }} </span></a>
+                    <span class="category"> {{ obj.category }} </span>
+                </div>
+            </div>
+        {% endfor %}    
+        {% endif %}
+    </div>
+</div>
+<div class="filter filter_more" id="filter_container">
+    <i class='bi-filter-right filterToggle' id="filter_toggle"></i>    
+    <form method="POST" action="{% url 'main:home' %}" id="filter_form">
+    {% csrf_token %}    
+    <ul class="list">
+        <li>
+            <input type="checkbox" name="M">
+            <span> male </span>
+        </li>
+        <li>
+            <input type="checkbox" name="F">
+            <span> female </span>
+        </li>
+        <li>
+            <input type="checkbox" name="B">
+            <span> baby </span>
+        </li>
+        <li>
+            <input type="checkbox" name="T">
+            <span> traditional </span>
+        </li>
+        <li>
+            <input type="checkbox" name="O">
+            <span> modern </span>
+        </li>
+        <li>
+            <input type="checkbox" name="C">
+            <span> classic </span>
+        <li class="reload">
+            <button><a href="#image_show"><i class='bi-arrow-clockwise' type='submit'></i></a></button>
+        </li>
+    </ul>
+    </form>
+</div>
+<div class="loadMore">
+    
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/home.js' %}"></script>
+{% endblock %}

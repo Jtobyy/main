@@ -1,0 +1,292 @@
+*,
+*::before,
+*::after {
+    box-sizing: padding-box;
+}
+main {
+    display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+ul {
+    list-style-type: none;
+}
+
+.dim {
+    z-index: 1;
+    display: flex;
+}
+
+section.profile-section {
+    width: 80vw;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 2em;
+    box-sizing: content-box;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    width: 100%;
+}
+.background-image {
+    height: 250px;
+    cursor: pointer;
+}
+.profile-image {
+    background-size: 100%;
+    cursor: pointer;
+    width: 9em;
+    height: 9em;
+    border: 0em;
+    border-radius: 50%;
+ }
+ .profile-image a img {
+    width: 9em;
+    height: 9em;
+    border-radius: 50%;
+    margin-bottom: 7px;
+    object-fit: cover;
+    border: .2em solid white;
+}
+
+ .profile-image img {
+     object-fit: cover;
+     width: 100%;
+     height:100%;
+     border-radius: 50%;
+ }
+
+.profile-info {
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -89px;
+}
+
+.profile .profile-info {
+    margin: 0px 0px 0px 50px;
+    padding: 5px;
+}
+
+.user-info {
+    margin-top: 2em;
+}
+.profile-user-name {
+    position: relative;
+    top: -5em;
+    left: 5em;
+}
+.profile-user-name h1{
+    font-size: 1.4em;    
+    font-weight: lighter;
+    text-align:center;
+    font-family: cursive;
+}
+.user-contact {
+    margin-top: 40px;
+}
+h3, h1 {
+    font-size: 1em;
+    color: rgb(203 83 83);
+}
+.user-contact, 
+.spec-info {
+    font-family: emoji;
+    font-weight: 200;
+    font-size: 1.3em;
+    color: grey;
+}
+.user-contact span,
+.spec-info span {
+   margin: 0px 30px; 
+}
+.contact-table {
+    margin: 1em;
+}
+tr {
+    height: 2em;
+}
+
+.profile-stats{
+    position: relative ;
+    margin-left: -15px;
+}
+.profile-stats ul li
+{
+    display: inline-block;
+    padding: 15px;
+}
+.grid 
+{
+    display: grid;
+    grid-template-rows: 50px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-columns: 1fr;
+    margin-bottom: 30px;
+}
+.grid .grid-header
+{
+    grid-column: 1 / 4;
+    display: flex;
+    justify-content: center;
+}
+.grid-header-item
+{
+    display: flex;   
+    cursor: pointer;
+    opacity: 0.8;
+    padding: 10px;
+}
+
+.grid-header-item:hover, 
+.grid-header-item:focus
+{
+    opacity: 1;
+}
+
+.grid-header h3
+{
+    font-variant: small-caps;
+    font-weight: lighter;
+    font-size: 1.2em;
+    padding: 4px;
+}
+.grid-header i{
+    font-size: 1.2em;    
+    padding: 2px;
+}
+.showitem {
+    margin-bottom: 3.5em;
+}
+.showitem img {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+}
+.mmain-container {
+    padding: 10px;
+    border-radius: 3px;
+    max-width: 100%;
+  }
+    .info {
+        height: 4em;
+        background-color: transparent;
+        text-align: center;
+        line-height: 1em;
+        }
+        .info span {
+        font-size: small;
+        display: block;
+        font-weight: 100;
+        }
+        .price {
+          padding: 2px;
+          margin: 0.2em;
+          font-size: medium !important;
+        }
+        .price:before {
+        content: 'N';
+        }
+        
+
+.empty {
+    grid-column: 2/3;
+    padding: 2em;
+}    
+ .empty-text {
+     font-weight: 200;
+ }  
+ 
+.bi-pencil {
+    font-size: 0.8em;
+}
+
+.display {
+    text-align: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    background-color: rgb(29,34,38);
+    border-radius: 10px;
+    color: rgb(203 83 83);
+    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
+    width: 70%;
+    z-index: 3;
+    margin-top: 1em;
+    position: fixed;
+    transition: all 0.3s;
+}
+.display_hidden {
+    display: none;
+}
+.image {
+    height: 70%;
+}
+.pimage {
+    height: 50%;
+    border-radius: 50%;
+    margin-top: 80px;
+    align-self: flex-start;
+    object-fit: contain;
+}
+.bi-x-lg{
+    color: skyblue;
+    position: absolute;
+    right: 30px;
+    cursor: pointer;
+    top: 15px;
+    font-size: 1.5em;
+}
+.bi-camera-fill {
+    font-size: 2em;
+}
+.light {
+    color: aliceblue;
+}
+.dark {
+    color: black;
+}
+input[type="file"],
+.nodisplay {
+    display: none;
+}
+input[type="submit"] {
+    position: relative;
+    bottom: 5px;    
+    border-radius: 5px;
+    margin-left: 50px;
+    font-size: 0.9em;
+}
+
+
+.custom-file-upload {        
+    bottom: 10px;
+    align-self: center;    
+    cursor: pointer;
+    font-size: 1.2em;
+    color: aliceblue;
+}
+.form {
+    display: block;    
+    position: absolute;
+    bottom: 0px;    
+    align-self: center;
+    text-align: center;
+}
+
+#file-selected {
+    position: absolute;
+    bottom: 5px;
+    margin-left: -200%;
+    color: wheat;
+    width: 500px;
+}
+
+@media screen and (max-width: 576px){
+    
+  }

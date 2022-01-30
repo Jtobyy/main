@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>
+        {% block title %}
+        {% endblock %}
+        </title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'main/css/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">        
+        <link rel="stylesheet" href="{% static 'main/css/font/bootstrap-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+        {% block links %}
+        {% endblock %}
+    </head>
+    <body>
+    {% block random %}    
+    {% endblock %}
+    {% if messages %}	
+            <div class="messages">
+            <ul>
+                {% for message in messages %}
+                <li {% if message.tags %} class="alert {{message.tags}} alert-dismissible fade show" {% endif %} role="alert">
+                    {{ message }}	
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+	{% endif %}    
+
+    {% block header %}
+    <header tabindex="0">
+        <div class="header-container" id="header" style="top: 0em">
+            <div id="sidebartoggle" class="sidebartoggle" onclick="toggleSidebar()">
+                <div class='toggleline' id="toggleline1"></div>
+                <div class='toggleline' id="toggleline2"></div>
+                <div class='toggleline' id="toggleline3"></div>
+            </div>        
+            <div class="logo" tabindex="0">
+                <a href="{% url 'main:welcome' %}" class="black-link small-cap">L'AYO</a>
+            </div>
+            <nav class="header-nav nav1">    
+                <ul>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li>
+                </ul>
+            </nav>
+            <nav class="header-nav nav2">
+                <ul>
+                    <li class="link-icon nav-item">
+                        <span>Fabric</span>
+                        <ul class="dropdown" id='fabricDropdown' tabindex="0">
+                            <li><a>Guinea</a></li>
+                            <li><a>Senator</a></li>
+                            <li><a>Various other materials</a></li>
+                        </ul>    
+                    </li>                        
+                    <li class="link-icon nav-item"><span>Tailors</span></li>
+                    <li class="link-icon nav-item"><span>Fashion Designers</span></li>
+                </ul>
+            </nav>
+            <nav class="header-nav nav3">
+                <ul>
+                    <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
+                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                </ul>    
+            </nav>
+            {% if request.user == AnonymousUser %}   
+                <a href="{% url 'main:auth' %}" class="user">    
+                    <button class='logInOut btn-outline-dark'>
+                        <p>Sign In/Up</p>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </a>    
+            {% else %}
+            <div class="user">    
+                <span class="username">
+                    {{ request.user }}
+                </span> 
+                <a href="{% url 'main:logout' %}" class="user">    
+                    <button class='logInOut btn-outline-dark'>
+                        Logout
+                    </button>
+                </a>
+            </div>
+            {% endif %}
+            </div>
+            <div class='sidebar closed' id='sidebar'>
+            
+            {% block sidenav %}    
+            <ul>
+                <li title="home" class="header-icon"><a class="link-icon" href="{% url 'main:home' %}">Home</a></li>
+                <br><br>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li>
+                <br>
+                <li class="link-icon nav-item">Fabric</li>
+                <li class="link-icon nav-item">Tailors</li>
+                <li class="link-icon nav-item">Fashion Designers</li>
+                <br>
+                <li title="help" class="header-icon small-icon"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
+                <li title="help" class="header-icon small-icon small-cap"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>                                
+            </ul>
+            {% endblock %}    
+            </div>
+    </header>
+    {% endblock %}
+    
+    <div class="body-container" id="body-container">
+        <div class="main" id="main">
+            <main>
+                {% block main %}
+                {% endblock %}
+            </main>
+        </div>
+        <footer>
+            <div class="footer">
+                <div class="company">
+                    <h3>The Company</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">About us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Blog</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Return Policy</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="services">
+                    <h3>Services</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Fabrics</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Tailors</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Fashion designers</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="Questions">
+                    <h3>Questions?</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Help</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="join">
+                    <h3>Be a tailor on L'ayo</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">How to</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:join' %}" class="footer-link">Terms and Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="contact">
+                    <h3>Contact and connect with us</h3>
+                    <ul>
+                        <li><a href=""><i class="bi-instagram"></i></a></li>
+                        <li><a href=""><i class="bi-twitter"></i></a></li>
+                        <li><a href=""><i class="bi-facebook"></i></a></li>
+                        <li><a href=""><i class="bi-whatsapp"></i></a></li>
+                        <li><a href=""><i class="bi-tiktok"></i></a></li>
+                    </ul>
+                </div>
+                
+                <div class="copyright">
+                    &copy; L'ayo 2022
+                </div>
+            </div>
+        </footer>
+    {% block headertoggle %}
+    <!--
+        <div class="toggle-header">
+            <span class="arrow-up" id="arrow-up" onclick="toggleHeader()"><i class="bi-arrow-90deg-up"></i></span>
+        </div>
+        -->
+    {% endblock %}
+    </div>
+    <script src="{% static 'main/js/jquery.min.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>    
+    <script src="{% static 'main/js/base.js' %}"></script>    
+    {% block scripts %}
+    {% endblock %}
+    </body>
+</html>

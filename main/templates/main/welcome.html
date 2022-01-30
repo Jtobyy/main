@@ -1,0 +1,223 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/welcome.css' %}">
+{% endblock %}
+
+{% block header %}
+<header tabindex="0">
+        <div class="header-container" id="header" style="top: 0em">
+            <div id="sidebartoggle" class="sidebartoggle" onclick="toggleSidebar()">
+                <div class='toggleline' id="toggleline1"></div>
+                <div class='toggleline' id="toggleline2"></div>
+                <div class='toggleline' id="toggleline3"></div>
+            </div>        
+            <div class="logo" tabindex="0">
+                <a href="{% url 'main:welcome' %}" class="black-link small-cap">L'AYO</a>
+            </div>
+            <nav class="header-nav nav1">    
+                <ul>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
+                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
+                </ul>
+            </nav>
+            <nav class="header-nav nav2">
+                <ul>
+                    <li class="link-icon nav-item">
+                        <span>Fabric</span>
+                        <ul class="dropdown" id='fabricDropdown' tabindex="0">
+                            <li><a>Guinea</a></li>
+                            <li><a>Senator</a></li>
+                            <li><a>Various other materials</a></li>
+                        </ul>    
+                    </li>                        
+                    <li class="link-icon nav-item"><span>Tailors</span></li>
+                    <li class="link-icon nav-item"><span>Fashion Designers</span></li>
+                </ul>
+            </nav>
+            <nav class="header-nav nav3">
+                <ul>
+                    <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
+                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                </ul>    
+            </nav>
+            {% if request.user == AnonymousUser %}   
+                <a href="{% url 'main:auth' %}" class="user">    
+                    <button class='logInOut btn-outline-dark'>
+                        <p>Sign In/Up</p>
+                        <span class="glyphicon glyphicon-user"></span>
+                    </button>
+                </a>    
+            {% else %}
+            <div class="user">    
+                <span class="username">
+                    {{ request.user }}
+                </span> </p> 
+                <a href="{% url 'main:logout' %}" class="user">    
+                    <button class='logInOut btn-outline-dark'>
+                        Logout
+                    </button>
+                </a>
+            </div>
+            {% endif %}
+            </div>
+            <div class='sidebar closed' id='sidebar'>
+            
+            {% block sidenav %}    
+            <ul>
+                <li title="home" class="header-icon"><a class="link-icon" href="{% url 'main:home' %}">Home</a></li>
+                </br></br>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
+                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
+                </br>
+                <li class="link-icon nav-item">Fabric</li>
+                <li class="link-icon nav-item">Tailors</li>
+                <li class="link-icon nav-item">Fashion Designers</li>
+                </br>
+                <li title="help" class="header-icon small-icon"><a class="link-icon" href="{% url 'main:welcome' %}#info" onclick="scrollV()">How it works</a></li>
+                <li title="help" class="header-icon small-icon small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq" onclick="scrollV()">faq</a></li>
+            </ul>
+            {% endblock %}    
+            </div>
+        </div>
+    </header>
+{% endblock %}
+{% block main %}
+<div class="wlcPic" id="slideShow">
+    <div id="wrap">
+        <div class="slideimg" id="slide1">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0005.jpg' %}">
+            <h1><span> Best fabrics on the market </span></h1>
+        </div>
+        <div class="slideimg" id="slide2">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0000.jpg' %}">
+            <h1><span> Exactly what you ordered </span></h1>
+        </div>      
+        <div class="slideimg" id="slide3">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0018.jpg' %}">
+            <h1><span> Your favourite tailoring site </span></h1>
+        </div>
+        <div class="slideimg" id="slide4">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0006.jpg' %}">
+            <h1><span> Attractive designs </span></h1>
+        </div>
+    </div>
+</div>    
+<div class="page-content">
+    <p class="random"> Fast, Easy and Reliable. <i class="bi-lightning-charge"></i></p>     
+        
+    <div class="catwrapper">
+        <h2 class="re-header"> Popular categories </h2>        
+        <div class="row category">
+            <div class="col category-item">
+                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Female clothings </span>
+            </div>
+            <div class="col category-item">
+                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Male clothings </span>
+            </div>
+            <div class="col category-item">
+                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Infants </span>
+            </div>
+        </div>
+        <div class="row category justify-content-center">
+            <div class="col-4 category-item">
+                <a href="#"><img src="{% static 'main/images/dressmaker-1416196.jpg' %}"></a>
+                <span class="caption"> Traditional attires </span>
+            </div>
+            <div class="col-4 category-item">
+                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Modern clothings </span>
+            </div>
+            <!--
+            <div class="col-4 category-item">
+                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Classic clothings </span>
+            </div>
+            -->
+        </div>
+        <p><a href="">View more</a></p>
+    </div>
+    <!-- small width screen display of category -->
+    <div class="row mobcategory">
+        <div class="col category-item">
+            <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+            <span class="caption"> Female clothings </span>
+        </div>
+        <div class="col category-item">
+            <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+            <span class="caption"> Male clothings </span>
+        </div>
+    </div>
+    <div class="row mobcategory">
+        <div class="col category-item">
+            <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+            <span class="caption"> Infants </span>
+        </div>    
+        <div class="col category-item">
+            <a href="#"><img src="{% static 'main/images/dressmaker-1416196.jpg' %}"></a>
+            <span class="caption"> Traditional attires </span>
+        </div>
+    </div>
+    <div class="row mobcategory justify-content-center">
+        <div class="col-6 category-item">
+            <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+            <span class="caption"> Modern clothings </span>
+        </div>
+        <!--
+        <div class="col-4 category-item">
+            <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+            <span class="caption"> Classic clothings </span>
+        </div>
+        -->
+    </div>
+    <!-- mobile end -->
+    <!--<div class=anchorwrap><a href="#main" onclick="scrollV()" class="top-anchor" id="topaid">Back to top <i class="bi-arrow-up"></i></a></div>-->
+    <div class="info" id="info">
+        <h2> How it works </h2>
+    </div>
+    <div class="faq" id="faq">
+        <h2> Frequently Asked Questions </h2>
+    </div>
+    <div class="container">
+        <h2 class="re-header"> We've got you covered </h2>
+        <div class="row re">
+            <div class="col re-item">
+                <div>
+                    <h3>Within 7 days</h3>
+                    <p>Orders are guranteed to be delivered within 7days</p>
+                    <p class="learn-more">learn more ></p>
+                </div>
+                <div>
+                    <i class="bi-minecart"></i>
+                </div>
+            </div>
+            <div class="col re-item">
+                <div>
+                    <h3>Best Tailors</h3>
+                    <p>Our tailors are wells seasoned and experienced</p>
+                    <p class="learn-more">learn more ></p>
+                </div>
+                <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            </div>
+            <div class="col re-item">
+                <div>
+                    <h3>Protected Financial</h3>
+                    <p>Orders are guranteed to be delivered within 7days</p>
+                    <p class="learn-more">learn more ></p>
+                </div>
+                <div>
+                    <i class="bi-shield-check"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'main/js/welcome.js' %}"></script>    
+{% endblock %}

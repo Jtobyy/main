@@ -1,0 +1,23 @@
+<form id="sign-up" class="sign-up" action="{% url 'main:register' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username </label>
+        {{ register_form.username }}
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>    
+        {{ register_form.email }}
+    </div>
+    <div class="form-group">
+        <label for="password1">Password</label>    
+        {{ register_form.password1 }}
+    </div>
+    <div class="form-group">
+        <label for="password2">Confirm Password</label>    
+        {{ register_form.password2 }}
+    </div>
+    <button type="submit" class="btn btn-dark mbtn">Submit</button>
+</form>
+<div class="alt-sign">
+    Already a member?  <button type="button" class="btn btn-outline-dark" onclick="signIn()">Sign In</button>
+</div>

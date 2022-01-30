@@ -1,0 +1,473 @@
+:root {  
+  --themecolor: rgb(203 83 83);
+  --headercolor: rgb(82,232,217);
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(white, rgba(225, 225, 225, 0.8), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
+  font-size: 13px;
+  font-family: 'Cormorant SC', serif;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.body-container {
+  margin: 0px;
+  padding: 0px;
+  overflow: auto;
+  position: relative;
+  transition: top 0.5s;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+    height: 4em;
+    position: relative;
+    border-bottom: 1px solid black;
+    transition: all 0.5s;
+    padding: 0 2em;
+}
+
+.header-nav {
+  position: normal;
+}
+.header-nav ul li {
+  display: inline-block;
+  margin: 0 .6em;
+}
+.nav1 {
+  margin-left: 25px;
+}
+.nav2 {
+  position: relative;
+  left: 20px;
+}
+.nav3 {  
+  margin-right: -35px;
+}
+.link-icon {
+  font-size: 1em;
+  font-weight: 350;  
+  color: rgb(203 83 83) !important;
+  transition: all 0.15s;
+  cursor: pointer;
+  position: relative;
+}
+.link-icon:hover {
+  color: rgba(203, 83, 83, 0.5);
+}
+.nav-item {
+  padding: 30px 0;
+}
+.nav-item span:hover {
+  color: rgba(203, 83, 83, 0.8) !important;
+  transition: color .1s;
+}
+.nav-item:hover .dropdown{
+  display: block;
+  box-sizing: border-box;
+  padding: 1em .5em;
+  position: absolute;
+  top: 4.8em;
+  height: 40vh;
+  text-align: left;
+  width: max-content;
+  justify-content: flex-start;
+  background: linear-gradient(to bottom,rgb(250,250,250), rgb(251,251,251), white);
+  z-index: 2;
+}
+.nav2 ul li:first-child:hover span{
+  color: rgb(156 24 24) !important;
+  font-weight: 400;
+  transition: all .1s;
+} 
+.dropdown{
+  display: none;
+}
+.dropdown li{
+  display: block !important;
+  margin: .6em 1em !important;
+  font-weight: 400 !important;
+}
+.hidden {
+  display: none;
+}
+.header-icon {
+  font-size: 1em;
+  display: inline-block;
+}
+
+.header-icon a{
+  margin: 2em;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+.user:hover {
+  text-decoration: none;
+}
+.user span {
+  padding: 0.3em;
+}
+
+  .toggle-header {
+    position: fixed;
+    top: 1em;
+    left: 0.5em;
+    cursor: pointer;
+  }  
+  
+  .arrow-up {
+    color: rgb(98 234 234);
+    transition: all 0.15s;
+  }
+    .arrow-up:hover {
+      color: rgba(98, 234, 234, 0.9);
+    }
+
+header .logo {
+  font-weight: 900;
+  font-size: 1.9em;
+  padding: 15px;
+  position: absolute;
+}
+
+
+div.main {
+  display: flex;
+  justify-content: center;
+  margin: 0px 30px;
+  min-height: 70vh;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 10px;
+  border-top: 0.5px solid black;
+  position: relative;
+  background: linear-gradient(to left, rgb(0, 0, 0, 0.7),rgb(0, 0, 0, 0.9), rgb(0,0,0,1));
+  color: rgb(249,219,219);
+  font-size:small;
+  min-height: 50vh;
+  width: 100%;
+}
+footer div {
+  padding: 50px;
+  border-top: 0px;
+  border-bottom: 0px;
+  transition: all 0.6s;
+}
+footer div:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+footer h3 {
+  font-size: 2em;
+  padding: 0 0 10px 20px;
+  font-variant: small-caps;
+  color: rgb(82,232,217);
+}
+footer ul {
+  text-align: left;
+}
+footer li {
+  padding: 5px 20px;
+}
+.footer-link{
+  color:inherit;
+}
+
+.footer-link:hover {
+  color: rgb(209,244,238);
+}
+.join, .contact {  
+  border-top: 0.05px;
+}
+.contact {
+  grid-column: 3/4;
+  margin-left: -130px;
+}
+
+.contact i {
+  font-size: 1.5em;
+  height: 40px;
+  color: var(--headercolor);
+}
+.contact ul {
+  position: relative;
+  left: 45px;
+}
+.contact ul li {
+  display: inline-block;
+
+}
+.contact i:hover {
+  color: rgb(195 251 245);
+  transition: color 0.4s;
+}
+
+.copyright {
+  font-weight: 200;
+  font-size: small;
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+  padding: 10px;
+}
+
+.messages
+{
+  z-index: 3;
+  display: flex;
+  position: absolute;
+  width: 30em;
+  height: 1em;
+  left: 50%;
+  margin-left: -17em;
+  opacity: 0.98;
+}
+.messages * {
+  position:relative;
+  bottom: 7px;
+}
+.close {
+  margin-top: 5px;
+}
+ul {
+  display: table-row;
+  text-align: center;
+  list-style-type: none;
+}
+.debug {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(182, 182, 47, 0.5);
+  }
+  .info {
+    width: 100%;
+    height: 100%;     
+    background-color: gainsboro;
+  }
+  .success {
+    width: 30em;
+    height: 2.5em;
+    background-color: rgba(144, 238, 144, 0.5);
+  }
+  .warning {
+    width: 100%;
+    height: 100%;        
+    background-color: rgba(231, 241, 38, 0.3);
+  }
+  .error {
+    width: 100%;
+    height: 100%;        
+    background-color: rgba(255, 50, 50, 0.5);
+  }
+  
+  .logInOut{
+    background-color: transparent;
+    border-radius: 2.5em;
+    color: rgb(203 83 83) !important;
+    border: 1px solid rgb(203 83 83) !important;
+    transition: all 0.2s;
+    height: 30px;
+  }
+  .logInOut:hover {
+    background-color: rgba(203, 83, 83, 0.2) !important;
+  }
+  .logInOut * {
+    display: inline-block;
+  }
+  .small-icon{
+    font-size: 1em;
+  }
+  .small-icon a:hover {
+    text-decoration: none;
+  }  
+
+  .small-cap {
+    font-variant: small-caps;
+  }
+  .black-link {
+    color: black;
+  }
+  .logo a:hover{
+    text-decoration: none;
+    color: black;
+  }
+  img {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+}
+.username {
+  font-size: small;
+}
+
+.top-anchor {
+  text-align: right;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.top-anchor:hover {
+  text-align: right;
+  text-decoration: none;
+}
+.sidebar {
+  display: none;
+}
+
+
+/* mobile design */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: block;
+    position: relative;
+    background-color: blanchedalmond;
+    width: 200px;
+    line-height: 2.05em;
+    opacity: 0.98;
+    position: fixed;
+    z-index: 3;
+    height: 100vh;
+    top: 0vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    left: 0px;
+    transition: all 0.6s;
+    font-size: 1.2em;
+  }
+  .sidebar ul {
+    padding: 0;
+  }
+  .sidebar ul li {
+    padding: 0;
+    border-bottom: 1px solid;
+  }
+  .sidebar ul li:hover {
+    background-color: rgb(250 220 173);
+    transition: background-color 0.6s;
+  }
+  header .logo {
+    font-weight: 900;
+    padding: 1px;
+    position: relative;
+  }
+  .closed {
+    left: -200px;
+  }
+  .closed *{
+    display: none;
+  }
+  
+  .sidebartoggle {
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+    left: 0px;
+    transition: all 0.7s;
+  }
+  .toggleline {
+    background-color: var(--themecolor);
+    height: 2.5px;
+    width: 18px;
+    margin: 3px;
+   }
+ 
+  .toggleclose {
+    left: 120px;
+  }
+  .toggleclose #toggleline2 {
+    display: none;
+  }
+  .toggleclose #toggleline1 {
+    margin: 1px;
+    transform: rotate(50deg);
+  }
+  .toggleclose #toggleline3 {
+    transform: rotate(-50deg);
+    margin: 1px;
+  }
+  .logInOut {
+    border: 0px !important;
+  }
+  
+  .toggle-header,
+  .header-nav,
+  .logInOut p {
+    display: none;
+  }
+  footer div {
+  padding: 50px 0 50px 50px;
+  border-top: 0px;
+  border-bottom: 0px;
+  transition: all 0.6s;
+}
+  footer h3 {
+    font-size: 1.8em;
+    padding: 0;
+  }
+  footer li {
+    padding: 5px;
+  }
+  .contact ul li {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  footer div {
+  padding: 10px 0 50px 10px;
+  border-top: 0px;
+  border-bottom: 0px;
+  transition: all 0.6s;
+}
+  footer h3 {
+    font-size: 1.2em;
+    padding: 0;
+  }
+  footer li {
+    padding: 5px;
+  }
+  .footer-link {
+    font-size: 0.8em;
+  }
+  .contact {
+   margin-left: -100px;
+  }
+  .contact ul {
+    left: 0px;
+  }
+  .contact ul li {
+    padding: 10px;
+  }
+}
+@media only screen and (max-width: 300px) {
+  body {
+    font-size: 10px;
+  }
+  .sidebar {
+    font-size: initial;
+  }
+  
+}

@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+auth
+{% endblock %}
+
+{% block header %}
+<header tabindex="0">
+    <div class="header-container" id="header" style="top: 0em">
+        <div class="logo" tabindex="0">
+            <a href="{% url 'main:welcome' %}" class="black-link small-cap">L'AYO</a>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/auth.css' %}">
+{% endblock %}
+
+{% block sigupbtn %}
+{% endblock %}
+{% block main %}
+<div class="form-container" id="form-container">
+
+</div>
+{% endblock %}
+{% block headertoggle %}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'main/js/auth.js' %}"></script>
+{% endblock %}
