@@ -52,6 +52,7 @@ input {
   width: 250px !important;
   height: 34px !important;
   font-size: 1.05em !important;
+ margin-bottom: 10px;
 }
 
 #forgot_pass{
@@ -87,3 +88,88 @@ input {
  .mbtn {
    margin-top: 12px;
  }
+ 
+ aside
+  {
+   position: absolute;
+   top: 30px;
+   left: 50%;
+   margin-left: -20%;
+   font-size: 1.5em;
+   font-family: cursive;
+   font-variant: small-caps;
+   color: #e85656;
+   
+ }
+.request {
+  display: none; 
+  width: 30vw;
+  left: 25%;
+  top: 40%;
+}
+
+@media only screen and (max-width: 800px)
+{
+ .request {
+  width: 20vw;
+ }
+}
+
+@media only screen and (max-width: 700px)
+{
+ aside, .request {
+  top: 30px;
+  left: 50%;
+  margin-left: -20%;
+  font-size: 1.2em;
+  width: fit-content; 
+ }
+ .form-container {
+  margin-top: 80px;
+ }
+ .form-container form {
+    padding: 30px 50px;    
+    font-size: 1.0em;
+}
+ input {
+  width: 230px !important;
+  height: 32px !important;
+}
+}
+
+@media only screen and (max-width: 500px)
+{
+ aside, .request {
+  left: 25%;
+  margin-left: -15px;
+ }
+ .form-container form {
+   padding: 30px 40px;
+   font-size: .9em;
+}
+ input {
+  width: 200px !important;
+  height: 30px !important;
+}
+}
+
+@media only screen and (max-width: 350px)
+{
+ aside, .request {
+  left: 20%;
+  margin-left: 0;
+  margin-bottom: 20px;
+ }
+ .form-container {
+  border: 0px;
+  margin-top: 60px;
+ }
+ .form-container form { 
+   padding: 30px 30px;
+   font-size: .8em;
+ }
+ input {
+  width: 200px !important;
+  height: 30px !important;
+}
+}

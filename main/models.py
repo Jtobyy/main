@@ -1,3 +1,5 @@
+from operator import mod
+from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import User, Group
 from django.db.models.deletion import CASCADE
@@ -15,8 +17,8 @@ CATEGORIES = [
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
-    phone_no = models.IntegerField(null=True)
-    address = models.TextField(null=True)
+    phone_no1 = models.TextField(max_length=10, null=True)
+    phone_no2 = models.TextField(max_length=10, null=True)
     gen_size = models.IntegerField(null=True)
     #group = Group.objects.get(name='Customers')
     #group.user_set.add(user)
@@ -54,3 +56,10 @@ class Clothe(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=7)
     image = models.ImageField(upload_to = cloth_image_path)
 
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=CASCADE, null=False)
+    address = models.TextField(null=False)
+    city = models.TextField(null=False)
+    state = models.TextField(null=False)
+    zipcode = models.TextField(null=True)
+    default = models.BooleanField(default=False)

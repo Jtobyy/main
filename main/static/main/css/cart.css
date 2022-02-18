@@ -1,0 +1,24 @@
+:root {  
+    --themecolor: rgb(248, 178, 48);
+    --headercolor: rgb(82,232,217);
+  }
+  
+.empty{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 1.5em;
+    color: var(--themecolor);
+}
+.shop-prompt {
+    background-color: var(--themecolor);
+    height: 50px;
+    font-size: 1em;
+    padding: 10px;
+    margin:10px;
+    color: white;
+    border-radius: 10px;
+}

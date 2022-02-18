@@ -1,0 +1,32 @@
+main {
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.form-container {
+    border: 0;
+}
+.form-container form {
+    align-items: flex-start;
+    margin-top: 70px;
+}
+
+.measureopt {
+    display: flex;
+    gap: 40px;
+}
+.optwrap {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+input {
+    position: absolute;
+    left: 17em;
+    height: 20px !important;
+}
+
+button {
+    align-self: flex-end;
+    width: 70px;
+    height: 30px;
+}

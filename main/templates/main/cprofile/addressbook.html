@@ -1,0 +1,40 @@
+<h2> My Address book</h2>
+<div class="row">
+    {% for obj in userdetails.addresses %}
+        <div class="part col-4">
+            <h3>Address {{ forloop.counter }}</h3>
+            <span>{{ obj.address }}</span>
+            <span>{{ obj.city }}</span>
+            <span>{{ obj.state }}</span>
+            <span>{{ obj.zipcode }}</span>
+            <br><br>
+            {% if obj.default is True %}
+            <span style="color: var(--themecolor);"> Default Address </span>
+            {% endif %}
+            <i onclick="addressdelete(this)" id="{{ obj.id }}" title="delete" class="bi-bucket-fill"></i>
+            <i onclick="addressedit(this)" id="{{ obj.id }}" title="edit" class="bi-pencil-fill"></i>
+        </div>
+    {% empty %}
+
+    {% endfor %}
+    <i onclick="newaddress()" class="bi-journal-plus" title="Add address"></i>
+</div> 
+
+<!--
+{% if userdetails.address %}        
+<div class="part col-4">
+    <h3>Address 1</h3>
+    <span>{{ userdetails.address }}</span>
+    {% if userdetails.city %}
+    <span>{{ userdetails.city }}</span>
+    {% endif %}
+    {% if userdetails.state %}
+    <span>{{ userdetails.state }}</span>
+    {% endif %}
+    {% if userdetails.zipcode %}
+    <span>{{ userdetails.zipcode }}</span>
+    {% endif %}
+    <i onclick="addressedit1()" id="edit1" title="edit" class="bi-pencil-fill"></i>
+</div>
+{% endif %}
+-->

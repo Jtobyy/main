@@ -1,3 +1,8 @@
+from email.policy import default
+from logging import exception
+from tabnanny import check
+from traceback import print_tb
+from xml.dom.minidom import Document
 from django.contrib import messages
 from django.http import JsonResponse
 from django.http.response import HttpResponse
@@ -7,10 +12,13 @@ from django.contrib.auth.models import AnonymousUser, User, Group
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import RegForm
-from .models import CATEGORIES, Clothe, Customer, Tailor
+from .models import CATEGORIES, Clothe, Customer, Tailor, Address
 from django.core import serializers
 from django.conf import settings
 import json
+import re
+
+from django.utils.datastructures import MultiValueDictKeyError
 
 @login_required(login_url='main/login.html')
 def mail_view(request, clothe_id):
@@ -25,20 +33,6 @@ def mail_view(request, clothe_id):
             )
     
     return render(request, 'main/clothe.html', None)
-
-def edit_view(request, tailor):
-    tailor = int(tailor)    
-    if request.method == 'POST':    
-        thistailor = Tailor.objects.get(user=tailor);
-        try:
-            thistailor.background_image = request.FILES['background_image']
-            thistailor.save()
-            print(thistailor)
-
-        except:
-            thistailor.profile_image = request.FILES['profile_image']
-            thistailor.save()
-        return redirect(f'/main/tailorProfile/{tailor}')
 
 @login_required(login_url='main/login.html')
 def clothe_sample_view(request, clothe_id):
@@ -102,6 +96,11 @@ def home_view(request):
     }    
     return render(request, 'main/home.html', context)
 
+
+
+
+# tailor profile section
+@login_required(login_url='main/login.html')
 def tailor_profile_view(request, tailor):
     try:
         info = Tailor.objects.get(user=tailor)
@@ -113,14 +112,213 @@ def tailor_profile_view(request, tailor):
         'AnonymousUser': AnonymousUser,
         'clothes': clothes
     }
-    return render(request, 'main/profile.html', context)
+    return render(request, 'main/tailorprofile.html', context)
 
+@login_required(login_url='main/login.html')
+def edit_tailor_view(request, tailor):
+    tailor = int(tailor)    
+    if request.method == 'POST':    
+        thistailor = Tailor.objects.get(user=tailor);
+        try:
+            thistailor.background_image = request.FILES['background_image']
+            thistailor.save()
+        except:
+            thistailor.profile_image = request.FILES['profile_image']
+            thistailor.save()
+        return redirect(f'/main/tailorProfile/{tailor}')
+
+
+
+
+# customer profile section
+@login_required(login_url='main/login.html')
+def customer_profile_view(request, customer):    
+    user = User.objects.get(id=customer)
+    customer = Customer.objects.get(user=user)
+    default_address = Address.objects.filter(user=user, default=True)[0]
+    userdetails = {
+        'username': user.username,
+        'email': user.email,
+        'phone_no1': customer.phone_no1,
+        'phone_no2': customer.phone_no2,
+        'this_address': default_address
+    }    
+    details = request.GET
+    try:    
+        section = details.get('section')
+        if section == 'account':
+            view = details.get('view')
+            if view == 'overview':
+                return render(request, 'main/cprofile/account.html', {'userdetails': userdetails})
+            elif view == 'accountdetails':
+                return render(request, 'main/cprofile/accountdetails.html', {'userdetails': userdetails})
+            elif view == 'addressbook':
+                addresses = Address.objects.filter(user=request.user)
+                userdetails['addresses'] = addresses
+                return render(request, 'main/cprofile/addressbook.html', {'userdetails': userdetails})
+            elif view == 'defaultaddress':
+                return render(request, 'main/cprofile/addressdetail.html', {'userdetails': userdetails})
+            elif view == 'newaddress':
+                return render(request, 'main/cprofile/addressoutline.html', None)
+            elif view == 'addressedit':
+                address_id = int(details['id'])
+                try:
+                    if details.get('action') == 'delete':
+                        Address.objects.get(id=address_id).delete()
+                        addresses = Address.objects.filter(user=request.user)
+                        userdetails['addresses'] = addresses
+                        return render(request, 'main/cprofile/addressbook.html', {'userdetails': userdetails})
+                except:
+                    pass    
+                userdetails['this_address'] = Address.objects.get(id=address_id)
+                return render(request, 'main/cprofile/addressdetail.html', {'userdetails': userdetails})
+            elif view == 'inbox':
+                return render(request, 'main/cprofile/inbox.html', {'userdetails': userdetails})
+            elif view == 'payment':
+                return render(request, 'main/cprofile/payment.html', {'userdetails': userdetails})
+
+        if section == 'inbox':
+            return render(request, 'main/cprofile/inbox.html', None)
+        if section == 'payment':
+            return render(request, 'main/cprofile/payment.html', None)
+        if section == 'orders':
+            return render(request, 'main/cprofile/orders.html', None)
+    except Exception as e:
+        return render(request, 'main/cprofile/account.html', None)
+    return render(request, 'main/custprofile.html', {'userdetails': userdetails})
+
+@login_required(login_url='main/login.html')
+def edit_customer_view(request):
+    if request.method == "POST":
+        details = request.POST
+        thiscustomer = Customer.objects.get(user=request.user.id)
+        thisuser = User.objects.get(id=request.user.id)
+        
+        # update email if present
+        if len(details.get('email', '#')) > 1:
+            thisuser.email = details.get('email')
+
+        # update rest of customer's data
+        if len(details.get('phone_no1', '#')) > 1:
+            thiscustomer.phone_no1 = details.get('phone_no1')
+        if len(details.get('phone_no2', '#')) > 1:
+            thiscustomer.phone_no2 = details.get('phone_no2')
+                
+        thisuser.save()
+        thiscustomer.save()
+        return redirect(f'/main/profile/{request.user.id}')
+    return render(request, 'main/custprofile.html', None)
+
+@login_required(login_url='main/login.html')
+def newaddress_view(request):
+    if request.method == "POST":
+        newaddress = Address()
+        newaddress.user = request.user
+        newaddress.address = request.POST["address"]
+        newaddress.city = request.POST["city"]
+        newaddress.state = request.POST["state"]
+        newaddress.zipcode = request.POST["zipcode"]
+        newaddress.save()
+    return redirect(f'/main/profile/{request.user.id}')
+
+@login_required(login_url='main/login.html')
+def edit_address_view(request, address_id):
+    this_address = Address.objects.get(id=address_id)
+    if request.method == "POST":
+        details = request.POST    
+        if len(details.get('address', '#')) > 1:
+            this_address.address = details.get('address')
+        if len(details.get('city', '#')) > 1:
+            this_address.city = details.get('city')
+        if len(details.get('state', '#')) > 1:
+            this_address.state = details.get('state')
+        if len(details.get('zipcode', '#')) > 1:
+            this_address.zipcode = details.get('zipcode')
+        this_address.save()
+    return redirect(f'/main/profile/{request.user.id}')
+
+
+
+# measurements
+@login_required(login_url='main/login.html')
+def measureopt_view(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None or re.match(".+/auth.*", referer) is None:
+        return redirect("/main/auth")
+    else:
+        if request.method == "POST":    
+            option = request.POST['measureopt']
+            if option == 'opt4':
+                return redirect(f"/main/profile/{request.user.id}", permanent=True)
+            else:
+                return redirect(f"/main/auth?thisform={option}")
+    return render(request, 'main/measureopt.html', None)
+
+@login_required(login_url='main/login.html')
+def measuredetails_view(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None or re.match(".+/auth.*", referer) is None:
+        return redirect("/main/auth")    
+    return render(request, 'main/measure/measuredetails.html', None)
+
+@login_required(login_url='main/login.html')
+def measurehowto_view(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None or re.match(".+/auth.*", referer) is None:
+        return redirect("/main/auth")
+    if request.method == "POST":
+        option = request.POST['measureopt']
+        if option is None or option == "":
+            messages.add_message(request, messages.error, "Please select an option")    
+            return redirect("/main/measurehowto", permanent=True)
+        if option == 'opt4':
+            return redirect("/main/profile", permanent=True)
+        else:
+            return redirect(f"/main/auth?thisform={option}")
+    return render(request, 'main/measure/howtoselfmeasure.html', None)
+
+@login_required(login_url='main/login.html')
+def promeasure_view(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None or re.match(".+/auth.*", referer) is None:
+        return redirect("/main/auth")
+    if request.method == "POST":
+        details = request.POST    
+        customer = Customer.objects.get(user=request.user)
+        newaddress = Address()
+        newaddress.user = request.user
+        newaddress.address = details.get('address')
+        newaddress.city = details.get('city')
+        newaddress.state = details.get('state')
+        newaddress.zipcode = details.get('zipcode')
+        newaddress.default = True
+        customer.phone_no1 = details.get('phone_no1')
+
+        customer.save()
+        newaddress.save()
+        return redirect(f'/main/profile/{request.user.id}')
+    return render(request, 'main/measure/requestpro.html', None)
+
+
+
+# Shopping
+def cart_view(request):
+    return render(request, 'main/cart.html', None)
+
+
+
+# Authentication
 def auth_view(request):
-    return render(request, 'main/auth.html', None)
+    try:    
+        form_t = request.GET
+        formtype = form_t['thisform']
+    except MultiValueDictKeyError:
+        formtype = 'signin'
+    return render(request, 'main/auth.html', {'formtype': formtype})
     
 def login_view(request):
     referer = request.META.get('HTTP_REFERER')
-    if referer is None or referer[-5:] != '/auth':
+    if referer is None or re.match(".+/auth.*", referer) is None:
         return redirect("/main/auth")
     else:
         if request.method == 'POST':    
@@ -136,18 +334,18 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:    
                 login(request, user)
-                messages.add_message(request, messages.SUCCESS, "Login successful")
+                #messages.add_message(request, messages.SUCCESS, "Login successful")
                 try:
                     return redirect('/main/',next)
                 except UnboundLocalError:
-                    return redirect('/main')
+                    return redirect('/main/')
             else:
                 return HttpResponse("Test successful, but not registered")
         return render(request, 'main/login.html', None)
         
 def register_view(request):
     referer = request.META.get('HTTP_REFERER')
-    if referer is None or referer[-5:] != '/auth':
+    if referer is None or re.match(".+/auth.*", referer) is None:
         return redirect("/main/auth")
     else:
         if request.method == "POST":
@@ -156,14 +354,27 @@ def register_view(request):
                 form.save()
                 group = Group.objects.get(name='Customers')
                 group.user_set.add(User.objects.get(username = request.POST['username']))
-                messages.add_message(request, messages.SUCCESS, "Registration successful")
-                return HttpResponse("Test successful")
+                #messages.add_message(request, messages.SUCCESS, "Registration successful")
+                user = authenticate(request, username=request.POST['username'], 
+                                    password=request.POST['password1'])
+                if user is not None:
+                    newcustomer = Customer(user=user)    
+                    newcustomer.save()
+                    login(request, user)
+                return redirect("/main/auth?thisform=measureopt")
             messages.add_message(request, messages.ERROR, f"{form.errors}")
-            return HttpResponse(f"Test successful, but unable to register user {form.errors}")
+            return redirect(f'/main/auth?thisform=signup')
         form = RegForm()
         return render(request, 'main/register.html', {'register_form': form})
-    
+
+@login_required(login_url='main/login.html')
+def change_user_pass(request):
+    user = User.objects.get(id=request.user.id)
+    user.password1 = request.POST['password1']
+    user.password2 = request.POST['password2']
+    return redirect(f'/main/profile/{request.user.id}')
+
 def logout_view(request):
     logout(request)
-    messages.add_message(request, messages.SUCCESS, "Logged Out")
-    return redirect("/main", permanent=True)
+    #messages.add_message(request, messages.SUCCESS, "Logged Out")
+    return redirect("/main/", permanent=True)

@@ -1,0 +1,21 @@
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/measure/measuredetails.css' %}">
+{% endblock %}
+<h2>
+    Your measurement details
+</h2>
+<div class="control">
+    <button id="femalebtn" onclick="femalebtn()" class="btn btn-outline-dark">
+        Female
+    </button>
+    <button id="malebtn" onclick="malebtn()" class="btn btn-outline-dark">
+        Male
+    </button>
+</div>
+<div id="femaledetails">
+    Female
+</div>
+<div id="maledetails" style="display: none;">
+    Male
+</div>

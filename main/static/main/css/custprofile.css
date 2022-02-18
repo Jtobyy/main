@@ -1,0 +1,191 @@
+
+body {
+    background: linear-gradient(white, rgba(255, 255, 255, 0.9), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
+}
+div.main {
+    min-height: 100vh;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    display: block;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+}
+.navigation {
+    position: relative;
+    min-height: 70vh;
+    padding: 30px 0px;
+    flex: 1;
+    border-left: 1px solid rgba(204,83,83,.3);     
+    border-right: 1px solid rgba(204,83,83,.3);     
+}
+.navigation ul li{
+    list-style: none;
+    padding: 10px 20px;
+    margin-left: -40px;
+    width: 1;
+    transition: all .1s;
+}
+.navigation ul li, 
+.logout{
+    text-decoration: none;
+    color: var(--themecolor);
+}
+.active,
+.active:focus {
+    background-color: blanchedalmond;
+}
+
+.logout:hover{
+    cursor: pointer;
+    text-decoration: none;    
+    background-color: blanchedalmond;
+}    
+.navigation ul li {
+    cursor: pointer;
+}
+.logout {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    padding: 10px 60px;
+    width: 100%;
+}
+.overview {
+    flex: 3;
+}
+.overview h2 {
+    padding: 10px;
+    text-align: center;
+    color: var(--themecolor)
+}
+.overview .part {
+    text-align: center;
+    padding-top:5px;
+    height: 18em;
+    border: 1px solid #ccc7c7;
+    border-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.overview div h3 {
+    border-bottom: 1px solid rgba(204,83,83,.3);     
+    margin-bottom: 20px;
+}
+.bi-pencil-fill {
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    color: var(--themecolor);
+    transition: color .3s;
+    cursor: pointer;
+}
+.bi-pencil-fill:hover {
+    color: rgb(174, 77, 77);
+}
+.accdiv {
+    border: 0;
+    align-self: center;
+    padding: 0 50px;
+}
+.acch {
+    text-align: center;
+    padding: 20px;
+    color: var(--themecolor);
+}
+.accp {
+    color: var(--themecolor);
+    width:100%;
+    position: relative;
+    padding:7px;
+    font-size: 1.1em;
+}
+
+.accin,
+.accp span {
+    color: black;
+    position: absolute;
+    right:100px;
+    border-top: 0px;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid #bebef6;
+}
+.code {
+    position: absolute;    
+    left: 400px;
+}
+.password {
+    padding: 40px;
+    transition: all .3s;
+    font-size: 1.2em;
+    cursor:pointer;
+    width: fit-content;
+    margin-top: 40px;
+}
+.password:hover {
+    color: rgb(174, 77, 77);
+}
+.changep {
+    display: none;
+}
+label {
+    color: var(--themecolor);
+    font-weight: inherit;
+}
+.btn1 {
+    text-align: center;
+    position: absolute;
+    right: 20%;
+    margin-top: 20px;
+    width: 70px;
+    height: 30px;
+    font-size: .8em;
+}
+.btn2 {
+    width: fit-content;
+    font-size: .8em;
+    margin-left: 50px;
+    margin-top: 22px;
+    height: 30px;
+}
+
+.default {
+    border-bottom: 1px solid saddlebrown;
+    cursor: pointer;
+}
+.bi-journal-plus {
+    font-size: 3em;
+    color: var(--themecolor);
+    padding: 10px;
+    position: inline-block;
+    margin-top: 1.5em;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.bi-bucket-fill {
+    color: (--themecolor);
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    color: var(--themecolor);
+    transition: color .3s;
+    cursor: pointer;
+
+}
+
+@media screen and (min-width: 850px){
+    .overview{
+        flex: 4;
+    }    
+    div.main {
+        padding: 10px 30px;
+    }
+}

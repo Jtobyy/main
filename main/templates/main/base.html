@@ -23,20 +23,20 @@
     {% block random %}    
     {% endblock %}
     {% if messages %}	
-            <div class="messages">
-            <ul>
-                {% for message in messages %}
-                <li {% if message.tags %} class="alert {{message.tags}} alert-dismissible fade show" {% endif %} role="alert">
-                    {{ message }}	
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </li>
-                {% endfor %}
-            </ul>
-            </div>
-	{% endif %}    
-
+    <div class="messages">
+        <ul>
+            {% for message in messages %}
+            <!--<li class="alert {{message.tags}} alert-dismissible fade show" role="alert">-->
+            <li class="alert {{message.tags}} alert-dismissible show" role="alert">
+                <p>{{ message }}</p>
+                <button type="button" class="close btn-primary" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}    
     {% block header %}
     <header tabindex="0">
         <div class="header-container" id="header" style="top: 0em">
@@ -57,7 +57,7 @@
             </nav>
             <nav class="header-nav nav2">
                 <ul>
-                    <li class="link-icon nav-item">
+                    <li class="link-icon nav-item" tabindex="0">
                         <span>Fabric</span>
                         <ul class="dropdown" id='fabricDropdown' tabindex="0">
                             <li><a>Guinea</a></li>
@@ -65,14 +65,15 @@
                             <li><a>Various other materials</a></li>
                         </ul>    
                     </li>                        
-                    <li class="link-icon nav-item"><span>Tailors</span></li>
-                    <li class="link-icon nav-item"><span>Fashion Designers</span></li>
+                    <li class="link-icon nav-item" tabindex="0"><span>Tailors</span></li>
+                    <li class="link-icon nav-item" tabindex="0"><span>Fashion Designers</span></li>
                 </ul>
             </nav>
             <nav class="header-nav nav3">
                 <ul>
                     <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
                     <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                    <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                 </ul>    
             </nav>
             {% if request.user == AnonymousUser %}   
@@ -83,16 +84,19 @@
                     </button>
                 </a>    
             {% else %}
-            <div class="user">    
-                <span class="username">
-                    {{ request.user }}
-                </span> 
-                <a href="{% url 'main:logout' %}" class="user">    
-                    <button class='logInOut btn-outline-dark'>
-                        Logout
-                    </button>
-                </a>
-            </div>
+                <div class="user">    
+                    <span class="username pc">
+                        <a href="{% url 'main:profile' customer=request.user.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                    </span> 
+                    <span class="username mobile">
+                        <a href="{% url 'main:profile' customer=request.user.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                    </span> 
+                    <!--<a href="{% url 'main:logout' %}" class="user">    
+                        <button class='logInOut btn-outline-dark'>
+                            Logout
+                        </button>
+                    </a>-->
+                </div>
             {% endif %}
             </div>
             <div class='sidebar closed' id='sidebar'>

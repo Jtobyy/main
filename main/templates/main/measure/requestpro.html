@@ -1,0 +1,52 @@
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/measure/requestpro.css' %}">
+{% endblock %}
+<div>
+    <h2>
+        You have requested for professional measurement,
+        <br><br>
+        Kindly fill in the details below
+    </h2>
+    <form method="POST" class="needs-validation" novalidate action="{% url 'main:promeasure' %}">
+    {% csrf_token %}    
+        <div class="form-row">
+            <div class="form-group">
+                <label for="inputAddress">Home address</label>
+                <input class="form-control" name="address" type="text" id="inputAddress" placeholder="1234 Main St" required>
+            </div>    
+            <div class="form-group inputTel">
+                <label for="inputTel">Phone number</label>
+                <input class="form-control" name="phone_no1" type="tel" id="inputTel" placeholder="+234..." required>
+            </div>    
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputCity">City</label>
+                <input type="text" name="city" class="form-control" id="inputCity">
+            </div>    
+            <div class="form-group col-md-4">
+                <label for="inputState">State</label>    
+                <select id="inputState" class="form-control" name="state">
+                    <option selected>Lagos</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputZip">Zip</label>
+                <input name="zipcode" type="text" class="form-control" id="inputZip">
+            </div>
+        </div>
+        
+        <br>
+        <p>When do you want to get measured?</p>
+        <div class="form-group date">
+            <label for="date">Date</label>
+            <input class="form-control" type="date" id="date" required>
+        </div>
+        <div class="form-group time">
+            <label for="time">Time</label>
+            <input class="form-control" type="time" id="time" required>
+        </div>
+        <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Next</button>
+    </form>
+</div>

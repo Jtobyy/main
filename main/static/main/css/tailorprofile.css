@@ -11,7 +11,6 @@ main {
 ul {
     list-style-type: none;
 }
-
 .dim {
     z-index: 1;
     display: flex;

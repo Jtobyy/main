@@ -1,4 +1,4 @@
-<form id="sign-up" class="sign-up" action="{% url 'main:register' %}" method="POST">
+<form id="sign-up" class="sign-up needs-validation" novalidate action="{% url 'main:register' %}" method="POST" autocomplete="off">
     {% csrf_token %}
     <div class="form-group">
         <label for="username">Username </label>
@@ -9,15 +9,15 @@
         {{ register_form.email }}
     </div>
     <div class="form-group">
-        <label for="password1">Password</label>    
+        <label for="password1">Password for your account</label>    
         {{ register_form.password1 }}
     </div>
     <div class="form-group">
         <label for="password2">Confirm Password</label>    
         {{ register_form.password2 }}
     </div>
-    <button type="submit" class="btn btn-dark mbtn">Submit</button>
+    <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Submit</button>
 </form>
 <div class="alt-sign">
-    Already a member?  <button type="button" class="btn btn-outline-dark" onclick="signIn()">Sign In</button>
+    Already have an account?  <button type="button" class="btn btn-outline-dark" onclick="signIn()">Sign In</button>
 </div>

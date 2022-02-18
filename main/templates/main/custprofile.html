@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/custprofile.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="content">
+    <div class="navigation">
+        <ul>
+            <li class="nav-item" id="account" tabindex="0">My Account</li>
+            <li class="nav-item" id="inbox" tabindex="0">Inbox</li>
+            <li class="nav-item" id="order" tabindex="0">Orders</li>
+            <input id="userId" type="hidden" name="userId" value="{{ request.user.id }}">
+        </ul>
+        <p class="logout" id="logout" tabindex="0"><a href="{% url 'main:logout' %}">Logout</a></p>
+    </div>
+    <div class="container-fluid overview">    
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/custprofile.js' %}"></script>
+<script src="{% static 'main/js/jquery-3.6.0.min.js' %}"></script>
+{% endblock %}

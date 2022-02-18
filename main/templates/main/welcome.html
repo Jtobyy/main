@@ -40,6 +40,8 @@
                 <ul>
                     <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
                     <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                    <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
+                    
                 </ul>    
             </nav>
             {% if request.user == AnonymousUser %}   
@@ -52,13 +54,14 @@
             {% else %}
             <div class="user">    
                 <span class="username">
-                    {{ request.user }}
+                    <a href="{% url 'main:profile' customer=request.user.id %}">{{ request.user }}</a>
                 </span> </p> 
+                <!--
                 <a href="{% url 'main:logout' %}" class="user">    
                     <button class='logInOut btn-outline-dark'>
                         Logout
                     </button>
-                </a>
+                </a>-->
             </div>
             {% endif %}
             </div>
@@ -68,9 +71,9 @@
             <ul>
                 <li title="home" class="header-icon"><a class="link-icon" href="{% url 'main:home' %}">Home</a></li>
                 </br></br>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
+                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
+                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
+                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
                 </br>
                 <li class="link-icon nav-item">Fabric</li>
                 <li class="link-icon nav-item">Tailors</li>
@@ -124,7 +127,8 @@
                 <span class="caption"> Infants </span>
             </div>
         </div>
-        <div class="row category justify-content-center">
+        <div class="row cate
+        gory justify-content-center">
             <div class="col-4 category-item">
                 <a href="#"><img src="{% static 'main/images/dressmaker-1416196.jpg' %}"></a>
                 <span class="caption"> Traditional attires </span>
@@ -179,10 +183,39 @@
     <!--<div class=anchorwrap><a href="#main" onclick="scrollV()" class="top-anchor" id="topaid">Back to top <i class="bi-arrow-up"></i></a></div>-->
     <div class="info" id="info">
         <h2> How it works </h2>
+        <div class="step step1" tabindex="0">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <span>Select the fabric you want</span>
+        </div>
+        <div class="step step2" tabindex="0">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <span>Pick the style you want</span>
+        </div>
+        <div class="step step3" tabindex="0">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <span>Choose the tailor that does it best</span>
+        </div>
+        <div class="step step4" tabindex="0">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <span>Make payment</span>
+        </div>
+        <div class="step step5" tabindex="0">
+            <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <span>Made just for you</span>
+        </div>
     </div>
     <div class="faq" id="faq">
         <h2> Frequently Asked Questions </h2>
     </div>
+    {% if request.user == AnonymousUser %}   
+    <div onclick="submit_form()">
+        <form class="staticpopup invisible" id="staticpopup" method="GET" action="{% url 'main:auth' %}">
+            Sew your clothes with L'ayo    
+            <input type="hidden" name="thisform" value="signup">
+        </form>
+    </div>
+    {% endif %}   
+    </a>
     <div class="container">
         <h2 class="re-header"> We've got you covered </h2>
         <div class="row re">
@@ -207,7 +240,7 @@
             <div class="col re-item">
                 <div>
                     <h3>Protected Financial</h3>
-                    <p>Orders are guranteed to be delivered within 7days</p>
+                    <p>............................</p>
                     <p class="learn-more">learn more ></p>
                 </div>
                 <div>

@@ -1,6 +1,9 @@
 slideShow = document.getElementById('wrap')
+staticpopup = document.getElementById('staticpopup')
+
 window.onload = function () {    
 let i = 0;
+let j = 0;
 slideimgs = document.getElementsByClassName('slideimg')
 first = document.getElementById('slide1').classList.add('visible')
 
@@ -14,7 +17,18 @@ setInterval(() => {
     i++;
     if (i == slideimgs.length) i = 0;
     }, 5000);
+
+setTimeout(() => {
+    staticpopup.classList.remove('invisible')    
+    setInterval(() => {
+        staticpopup.className='pop';
+        setTimeout(() => {
+            staticpopup.className='staticpopup';
+            }, 500);  
+        }, 8000);   
+}, 15000);
 }
+
 function scrollV() {
     let anchorlinks = document.querySelectorAll('a[href^="#"]')
 
@@ -29,4 +43,9 @@ function scrollV() {
         e.preventDefault()
     })
     }
+}
+
+function submit_form() {
+    form = document.getElementById('staticpopup')
+    form.submit()
 }

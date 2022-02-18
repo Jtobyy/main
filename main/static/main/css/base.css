@@ -1,6 +1,6 @@
 :root {  
-  --themecolor: rgb(203 83 83);
-  --headercolor: rgb(82,232,217);
+  --themecolor: rgb(228, 72, 72);
+  --headercolor: rgb(48, 174, 161);
 }
 
 html, body {
@@ -9,12 +9,11 @@ html, body {
   padding: 0;
   margin: 0;
 }
-
 body{
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: linear-gradient(white, rgba(225, 225, 225, 0.8), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
+  background: linear-gradient(white, rgba(255, 255, 255, 0.9), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
   font-size: 13px;
   font-family: 'Cormorant SC', serif;
 }
@@ -63,7 +62,7 @@ a:hover {
 .link-icon {
   font-size: 1em;
   font-weight: 350;  
-  color: rgb(203 83 83) !important;
+  color: var(--themecolor) !important;
   transition: all 0.15s;
   cursor: pointer;
   position: relative;
@@ -186,10 +185,17 @@ footer h3 {
   color: rgb(82,232,217);
 }
 footer ul {
+  list-style-type: none;
   text-align: left;
 }
 footer li {
   padding: 5px 20px;
+}
+.company li,
+.services li,
+.join li,
+.Questions li {
+  margin-left: -35px;  
 }
 .footer-link{
   color:inherit;
@@ -236,57 +242,53 @@ footer li {
 .messages
 {
   z-index: 3;
-  display: flex;
   position: absolute;
-  width: 30em;
-  height: 1em;
-  left: 50%;
-  margin-left: -17em;
+  width: fit-content;
+  height: fit-content;
+  left: 28vw;
   opacity: 0.98;
 }
-.messages * {
-  position:relative;
-  bottom: 7px;
-}
 .close {
-  margin-top: 5px;
+  padding: 20px !important;
+  color: blue !important;
+  font-size: 1.5em;
+  height: 50px !important;
+  width: 50px !important;
+  border-radius: 10px;
 }
-ul {
-  display: table-row;
+.messages ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: inherit;
   text-align: center;
   list-style-type: none;
+  margin-left: -25px;
 }
-.debug {
-    width: 100%;
-    height: 100%;
+.messages ul li {
+  width: fit-content;
+  height: fit-content;
+}
+  .debug {
     background-color: rgba(182, 182, 47, 0.5);
   }
-  .info {
-    width: 100%;
-    height: 100%;     
+  .info {   
     background-color: gainsboro;
   }
   .success {
-    width: 30em;
-    height: 2.5em;
     background-color: rgba(144, 238, 144, 0.5);
   }
   .warning {
-    width: 100%;
-    height: 100%;        
     background-color: rgba(231, 241, 38, 0.3);
   }
   .error {
-    width: 100%;
-    height: 100%;        
     background-color: rgba(255, 50, 50, 0.5);
-  }
-  
+  }    
   .logInOut{
     background-color: transparent;
     border-radius: 2.5em;
-    color: rgb(203 83 83) !important;
-    border: 1px solid rgb(203 83 83) !important;
+    color: var(--themecolor) !important;
+    border: 1px solid var(--themecolor) !important;
     transition: all 0.2s;
     height: 30px;
   }
@@ -321,7 +323,19 @@ ul {
 .username {
   font-size: small;
 }
-
+.username a{
+  color:var(--headercolor);
+  transition: all .4s;
+}
+.username a:hover {
+  --headercolor: rgb(46, 203, 187);
+}
+.pc {
+  display: block;
+}
+.mobile {
+  display: none;
+}
 .top-anchor {
   text-align: right;
   text-decoration: none;
@@ -335,9 +349,19 @@ ul {
   display: none;
 }
 
-
+.bi-cart4 {
+  font-size: 1.4em;
+  padding: 12px;
+  color: var(--themecolor);
+}
+@media screen and (min-width: 900px) {
+  .messages
+{
+  left: 33vw;
+}
+}
 /* mobile design */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {  
   .sidebar {
     display: block;
     position: relative;
@@ -357,6 +381,13 @@ ul {
     transition: all 0.6s;
     font-size: 1.2em;
   }
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  
   .sidebar ul {
     padding: 0;
   }
@@ -435,7 +466,36 @@ ul {
   }
 }
 
+@media screen and (max-width: 780px) {
+  .messages {
+    z-index: 3;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    left: 26vw;
+    opacity: 0.98;
+  }
+}
+@media screen and (max-width: 700px) {
+  .messages {
+    left: 25vw;
+  }
+}
+@media screen and (max-width: 650px) {
+    .messages {
+      left: 20vw;
+   }
+}
+@media screen and (max-width: 600px) {
+  .messages {
+    left: 15vw;
+  }
+}
 @media screen and (max-width: 500px) {
+  .messages
+  {
+    left: 10vw;
+  }
   footer div {
   padding: 10px 0 50px 10px;
   border-top: 0px;
@@ -462,12 +522,64 @@ ul {
     padding: 10px;
   }
 }
+  @media screen and (max-width: 400px) {
+  .messages{
+    left: 7vw;
+  }
+}
+    @media screen and (max-width: 385px) {
+  .messages {
+    left: 4vw;
+  }
+}
+  @media screen and (max-width: 358px) {
+  .messages {
+    left: 2vw;
+  }
+}
+  @media screen and (max-width: 350px) {
+  .messages {
+    left: 5vw;
+    font-size: .8em;
+  }
+} 
 @media only screen and (max-width: 300px) {
+  .close {
+    margin-top: -10px;
+  }
   body {
     font-size: 10px;
   }
   .sidebar {
     font-size: initial;
   }
-  
+  footer h3{
+    font-size: 1em;
+  }
+  footer div{
+    padding-bottom: 5px; 
+  }
+  .contact ul li {
+    font-size: .7em;
+  }
+  .copyright {
+    font-size: .7em;
+  }
+}
+@media only screen and (max-width: 250px) {
+  .messages {
+    left: -5vw;
+  }
+  body {
+    font-size: 7px;
+  }
+  footer div {
+    font-size: .6em;
+  }
+  .contact {
+    margin-left: -90px;
+  }
+  .contact h3 {
+    margin-left: 20px;
+  }
 }

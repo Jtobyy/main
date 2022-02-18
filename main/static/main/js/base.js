@@ -43,3 +43,25 @@ function showDropdown() {
 function hideDropdown() {
   document.getElementById('fabricDropdown').classList.add('hidden')
 }
+function validate() {
+  'use strict'
+
+  //Fetch forms to apply validation
+  var forms = document.querySelectorAll('.needs-validation')    
+
+  //Loovp over them and prevent submission
+  Array.prototype.slice.call(forms).forEach(function(form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+      if ($('#password2').val() != $('#password1').val()) {
+          event.preventDefault()
+          event.stopPropagation()
+          alert('password missmatch')
+        }
+    }, false)
+  })
+}
