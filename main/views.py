@@ -1,6 +1,8 @@
+from audioop import add
 from email.policy import default
 from logging import exception
 from tabnanny import check
+from tkinter.tix import Tree
 from traceback import print_tb
 from xml.dom.minidom import Document
 from django.contrib import messages
@@ -135,7 +137,7 @@ def edit_tailor_view(request, tailor):
 def customer_profile_view(request, customer):    
     user = User.objects.get(id=customer)
     customer = Customer.objects.get(user=user)
-    default_address = Address.objects.filter(user=user, default=True)[0]
+    default_address = Address.objects.get(user=request.user.id, default=True)
     userdetails = {
         'username': user.username,
         'email': user.email,
@@ -235,6 +237,19 @@ def edit_address_view(request, address_id):
         if len(details.get('zipcode', '#')) > 1:
             this_address.zipcode = details.get('zipcode')
         this_address.save()
+    return redirect(f'/main/profile/{request.user.id}')
+
+@login_required(login_url='main/login.html')
+def change_address_view(request, address_id):
+    try:    
+        default_address = Address.objects.filter(user=request.user, default=True)[0]
+        default_address.default = False
+        default_address.save()
+    except:
+        pass
+    this_address = Address.objects.get(user=request.user, id=address_id)
+    this_address.default = True
+    this_address.save()
     return redirect(f'/main/profile/{request.user.id}')
 
 

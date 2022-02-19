@@ -10,6 +10,8 @@
             <br><br>
             {% if obj.default is True %}
             <span style="color: var(--themecolor);"> Default Address </span>
+            {% else %}
+            <a onclick="sessionStorage['view']='addressbook';" class="changeaddress" href="{% url 'main:changeaddress' address_id=obj.id %}"><span style="color: var(--themecolor);"> Set as default </span></a>
             {% endif %}
             <i onclick="addressdelete(this)" id="{{ obj.id }}" title="delete" class="bi-bucket-fill"></i>
             <i onclick="addressedit(this)" id="{{ obj.id }}" title="edit" class="bi-pencil-fill"></i>

@@ -14,7 +14,7 @@
           <i class="code">+234</i>
           <input class="accin" type="tel" placeholder="{{ userdetails.phone_no2 }}" name="phone_no2" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no2 }}" {% endif %}>
         </p>
-        <button onclick="localStorage['view']='overview'" type="submit" class="btn btn1 btn-dark mbtn">Save changes</button>
+        <button onclick="sessionStorage['view']='overview'" type="submit" class="btn btn1 btn-dark mbtn">Save changes</button>
         <p class="accp password" onclick="changep()">Change password?</p>
       </div>
     </div>
@@ -30,6 +30,6 @@
         <label for="confirmp">Confirm password</label>
         <input name="password2" id="password2" class="form-control" type="password" autocomplete="off" required>
       </div>
-      <button onclick="localStorage['view']='overview'; validate()" id="changepassbtn" type="submit" class="btn btn-dark mbtn btn2">Confirm change</button>
+      <button onclick="sessionStorage['view']='overview'; validate()" id="changepassbtn" type="submit" class="btn btn-dark mbtn btn2">Confirm change</button>
     </div>
 </form>

@@ -7,7 +7,8 @@ window.onload = function () {
         $('.overview').html(this.responseText)
         }
     }
-    xhttp.open("GET", userId+"?section=account&view="+localStorage.getItem('view', 'overview'), true);
+    if (sessionStorage.getItem('view') != null) xhttp.open("GET", userId+"?section=account&view="+sessionStorage.getItem('view'), true);
+    else xhttp.open("GET", userId+"?section=account&view=overview", true);
     xhttp.send();
 
     $('#account').click(() => {
