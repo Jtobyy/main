@@ -1,7 +1,3 @@
-main {
-    align-items: flex-end;
-    justify-content: flex-end;
-}
 .form-container {
     border: 0;
 }
@@ -12,7 +8,7 @@ main {
 
 .measureopt {
     display: flex;
-    gap: 40px;
+    gap: 35px;
 }
 .optwrap {
     display: flex;
@@ -30,3 +26,58 @@ button {
     width: 70px;
     height: 30px;
 }
+@media only screen and (max-width: 500px) {
+    .optwrap {
+        margin-left: -50px;        
+    }        
+.optwrap input {
+        left: 40vw;
+        height: 15px !important;
+    }
+}
+@media only screen and (max-width: 470px) {
+     .optwrap {
+        margin-left: -20px;        
+    }   
+    .optwrap input {
+            left: 30vw;
+            height: 15px !important;
+        }
+    }
+@media only screen and (max-width: 320px) {
+    .optwrap {
+        margin-left: -50px;        
+    }    
+    .optwrap input {
+            left: 30vw;
+            height: 15px !important;
+        }
+    button {
+    align-self: flex-end;
+    width: 50px;
+    height: 25px;
+}
+    }
+@media only screen and (max-width: 300px) {
+    .form-container form {
+    align-items: flex-start;
+    margin-top: -20px;
+}
+    .measureopt {
+        gap: 20px;
+    }
+    .optwrap {
+        margin-left: -50px; 
+        margin-top: 0px;
+    }    
+    .optwrap input {
+            left: 20vw;
+            height: 12px !important;
+        }
+    }
+
+@media only screen and (max-width: 250px) {
+        .form-container form {
+        align-items: flex-start;
+        margin-top: -20px;
+    }    

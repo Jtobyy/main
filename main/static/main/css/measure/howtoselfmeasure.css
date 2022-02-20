@@ -13,8 +13,22 @@
 }
 .tutorial {
     min-height: 80vh;
-    min-width: 80vw;
-    background-color: #7bbaf1;
+    width: 80vw;
+    background-color: #f1aa7b;
     margin-top: 30px;
 }
 
+@media only screen and (max-width: 500px) {
+    .optwrap {
+        margin-left: 0px !important;        
+    }        
+}
+@media only screen and (max-width: 470px) {
+     .optwrap {
+        margin-left: -40px !important;         
+    }   
+    .optwrap input {
+            left: 50vw !important;
+            height: 15px !important;
+        }
+    }

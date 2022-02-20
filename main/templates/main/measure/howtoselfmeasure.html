@@ -1,8 +1,4 @@
 {% load static %}
-{% block links %}
-<link rel="stylesheet" href="{% static 'main/css/measureopt.css' %}">
-    <link rel="stylesheet" href="{% static 'main/css/measure/howtoselfmeasure.css' %}">
-{% endblock %}
 <h2>    Kindly watch the tutorial video below to learn how to measure yourself
 </h2>    
 </aside>
@@ -16,7 +12,7 @@
     <div class="optwrap optwrap3">
         <label for="opt3"> Request professional measurement (<strong>recommended</strong>) </label>
         <input id="opt3" type="radio" name="measureopt" value="opt3" checked>
-    </div>
+    </div>  
     <div class="optwrap">
         <label for="opt4"> Do this later </label>
         <input id="opt4" type="radio" name="measureopt" value="opt4">
@@ -24,4 +20,7 @@
         
     <button onclick="validate()" id="next" class="btn btn-dark mbtn">Next</button>
 </form>
-
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/measure/howtoselfmeasure.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/measureopt.css' %}">
+{% endblock %}
