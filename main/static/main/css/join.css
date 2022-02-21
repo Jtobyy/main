@@ -1,5 +1,6 @@
-h4.row {
+h4 {
     border-bottom: 1px solid rgb(203 83 83);
+    text-align: center;
 }
 .mcontainer {
     color: rgb(203 83 83);
@@ -7,4 +8,5 @@ h4.row {
     margin: 1em 0em;
     font-family: emoji;
     min-height: 80vh;
+    font-size: 1.3em;
 }

@@ -1,10 +1,3 @@
-from audioop import add
-from email.policy import default
-from logging import exception
-from tabnanny import check
-from tkinter.tix import Tree
-from traceback import print_tb
-from xml.dom.minidom import Document
 from django.contrib import messages
 from django.http import JsonResponse
 from django.http.response import HttpResponse
@@ -375,8 +368,8 @@ def register_view(request):
             form = RegForm(request.POST)    
             if form.is_valid():
                 form.save()
-                group = Group.objects.get(name='Customers')
-                group.user_set.add(User.objects.get(username = request.POST['username']))
+                #group = Group.objects.get(name='Customers')
+                #group.user_set.add(User.objects.get(username = request.POST['username']))
                 #messages.add_message(request, messages.SUCCESS, "Registration successful")
                 user = authenticate(request, username=request.POST['username'], 
                                     password=request.POST['password1'])
