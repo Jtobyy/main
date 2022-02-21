@@ -137,7 +137,10 @@ def edit_tailor_view(request, tailor):
 def customer_profile_view(request, customer):    
     user = User.objects.get(id=customer)
     customer = Customer.objects.get(user=user)
-    default_address = Address.objects.get(user=request.user.id, default=True)
+    try:
+        default_address = Address.objects.get(user=request.user.id, default=True)
+    except:
+        default_address = None
     userdetails = {
         'username': user.username,
         'email': user.email,
@@ -220,6 +223,11 @@ def newaddress_view(request):
         newaddress.city = request.POST["city"]
         newaddress.state = request.POST["state"]
         newaddress.zipcode = request.POST["zipcode"]
+        try:
+            if len(Address.objects.get(user=request.user))==1:
+                newaddress.default = True
+        except:
+            newaddress.default = True    
         newaddress.save()
     return redirect(f'/main/profile/{request.user.id}')
 
