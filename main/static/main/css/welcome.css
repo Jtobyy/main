@@ -1,5 +1,5 @@
 :root {  
-    --themecolor: rgb(228, 72, 72);;
+    --themecolor: rgb(228, 72, 72);
     --headercolor: rgb(39, 149, 138);
   }
   
@@ -16,10 +16,11 @@ div.main {
     font-size: 3em;
     text-align: center;
     padding: 0px;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     color: var(--themecolor);
     transform: rotate(-15deg);
     box-shadow: 0 0 max(100vh, 100vw) rgba(0, 0, 0, .12);
+    margin-bottom: 50px;
   }
 h1 {
     margin-bottom: 40px;
@@ -329,6 +330,9 @@ h1 {
     }    
 }
 @media only screen and (max-width: 600px) {
+.random {
+    margin-bottom: 20px !important;
+}    
 .page-content {
     padding: 0px !important;
     margin: 0px;
@@ -347,7 +351,10 @@ h1 {
     display: none;
 }
 @media only screen and (max-width: 480px)
-{
+{    
+.random {
+    font-size: 2em;
+}    
   .info {
     padding-top: 0px;
   }

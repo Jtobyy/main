@@ -1,0 +1,56 @@
+<h2>Account overview</h2>
+<div class="row">
+    <div class="part col-sm-6"> 
+        <h3>Account details</h3>
+        <p>Name: <span>{{ userdetails.username }}</span></p>
+        {% if userdetails.email %}
+        <p>Email address: <span>{{ userdetails.email }}</span></p>
+        {% endif %}
+        {% if userdetails.phone_no1 %}
+            <p>Phone number: <span>+234{{ userdetails.phone_no1 }}</span></p>
+        {% elif userdetails.phone_no2 %}
+            <p>Phone number: <span>+234{{ userdetails.phone_no2 }}</span></p>
+        {% endif %}
+        <i onclick="edit1()" id="edit1" title="edit" class="bi-pencil-fill"></i>
+    </div>
+    <div class="part col-sm-6">
+        {% for group in request.user.groups.all %}
+        {% if group.name == 'Customers' %}    
+            <h3>Address book</h3>
+            <h4 onclick="sessionStorage['view']='overview'; addressedit(this);" id="{{ userdetails.this_address.id }}" class="default">Your defualt address</h4></a>
+        {% else %}
+            <h3>Location</h3>
+        {% endif %}
+                {% if userdetails.this_address.address %}
+                <span>{{ userdetails.this_address.address }}</span>
+                {% endif %}
+                {% if userdetails.this_address.city %}
+                <span>{{ userdetails.this_address.city }}</span>
+                {% endif %}
+                {% if userdetails.this_address.state %}
+                <span>{{ userdetails.this_address.state }}</span>
+                {% endif %}
+                {% if userdetails.this_address.zipcode %}
+                <span>{{ userdetails.this_address.zipcode }}</span>
+                {% endif %}
+                {% if group.name == 'Customers' %}    
+                    <i onclick="edit2()" id="edit2" title="edit" class="bi-pencil-fill"></i>
+                {% else %}
+                    {% if userdetails.this_address %}
+                        <i onclick="sessionStorage['view'] = 'overview'; addressedit(this)" id="{{ userdetails.this_address.id }}" title="edit" class="bi-pencil-fill"></i>
+                    {% else %}
+                        <i onclick="sessionStorage['view'] = 'overview'; newaddress()" ti    tle="edit" class="bi-pencil-fill"></i>
+                    {% endif %}
+                {% endif %}
+        {% endfor %}
+    </div>
+    {% for group in request.user.groups.all %}
+        {% if group.name == 'Customers' %}
+            <div class="part col-sm-6"> 
+                <h3>Measurement details</h3>
+                <span></span>
+                <i onclick="edit2()" id="edit3" title="edit" class="bi-pencil-fill"></i>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div> 

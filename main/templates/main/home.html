@@ -25,7 +25,7 @@ Home
                 </div>
                 <div class="info">
                     <span class="price"> {{ obj.price }} </span>
-                    <a href='{% url "main:tailorProfile" tailor=obj.company_name.id %}'><span class="company"> {{ obj.company_name }} </span></a>
+                    <a href='{% url "main:tailorProfile" tailor_id=obj.company_name.id %}'><span class="company"> {{ obj.company_name }} </span></a>
                     <span class="category"> {{ obj.category }} </span>
                 </div>
             </div>

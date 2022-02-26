@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/join.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container mcontainer">
+    <h1>
+        Be a tailor on Layo    
+    </h1>
+    <br><br><br>
+    <ul>
+        <li><div class="infograph step1"></div><span>Step 1</span> Fill out and submit the registration form</li>
+        <li><div class="infograph step2"></div><span>Step 2</span> Wait for our immediate response </li>
+        <li><div class="infograph step3"></div><span>Step 3</span> Start getting sewing orders </li>
+    </ul>
+    <a href="{% url 'main:tailorReg' %}">
+        <div class="startreg" id="startreg"> 
+            Start Registration
+        </div>
+    </a>
+    <!--Please contact us through the following numbers:
+    <li>+2348164517777</li>
+    <li>+2348124420102</li>
+    <li>+2347016578601</li>
+    <li>+2348161664172</li>-->
+</div>    
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/join.js' %}"></script>    
+{% endblock %}

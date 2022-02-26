@@ -1,0 +1,66 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/join.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container mcontainer">    
+    <form class="needs-validation" novalidate action="{% url 'main:sellerReg' %}" method="POST">
+        {% csrf_token %}
+        <h3>Your full name</h3>
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label> First name </label>
+                {{ form.first_name }}
+            </div>
+            <div class="form-group col-6">
+                <label> Last name </label>
+                {{ form.last_name }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label>    
+            {{ form.email }}
+        </div>
+        <br>
+        <h3>Your company's details</h2>
+        <div class="form-group">
+            <label>Business name</label>
+            {{ form.business_name }}            
+        </div>    
+        <div class="form-group">
+            <label>Address</label>
+            {{ form.address }}            
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>City</label>
+                {{ form.city }}
+            </div>
+            <div class="form-group col-md-4">
+                <label>State</label>
+                {{ form.state }}
+            </div>
+            <div class="form-group col-md-2">
+                <label for="input class="form-control"Zip">Zip</label>
+                {{ form.zipcode }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Instagram business page link</label>
+            {{ form.ig_link }}  
+        </div>
+        <div class="form-group">
+            <label>What do you do, things you sell etc.</label>
+            {{ form.what_i_do }}
+        </div>
+        <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Submit details</button>
+    </form>
+</div>    
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/join.js' %}"></script>    
+{% endblock %}
+

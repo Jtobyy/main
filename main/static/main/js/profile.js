@@ -106,12 +106,6 @@ xhttp.open("GET", userId+"?section=account&view=accountdetails", true);
 xhttp.send();
 }
 
-function addressedit1() {
-    $.get(userId+"?section=account&view=defaultaddress", function(page, textStatus) {
-        $('.overview').html(page);
-    });
-};
-
 function addressedit(address) {
     $.get(userId+"?section=account&view=addressedit&id="+address['id'], function(page, textStatus) {    
         $('.overview').html(page);
@@ -142,4 +136,8 @@ function validatepass() {
             alert(insimilarities)
         }
     })
+}
+
+function navToggle() {
+    $('#nav').fadeToggle()
 }

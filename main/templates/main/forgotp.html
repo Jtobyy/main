@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+<form method="POST" id="changepassform" class="needs-validation" novalidate action="{% url 'main:changepass' %}" autocomplete="off">
+    {% csrf_token %}    
+      <div id="changep" class="changep">
+        <div class="form-group col-md-6">
+          <label for="newp">New password</label>
+          <input name="password1" id="password1" class="form-control" type="password" autocomplete="off">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="confirmp">Confirm password</label>
+          <input name="password2" id="password2" class="form-control" type="password" autocomplete="off" required>
+        </div>
+        <button onclick="validate()" id="changepassbtn" type="submit" class="btn btn-dark mbtn btn2">Confirm change</button>
+      </div>
+  </form>

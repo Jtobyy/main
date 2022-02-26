@@ -65,3 +65,7 @@ function validate() {
     }, false)
   })
 }
+
+function payment() {
+  
+}

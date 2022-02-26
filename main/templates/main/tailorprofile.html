@@ -9,21 +9,37 @@ tailorProfile
 </form>
 {% endblock %}
 {% block links %}
+<link rel="stylesheet" href="{% static 'main/css/custprofile.css' %}">
 <link rel="stylesheet" href="{% static 'main/css/tailorprofile.css' %}">
 {% endblock %}
 
 {% block main %}
+    <div class="content">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <div class="profile-image"  tabindex="0">
+                        <a title="profile image" onclick="profileImage('{{ profileinfo.user.id }}')"><img id="profileImage" src="{{ profileinfo.profile_image.url }}"></a>
+                    </div>    
+                </li>
+                <li class="nav-item" id="account" tabindex="0">My Account</li>
+                <li class="nav-item" id="inbox" tabindex="0">Inbox</li>
+                <li class="nav-item" id="order" tabindex="0">Orders</li>
+                <input id="userId" type="hidden" name="userId" value="{{ request.user.id }}">
+            </ul>
+            <p class="logout" id="logout" tabindex="0"><a href="{% url 'main:logout' %}">Logout</a></p>
+        </div>
+        <div class="container-fluid overview">    
+            
+        </div>
+    </div>
+
     <section class="profile-section">
         <div class="profile">
-            <a title="background" onclick="profileBackground('{{ profileinfo.user.id }}')"><img id="backgroundImage" class="background-image" src="{{ profileinfo.background_image.url }}"></a>
+            <!--<a title="background" onclick="profileBackground('{{ profileinfo.user.id }}')"><img id="backgroundImage" class="background-image" src="{{ profileinfo.background_image.url }}"></a>-->
             <div class="profile-info">
-                <div class="profile-image"  tabindex="0">
-                    <a title="profile image" onclick="profileImage('{{ profileinfo.user.id }}')"><img id="profileImage" src="{{ profileinfo.profile_image.url }}"></a>
-                </div>
+                
                 <div class="user-info">
-                    <div class="profile-user-name" title="username">
-                        <h1>{{ profileinfo.user }}</h1>
-                    </div>
                     <p class="spec-info"> Specification: <span>{{ profileinfo.gender_spec }}</span></p>
                     <div class="user-contact"> 
                         <h3>Contact</h3>

@@ -1,12 +1,82 @@
-h4 {
+:root {  
+    --themecolor: rgb(228, 72, 72);
+    --headercolor: rgb(48, 174, 161);
+  }
+  
+h1, h3 {
     border-bottom: 1px solid rgb(203 83 83);
-    text-align: center;
+    text-align: center;  
 }
+h3 {
+    width: fit-content;
+    margin: 20px;
+}
+label {
+    font-weight: initial;
+    color: var(--themecolor);
+}
+
 .mcontainer {
+    padding: 20px;    
+    margin: 30px;
+    color: black;
+    font-size: 1.2em;
+}
+.mcontainer ul {
+    list-style-type: none;
+    margin-left: -90px;
+    margin-top: -30px;
+}
+.mcontainer li {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 10px;
+}
+.infograph {
+    width: 70px;
+    height: 70px;
+    border: solid 1px black;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.mcontainer span {
     color: rgb(203 83 83);
-    padding: 1em;
-    margin: 1em 0em;
+    margin: 0px 20px;
     font-family: emoji;
-    min-height: 80vh;
     font-size: 1.3em;
+}
+.step1 {
+    margin-left: -50px;
+}
+.step2 {
+    margin-left: 90px;
+}
+.step3 {
+    margin-left: 0px;
+}
+.startreg {
+    cursor: pointer;    
+    background-color:blue;
+    height: 50px;
+    font-size: 1em;
+    padding: 10px;
+    margin:10px;
+    color: white;
+    border-radius: 10px;
+    width: fit-content;
+    position: relative;
+    top: 20px;
+    left: 300px;
+    transition: all .3s;
+}
+
+.startreg:hover {
+    background-color:rgba(16, 16, 250, .8);
+}
+
+.successreg {
+    color: var(--themecolor);
+    margin-top: 30vh;
 }

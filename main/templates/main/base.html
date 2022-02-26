@@ -50,9 +50,9 @@
             </div>
             <nav class="header-nav nav1">    
                 <ul>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                 </ul>
             </nav>
             <nav class="header-nav nav2">
@@ -85,12 +85,34 @@
                 </a>    
             {% else %}
                 <div class="user">    
-                    <span class="username pc">
-                        <a href="{% url 'main:profile' customer=request.user.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
-                    </span> 
-                    <span class="username mobile">
-                        <a href="{% url 'main:profile' customer=request.user.id %}"><span class="glyphicon glyphicon-user"></span></a>
-                    </span> 
+                    {% for group in request.user.groups.all %}
+                    {% if group.name == 'Customers' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span> 
+                    {% elif group.name == 'Tailors' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span> 
+                    {% elif group.name == 'Sellers' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span> 
+                    {% else %}
+                        <a href="#">{{ request.user }}/admin</a>
+                    {% endif %}
+                    {% empty %}
+                        <a href="#">{{ request.user }}/admin</a>
+                    {% endfor %}
                     <!--<a href="{% url 'main:logout' %}" class="user">    
                         <button class='logInOut btn-outline-dark'>
                             Logout
@@ -103,11 +125,11 @@
             
             {% block sidenav %}    
             <ul>
-                <li title="home" class="header-icon"><a class="link-icon" href="{% url 'main:home' %}">Home</a></li>
+                <li title="shop" class="header-icon"><a class="link-icon" href="{% url 'main:shop' %}">Shop</a></li>
                 <br><br>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li>
-                <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li>
+                <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
+                <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
+                <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                 <br>
                 <li class="link-icon nav-item">Fabric</li>
                 <li class="link-icon nav-item">Tailors</li>
@@ -134,13 +156,13 @@
                     <h3>The Company</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">About us</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">About us</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Blog</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Blog</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Return Policy</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Return Policy</a>
                         </li>
                     </ul>
                 </div>
@@ -148,13 +170,13 @@
                     <h3>Services</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Fabrics</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Fabrics</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Tailors</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Tailors</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Fashion designers</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Fashion designers</a>
                         </li>
                     </ul>
                 </div>
@@ -162,21 +184,24 @@
                     <h3>Questions?</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">FAQ</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">FAQ</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Help</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Help</a>
                         </li>
                     </ul>
                 </div>
                 <div class="join">
-                    <h3>Be a tailor on L'ayo</h3>
+                    <h3>Join L'ayo</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">How to</a>
+                            <a href="{% url 'main:tailorRegInfo' %}" class="footer-link">Be a tailor on L'ayo</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:join' %}" class="footer-link">Terms and Conditions</a>
+                            <a href="{% url 'main:sellerRegInfo' %}" class="footer-link">Sell on L'ayo</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailorRegInfo' %}" class="footer-link">Terms and Conditions</a>
                         </li>
                     </ul>
                 </div>

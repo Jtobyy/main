@@ -16,12 +16,16 @@ div.main {
     min-height: 100vh;
 }
 .navigation {
+    display: block;  
     position: relative;
     min-height: 70vh;
     padding: 30px 0px;
     flex: 1;
     border-left: 1px solid rgba(204,83,83,.3);     
     border-right: 1px solid rgba(204,83,83,.3);     
+}
+#navtoggle {
+    display: none;
 }
 .navigation ul li{
     list-style: none;
@@ -188,4 +192,40 @@ label {
     div.main {
         padding: 10px 30px;
     }
+}
+
+@media screen and (max-width: 600px){
+    .navigation {
+        opacity: .98;    
+        z-index: 3;
+        height: 100%;
+        padding: 10px;
+        display: none;
+        position: absolute;
+        background-color: bisque;
+        margin-left: -10px;
+        margin-top: -10px;
+        position: fixed;
+    }  
+    #navtoggle {
+      display: block;
+      padding: 0 10px;
+      position: fixed;
+      left: 0px;
+      top: 60px;
+      z-index: 3;
+  }
+  .navline {
+      background-color: var(--headercolor);    
+      height: 2px;
+      width: 12px;
+      margin: 2px;
+  }
+  .logout {
+    bottom: 60px;
+    margin-left: -10px;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
 }

@@ -5,16 +5,11 @@
 {% endblock %}
 
 {% block main %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-        </div>
-    </div>        
+<div class="container content">
+    
 </div>
-<div class="empty">
-    <p>Your Cart is empty</p>
-    <a href="#"><div class="shop-prompt d-inline-block"> 
-        Start Shopping 
-    </div></a>
-</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'main/js/shop.js' %}"></script>    
+<script src="{% static 'main/js/cart.js' %}"></script>    
 {% endblock %}

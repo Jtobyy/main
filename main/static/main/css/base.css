@@ -1,6 +1,7 @@
 :root {  
   --themecolor: rgb(228, 72, 72);
   --headercolor: rgb(48, 174, 161);
+  --genfont: 13px;
 }
 
 html, body {
@@ -14,7 +15,7 @@ body{
   flex-direction: column;
   overflow: hidden;
   background: linear-gradient(white, rgba(255, 255, 255, 0.9), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
-  font-size: 13px;
+  font-size: var(--genfont);
   font-family: 'Cormorant SC', serif;
 }
 a {
@@ -370,7 +371,7 @@ footer li {
     line-height: 2.05em;
     opacity: 0.98;
     position: fixed;
-    z-index: 3;
+    z-index: 4;
     height: 100vh;
     top: 0vh;
     display: flex;
@@ -393,6 +394,8 @@ footer li {
   }
   .sidebar ul li {
     padding: 0;
+    text-align: center;
+    width: 100%;
     border-bottom: 1px solid;
   }
   .sidebar ul li:hover {
@@ -432,12 +435,12 @@ footer li {
     display: none;
   }
   .toggleclose #toggleline1 {
-    margin: 1px;
+    margin: -2px;
     transform: rotate(50deg);
   }
   .toggleclose #toggleline3 {
     transform: rotate(-50deg);
-    margin: 1px;
+    margin: -2px;
   }
   .logInOut {
     border: 0px !important;

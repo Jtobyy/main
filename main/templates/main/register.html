@@ -1,4 +1,4 @@
-<form id="sign-up" class="sign-up needs-validation" novalidate action="{% url 'main:register' %}" method="POST" autocomplete="off">
+<form id="sign-up" class="sign-up needs-validation" novalidate action="{% url 'main:register' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
         <label for="username">Username </label>

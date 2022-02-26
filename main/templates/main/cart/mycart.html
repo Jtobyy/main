@@ -1,0 +1,29 @@
+<div class="mycontainer">    
+    {% for obj in cart %}
+    <div class="myrow">
+        <div class="img">
+            <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+        </div>
+        <span class="price"> {{ obj.price }} </span>
+        <div class="remove" onclick="cartremove(this)" id="{{ obj.id }}">
+            Remove from cart
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty">
+        <p>Your Cart is empty</p>
+        <a href="{% url 'main:shop' %}"><div class="shop-prompt d-inline-block"> 
+            Start Shopping 
+        </div></a>
+    </div>
+    {% endfor %}
+    {% if cart %}
+    <div class="sumtotal myrow">
+        Total
+        <span class="price"> {{ total }} </span>
+    </div>
+    <div onclick="payment()" class="checkout">
+        Checkout
+    </div>
+    {% endif %}
+</div>

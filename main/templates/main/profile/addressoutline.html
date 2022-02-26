@@ -21,5 +21,11 @@
       <input type="text" class="form-control" id="inputZip" name="zipcode">
     </div>
   </div>
+  {% for group in request.user.groups.all %}
+  {% if group == 'Customer' %}
   <button onclick="sessionStorage['view']='addressbook'" type="submit" class="btn btn1 btn-dark">Add</button>
+  {% else %}
+  <button onclick="sessionStorage['view']='overview';" type="submit" class="btn btn1 btn-dark">Update</button>
+  {% endif %}
+  {% endfor %}
 </form>

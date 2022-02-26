@@ -17,9 +17,9 @@
             </div>
             <nav class="header-nav nav1">    
                 <ul>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
-                    <li title="home"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li></a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F'%}">Women</a></li></a></li>
+                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li></a></li>
                 </ul>
             </nav>
             <nav class="header-nav nav2">
@@ -44,40 +44,65 @@
                     
                 </ul>    
             </nav>
-            {% if request.user == AnonymousUser %}   
-                <a href="{% url 'main:auth' %}" class="user">    
-                    <button class='logInOut btn-outline-dark'>
-                        <p>Sign In/Up</p>
-                        <span class="glyphicon glyphicon-user"></span>
-                    </button>
-                </a>    
+            {% if request.user.is_authenticated %}   
+            {% for group in request.user.groups.all %}
+                <div class="user">
+                    <span class="username">
+                    {% if group.name == 'Customers' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span> 
+                    {% elif group.name == 'Tailors' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span> 
+                    {% elif group.name == 'Sellers' %}
+                        <span class="username pc">
+                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
+                        </span> 
+                        <span class="username mobile">
+                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span></a>
+                        </span>
+                    {% endif %}
+                    </span>
+                    <!--
+                    <a href="{% url 'main:logout' %}" class="user">    
+                        <button class='logInOut btn-outline-dark'>
+                            Logout
+                        </button>
+                    </a>-->
+                </div>
+            {% empty %}
+                <a href="#">{{ request.user }}/admin</a>
+            {% endfor %}
             {% else %}
-            <div class="user">    
-                <span class="username">
-                    <a href="{% url 'main:profile' customer=request.user.id %}">{{ request.user }}</a>
-                </span> </p> 
-                <!--
-                <a href="{% url 'main:logout' %}" class="user">    
-                    <button class='logInOut btn-outline-dark'>
-                        Logout
-                    </button>
-                </a>-->
-            </div>
+                <a href="{% url 'main:auth' %}" class="user">    
+                <button class='logInOut btn-outline-dark'>
+                    <p>Sign In/Up</p>
+                    <span class="glyphicon glyphicon-user"></span>
+                </button>
+            </a>    
             {% endif %}
             </div>
             <div class='sidebar closed' id='sidebar'>
             
             {% block sidenav %}    
             <ul>
-                <li title="home" class="header-icon"><a class="link-icon" href="{% url 'main:home' %}">Home</a></li>
+                <li title="shop" class="header-icon"><a class="link-icon" href="{% url 'main:shop' %}">Shop</a></li>
                 </br></br>
-                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Men</a></li></a></li>
-                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Women</a></li></a></li>
-                <li title="home" tabindex="0"><a class="link-icon" href="{% url 'main:home' %}">Kids</a></li></a></li>
+                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
+                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
+                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                 </br>
-                <li class="link-icon nav-item">Fabric</li>
-                <li class="link-icon nav-item">Tailors</li>
-                <li class="link-icon nav-item">Fashion Designers</li>
+                <li class="link-icon nav-item" tabindex="0">Fabric</li>
+                <li class="link-icon nav-item" tabindex="0">Tailors</li>
+                <li class="link-icon nav-item" tabindex="0">Fashion Designers</li>
                 </br>
                 <li title="help" class="header-icon small-icon"><a class="link-icon" href="{% url 'main:welcome' %}#info" onclick="scrollV()">How it works</a></li>
                 <li title="help" class="header-icon small-icon small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq" onclick="scrollV()">faq</a></li>

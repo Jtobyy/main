@@ -1,0 +1,116 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/shop.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container mmain-container">
+    <div class="row theme_cover">
+        <div class="col">
+            <div class="cover_img"></div>
+        </div>
+    </div>
+    <div class="row" id="image_show">
+        {% for obj in page_obj %}
+            <div class="col-sm-6 product">
+                <div class="img">
+                    <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+                </div>    
+                <div class="info">
+                    <div class="cart" onclick="cartadd(this)" id="{{ obj.id }}">
+                        Add to cart<i class="bi-cart4"></i>
+                    </div>
+                    <div class="mid">
+
+                    </div>
+                    <span class="price"> {{ obj.price }} </span>
+                    <!--<a href='{% url "main:tailorProfile" tailor_id=obj.company_name.id %}'><span class="company"> {{ obj.company_name }} </span></a>-->
+                    <!--<span class="category"> {{ obj.category }} </span>-->
+                </div>    
+            </div>
+        {% endfor %}    
+    </div>
+</div>
+<div class="filter filter_more" id="filter_container">
+    <i class='bi-filter-right filterToggle' id="filter_toggle"></i>    
+    <form id="filter_form" action="{% url 'main:shopfilter' %}" method="POST">
+        {% csrf_token %}    
+        <ul class="list">    
+            <li>
+            {% if 'M' in categories %}    
+                <input type="checkbox" name="M" checked>
+            {% else %}
+                <input type="checkbox" name="M">
+            {% endif %}
+                <span> male </span>
+            </li>
+            <li>
+            {% if 'F' in categories %}        
+                <input type="checkbox" name="F" checked>
+            {% else %}
+                <input type="checkbox" name="F">
+            {% endif %}
+                <span> female </span>
+            </li>
+            <li>
+            {% if 'B' in categories %}    
+                <input type="checkbox" name="B" checked>
+            {% else %}
+                <input type="checkbox" name="B">
+            {% endif %}
+                <span> baby </span>
+            </li>
+            <li>
+            {% if 'T' in categories %}        
+                <input type="checkbox" name="T" checked>
+            {% else %}
+                <input type="checkbox" name="T">
+            {% endif %}
+                <span> traditional </span>
+            </li>
+            <li>
+            {% if 'O' in categories %}            
+                <input type="checkbox" name="O" checked>
+            {% else %}
+                <input type="checkbox" name="O">
+            {% endif %}
+                <span> modern </span>
+            </li>
+            <li>
+            {% if 'C' in categories %}                
+                <input type="checkbox" name="C">
+            {% else %}
+                <input type="checkbox" name="C">
+            {% endif %}
+                <span> classic </span>
+            <li class="reload">
+                <button type="submit"><i class='bi-arrow-clockwise'></i></button>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div class="loadMore">
+    {% if page_obj.has_previous %}
+        <a class="first" href="?page=1">&laquo; first</a>
+        <a class="previous"href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+    <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+        <a class="next" href="?page={{ page_obj.next_page_number }}">next</a>
+        <a class="last" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/shop.js' %}"></script>
+{% endblock %}
