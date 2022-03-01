@@ -7,8 +7,7 @@
     width: 90vw;
 }
 .profile_pic {
-    width: 300px;
-    height: 300px;
+    height: 60vh;
     flex: 1;
 }
 .profile_pic img {
@@ -17,7 +16,7 @@
 .info {
     position: relative;    
     left: 30px;
-    flex: 2;    
+    flex: 2;  
     background-color: transparent;
     position: relative;
     padding: 50px;
@@ -70,3 +69,67 @@
     object-fit: fill;
     height: 50vh;
 }
+.clothe-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.price {
+    font-size: 2em;
+    align-items: center;
+}
+.rating {
+    font-size: 1.2em;    
+    display: flex;
+    color: rgb(247, 180, 55);
+    gap: 4px;
+}
+
+@media screen and (max-width: 850px) {
+    .profile_pic{
+        flex: 2;    
+    } 
+}    
+@media screen and (max-width: 650px) {
+    .profile_pic{
+        height: 50vh;
+    } 
+}       
+@media screen and (max-width: 650px) {
+.info {
+    font-size: .8em;
+}    
+}
+@media screen and (max-width: 550px) {
+    .info {
+        font-size: .6em;
+    }
+    .profile_pic {
+        flex: 3;
+    }
+}
+@media screen and (max-width: 400px) {
+    .profile_pic {
+        flex: 2;
+        height: 40vh;
+    }    
+    .info {
+        padding: 0px;
+        font-size: .4em;
+    }   
+    .profile {
+        padding: 0 !important;
+        margin-top: -80px;
+    }
+}    
+@media screen and (max-width: 300px) {    
+    .profile_pic {
+        flex: 2;
+        height: 30vh;
+    }    
+    .info {
+        padding: 0px;
+        font-size: .4em;
+    }   
+}    

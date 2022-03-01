@@ -14,7 +14,7 @@ Designers
     {% for obj in page_obj %}
     <div class="myrow">
         <div class="img">
-            <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.profile_image.url }}"></a>
+            <a><img src="{{ obj.profile_image.url }}"></a>
         </div>
         <div class="info">
             <p>{{ obj.user }}</p>

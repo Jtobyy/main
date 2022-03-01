@@ -25,8 +25,8 @@ Fabrics
     <div class="row">
         {% for fabric in fabrics %}
             <div class="col-sm-4 product">
-                <div class="img">
-                    <a onmouseover="showfeats(this)" onmouseout="hidefeats(this)"><img src="{{ fabric.image.url }}"></a>
+                <div class="img">    
+                    <a href="{% url 'main:fabric_sample' fabric_id=fabric.id %}"><img src="{{ fabric.image.url }}"></a>
                     <div class="feats">
                         <i class="bi-heart" onclick="heart(this)"></i>    
                         <i class="bi-cart" onclick="cart(this); fabriccartadd(this);" id="{{ fabric.id }}"></i>

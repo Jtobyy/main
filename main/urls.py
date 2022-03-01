@@ -13,6 +13,7 @@ urlpatterns = [
     path('tailors', views.tailors_list_view, name="tailors_list"),
     path('fabricsfilter/', views.fabrics_filter_view, name="fabricsfilter"),
     path('clothe_sample/<int:clothe_id>', views.clothe_sample_view, name="clothe_sample"),
+    path('fabric_sample/<int:fabric_id>', views.fabric_sample_view, name="fabric_sample"),
     path('mail/<int:clothe_id>', views.mail_view, name="sendmail"),
     path('profile/<str:user>', views.external_profile_view, name="profile"),
     path('tailorProfile/<int:tailor_id>', views.tailor_profile_view, name="tailorProfile"),

@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+    Clothe sample
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/clothe.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="main">
+    <img class="clothe_image" src="{{ object.image.url }}">
+    <a href="{% url 'main:fabric_sample' fabric_id=object.id %}"><button class="btn btn-primary"> Order </button></a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'main/js/clothe.js' %}"></script>
+{% endblock %}

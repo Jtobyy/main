@@ -13,6 +13,13 @@ CATEGORIES = [
         ('O', 'Modern'),
         ('C', 'Classic'),
     ]
+RATING = [
+        (1, 'Bad'),
+        (2, 'Fair'),
+        (3, 'Good'),
+        (4, 'Very Good'),
+        (5, 'Excellent'),
+    ]
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
@@ -35,14 +42,6 @@ class Tailor(models.Model):
 
     gender_spec = MultiSelectField(max_length=6, choices=CATEGORIES, default='M',
                                    max_choices=6)
-    
-    RATING = [
-        (1, 'Bad'),
-        (2, 'Fair'),
-        (3, 'Good'),
-        (4, 'Very Good'),
-        (5, 'Excellent'),
-    ]
     rating = models.IntegerField(choices=RATING, default=3)
     profile_image = models.ImageField(upload_to = tailor_profile_path, default='Tailor_12/profile_image/images/blank-profile-picture-gc048af202_1280.png')
     background_image = models.ImageField(upload_to = tailor_background_path, default='Tailor_12/background_image/images/paper-g0b57e8602_1920.jpg')
@@ -57,13 +56,6 @@ class Seller(models.Model):
     spec = MultiSelectField(max_length=6, choices=CATEGORIES, default='M',
                                    max_choices=6)
     
-    RATING = [
-        (1, 'Bad'),
-        (2, 'Fair'),
-        (3, 'Good'),
-        (4, 'Very Good'),
-        (5, 'Excellent'),
-    ]
     rating = models.IntegerField(choices=RATING, default=3)
 
 def cloth_image_path(instance, filename):
@@ -74,6 +66,7 @@ class Clothe(models.Model):
                                        max_choices=2)
     price_range = models.CharField(max_length=20)
     image = models.ImageField(upload_to = cloth_image_path)
+    rating = models.IntegerField(choices=RATING, default=3)
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=CASCADE, null=False)

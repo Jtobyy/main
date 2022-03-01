@@ -34,10 +34,20 @@ def mail_view(request, clothe_id):
     
     return render(request, 'main/clothe.html', None)
 
+
+
+
+
+# sample views
 @login_required(login_url='main/login.html')
 def clothe_sample_view(request, clothe_id):
     object = Clothe.objects.get(id=clothe_id)
     return render(request, 'main/clothe.html', {'object': object})
+
+@login_required(login_url='main/login.html')
+def fabric_sample_view(request, fabric_id):
+    object = Fabric.objects.get(id=fabric_id)
+    return render(request, 'main/fabric.html', {'object': object})
 
 def welcome_view(request):
     context = {
