@@ -15,7 +15,7 @@ profile
         <img src="{{ tailor.profile_image.url }}">  
     </div>
     <div class="info">
-        <h1 class="company">{{ tailor.user }}</h1>
+        <h1 class="info-company">{{ tailor.user }}</h1>
         <p class="spec-info"> Specification: <span>{{ tailor.gender_spec }}</span></p>
     </div>
     {% elif seller %}
@@ -25,8 +25,21 @@ profile
 
     {% endif %}
 </div>
-<div class="posts">
-
+<div class="works">
+    <div class="works-header"><h3>Works</h3><i class="bi-grid-3x3-gap"></i></div>
+    <div class="container">
+        <div class="row myrow">
+        {% for obj in clothes %}    
+            <div class="col-md-4 col-sm-6 mycol showitem">
+                <a href="{% url 'main:clothe_sample' clothe_id=obj.id %}"><img class="grid-item" src="{{ obj.image.url }}" alt=" " ></a>
+                <div class="info">
+                    <span class="price"> {{ obj.price }} </span>
+                    <span class="category"> {{ obj.category }} </span>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}
 

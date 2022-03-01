@@ -22,10 +22,9 @@
     position: relative;
     padding: 50px;
 }
-.company {
+.info-company {
     font-size: 3em;
-    color: var(--themecolor);
-    
+    color: var(--themecolor);    
 }
 .spec-info {
     color: var(--themecolor);
@@ -49,4 +48,25 @@
 .profile h3 {
     font-size: 2em;
     color: var(--themecolor);
+}
+.works-header {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: l00;
+}
+.bi-grid-3x3-gap {
+    margin-top: -4px;    
+}
+.showitem {
+    margin-bottom: 3.5em;
+}
+.mycol {
+    height: 60vh;
+}
+.showitem img {
+    object-fit: fill;
+    height: 50vh;
 }

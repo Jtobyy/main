@@ -160,12 +160,22 @@ def external_profile_view(request, user):
     try:
         thisuser = User.objects.get(username=user)
         tailor = Tailor.objects.get(user=thisuser.id)
-        return render(request, 'main/profile2.html', {'tailor': tailor})
+        clothes = Clothe.objects.filter(company_name=thisuser.id)
+        context = {
+            'clothes': clothes,
+            'tailor': tailor
+        }
+        return render(request, 'main/profile2.html', context)
     except Exception as e:
         thisuser = User.objects.get(username=user)
         seller = Tailor.objects.get(user=thisuser.id)
-        return render(request, 'main/profile2.html', {'seller': seller})
-
+        clothes = Clothe.objects.filter(company_name=thisuser.id)
+        context = {
+            'clothes': clothes,
+            'seller': seller
+        }
+        return render(request, 'main/profile2.html', context)
+    
 @login_required(login_url='main/login.html')
 def tailor_profile_view(request, tailor_id):
     tailor = Tailor.objects.get(id=tailor_id)
