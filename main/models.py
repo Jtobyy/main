@@ -1,5 +1,3 @@
-from operator import mod
-from statistics import mode
 from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import User, Group
@@ -30,6 +28,8 @@ def tailor_background_path(instance, filename):
     return f'Tailor_{instance.user.id}/background_image/images/{filename}'
 class Tailor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
+    first_name = models.CharField(null=True, max_length=225)
+    last_name = models.CharField(null=True, max_length=225)
     phone_no1 = models.CharField(null=True, max_length=15)
     phone_no2 = models.CharField(null=True, max_length=15)
 
@@ -49,6 +49,8 @@ class Tailor(models.Model):
 
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
+    first_name = models.CharField(null=True, max_length=225)
+    last_name = models.CharField(null=True, max_length=225)
     phone_no1 = models.CharField(null=True, max_length=15)
     phone_no2 = models.CharField(null=True, max_length=15)
 
@@ -70,7 +72,7 @@ class Clothe(models.Model):
     company_name = models.ForeignKey(User, on_delete=CASCADE, null=False)
     category = MultiSelectField(max_length=3, choices=CATEGORIES, default='M',
                                        max_choices=2)
-    price = models.DecimalField(decimal_places=2, max_digits=7)
+    price_range = models.CharField(max_length=20)
     image = models.ImageField(upload_to = cloth_image_path)
 
 class Address(models.Model):
@@ -104,3 +106,12 @@ class PendingSellerReg(models.Model):
     city = models.CharField(null=False, max_length=225)
     state = models.CharField(null=False, max_length=225)
     zipcode = models.CharField(null=True, max_length=225)
+
+def fabrics_image_path(instance, filename):
+    return f'Fabric_{instance.seller.id}/fabric_images/images/{filename}'
+class Fabric(models.Model):
+    seller = models.ForeignKey(Seller, on_delete=CASCADE, null=False)        
+    type = models.CharField(null=False, default='Not specified', max_length=225)
+    price = models.CharField(max_length=225)
+    image = models.ImageField(upload_to = fabrics_image_path)
+    

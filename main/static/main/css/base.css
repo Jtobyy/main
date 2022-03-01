@@ -220,7 +220,7 @@ footer li {
 }
 .contact ul {
   position: relative;
-  left: 45px;
+  left: -45px;
 }
 .contact ul li {
   display: inline-block;

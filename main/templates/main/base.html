@@ -58,15 +58,14 @@
             <nav class="header-nav nav2">
                 <ul>
                     <li class="link-icon nav-item" tabindex="0">
-                        <span>Fabric</span>
+                        <a class="link-icon" href="{% url 'main:fabrics' %}"><span>Fabrics</span></a>
                         <ul class="dropdown" id='fabricDropdown' tabindex="0">
                             <li><a>Guinea</a></li>
                             <li><a>Senator</a></li>
                             <li><a>Various other materials</a></li>
                         </ul>    
                     </li>                        
-                    <li class="link-icon nav-item" tabindex="0"><span>Tailors</span></li>
-                    <li class="link-icon nav-item" tabindex="0"><span>Fashion Designers</span></li>
+                    <li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Tailors/Fashion Designers</span></a></li>
                 </ul>
             </nav>
             <nav class="header-nav nav3">
@@ -131,9 +130,9 @@
                 <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
                 <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                 <br>
-                <li class="link-icon nav-item">Fabric</li>
-                <li class="link-icon nav-item">Tailors</li>
-                <li class="link-icon nav-item">Fashion Designers</li>
+                <li class="link-icon nav-item">Fabrics</li>
+                
+                <li class="link-icon nav-item"><a class="link-icon" href="{% url 'main:tailors_list' %}"><span>Fashion Designers</span></a></li>
                 <br>
                 <li title="help" class="header-icon small-icon"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
                 <li title="help" class="header-icon small-icon small-cap"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>                                
@@ -170,13 +169,10 @@
                     <h3>Services</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Fabrics</a>
+                            <a href="{% url 'main:fabrics' %}" class="footer-link">Fabrics</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Tailors</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Fashion designers</a>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Fashion designers</a>
                         </li>
                     </ul>
                 </div>
@@ -206,7 +202,7 @@
                     </ul>
                 </div>
                 <div class="contact">
-                    <h3>Contact and connect with us</h3>
+                    <h3>Contact/Connect with us</h3>
                     <ul>
                         <li><a href=""><i class="bi-instagram"></i></a></li>
                         <li><a href=""><i class="bi-twitter"></i></a></li>

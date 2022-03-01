@@ -10,7 +10,7 @@ from django.contrib.auth.models import AnonymousUser, User, Group
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from .forms import RegForm, TailorRegForm, SellerRegForm
-from .models import CATEGORIES, Clothe, Customer, Tailor, Address, Seller, PendingSellerReg, PendingTailorReg
+from .models import CATEGORIES, Clothe, Customer, Fabric, Tailor, Address, Seller, PendingSellerReg, PendingTailorReg
 from django.core import serializers
 from django.conf import settings
 import json
@@ -47,7 +47,27 @@ def welcome_view(request):
 
 
 
-# shop
+
+# Shopping
+def cart_view(request):
+    referer = request.META.get('HTTP_REFERER')
+    if referer is None or re.match(".+/cart.*", referer) is None:
+        return render(request, 'main/cart.html', None)
+    clothes = request.GET.get('thestorage')
+    try:
+        clothes_obj = json.loads(clothes)
+        cart_clothes = []
+        total = 0
+        for key, val in clothes_obj.items():
+            thisclothe = Clothe.objects.get(id=val)
+            cart_clothes.append(thisclothe)
+        context = {
+            'cart': cart_clothes,
+        }
+        return render(request, 'main/cart/mycart.html', context)
+    except Exception as e:
+        return render(request, 'main/cart/mycart.html', None)
+
 def shop_view(request):
     print('here first')    
     clothes = Clothe.objects.all()
@@ -124,10 +144,28 @@ def ex_shop_filter_view(request, filter):
     }
     return render(request, 'main/shop.html', context)
 
+def fabrics_view(request):
+    fabrics = Fabric.objects.all()
+    return render(request, 'main/fabrics.html', {'fabrics': fabrics})
+
+def fabrics_filter_view(request):
+    return render(request, 'main/fabrics.html', None)
+
 
 
 
 # tailor profile section
+@login_required(login_url='main/login.html')
+def external_profile_view(request, user):
+    try:
+        thisuser = User.objects.get(username=user)
+        tailor = Tailor.objects.get(user=thisuser.id)
+        return render(request, 'main/profile2.html', {'tailor': tailor})
+    except Exception as e:
+        thisuser = User.objects.get(username=user)
+        seller = Tailor.objects.get(user=thisuser.id)
+        return render(request, 'main/profile2.html', {'seller': seller})
+
 @login_required(login_url='main/login.html')
 def tailor_profile_view(request, tailor_id):
     tailor = Tailor.objects.get(id=tailor_id)
@@ -196,7 +234,15 @@ def edit_tailor_view(request, tailor_id):
         thistailor.save()
         return redirect(f'/main/tailorProfile/{tailor_id}')
     return render(request, 'main/profile.html', None)    
-    
+
+@login_required(login_url='main/login.html')
+def tailors_list_view(request):
+    tailors = Tailor.objects.all()
+    paginator = Paginator(tailors, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'main/tailors.html', {'page_obj': page_obj})  
+
 
 
 
@@ -492,28 +538,6 @@ def promeasure_view(request):
         newaddress.save()
         return redirect(f'/main/custProfile/{request.user.customer.id}')
     return render(request, 'main/measure/requestpro.html', None)
-
-
-
-# Shopping
-def cart_view(request):
-    clothes = request.GET.get('thestorage')
-    try:
-        clothes_obj = json.loads(clothes)
-        cart_clothes = []
-        total = 0
-        for key, val in clothes_obj.items():
-            thisclothe = Clothe.objects.get(id=val)
-            cart_clothes.append(thisclothe)
-            total += thisclothe.price
-        context = {
-            'cart': cart_clothes,
-            'total': total
-        }
-        return render(request, 'main/cart/mycart.html', context)
-    except:
-        pass
-    return render(request, 'main/cart.html', None)
 
 
 

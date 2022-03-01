@@ -78,3 +78,32 @@
 .checkout:hover {
     padding: 8px;
 }
+.loadMore {
+    background-color: white; 
+    width: fit-content;
+    position: relative;
+    left:55%;
+    border: 5px;
+    margin: 20px 0px;
+    padding: 10px 20px;
+    font-size: 1em !important;
+  }
+  .loadMore a {
+    font-size: 1.2em;
+  }
+  .first {
+    margin-right: 25px;
+    font-size: 1em;
+  }
+  .previous {
+    margin-right: 10px;
+    font-size: 1em;
+  }
+  
+  .next {
+    margin-left: 10px;
+  }
+  .last {
+    margin-left: 25px;
+  }
+  

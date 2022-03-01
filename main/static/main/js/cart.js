@@ -7,10 +7,11 @@ window.onload = function() {
             clothes[key] = localStorage[key]
         }
     });
-    if (clothes.length != {}) {
+    console.log(clothes)
+    if (clothes != {}) {
         thestorage = JSON.stringify(clothes)
         $.get('?thestorage='+thestorage, function(page, textStatus) {
             $('.content').html(page)
         })
     }
-}
+}   

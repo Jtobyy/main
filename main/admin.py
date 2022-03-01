@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer, Tailor, Clothe, Seller, PendingTailorReg, PendingSellerReg
+from .models import Customer, Tailor, Clothe, Seller, PendingTailorReg, PendingSellerReg, Fabric
 
 # Register your models here.
 admin.site.register(Customer)
@@ -9,3 +9,4 @@ admin.site.register(Clothe)
 admin.site.register(Seller)
 admin.site.register(PendingTailorReg)
 admin.site.register(PendingSellerReg)
+admin.site.register(Fabric)

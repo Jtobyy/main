@@ -1,0 +1,115 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}
+Fabrics
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/shop.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/fabrics.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container">    
+    <h1 class="caption">Get quality fabrics at your doorstep</h1>    
+    <div class="row intro">
+        {% for fabric in fabrics|slice:":3" %}    
+        <div class="col-sm-4">
+            <div class="img step{{ forloop.counter }}">
+                <a><img src="{{ fabric.image.url }}"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% for fabric in fabrics %}
+            <div class="col-sm-4 product">
+                <div class="img">
+                    <a onmouseover="showfeats(this)" onmouseout="hidefeats(this)"><img src="{{ fabric.image.url }}"></a>
+                    <div class="feats">
+                        <i class="bi-heart" onclick="heart(this)"></i>    
+                        <i class="bi-cart" onclick="cart(this); fabriccartadd(this);" id="{{ fabric.id }}"></i>
+                    </div>
+                </div>
+                <div class="info">
+                    <!--<div class="cart" onclick="cartadd(this)" id="{{ fabric.id }}">
+                        Add to cart<i class="bi-cart4"></i>
+                    </div>-->
+                    {% if fabric.type == 'Not specified' %}
+                    <div class="name">fab{{fabric.id}}</div>
+                    {% else %}
+                    <div class="name">{{ fabric.type }}{{fabric.id}}</div>
+                    {% endif %}
+                    <span class="price"> {{ fabric.price }} </span>                    
+                </div>
+                <div class="type"> {{ fabric.type }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="filter filter_more" id="filter_container">
+    <i class='bi-filter-right filterToggle' id="filter_toggle"></i>    
+    <form id="filter_form" action="{% url 'main:fabricsfilter' %}" method="POST">
+        {% csrf_token %}   
+        <ul class="list"> 
+            <li>
+            {% if 'A' in categories %}    
+                <input type="checkbox" name="A" checked>
+            {% else %}
+                <input type="checkbox" name="A">
+            {% endif %}
+                <span> Ankara </span>
+            </li>
+            <li>
+            {% if 'G' in categories %}        
+                <input type="checkbox" name="G" checked>
+            {% else %}
+                <input type="checkbox" name="G">
+            {% endif %}
+                <span> Guinea </span>
+            </li>
+            <li>
+            <!--
+            {% if 'B' in categories %}    
+                <input type="checkbox" name="B" checked>
+            {% else %}
+                <input type="checkbox" name="B">
+            {% endif %}
+                <span> kids </span>
+            </li>
+            <li>
+            {% if 'T' in categories %}        
+                <input type="checkbox" name="T" checked>
+            {% else %}
+                <input type="checkbox" name="T">
+            {% endif %}
+                <span> traditional </span>
+            </li>
+            <li>-->    
+            {% if 'O' in categories %}            
+                <input type="checkbox" name="O" checked>
+            {% else %}
+                <input type="checkbox" name="O">
+            {% endif %}
+                <span> Other materials </span>
+            </li>
+            <!--
+            <li>
+            {% if 'C' in categories %}                
+                <input type="checkbox" name="C">
+            {% else %}
+                <input type="checkbox" name="C">
+            {% endif %}
+                <span> classic </span>-->
+            <li class="reload">
+                <button type="submit"><i class='bi-arrow-clockwise'></i></button>
+            </li>
+        </ul>
+    </form>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'main/js/shop.js' %}"></script>
+<script src="{% static 'main/js/fabrics.js' %}"></script>
+{% endblock %}

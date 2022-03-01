@@ -25,15 +25,14 @@
             <nav class="header-nav nav2">
                 <ul>
                     <li class="link-icon nav-item">
-                        <span>Fabric</span>
+                        <a class="link-icon" href="{% url 'main:fabrics' %}"><span>Fabrics</span></a>
                         <ul class="dropdown" id='fabricDropdown' tabindex="0">
                             <li><a>Guinea</a></li>
                             <li><a>Senator</a></li>
                             <li><a>Various other materials</a></li>
                         </ul>    
-                    </li>                        
-                    <li class="link-icon nav-item"><span>Tailors</span></li>
-                    <li class="link-icon nav-item"><span>Fashion Designers</span></li>
+                    </li>                       
+                    <li class="link-icon nav-item"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Fashion Designers</span></a></li>
                 </ul>
             </nav>
             <nav class="header-nav nav3">
@@ -100,9 +99,9 @@
                 <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
                 <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                 </br>
-                <li class="link-icon nav-item" tabindex="0">Fabric</li>
-                <li class="link-icon nav-item" tabindex="0">Tailors</li>
-                <li class="link-icon nav-item" tabindex="0">Fashion Designers</li>
+                <li class="link-icon nav-item" tabindex="0">Fabrics</li>
+                
+                <li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon">Fashion Designers<span>Tailors/Fashion Designers</span></a></li>
                 </br>
                 <li title="help" class="header-icon small-icon"><a class="link-icon" href="{% url 'main:welcome' %}#info" onclick="scrollV()">How it works</a></li>
                 <li title="help" class="header-icon small-icon small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq" onclick="scrollV()">faq</a></li>
@@ -140,26 +139,25 @@
         <h2 class="re-header"> Popular categories </h2>        
         <div class="row category">
             <div class="col category-item">
-                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <a href="{% url 'main:exshopfilter' filter='F' %}"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
                 <span class="caption"> Female clothings </span>
             </div>
             <div class="col category-item">
-                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <a href="{% url 'main:exshopfilter' filter='M' %}"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
                 <span class="caption"> Male clothings </span>
             </div>
             <div class="col category-item">
-                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
-                <span class="caption"> Infants </span>
+                <a href="{% url 'main:exshopfilter' filter='B' %}"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <span class="caption"> Kids </span>
             </div>
         </div>
-        <div class="row cate
-        gory justify-content-center">
+        <div class="row category justify-content-center">
             <div class="col-4 category-item">
-                <a href="#"><img src="{% static 'main/images/dressmaker-1416196.jpg' %}"></a>
+                <a href="{% url 'main:exshopfilter' filter='T' %}"><img src="{% static 'main/images/dressmaker-1416196.jpg' %}"></a>
                 <span class="caption"> Traditional attires </span>
             </div>
             <div class="col-4 category-item">
-                <a href="#"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
+                <a href="{% url 'main:exshopfilter' filter='O' %}"><img src="{% static 'main/images/pattern-1484981.jpg' %}"></a>
                 <span class="caption"> Modern clothings </span>
             </div>
             <!--
@@ -169,7 +167,7 @@
             </div>
             -->
         </div>
-        <p><a href="">View more</a></p>
+        <p><a href="{% url 'main:shop' %}">View more</a></p>
     </div>
     <!-- small width screen display of category -->
     <div class="row mobcategory">
@@ -226,7 +224,7 @@
         </div>
         <div class="step step5" tabindex="0">
             <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
-            <span>Made just for you</span>
+            <span>Have it made just for you</span>
         </div>
     </div>
     <div class="faq" id="faq">
@@ -257,7 +255,7 @@
             <div class="col re-item">
                 <div>
                     <h3>Best Tailors</h3>
-                    <p>Our tailors are wells seasoned and experienced</p>
+                    <p>Our tailors are well seasoned and experienced</p>
                     <p class="learn-more">learn more ></p>
                 </div>
                 <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">

@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+profile
+{% endblock %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/profile2.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="profile">
+    {% if tailor %}    
+    <div class="profile_pic">
+        <img src="{{ tailor.profile_image.url }}">  
+    </div>
+    <div class="info">
+        <h1 class="company">{{ tailor.user }}</h1>
+        <p class="spec-info"> Specification: <span>{{ tailor.gender_spec }}</span></p>
+    </div>
+    {% elif seller %}
+    <div class="profile_pic">
+       <img src="{{ seller.image.url }}">
+    </div>
+
+    {% endif %}
+</div>
+<div class="posts">
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

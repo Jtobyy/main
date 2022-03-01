@@ -1,0 +1,95 @@
+.fabric {
+    border: 1px solid black;
+    background-color: aliceblue;
+}
+.filter_less {
+    left: -9em;
+  }
+  
+.step1 {
+    height: 40vh;
+    width: auto;
+}  
+.step2 {
+    height: 60vh;
+    width: auto;
+}  
+.step3 {
+    height: 80vh;
+    width: auto;
+}
+.caption {
+    color: var(--themecolor);
+    position: relative;
+    top: 75vh;
+    left: 120px;
+    font-size: 3em;
+}
+.intro {
+    margin-top: -20px;    
+    margin-bottom: 50px;
+}
+.product .img {
+    height: 50vh;
+} 
+.product .img .feats {
+    position: absolute;
+    right: 25px;
+    top: 35px;
+    z-index: 5;
+    color: red;
+    font-size: 1.8em;
+    font-weight: 900;
+    display: none;
+    flex-direction: column;
+}
+.feats:hover {
+    display: flex !important;
+    cursor: pointer;
+}
+span.price {
+    flex: 2;
+}
+.name {
+    color: var(--themecolor);
+    background-color: rgba(255, 255, 255, .5); 
+    height: 100%;
+    padding: 10px;
+    font-size: 1.4em;
+    flex: 1;
+    transition: all .5s;
+}
+.type {
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 100 !important;
+    color: grey;
+}
+@media screen and (max-width: 900px) {
+    .caption {
+        left: 0;
+    }    
+
+}    
+@media screen and (max-width: 780px) {
+    .caption {
+        font-size: 2.5em;
+    }    
+}    
+
+@media screen and (max-width: 600px) {
+    .intro, .caption {
+        display: none;
+    }
+    .filter_less {
+    left: -10em;        
+    }
+    .filterToggle {
+        position: absolute;
+        right: -15px;
+        top: 0px;
+        font-size: 1.8em;
+        color: blue;
+        cursor: pointer;
+      }      
+}

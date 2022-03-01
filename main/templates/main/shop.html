@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Home
+Shop
 {% endblock %}
 
 {% block links %}
@@ -20,7 +20,7 @@ Home
         {% for obj in page_obj %}
             <div class="col-sm-6 product">
                 <div class="img">
-                    <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+                    <a><img src="{{ obj.image.url }}"></a>
                 </div>    
                 <div class="info">
                     <div class="cart" onclick="cartadd(this)" id="{{ obj.id }}">
@@ -34,7 +34,7 @@ Home
                     <!--<span class="category"> {{ obj.category }} </span>-->
                 </div>    
             </div>
-        {% endfor %}    
+        {% endfor %}
     </div>
 </div>
 <div class="filter filter_more" id="filter_container">
@@ -64,7 +64,7 @@ Home
             {% else %}
                 <input type="checkbox" name="B">
             {% endif %}
-                <span> baby </span>
+                <span> kids </span>
             </li>
             <li>
             {% if 'T' in categories %}        
