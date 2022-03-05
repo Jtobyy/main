@@ -85,6 +85,36 @@
     color: rgb(247, 180, 55);
     gap: 4px;
 }
+.dim {
+    z-index: 1;
+    display: flex;
+}
+.pimage {
+    height: 50%;
+    border-radius: 50%;
+    margin-top: 80px;
+    align-self: flex-start;
+    object-fit: contain;
+}
+.display {
+    text-align: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    background-color: rgb(29,34,38);
+    border-radius: 10px;
+    color: rgb(203 83 83);
+    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
+    width: 70%;
+    z-index: 3;
+    margin-top: 1em;
+    position: fixed;
+    transition: all 0.3s;
+}
+.display_hidden {
+    display: none;
+}
 
 @media screen and (max-width: 850px) {
     .profile_pic{

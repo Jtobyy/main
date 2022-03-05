@@ -2,10 +2,8 @@
     --themecolor: rgb(228, 72, 72);
     --headercolor: rgb(48, 174, 161);    
   }
-  .content {
-    padding: 50px;
-  }
-  .empty{
+  
+.empty{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -25,35 +23,47 @@
     color: white;
     border-radius: 10px;
 }
+.mycontainer {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    padding: 50px;
+}
+.myrow {
+    display: flex;
+    height: 100px;
+    padding: 0 50px;
+    background-color: rgba(255, 255, 255, .7);
+    margin: 10px;
+    position: relative;
+    align-items: center;
+}
+.myrow span {
+    position: absolute;
+    right: 30px;
+    font-size: 1.3em;
+}
 .remove {
     background-color: rgb(248, 220, 224);
     position: absolute;
-    right: 0px;
+    right: 30px;
     top:0px;
     padding: 7px;
     color: var(--themecolor);
     cursor: pointer;
 }
+.myrow .img {
+    width: 100px;
+    height: 100px;
+}
 .sumtotal {
     font-size: 1.4em;
     color: var(--themecolor);
     font-family: cursive;
-    padding: 30px 0 30px 30px;
-    background-color: rgba(255, 255, 255, .7);
-    align-items: center;
-    height: 20vh;
 }
 .sumtotal .price {
     font-size: 1em;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    position: absolute;
-    right: 0;
-    width: fit-content;
-    background-color: transparent;
 }
-
 .checkout {
     background-color: rgb(248, 178, 48);
     border-radius: 5px;
@@ -96,23 +106,4 @@
   .last {
     margin-left: 25px;
   }
-.myrow {
-  height: 40vh !important;
-  width: 80vw;
-  position: relative;
-  background-color: rgba(255, 255, 255, .7);
-}
-.info {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  position: absolute;
-  right: 0;
-  width: fit-content;
-  font-size: 1.3em;
-  background-color: transparent;
-}
-.img {
-  height: 40vh; 
-  width: 80%;
-}
+  

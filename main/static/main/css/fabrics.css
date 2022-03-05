@@ -1,3 +1,25 @@
+.info {
+display: flex;  
+flex-direction: row;
+height: 3em;
+border-radius: 10px;
+text-align: center;
+line-height: 1em;
+align-items: center;
+justify-content: center;
+background-color: transparent;
+}
+
+.info span {
+font-size: 2em;    
+  flex: 1;
+  font-weight: 100;
+  background:linear-gradient(to bottom right, rgba(255, 255, 255, .7) 70%,  transparent);
+  color: var(--themecolor);
+  height: 100%;
+  padding: 10px 0;
+}
+
 .fabric {
     border: 1px solid black;
     background-color: aliceblue;

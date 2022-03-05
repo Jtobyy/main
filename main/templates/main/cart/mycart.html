@@ -1,11 +1,20 @@
-<div class="mycontainer">    
     {% for obj in cart %}
-    <div class="myrow">
-        <div class="img">
-            <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+    <div class="row myrow">    
+        <div class="col-6">
+            <div class="img">
+                <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+            </div>
         </div>
-        <span class="price"> {{ obj.price }} </span>
-        <div class="remove" onclick="cartremove(this)" id="{{ obj.id }}">
+        <div class="col-6 info">
+            {% if obj.type == 'Not specified' %}
+            <div class="name">fab{{obj.id}}</div>
+            {% else %}
+            <div class="name">{{ obj.type }}{{obj.id}}</div>
+            {% endif %}    
+            <span class="price"> N {{ obj.price }} </span>
+            <span class="price"> x{{ obj.amount }} </span>
+        </div>
+        <div class="remove" onclick="cartremove(this)" id="{{ obj.id }}" data-name="{{ obj }}">
             Remove from cart
         </div>
     </div>
@@ -18,12 +27,15 @@
     </div>
     {% endfor %}
     {% if cart %}
-    <div class="sumtotal myrow">
-        Total
-        <span class="price"> {{ total }} </span>
-    </div>
-    <div onclick="payment()" class="checkout">
-        Checkout
+    <div class="row myrow sumtotal">    
+        <div class="col-6">
+            Total
+        </div>
+        <div class="col-6">
+            <span class="price"> N {{ total }} </span>
+            <div onclick="payment()" class="checkout">
+                Checkout
+            </div>
+        </div>
     </div>
     {% endif %}
-</div>

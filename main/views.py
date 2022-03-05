@@ -2,6 +2,7 @@ from http.client import REQUEST_ENTITY_TOO_LARGE
 from multiprocessing import context
 import this
 from unicodedata import category
+from xml.dom.minidom import Document
 from django.contrib import messages
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
@@ -63,19 +64,38 @@ def cart_view(request):
     referer = request.META.get('HTTP_REFERER')
     if referer is None or re.match(".+/cart.*", referer) is None:
         return render(request, 'main/cart.html', None)
-    clothes = request.GET.get('thestorage')
+    basket = json.loads(request.GET.get('thestorage'))
+    print(basket)
+    fabrics = basket['fabrics']
+    clothes = basket['clothes']
     try:
-        clothes_obj = json.loads(clothes)
-        cart_clothes = []
+        cart = []
         total = 0
-        for key, val in clothes_obj.items():
-            thisclothe = Clothe.objects.get(id=val)
-            cart_clothes.append(thisclothe)
+        for key, val in fabrics.items():
+            sep = val.index('_')  
+            id = val[:sep]
+            amount = val[sep+1:]
+            fabric_obj = Fabric.objects.get(id=id)
+            total += fabric_obj.price * int(amount)
+            thisfabric = fabric_obj
+            thisfabric.amount = amount
+            cart.append(thisfabric)
+        for key, val in clothes.items():
+            sep = val.index('_')  
+            id = val[:sep]
+            amount = val[sep+1:]
+            clothe_obj = Clothe.objects.get(id=id)
+            total += clothe_obj.price * int(amount)
+            thisclothe = clothe_obj
+            thisclothe.amount = amount
+            cart.append(thisclothe)
         context = {
-            'cart': cart_clothes,
+            'cart': cart,
+            'total': total
         }
         return render(request, 'main/cart/mycart.html', context)
     except Exception as e:
+        print(e)
         return render(request, 'main/cart/mycart.html', None)
 
 def shop_view(request):

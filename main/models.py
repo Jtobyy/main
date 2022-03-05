@@ -105,6 +105,6 @@ def fabrics_image_path(instance, filename):
 class Fabric(models.Model):
     seller = models.ForeignKey(Seller, on_delete=CASCADE, null=False)        
     type = models.CharField(null=False, default='Not specified', max_length=225)
-    price = models.CharField(max_length=225)
+    price = models.IntegerField()
     image = models.ImageField(upload_to = fabrics_image_path)
     

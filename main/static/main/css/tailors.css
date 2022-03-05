@@ -1,8 +1,14 @@
 .myrow {
-    position: relative;
+    gap: 0;
+}
+.img {
+    flex: 2;
+}
+.img img {
+    width: 100px;
 }
 .info {
-    position: absolute;
+    flex: 2;
     right: 200px;
     width: fit-content;
     padding: 10px 20px;
@@ -16,3 +22,54 @@
 .myrow a {
     color: var(--themecolor);
 }
+
+@media screen and (max-width: 690px) {
+    .mycontainer {
+    font-size: .8em;
+  }
+    .myrow {
+        padding: 0
+    }
+}
+@media screen and (max-width: 560px) {
+     .mycontainer {
+        padding-top: 10px;    
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .img {
+        flex: 1;
+    }
+.img img{
+    border-radius: 50px;
+}
+}
+@media screen and (max-width: 360px) {
+.myrow {
+    height: 70px;
+}    
+.myrow .img {
+    height: 70px;
+}
+.img img {
+    width: 70px;
+}
+.info {
+    width: fit-content;
+    padding: 0px 0px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color:rgb(249,249,249);
+    justify-content: flex-start;
+}
+}    
+@media screen and (max-width: 250px) {
+    .info {    
+        height: 70px;
+    }
+}    
+    

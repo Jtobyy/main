@@ -10,9 +10,30 @@
 {% endblock %}
 
 {% block main %}
-<div class="main">
-    <img class="clothe_image" src="{{ object.image.url }}">
-    <a href="{% url 'main:sendmail' clothe_id=object.id %}"><button class="btn btn-primary"> Order </button></a>
+<div class="container main">
+    <div class="col-sm-6">
+        <img class="clothe_image" src="{{ object.image.url }}">
+    </div>
+    <div class="col-sm-6 info">
+        <div>
+            <!--<div class="cart" onclick="cartadd(this)" id="{{ fabric.id }}">
+                Add to cart<i class="bi-cart4"></i>
+            </div>-->
+            {% if object.type == 'Not specified' %}
+            <div class="name">fab{{object.id}}</div>
+            {% else %}
+            <div class="name">{{ object.type }}{{object.id}}</div>
+            {% endif %}
+        </div>
+        <span class="price"> {{ object.price }} </span>                 
+        <div class="amount">
+        <label for="amount"> How many yards: </label>
+        <input id="amount" value="1" type="number">
+        </div>
+        <div class="cart" onclick="cartadd(this)" id="{{ object.id }}">
+            Add to cart<i class="bi-cart4"></i>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

@@ -29,19 +29,16 @@ Fabrics
                     <a href="{% url 'main:fabric_sample' fabric_id=fabric.id %}"><img src="{{ fabric.image.url }}"></a>
                     <div class="feats">
                         <i class="bi-heart" onclick="heart(this)"></i>    
-                        <i class="bi-cart" onclick="cart(this); fabriccartadd(this);" id="{{ fabric.id }}"></i>
+                        <i class="bi-cart" onclick="cart(this);cartadd(this);" id="{{ fabric.id }}"></i>
                     </div>
                 </div>
                 <div class="info">
-                    <!--<div class="cart" onclick="cartadd(this)" id="{{ fabric.id }}">
-                        Add to cart<i class="bi-cart4"></i>
-                    </div>-->
+                    <span class="price"> {{ fabric.price }} </span>
                     {% if fabric.type == 'Not specified' %}
                     <div class="name">fab{{fabric.id}}</div>
                     {% else %}
                     <div class="name">{{ fabric.type }}{{fabric.id}}</div>
                     {% endif %}
-                    <span class="price"> {{ fabric.price }} </span>                    
                 </div>
                 <div class="type"> {{ fabric.type }}</div>
             </div>

@@ -17,12 +17,29 @@ profile
     <div class="info">
         <h1 class="info-company">{{ tailor.user }}</h1>
         <p class="spec-info"> Specification: <span>{{ tailor.gender_spec }}</span></p>
+        {% with ''|center:tailor.rating as range %}
+        <div class="rating">
+            {% for val in range %}
+            <i class="bi-star-fill rating" ></i>
+            {% endfor %}
+        </div>
+        {% endwith %}
     </div>
+    <h1 class="info-company">{{ seller.user }}</h1>
     {% elif seller %}
     <div class="profile_pic">
        <img src="{{ seller.image.url }}">
     </div>
-
+    <div class="info">
+        <h1 class="info-company">{{ seller.user }}</h1>
+        {% with ''|center:seller.rating as range %}
+        <div class="rating">
+            {% for val in range %}
+            <i class="bi-star-fill rating" ></i>
+            {% endfor %}
+        {% endwith %}
+        </div>
+    </div>
     {% endif %}
 </div>
 <div class="works">
