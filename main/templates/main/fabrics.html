@@ -33,14 +33,34 @@ Fabrics
                     </div>
                 </div>
                 <div class="info">
-                    <span class="price"> {{ fabric.price }} </span>
+                    <span class="price"> N {{ fabric.price }} </span>
                     {% if fabric.type == 'Not specified' %}
                     <div class="name">fab{{fabric.id}}</div>
                     {% else %}
                     <div class="name">{{ fabric.type }}{{fabric.id}}</div>
                     {% endif %}
                 </div>
-                <div class="type"> {{ fabric.type }}</div>
+                {% if fabric.type == 'K' %}    
+                <div class="type"> Ankara </div>
+                {% elif fabric.type == 'A' %}    
+                <div class="type"> Adire </div>
+                {% elif fabric.type == 'O' %}    
+                <div class="type"> Aso Oke </div>
+                {% elif fabric.type == 'T' %}    
+                <div class="type"> Adtiku </div>
+                {% elif fabric.type == 'B' %}    
+                <div class="type"> Brocades </div>
+                {% elif fabric.type == 'C' %}    
+                <div class="type"> Chiffon </div>
+                {% elif fabric.type == 'L' %}    
+                <div class="type"> Lace </div>
+                {% elif fabric.type == 'S' %}    
+                <div class="type"> Silk </div>
+                {% elif fabric.type == 'T' %}    
+                <div class="type"> Tulle </div>
+                {% elif fabric.type == 'V' %}    
+                <div class="type"> Velvet </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
@@ -50,55 +70,86 @@ Fabrics
     <form id="filter_form" action="{% url 'main:fabricsfilter' %}" method="POST">
         {% csrf_token %}   
         <ul class="list"> 
-            <li>
-            {% if 'A' in categories %}    
-                <input type="checkbox" name="A" checked>
+            <li>    
+            {% if 'K' in types %}    
+                <input type="checkbox" name="K" checked>
             {% else %}
-                <input type="checkbox" name="A">
+                <input type="checkbox" name="K">
             {% endif %}
                 <span> Ankara </span>
             </li>
             <li>
-            {% if 'G' in categories %}        
-                <input type="checkbox" name="G" checked>
+            {% if 'A' in types %}        
+                <input type="checkbox" name="A" checked>
             {% else %}
-                <input type="checkbox" name="G">
+                <input type="checkbox" name="A">
             {% endif %}
-                <span> Guinea </span>
+                <span> Adire </span>
             </li>
             <li>
-            <!--
-            {% if 'B' in categories %}    
-                <input type="checkbox" name="B" checked>
-            {% else %}
-                <input type="checkbox" name="B">
-            {% endif %}
-                <span> kids </span>
-            </li>
-            <li>
-            {% if 'T' in categories %}        
-                <input type="checkbox" name="T" checked>
-            {% else %}
-                <input type="checkbox" name="T">
-            {% endif %}
-                <span> traditional </span>
-            </li>
-            <li>-->    
-            {% if 'O' in categories %}            
+            {% if 'O' in types %}    
                 <input type="checkbox" name="O" checked>
             {% else %}
                 <input type="checkbox" name="O">
             {% endif %}
-                <span> Other materials </span>
+                <span> Aso Oke </span>
             </li>
-            <!--
             <li>
-            {% if 'C' in categories %}                
+            {% if 'T' in types %}        
+                <input type="checkbox" name="T" checked>
+            {% else %}
+                <input type="checkbox" name="T">
+            {% endif %}
+                <span> Atiku </span>
+            </li>
+            <li>
+            {% if 'B' in types %}            
+                <input type="checkbox" name="B" checked>
+            {% else %}
+                <input type="checkbox" name="B">
+            {% endif %}
+                <span> Brocades </span>
+            </li>
+            <li>
+            {% if 'C' in types %}                
                 <input type="checkbox" name="C">
             {% else %}
                 <input type="checkbox" name="C">
             {% endif %}
-                <span> classic </span>-->
+                <span> chiffon </span>
+            </li>
+            <li>
+            {% if 'L' in types %}                
+                <input type="checkbox" name="L">
+            {% else %}
+                <input type="checkbox" name="L">
+            {% endif %}
+                <span> Lace </span>
+            </li>
+            <li>
+                {% if 'S' in types %}                
+                <input type="checkbox" name="S">
+            {% else %}
+                <input type="checkbox" name="S">
+            {% endif %}
+                <span> Silk </span>
+            </li>
+            <li>
+            {% if 'T' in types %}                    
+                <input type="checkbox" name="T">
+            {% else %}
+                <input type="checkbox" name="T">
+            {% endif %}
+                <span> Tulle </span>
+            </li>
+            <li>
+            {% if 'V' in types %}                
+                <input type="checkbox" name="V">
+            {% else %}
+                <input type="checkbox" name="V">
+            {% endif %}
+                <span> Velvet </span>
+            </li>
             <li class="reload">
                 <button type="submit"><i class='bi-arrow-clockwise'></i></button>
             </li>

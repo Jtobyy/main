@@ -179,7 +179,72 @@ def fabrics_view(request):
     return render(request, 'main/fabrics.html', {'fabrics': fabrics})
 
 def fabrics_filter_view(request):
-    return render(request, 'main/fabrics.html', None)
+    if request.method == 'POST':
+        fabrics_arrays = []
+        types = request.POST
+        if len(request.POST) <= 1:
+            return redirect('/main/fabrics')
+        for key in types:
+            fabrics = Fabric.objects.filter(type__icontains = key)#.distinct('id')
+            if len(fabrics) > 0:
+                fabrics_arrays.append(list(fabrics))
+        fabrics_array = [item for sublist in fabrics_arrays for item in sublist]
+        pickle_out = open("fabdict.pickle", "wb")
+        pickle.dump(fabrics_array, pickle_out)
+        pickle_out.close()
+        typepickle_out = open("fabdict.typepickle", "wb")
+        pickle.dump(types, typepickle_out)
+        typepickle_out.close()
+        paginator = Paginator(fabrics_array, 8)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        print(page_obj)
+        context = {
+            'fabrics': page_obj,
+            'types': types
+        }
+        return render(request, 'main/fabrics.html', context)
+    else:
+        try:    
+            pickle_in = open("fabdict.pickle", "rb")
+            typepickle_in = open("fabdict.typepickle", "rb")
+            fabrics_array = pickle.load(pickle_in)
+            #print(fabrics_array)
+            types = pickle.load(typepickle_in)
+            paginator = Paginator(fabrics_array, 8)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            context = {
+                'page_obj': page_obj,
+                'types': types
+            }
+            return render(request, 'main/fabrics.html', context)
+        except:
+            return redirect('/main/fabrics')
+
+def ex_fabrics_filter_view(request, filter):
+    fabrics_arrays = []
+    types = []
+    types.append(filter)
+    for key in types:
+        fabrics = Fabric.objects.filter(type__icontains = key)#.distinct('id')
+        if len(fabrics) > 0:
+            fabrics_arrays.append(list(fabrics))
+    fabrics_array = [item for sublist in fabrics_arrays for item in sublist]
+    pickle_out = open("fabdict.pickle", "wb")
+    pickle.dump(fabrics_array, pickle_out)
+    pickle_out.close()
+    typepickle_out = open("fabdict.typepickle", "wb")
+    pickle.dump(types, typepickle_out)
+    typepickle_out.close()
+    paginator = Paginator(fabrics_array, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'types': types
+    }
+    return render(request, 'main/fabrics.html', context)
 
 
 

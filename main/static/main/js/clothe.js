@@ -2,7 +2,8 @@ function cartadd(div) {
     id = div['id']
     key = "clothe_"+id
     if (!localStorage[key]) {
-        localStorage[key]=id
+        amount = $('#amount').val()
+        localStorage[key]=id + "_" + amount
         $(div).css('background-color', 'rgb(248, 220, 224)')
         $(div).css('padding-top', '10px')
         $(div).text('Added to cart')

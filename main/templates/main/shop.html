@@ -23,7 +23,7 @@ Shop
                     <a href="{% url 'main:clothe_sample' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
                 </div>    
                 <div class="info">
-                    <span class="price"> {{ obj.price_range }} </span>
+                    <span class="price"> N {{ obj.price }} </span>
                     {% with ''|center:obj.rating as range %}
                     <div class="rating">
                     {% for val in range %}

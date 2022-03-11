@@ -1,3 +1,4 @@
+from tkinter import N
 from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import User, Group
@@ -19,6 +20,18 @@ RATING = [
         (3, 'Good'),
         (4, 'Very Good'),
         (5, 'Excellent'),
+    ]
+FABRICS = [
+        ('K', 'Ankara'),    
+        ('A', 'Adire'),
+        ('O', 'Aso Oke'),
+        ('T', 'Atiku'),
+        ('B', 'Brocades'),
+        ('C', 'Chiffon'),
+        ('L', 'Lace'),
+        ('S', 'Silk'),
+        ('T', 'Tulle'),
+        ('V', 'Velvet'),
     ]
 
 class Customer(models.Model):
@@ -64,7 +77,7 @@ class Clothe(models.Model):
     company_name = models.ForeignKey(User, on_delete=CASCADE, null=False)
     category = MultiSelectField(max_length=3, choices=CATEGORIES, default='M',
                                        max_choices=2)
-    price_range = models.CharField(max_length=20)
+    price = models.IntegerField(default=1000)
     image = models.ImageField(upload_to = cloth_image_path)
     rating = models.IntegerField(choices=RATING, default=3)
 
@@ -104,7 +117,7 @@ def fabrics_image_path(instance, filename):
     return f'Fabric_{instance.seller.id}/fabric_images/images/{filename}'
 class Fabric(models.Model):
     seller = models.ForeignKey(Seller, on_delete=CASCADE, null=False)        
-    type = models.CharField(null=False, default='Not specified', max_length=225)
+    type = models.CharField(choices=FABRICS, default='K', max_length=1)
     price = models.IntegerField()
     image = models.ImageField(upload_to = fabrics_image_path)
     

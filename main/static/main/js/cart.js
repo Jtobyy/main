@@ -1,3 +1,4 @@
+
 window.onload = requestCart()
 
 function requestCart() {
@@ -15,6 +16,7 @@ function requestCart() {
         }
     });
     console.log(basket['fabrics'])
+    console.log(basket['clothes'])
     if (basket['clothes'] == {} && basket['fabrics'] == {}) {
     }
     else {

@@ -22,14 +22,15 @@
             {% if object.type == 'Not specified' %}
             <div class="name">fab{{object.id}}</div>
             {% else %}
-            <div class="name">{{ object.type }}{{object.id}}</div>
+            <div class="name">{{ object.company_name }}design{{object.id}}</div>
             {% endif %}
         </div>
+        <input id="amount" value="1" type="hidden">
         <span class="price"> {{ object.price }} </span>                 
-        <div class="amount">
-        <label for="amount"> How many yards: </label>
+        <!--<div class="amount">
+        <!--<label for="amount"> How many: </labe>
         <input id="amount" value="1" type="number">
-        </div>
+        </div>-->
         <div class="cart" onclick="cartadd(this)" id="{{ object.id }}">
             Add to cart<i class="bi-cart4"></i>
         </div>

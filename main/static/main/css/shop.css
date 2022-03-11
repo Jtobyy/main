@@ -41,7 +41,7 @@ div.main {
     font-size: small;
     z-index: 2;
     transition: all 0.5s;
-    height: 70vh;
+    min-height: 70vh;
 }
 .fiter_more {
   left: 0px;
