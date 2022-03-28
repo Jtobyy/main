@@ -27,15 +27,15 @@
     </div>
     {% endfor %}
     {% if cart %}
-    <div class="row myrow sumtotal">    
+    <div class="row sumtotal">    
         <div class="col-6">
             Total
         </div>
         <div class="col-6">
             <span class="price"> N {{ total }} </span>
-            <div onclick="payment()" class="checkout">
-                Checkout
-            </div>
         </div>
+    </div>
+    <div onclick="payment()" class="checkout">
+        Checkout
     </div>
     {% endif %}

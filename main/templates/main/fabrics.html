@@ -112,15 +112,15 @@ Fabrics
             </li>
             <li>
             {% if 'C' in types %}                
-                <input type="checkbox" name="C">
+                <input type="checkbox" name="C" checked>
             {% else %}
                 <input type="checkbox" name="C">
             {% endif %}
-                <span> chiffon </span>
+                <span> Chiffon </span>
             </li>
             <li>
             {% if 'L' in types %}                
-                <input type="checkbox" name="L">
+                <input type="checkbox" name="L" checked>
             {% else %}
                 <input type="checkbox" name="L">
             {% endif %}
@@ -128,15 +128,15 @@ Fabrics
             </li>
             <li>
                 {% if 'S' in types %}                
-                <input type="checkbox" name="S">
+                <input type="checkbox" name="S" checked>
             {% else %}
                 <input type="checkbox" name="S">
             {% endif %}
                 <span> Silk </span>
             </li>
             <li>
-            {% if 'T' in types %}                    
-                <input type="checkbox" name="T">
+            {% if 'T' in types %}
+                <input type="checkbox" name="T" checked>
             {% else %}
                 <input type="checkbox" name="T">
             {% endif %}
@@ -144,7 +144,7 @@ Fabrics
             </li>
             <li>
             {% if 'V' in types %}                
-                <input type="checkbox" name="V">
+                <input type="checkbox" name="V" checked>
             {% else %}
                 <input type="checkbox" name="V">
             {% endif %}
@@ -156,6 +156,21 @@ Fabrics
         </ul>
     </form>
 </div>
+
+<div class="loadMore">
+    {% if fabrics.has_previous %}
+        <a class="first" href="?page=1">&laquo; first</a>
+        <a class="previous"href="?page={{ fabrics.previous_page_number }}">previous</a>
+    {% endif %}
+    <span>
+        Page {{ fabrics.number }} of {{ fabrics.paginator.num_pages }}
+    </span>
+    {% if fabrics.has_next %}
+        <a class="next" href="?page={{ fabrics.next_page_number }}">next</a>
+        <a class="last" href="?page={{ fabrics.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+</div>
+
 {% endblock %}
 {% block scripts %}
 <script src="{% static 'main/js/shop.js' %}"></script>

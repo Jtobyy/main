@@ -61,10 +61,15 @@
                 <ul>
                     <li class="link-icon nav-item" tabindex="0">
                         <a class="link-icon" href="{% url 'main:fabrics' %}"><span>Fabrics</span></a>
-                        <ul class="dropdown" id='fabricDropdown' tabindex="0">
-                            <li><a>Guinea</a></li>
-                            <li><a>Senator</a></li>
-                            <li><a>Various other materials</a></li>
+                    <ul class="dropdown" id='fabricDropdown' tabindex="0">
+                            <li><a href="{% url 'main:exfabricsfilter' filter='K' %}">Ankara</a></li>    
+                            <li><a href="{% url 'main:exfabricsfilter' filter='A' %}">Adire</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='O' %}">Aso Oke</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='T' %}">Atiku</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='S' %}">Silk</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='L' %}">Lace</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='B' %}">Brocades</a></li>
+                            <li><a href="{% url 'main:exfabricsfilter' filter='V' %}">Velvet</a></li>
                         </ul>    
                     </li>                        
                     <li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Tailors/Fashion Designers</span></a></li>
@@ -153,6 +158,30 @@
         </div>
         <footer>
             <div class="footer">
+                <div class="services">
+                    <h3>Doing Business</h3>
+                    <ul>
+                        <li>
+                            <a href="{% url 'main:fabrics' %}" class="footer-link">Success Stories</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Partner with us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Sew with us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Sell with us</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Buy in Bulk</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Join our logistics</a>
+                        </li>
+                    </ul>
+                </div>
+
                 <div class="company">
                     <h3>The Company</h3>
                     <ul>
@@ -160,51 +189,46 @@
                             <a href="{% url 'main:tailorReg' %}" class="footer-link">About us</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Blog</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">What we do</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Return Policy</a>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Why we do it</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Our blog</a>
                         </li>
                     </ul>
                 </div>
-                <div class="services">
-                    <h3>Services</h3>
-                    <ul>
-                        <li>
-                            <a href="{% url 'main:fabrics' %}" class="footer-link">Fabrics</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:tailors_list' %}" class="footer-link">Fashion designers</a>
-                        </li>
-                    </ul>
-                </div>
+    
                 <div class="Questions">
-                    <h3>Questions?</h3>
+                    <h3>Support</h3>
                     <ul>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">FAQ</a>
+                            <a href="{% url 'main:welcome' %}#faq" class="footer-link">Help</a>
                         </li>
                         <li>
-                            <a href="{% url 'main:tailorReg' %}" class="footer-link">Help</a>
+                            <a href="{% url 'main:welcome' %}#faq" href="{% url 'main:tailorReg' %}" class="footer-link">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:welcome' %}#faq" href="{% url 'main:tailorReg' %}" class="footer-link">Your Account</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'main:welcome' %}#faq" href="{% url 'main:tailorReg' %}" class="footer-link">Report</a>
                         </li>
                     </ul>
                 </div>
-                <div class="join">
-                    <h3>Join L'ayo</h3>
-                    <ul>
-                        <li>
-                            <a href="{% url 'main:tailorRegInfo' %}" class="footer-link">Be a tailor on L'ayo</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:sellerRegInfo' %}" class="footer-link">Sell on L'ayo</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'main:tailorRegInfo' %}" class="footer-link">Terms and Conditions</a>
-                        </li>
-                    </ul>
+                <div class="logos">
+                    <div class="logo1">
+                        <h2>L'ayo</h2>
+                        <img src="{% static 'main/images/Layo/transparentlogo.png' %}">
+                    </div>
+                    <div class="logo2">
+                        <h2>Nigeria</h2>
+                        <img src="{% static 'main/images/Layo/nigerialogo.jfif' %}">
+                    </div>
                 </div>
                 <div class="contact">
-                    <h3>Contact/Connect with us</h3>
+                    <h3>Contact us</h3>
                     <ul>
                         <li><a href=""><i class="bi-instagram"></i></a></li>
                         <li><a href=""><i class="bi-twitter"></i></a></li>

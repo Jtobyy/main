@@ -158,6 +158,7 @@ justify-content: center;
   font-size: 1.8em;
   color: blue;
   cursor: pointer;
+  background-color: white;
 }
 
 .loadMore {

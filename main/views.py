@@ -60,19 +60,23 @@ def welcome_view(request):
 
 
 # Shopping
-def cart_view(request):
+def cart_view(request):    
     referer = request.META.get('HTTP_REFERER')
+    print(referer)
     if referer is None or re.match(".+/cart.*", referer) is None:
+        print(referer)
         return render(request, 'main/cart.html', None)
-    basket = json.loads(request.GET.get('thestorage'))
-    print(basket)
+    storage = request.GET.get('thestorage')
+    if (storage is None):
+        return render(request, 'main/cart.html', None)
+    basket = json.loads(storage)
     fabrics = basket['fabrics']
     clothes = basket['clothes']
     try:
         cart = []
         total = 0
         for key, val in fabrics.items():
-            sep = val.index('_')  
+            sep = val.index('_')
             id = val[:sep]
             amount = val[sep+1:]
             fabric_obj = Fabric.objects.get(id=id)
@@ -95,11 +99,11 @@ def cart_view(request):
         }
         return render(request, 'main/cart/mycart.html', context)
     except Exception as e:
-        print(e)
+        #print(e)
         return render(request, 'main/cart/mycart.html', None)
 
 def shop_view(request):
-    print('here first')    
+    #print('here first')    
     clothes = Clothe.objects.all()
     paginator = Paginator(clothes, 8)
     page_number = request.GET.get('page')
@@ -136,7 +140,7 @@ def shop_filter_view(request):
             pickle_in = open("dict.pickle", "rb")
             catpickle_in = open("dict.catpickle", "rb")
             clothes_array = pickle.load(pickle_in)
-            print(clothes_array)
+            #print(clothes_array)
             categories = pickle.load(catpickle_in)
             paginator = Paginator(clothes_array, 8)
             page_number = request.GET.get('page')
@@ -150,7 +154,7 @@ def shop_filter_view(request):
             return redirect('/main/shop')
 
 def ex_shop_filter_view(request, filter):
-    print('got here')
+    #print('got here')
     clothes_arrays = []
     categories = []
     categories.append(filter)
@@ -176,7 +180,10 @@ def ex_shop_filter_view(request, filter):
 
 def fabrics_view(request):
     fabrics = Fabric.objects.all()
-    return render(request, 'main/fabrics.html', {'fabrics': fabrics})
+    paginator = Paginator(fabrics, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'main/fabrics.html', {'fabrics': page_obj})
 
 def fabrics_filter_view(request):
     if request.method == 'POST':
@@ -241,7 +248,7 @@ def ex_fabrics_filter_view(request, filter):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
-        'page_obj': page_obj,
+        'fabrics': page_obj,
         'types': types
     }
     return render(request, 'main/fabrics.html', context)
@@ -663,7 +670,7 @@ def tailor_reg_view(request):
         else:
             messages.add_message(request, messages.ERROR, form.errors)
     form = TailorRegForm()
-    print('got here with', form.errors)
+    #print('got here with', form.errors)
     return render(request, 'main/reg/regtailor.html', {'form': form})
 
 def seller_reg_view(request):
@@ -722,8 +729,8 @@ def login_view(request):
         if request.method == 'POST':    
             username = request.POST['username']
             password = request.POST['password']
-            print(username)
-            print(password)
+            #print(username)
+            #print(password)
             try:
                 if request.POST['next']:
                     next = request.POST['next']

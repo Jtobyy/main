@@ -1,5 +1,6 @@
 :root {  
-    --themecolor: rgb(228, 72, 72);
+    --oldthemecolor: rgb(228, 72, 72);
+    --themecolor: black;
     --headercolor: rgb(39, 149, 138);
   }
   
@@ -10,17 +11,26 @@ div.main {
     flex-direction: column;
 }
 .page-content {
+    margin-top: 90px;
     padding: 0 70px;
 }
 .random {
-    font-size: 3em;
+    font-size: 1.5em;
     text-align: center;
     padding: 0px;
-    padding-bottom: 20px;
     color: var(--themecolor);
-    transform: rotate(-15deg);
     box-shadow: 0 0 max(100vh, 100vw) rgba(0, 0, 0, .12);
-    margin-bottom: 50px;
+  }
+  .random1 {
+    position: relative;
+    margin-top: 60px;
+    right: 300px;
+  }
+  .random2 {
+      position: absolute;
+      right: 60px;
+      top: 530px;
+      z-index: 2;
   }
 h1 {
     margin-bottom: 40px;
@@ -41,7 +51,7 @@ h1 {
     transition: all 1s;
     overflow: hidden;
     height: 95vh;
-    margin: 2em 0em 6em -2em;
+    margin: 1em 0em 1em -2em;
     width: 98.5vw;
 }
 .wlcPic div{
@@ -96,16 +106,8 @@ h1 {
 .catwrapper {
     width: 100%;
     box-sizing: content-box;
-    background: linear-gradient(to bottom, transparent, rgb(239,239,239), rgba(255,255,255,0.7), rgba(255,255,255,0.7), rgba(255,255,255,0.7),rgba(255,255,255,0.5), transparent);  
-    margin-left: -50px;
-    padding: 20px 50px 10px 50px;
-    border-right: 1px solid ;
-    border-left: 1px solid ;
-    border-radius: 20px;
+    margin-top: 50px;
   }
-  .catwrapper h2 {
-    padding-bottom: 30px;
-}
 .catwrapper a,
 .catwrapper p {
     text-align: right;    
@@ -116,20 +118,31 @@ h1 {
   .category {
     margin-bottom: 2em;
     text-align: center;
-    border-radius: 100px;
 }
 .category-item img {
-    border-radius: 20px;
+    border-radius: 10px;
+    height: 300px;
+    object-fit:cover;
 }
 .category-item img:hover {
     filter: brightness(70%);
     transition: filter 0.5s;
 }
 .caption {
-    color: white;
     position: relative;
-    bottom:50%;
-    font-size: 1.5em;
+}
+.box {
+    color: var(--themecolor);
+    position: relative;
+    display: block;
+    align-self: center;
+    margin: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 200px;
+    background-color: skyblue;
+    font-size: 1.3em;
 }
 
 .info, .faq {
@@ -137,14 +150,32 @@ h1 {
     flex-direction:column;
     align-items: center;
     padding: 1em;
-    margin-top: 4em;
+    margin-top: 5em;
     color: var(--themecolor);
     background: linear-gradient(to right, transparent, rgb(232,232,232, 0.1), rgb(220,220,220, 0.5), rgb(212,211,210, 0.3), transparent); 
     min-height: 60vh;
     text-align: center;
     position: relative;
 }
+.addinfo {
+    display: flex;
+    padding: 60px;
+    margin: 10px;
+}
+.addinfo img {
+    width: 100px;
+    height: 200px;    
+    flex: 2;
+}
+.addinfo div {
+    padding: 40px;
+    flex: 2;
+}
+.addinfo1 {
+    background-color: rgb(245, 245, 245);
+}
 .info {
+    margin-top: 6em;    
     font-family: cursive;
     min-height: 80vh;
     width: 100%;
@@ -227,15 +258,6 @@ h1 {
     text-align: right;
     text-decoration: none;
 }
-.re-header {
-    text-align: center;
-    text-align: center;
-    font-size: 2em;
-    font-weight: 600;
-    font-variant: small-caps;
-    color: var(--themecolor);
-}
-
 .re {
     min-height: 40vh;
     background: linear-gradient(to right,transparent, rgba(255,255,255,0.5),rgba(255,255,255,0.5),rgba(200,200,199, 0.5), transparent );
@@ -300,12 +322,30 @@ h1 {
     width: 10em;
     padding: 10px;
 }
+
 @media only screen and (max-width: 768px)
 {   
+    .page-content {
+        padding: 0 0px;
+    }
+    .category-item {
+        margin-top: 30px;
+        text-align: center;    
+    }
+    .category-item:last-child {
+        margin-left: 150px;
+    }
+    .random1 {
+        right: 200px;
+    }
+    .box {    
+    background-color: skyblue;
+    font-size: 1.1em;
+    margin-left: 50px;
+    }
     .slideimg h1 {
         font-size: 3em;
     }
-       
     .caption {
        font-size: 1em;
     }
@@ -328,15 +368,40 @@ h1 {
     .step span{
         font-size: 1.3em;
     }    
+    .category-item:last-child {
+        margin-left: 120px;
+    }
 }
 @media only screen and (max-width: 600px) {
-.random {
-    margin-bottom: 20px !important;
+    .addinfo {
+        display: flex;
+        padding: 10px;
+        padding-top: 30px;
+        margin: 10px;
+    }
+    .addinfo img {
+        width: 150px;
+        height: 150px;    
+        flex: 2;
+    }
+    .addinfo div {
+        padding: 40px;
+        flex: 2;
+    }
+.random1 {
+    right: 100px !important;
 }    
+.addinfo2 {
+    margin-bottom: 60px !important;
+}
 .page-content {
-    padding: 0px !important;
-    margin: 0px;
+    padding: 30px !important;
+    margin: 0px ;
   }
+  .box {
+      margin-left: 0px;
+  }
+  
 .re-item img {
     margin-top: 10px;
     height: 40px;
@@ -350,11 +415,39 @@ h1 {
 .pop {
     display: none;
 }
-@media only screen and (max-width: 480px)
-{    
-.random {
-    font-size: 2em;
+@media only screen and (max-width: 560px)
+{
+.page-content {
+    padding: 20px;
 }    
+    .category-item img{
+        height: 250px;
+    }
+    .box {
+        width: 130px;
+        margin-left: 30px;
+    }
+
+}
+@media only screen and (max-width: 480px)
+{
+div.main {
+    margin-right: 0;
+    margin-right: 0;
+}    
+.page-content {
+    padding: 0;
+    margin: 0;
+}    
+.random2 {
+    top: 480px !important;
+}
+.addinfo {
+    width: 100%;
+}
+.box {
+margin-left: 10px;
+}
   .info {
     padding-top: 0px;
   }
@@ -377,14 +470,29 @@ h1 {
     #slideShow {
         width: 100vw;
     }           
-    .category, .catwrapper {
-        display: none;
+}
+@media only screen and (max-width: 380px) 
+{
+    .random1 {
+        margin-right: -30px;
     }
-    .mobcategory {
-        display: flex;
-        margin-bottom: 2em;
-        text-align: center;
+    .catwrapper {
+        margin-top: 0px;
     }
+    .category-item:last-child {
+        margin-left: 70px;
+    }
+    .category-item img{
+        height: 150px !important;
+    }
+    .addinfo {
+        width: fit-content;
+        margin-left: -50px;
+    }
+    .box {
+        width: 100px;
+    }
+    
 }
 @media only screen and (max-width: 300px) 
 {

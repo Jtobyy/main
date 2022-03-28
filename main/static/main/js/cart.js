@@ -2,6 +2,7 @@
 window.onload = requestCart()
 
 function requestCart() {
+console.log('got here')    
     basket = {
         'clothes':{},
         'fabrics':{}
@@ -15,10 +16,9 @@ function requestCart() {
             basket['fabrics'][key] = localStorage[key]
         }
     });
-    console.log(basket['fabrics'])
-    console.log(basket['clothes'])
-    if (basket['clothes'] == {} && basket['fabrics'] == {}) {
-    }
+    /* console.log(basket['fabrics'])
+    console.log(basket['clothes'])*/
+    if (basket['clothes'] == {} && basket['fabrics'] == {}) {}
     else {
         thestorage = JSON.stringify(basket)
         $.get('?thestorage='+thestorage, function(page, textStatus) {

@@ -81,15 +81,18 @@ a:hover {
 .nav-item:hover .dropdown{
   display: block;
   box-sizing: border-box;
-  padding: 1em .5em;
+  padding: 0em 1.5em;
   position: absolute;
   top: 4.8em;
-  height: 40vh;
+  height: 45vh;
   text-align: left;
   width: max-content;
   justify-content: flex-start;
   background: linear-gradient(to bottom,rgb(250,250,250), rgb(251,251,251), white);
   z-index: 2;
+}
+.dropdown li {
+  padding: .2em;
 }
 .nav2 ul li:first-child:hover span{
   color: rgb(156 24 24) !important;
@@ -160,30 +163,25 @@ div.main {
 .footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 150px;
   padding: 10px;
   border-top: 0.5px solid black;
   position: relative;
-  background: linear-gradient(to left, rgb(0, 0, 0, 0.7),rgb(0, 0, 0, 0.9), rgb(0,0,0,1));
-  color: rgb(249,219,219);
+  background-color: rgb(245,240,240);
   font-size:small;
   min-height: 50vh;
   width: 100%;
 }
 footer div {
-  padding: 50px;
+  padding: 40px;
   border-top: 0px;
   border-bottom: 0px;
   transition: all 0.6s;
-}
-footer div:hover {
-  background-color: rgba(0,0,0,0.2);
 }
 footer h3 {
   font-size: 2em;
   padding: 0 0 10px 20px;
   font-variant: small-caps;
-  color: rgb(82,232,217);
 }
 footer ul {
   list-style-type: none;
@@ -194,7 +192,6 @@ footer li {
 }
 .company li,
 .services li,
-.join li,
 .Questions li {
   margin-left: -35px;  
 }
@@ -203,16 +200,47 @@ footer li {
 }
 
 .footer-link:hover {
-  color: rgb(209,244,238);
+  color: rgba(203, 83, 83, 0.8);
 }
-.join, .contact {  
+
+.contact {  
   border-top: 0.05px;
+}
+.logos {
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
+  margin-top: -40px;
+}
+.logos, .contact 
+{  
+  padding-top: 0px;  
+}
+.logos h2 {
+  padding: 0;
+  margin: 0;
+}
+.logo1, .logo2 {
+  display: flex;
+}
+.logo2 {  
+  margin-top: -80px;  
+  flex-direction: row-reverse;
+}
+.logo1 img {
+  margin-top: -40px;  
+  width: 100px !important;
+  height: 100px !important;
+}
+.logo2 img {
+  margin-right: 20px;  
+  width: 50px !important;
+  height: 50px !important;
 }
 .contact {
   grid-column: 3/4;
   margin-left: -130px;
 }
-
 .contact i {
   font-size: 1.5em;
   height: 40px;
@@ -224,10 +252,9 @@ footer li {
 }
 .contact ul li {
   display: inline-block;
-
 }
 .contact i:hover {
-  color: rgb(195 251 245);
+  color: rgba(203, 83, 83, 0.8);
   transition: color 0.4s;
 }
 
@@ -467,6 +494,9 @@ footer li {
   .contact ul li {
     padding: 10px;
   }
+  .footer {
+    height: fit-content;
+}
 }
 
 @media screen and (max-width: 780px) {
@@ -516,10 +546,13 @@ footer li {
     font-size: 0.8em;
   }
   .contact {
-   margin-left: -100px;
+   margin-left: -80px;
+  }
+  .contant h3 {
+    margin-left: 50px;
   }
   .contact ul {
-    left: 0px;
+    left: -10px;
   }
   .contact ul li {
     padding: 10px;
