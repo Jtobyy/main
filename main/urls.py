@@ -27,6 +27,7 @@ urlpatterns = [
     path('sellerRegInfo', views.seller_reg_info_view, name="sellerRegInfo"),
     path('tailorReg', views.tailor_reg_view, name="tailorReg"),
     path('sellerReg', views.seller_reg_view, name="sellerReg"),
+    path('popauth', views.popauth_view, name="popauth"),
     path('auth', views.auth_view, name="auth"),
     path('login', views.login_view, name="login"),
     path('register', views.register_view, name="register"),

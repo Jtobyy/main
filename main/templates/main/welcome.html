@@ -117,6 +117,9 @@
     </header>
 {% endblock %}
 {% block main %}
+<div class="popauth no-display" id="popauth">
+        
+</div>
 <p class="random1 random"> Your dream clothe </p>
 <div class="wlcPic" id="slideShow">
     <div id="wrap">
@@ -143,24 +146,31 @@
         
     <div class="catwrapper">
         <div class="row category">
-            <div class="col-6 col-lg-4 category-item">
+            <div class=" col-lg-4 col-6 category-item">
                 <img src="{% static 'main/images/Layo/IMG-20220109-WA0005.jpg' %}">
                 <span class="caption"> Select the finest fabrics </span>
                 <button class="box btn-primary"> Shop </button>
             </div>
-            <div class="col-6 col-lg-4 category-item">
+            <div class="col-lg-4 col-6 category-item">
                 <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
                 <span class="caption"> Discover the best tailors and fashion designers </span>
                 <button class="box btn-primary"> Connect </button>
             </div>
-            <div class="col-6 col-lg-4 category-item">
+            <div class="col-lg-4 col-6 category-item">
                 <img src="{% static 'main/images/Layo/IMG-20220109-WA0013.jpg' %}">
                 <span class="caption"> Make the latest style </span>
                 <button class="box btn-primary"> Style </button>
             </div>
         </div>
     </div>
-
+    {% if request.user == AnonymousUser %}   
+    <div onclick="submit_form(this)">
+        <form class="staticpopup invisible" id="staticpopup" method="GET" action="{% url 'main:popauth' %}">
+            Sew your clothes with L'ayo    
+            <input type="hidden" name="thisform" value="signup">
+        </form>
+    </div>
+    {% endif %}   
     <div class="addinfo1 addinfo">
         <img src="{% static 'main/images/Layo/a537ee0bdc12183ac6e297976ac8b363.jfif' %}">
         <div>

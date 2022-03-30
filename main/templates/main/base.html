@@ -8,6 +8,7 @@
         </title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-signin-client_id" content="518259746978-8b0o4oq17138tn8bpiom5impoc7c2l3u.apps.googleusercontent.com">
 
         <link rel="icon" href="{% static 'main/images/Layo/Layo 1.ico'%}">
 
@@ -251,9 +252,10 @@
         -->
     {% endblock %}
     </div>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="{% static 'main/js/jquery.min.js' %}"></script>
-    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>    
-    <script src="{% static 'main/js/base.js' %}"></script>    
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main/js/base.js' %}"></script>
     {% block scripts %}
     {% endblock %}
     </body>

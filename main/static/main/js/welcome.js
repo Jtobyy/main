@@ -26,7 +26,8 @@ setTimeout(() => {
             staticpopup.className='staticpopup';
             }, 500);  
         }, 8000);   
-}, 15000);
+}, 1000);
+//15000
 }
 
 function scrollV() {
@@ -45,7 +46,10 @@ function scrollV() {
     }
 }
 
-function submit_form() {
+function submit_form(el) {       
     form = document.getElementById('staticpopup')
-    form.submit()
+    $.get('popauth', function(page, textStatus) {    
+        $('#popauth').toggleClass('no-display');
+        $('.popauth').html(page);
+    });
 }

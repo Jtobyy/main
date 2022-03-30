@@ -382,6 +382,65 @@ footer li {
   padding: 12px;
   color: var(--themecolor);
 }
+.popauth {
+  box-shadow: 0px 0px 100vw 100px rgba(0, 0, 0, 1), 0px 0px 100vw 100px rgba(0, 0, 0, .9) inset;
+  display: block;
+  position: fixed;
+  text-align: center;
+  left: 20vw;
+  top: 15vh;
+  display: flex;
+  width: 60vw;
+  height: 80vh;
+  background-color: transparent;
+  color: var(--themecolor);
+  z-index: 3;
+  border-radius: 30px;
+}
+.popsign-in,
+.popsign-up {
+  background-color: white;  
+  padding: 50px;
+  border-radius: 1px;
+  font-family:sans-serif;
+  width: 40vw;
+}
+.g-signin2 img{
+  cursor: pointer;
+  transition: all .5s;
+  filter:brightness(95%);
+}
+.g-signin2 img:hover {
+  filter:brightness(105%);
+}
+input {
+  width: 80%;
+}
+.popsign-in div,
+.popsign-up div {
+  padding: 10px;
+}
+.popsign-in {
+  border: 1px solid black;  
+  height: 100%;
+}
+.popsign-up {
+  margin-top: 30px;  
+  height: 85%;
+}
+.close-popauth {
+  font-size: 3em;
+  position: absolute;
+  left: 20px;
+  cursor: pointer;
+}
+
+#forgot_pass {
+  font-size: 1;
+}
+.no-display {
+  display: none;
+}
 @media screen and (min-width: 900px) {
   .messages
 {
@@ -389,7 +448,22 @@ footer li {
 }
 }
 /* mobile design */
+@media screen and (max-width: 780px) {
+  .messages {
+    z-index: 3;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    left: 26vw;
+    opacity: 0.98;
+  }
+}
+
 @media screen and (max-width: 768px) {  
+  .popauth {
+    width: 80vw;
+    left: 10vw;
+  }  
   .sidebar {
     display: block;
     position: relative;
@@ -472,7 +546,6 @@ footer li {
   .logInOut {
     border: 0px !important;
   }
-  
   .toggle-header,
   .header-nav,
   .logInOut p {
@@ -499,17 +572,12 @@ footer li {
 }
 }
 
-@media screen and (max-width: 780px) {
-  .messages {
-    z-index: 3;
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    left: 26vw;
-    opacity: 0.98;
-  }
-}
 @media screen and (max-width: 700px) {
+  .popsign-in,
+  .popsign-up {
+    padding-left: 30px;
+    padding-right: 30px;
+  }  
   .messages {
     left: 25vw;
   }
@@ -520,11 +588,33 @@ footer li {
    }
 }
 @media screen and (max-width: 600px) {
+  .popauth {
+    width: 75vw;
+    left: 12vw;
+  }    
+  .popsign-in,
+  .popsign-up {
+    padding-left: 20px;
+    padding-right: 20px;
+  }    
   .messages {
     left: 15vw;
   }
 }
 @media screen and (max-width: 500px) {
+  .popauth {
+    width: 100vw !important;
+    left: 0vw;
+  }      
+  .popsign-up {
+    padding-top: 30px;
+  }      
+  .popsign-up,
+  .popsign-in {
+    width: 50vw;
+    padding-left: 10px ;
+    padding-right: 10px;
+  }
   .messages
   {
     left: 10vw;
@@ -574,12 +664,18 @@ footer li {
   }
 }
   @media screen and (max-width: 350px) {
+    .popsign-in,
+    .popsign-up {
+      padding-left: 1px;
+      padding-right: 1px;
+    }
   .messages {
     left: 5vw;
     font-size: .8em;
   }
 } 
 @media only screen and (max-width: 300px) {
+  
   .close {
     margin-top: -10px;
   }

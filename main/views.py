@@ -713,6 +713,9 @@ def register_view(request):
 
 
 # Authentication
+def popauth_view(request):
+    return render(request, 'main/popauth.html', {'test': 'test'})
+
 def auth_view(request):
     try:    
         form_t = request.GET
