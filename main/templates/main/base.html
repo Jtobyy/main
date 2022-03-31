@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{% static 'main/css/font/bootstrap-icons.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+        
         {% block links %}
         {% endblock %}
     </head>
@@ -83,51 +84,66 @@
                     <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                 </ul>    
             </nav>
-            {% if request.user == AnonymousUser %}   
-                <a href="{% url 'main:auth' %}" class="user">    
-                    <button class='logInOut btn-outline-dark'>
-                        <p>Sign In/Up</p>
-                        <span class="glyphicon glyphicon-user"></span>
-                    </button>
-                </a>    
-            {% else %}
-                <div class="user">    
-                    {% for group in request.user.groups.all %}
+            {% if request.user.is_authenticated %}   
+            {% for group in request.user.groups.all %}
+                <div class="dropdown profileDropdown" tabindex="0">
+                    <span class="glyphicon glyphicon-user"></span> {{ request.user }}
+                    <div class="drop-arrow">
+                        <div class="div1"></div>
+                        <div class="div2"></div>
+                        <div class="div3"></div>
+                    </div>
                     {% if group.name == 'Customers' %}
-                        <span class="username pc">
-                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
-                        </span> 
-                        <span class="username mobile">
-                            <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span></a>
-                        </span> 
+                        <ul class="drop-item hidden profileItems">
+                            <li><a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
+                            <li><a href="{% url 'main:auth' %}">Wishlist</a></li>        
+                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
+                        </ul>
                     {% elif group.name == 'Tailors' %}
-                        <span class="username pc">
-                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
-                        </span> 
-                        <span class="username mobile">
-                            <a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span></a>
-                        </span> 
+                        <ul class="drop-item hidden profileItems">
+                            <li><a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
+                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
+                        </ul>
                     {% elif group.name == 'Sellers' %}
-                        <span class="username pc">
-                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span>{{ request.user }}</a>
-                        </span> 
-                        <span class="username mobile">
-                            <a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}"><span class="glyphicon glyphicon-user"></span></a>
-                        </span> 
-                    {% else %}
-                        <a href="#">{{ request.user }}/admin</a>
-                    {% endif %}
-                    {% empty %}
-                        <a href="#">{{ request.user }}/admin</a>
-                    {% endfor %}
-                    <!--<a href="{% url 'main:logout' %}" class="user">    
-                        <button class='logInOut btn-outline-dark'>
-                            Logout
-                        </button>
-                    </a>-->
+                        <ul class="drop-item hidden profileItems">
+                            <li><a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}">Account</a></li>
+                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
+                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
+                        </ul>
+                    {% endif %}    
+                </div>    
+            {% empty %}
+                <div class="dropdown username pc" id='profileDropdown' tabindex="0">
+                    <span class="glyphicon glyphicon-user"></span> {{ request.user }}/nonuser
+                    <div class="drop-arrow">
+                        <div class="div1"></div>
+                        <div class="div2"></div>
+                        <div class="div3"></div>
+                    </div>
+                    <ul class="drop-item hidden" id="profileItems">
+                        <li><a href="{% url 'main:auth' %}">Account</a></li>    
+                        <li><a href="{% url 'main:auth' %}">Orders</a></li>
+                        <li><a href="{% url 'main:auth' %}">Wishlist</a></li>
+                        <li><a href="{% url 'main:logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            {% endfor %}
+            {% else %}
+                <div class="dropdown" id='profileDropdown' tabindex="0">
+                    <span class="glyphicon glyphicon-user"></span> Profile
+                    <div class="drop-arrow">
+                        <div class="div1"></div>
+                        <div class="div2"></div>
+                        <div class="div3"></div>
+                    </div>
+                    <ul class="drop-item hidden" id="profileItems">
+                        <li><a href="{% url 'main:auth' %}">Sign in</a></li>    
+                        <li><a href="{% url 'main:auth' %}">Sign up</a></li>
+                    </ul>
                 </div>
             {% endif %}
-            </div>
             <div class='sidebar closed' id='sidebar'>
             
             {% block sidenav %}    
@@ -255,7 +271,6 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="{% static 'main/js/jquery.min.js' %}"></script>
     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'main/js/base.js' %}"></script>
     {% block scripts %}
     {% endblock %}
     </body>

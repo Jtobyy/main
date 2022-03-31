@@ -9,7 +9,7 @@ window.onload = function() {
   if (formtype == "" || formtype == 'signin') signIn();
   if (formtype == "signup") signUp();
   else if (formtype == "measureopt") {measureOpt();}
-  else {opt[formtype]()};
+  else {opt[formtype]()}; 
 }
 
 function signUp() {

@@ -1,5 +1,18 @@
 
-window.onload = requestCart()
+window.onload = function () {
+    requestCart()    
+    /*
+      gapi.load('auth2', function() {
+          gapi.auth2.init();
+      })*/
+      $('.profileDropdown').hover(
+        () => { $('.profileItems').removeClass('hidden') },
+        () => { $('.profileItems').addClass('hidden') }
+      )
+      $('.profileItems').mouseover(
+        () => { $('.profileItems').removeClass('hidden') }
+      )
+}
 
 function requestCart() {
 console.log('got here')    

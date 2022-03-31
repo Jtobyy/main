@@ -69,7 +69,17 @@ window.onload = function () {
         $('#logout').addClass('active')  
     })
 
-    
+/*
+      gapi.load('auth2', function() {
+          gapi.auth2.init();
+      })*/
+      $('.profileDropdown').hover(
+        () => { $('.profileItems').removeClass('hidden') },
+        () => { $('.profileItems').addClass('hidden') }
+      )
+      $('.profileItems').mouseover(
+        () => { $('.profileItems').removeClass('hidden') }
+      )    
 }
 // details section
 // basic accout details

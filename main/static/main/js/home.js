@@ -11,6 +11,17 @@ window.onload = function () {
         if (filterCont.classList == 'filter filter_more' ) filterCont.className = 'filter filter_less';
         else filterCont.classList = 'filter filter_more';
     })
+    /*
+      gapi.load('auth2', function() {
+          gapi.auth2.init();
+      })*/
+      $('.profileDropdown').hover(
+        () => { $('.profileItems').removeClass('hidden') },
+        () => { $('.profileItems').addClass('hidden') }
+      )
+      $('.profileItems').mouseover(
+        () => { $('.profileItems').removeClass('hidden') }
+      )
 }
 
 function reload() {

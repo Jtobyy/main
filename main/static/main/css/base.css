@@ -84,13 +84,14 @@ a:hover {
   padding: 0em 1.5em;
   position: absolute;
   top: 4.8em;
-  height: 45vh;
+  height: 55vh;
   text-align: left;
   width: max-content;
   justify-content: flex-start;
   background: linear-gradient(to bottom,rgb(250,250,250), rgb(251,251,251), white);
   z-index: 2;
 }
+
 .dropdown li {
   padding: .2em;
 }
@@ -119,17 +120,47 @@ a:hover {
   margin: 2em;
 }
 
-.user {
-  display: flex;
-  justify-content: space-between;
+.profileDropdown {
+ display: block; 
+ cursor: pointer;
+  position: relative;
 }
-.user:hover {
-  text-decoration: none;
+.drop-arrow {
+  display: flex;  
+  height: 10px;
+  flex-direction: column;
+  align-items: center;
 }
-.user span {
-  padding: 0.3em;
+.drop-arrow div {
+  height: 2px;
+  margin: 1.5px;
+  background-color: black;
 }
-
+.drop-arrow .div1{
+  width: 15px;
+}
+.drop-arrow .div2{
+  width: 10px;
+}
+.drop-arrow .div3{
+  width: 3px;
+}
+.profileItems {
+  position: fixed;
+  right: 15px;
+  width: inherit;
+  padding: 0;
+  z-index: 2;
+}
+.profileItems a {
+  color: grey !important;
+  background-color: white;
+  padding: 7px;
+  border: 1px solid black;
+}
+.profileItems li:hover {
+  filter: brightness(95%);
+}
   .toggle-header {
     position: fixed;
     top: 1em;
@@ -347,16 +378,6 @@ footer li {
     object-fit: fill;
     width: 100%;
     height: 100%;
-}
-.username {
-  font-size: small;
-}
-.username a{
-  color:var(--headercolor);
-  transition: all .4s;
-}
-.username a:hover {
-  --headercolor: rgb(46, 203, 187);
 }
 .pc {
   display: block;

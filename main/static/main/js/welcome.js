@@ -1,7 +1,7 @@
 slideShow = document.getElementById('wrap')
 staticpopup = document.getElementById('staticpopup')
 
-window.onload = function () {    
+window.onload = function () {
 let i = 0;
 let j = 0;
 slideimgs = document.getElementsByClassName('slideimg')
@@ -28,6 +28,17 @@ setTimeout(() => {
         }, 8000);   
 }, 1000);
 //15000
+/*
+gapi.load('auth2', function() {
+    gapi.auth2.init();
+})*/
+$('.profileDropdown').hover(
+    () => { $('.profileItems').removeClass('hidden') },
+    () => { $('.profileItems').addClass('hidden') }
+)
+$('.profileItems').mouseover(
+    () => { $('.profileItems').removeClass('hidden') }
+)
 }
 
 function scrollV() {

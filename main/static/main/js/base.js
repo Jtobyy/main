@@ -1,8 +1,17 @@
 window.onload = function () {
+    /*
   gapi.load('auth2', function() {
-    gapi.auth2.init();
-  })
+      gapi.auth2.init();
+  })*/
+  $('.profileDropdown').hover(
+    () => { $('.profileItems').removeClass('hidden') },
+    () => { $('.profileItems').addClass('hidden') }
+  )
+  $('.profileItems').mouseover(
+    () => { $('.profileItems').removeClass('hidden') }
+  )
 }
+
 
 function toggleHeader() {
     if (document.getElementById('header').style['top'] === '0em')
@@ -71,6 +80,7 @@ function validate() {
     }, false)
   })
 }
+
 
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
