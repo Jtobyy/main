@@ -1,6 +1,7 @@
 :root {  
-  --themecolor: rgb(228, 72, 72);
-  --headercolor: rgb(48, 174, 161);
+  --oldthemecolor: rgb(228, 72, 72);
+  --themecolor: black;
+  --headercolor: rgb(39, 149, 138);
   --genfont: 13px;
 }
 

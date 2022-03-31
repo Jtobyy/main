@@ -95,14 +95,14 @@
                     </div>
                     {% if group.name == 'Customers' %}
                         <ul class="drop-item hidden profileItems">
-                            <li><a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                            <li><a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}">Account</a></li>
                             <li><a href="{% url 'main:auth' %}">Orders</a></li>
                             <li><a href="{% url 'main:auth' %}">Wishlist</a></li>        
                             <li><a href="{% url 'main:logout' %}">Logout</a></li>
                         </ul>
                     {% elif group.name == 'Tailors' %}
                         <ul class="drop-item hidden profileItems">
-                            <li><a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                            <li><a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}">Account</a></li>
                             <li><a href="{% url 'main:auth' %}">Orders</a></li>
                             <li><a href="{% url 'main:logout' %}">Logout</a></li>
                         </ul>
@@ -131,19 +131,20 @@
                 </div>
             {% endfor %}
             {% else %}
-                <div class="dropdown" id='profileDropdown' tabindex="0">
+                <div class="dropdown profileDropdown" tabindex="0">
                     <span class="glyphicon glyphicon-user"></span> Profile
                     <div class="drop-arrow">
                         <div class="div1"></div>
                         <div class="div2"></div>
                         <div class="div3"></div>
                     </div>
-                    <ul class="drop-item hidden" id="profileItems">
+                    <ul class="drop-item hidden profileItems">
                         <li><a href="{% url 'main:auth' %}">Sign in</a></li>    
                         <li><a href="{% url 'main:auth' %}">Sign up</a></li>
                     </ul>
                 </div>
             {% endif %}
+            
             <div class='sidebar closed' id='sidebar'>
             
             {% block sidenav %}    

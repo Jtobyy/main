@@ -432,7 +432,8 @@ def edit_seller_view(request, seller_id):
 
 # customer profile section
 @login_required(login_url='main/login.html')
-def customer_profile_view(request, customer_id):    
+def customer_profile_view(request, customer_id):
+    print(request.META.get('HTTP_REFERER'))    
     customer = Customer.objects.get(id=customer_id)
     user = User.objects.get(customer=customer)
     try:
