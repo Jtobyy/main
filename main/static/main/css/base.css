@@ -3,6 +3,8 @@
   --themecolor: black;
   --headercolor: rgb(39, 149, 138);
   --genfont: 13px;
+  --genfontfamily: 'Montserrat', serif;
+  --oldgenfontfamily: 'Cormorant SC', serif;
 }
 
 html, body {
@@ -17,7 +19,7 @@ body{
   overflow: hidden;
   background: linear-gradient(white, rgba(255, 255, 255, 0.9), white), url(../images/italian-dressmaker-1240630.jpg) no-repeat center center fixed;
   font-size: var(--genfont);
-  font-family: 'Cormorant SC', serif;
+  font-family: var(--genfontfamily);
 }
 a {
   text-decoration: none;
@@ -196,21 +198,22 @@ div.main {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 150px;
+  box-sizing: border-box;
   padding: 10px;
   border-top: 0.5px solid black;
   position: relative;
   background-color: rgb(245,240,240);
   font-size:small;
   min-height: 50vh;
-  width: 100%;
 }
 footer div {
-  padding: 40px;
+  padding: 30px;
   border-top: 0px;
   border-bottom: 0px;
   transition: all 0.6s;
+  box-sizing: border-box !important;
 }
-footer h3 {
+footer h3 {  
   font-size: 2em;
   padding: 0 0 10px 20px;
   font-variant: small-caps;
@@ -608,6 +611,11 @@ input {
     .messages {
       left: 20vw;
    }
+   footer h3 {
+    font-size: 1.5em;
+    padding: 0 0 10px 0px;
+    font-variant: small-caps;
+  }
 }
 @media screen and (max-width: 600px) {
   .popauth {
@@ -622,6 +630,14 @@ input {
   .messages {
     left: 15vw;
   }
+  footer div:first-child {
+    margin-left: -10px;
+  }
+  footer div:nth-child(2) {
+    margin-left: -50px;
+  }
+  .footer div:nth-child(3) {
+    margin-left: -30px;  
 }
 @media screen and (max-width: 500px) {
   .popauth {
@@ -642,10 +658,15 @@ input {
     left: 10vw;
   }
   footer div {
-  padding: 10px 0 50px 10px;
+  padding: 10px 0 20px 10px;
   border-top: 0px;
   border-bottom: 0px;
   transition: all 0.6s;
+}
+.footer div:first-child,
+.footer div:nth-child(2),
+.footer div:nth-child(3) {
+  margin-left: 0px !important;
 }
   footer h3 {
     font-size: 1.2em;
@@ -660,25 +681,51 @@ input {
   .contact {
    margin-left: -80px;
   }
-  .contant h3 {
-    margin-left: 50px;
-  }
-  .contact ul {
-    left: -10px;
+   .contact ul {
+    margin-top: 0px;
+    padding: 0;
+    margin-right: -40px;
+    margin-left: -20px;
+     position: relative;
+     left: 0px;
   }
   .contact ul li {
     padding: 10px;
+  }
+  .logos {
+    margin-top: 0;
+  }
+  .logo2 {
+    margin-top: -25px;
   }
 }
   @media screen and (max-width: 400px) {
   .messages{
     left: 7vw;
   }
+  footer div:nth-child(2){
+    margin-left: -30px !important;
+    }
 }
     @media screen and (max-width: 385px) {
   .messages {
     left: 4vw;
   }
+  .contact h3 {
+    display: none;
+  }
+  .contact ul {
+    margin-top: 25px;
+    padding: 0;
+    margin-right: -40px;
+    margin-left: -40px;
+    background-color: black;
+    border-radius: 30px;
+    position: relative;
+    left: .1px;
+    width: fit-content;
+  }
+ 
 }
   @media screen and (max-width: 358px) {
   .messages {
@@ -695,6 +742,22 @@ input {
     left: 5vw;
     font-size: .8em;
   }
+  .footer h3 {
+    font-size: 1.3em;
+  }
+    .footer {
+      font-size: .8em;
+    }
+    .footer div:nth-child(2) {
+      margin-left: -50px !important; 
+    }
+     .footer div:nth-child(3) {
+      margin-left: -10px !important; 
+    }
+    .contact ul {
+      font-size: .8rem;
+      left: 20px;
+    }
 } 
 @media only screen and (max-width: 300px) {
   
@@ -713,12 +776,27 @@ input {
   footer div{
     padding-bottom: 5px; 
   }
-  .contact ul li {
-    font-size: .7em;
+  .contact ul {
+    top: 66px;
+    font-size: .7rem;
+    left: -10px;
+    box-sizing: border-box;
   }
   .copyright {
     font-size: .7em;
   }
+   .footer h3 {
+    font-size: 1rem;
+  }
+    .footer {
+      font-size: 1em;
+    }
+    .footer div:nth-child(2) {
+      margin-left: -60px !important; 
+    }
+     .footer div:nth-child(3) {
+      margin-left: -30px !important; 
+    }
 }
 @media only screen and (max-width: 250px) {
   .messages {
@@ -736,4 +814,15 @@ input {
   .contact h3 {
     margin-left: 20px;
   }
+  .contact ul {
+    top: 75px;
+    font-size: .5rem;
+    left: 10px;
+  }
+   .footer div:nth-child(2) {
+      margin-left: -80px !important; 
+    }
+     .footer div:nth-child(3) {
+      margin-left: -40px !important; 
+    }
 }

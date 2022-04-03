@@ -411,6 +411,10 @@ h1 {
     border-radius: 50%;
     font-size: 30px;
 }
+.re-header,
+.re {
+    display: none;
+}
 .staticpopup,
 .pop {
     display: none;
@@ -476,6 +480,10 @@ margin-left: 10px;
     .random1 {
         margin-right: -30px;
     }
+    .random2 {
+        top: 113vh !important;
+        right: 50px;
+    }    
     .catwrapper {
         margin-top: 0px;
     }
