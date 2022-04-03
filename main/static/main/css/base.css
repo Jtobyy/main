@@ -5,6 +5,7 @@
   --genfont: 13px;
   --genfontfamily: 'Montserrat', serif;
   --oldgenfontfamily: 'Cormorant SC', serif;
+  --logofontfamily: 'Ubuntu', serif;
 }
 
 html, body {
@@ -825,4 +826,4 @@ input {
      .footer div:nth-child(3) {
       margin-left: -40px !important; 
     }
-}
+  }

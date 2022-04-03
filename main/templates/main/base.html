@@ -16,6 +16,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'main/css/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">        
         <link rel="stylesheet" href="{% static 'main/css/font/bootstrap-icons.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
@@ -75,7 +76,7 @@
                             <li><a href="{% url 'main:exfabricsfilter' filter='V' %}">Velvet</a></li>
                         </ul>    
                     </li>                        
-                    <li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Tailors/Fashion Designers</span></a></li>
+                    <!--<li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Tailors/Fashion Designers</span></a></li>-->
                 </ul>
             </nav>
             <nav class="header-nav nav3">
@@ -158,7 +159,7 @@
                 <br>
                 <li class="link-icon nav-item">Fabrics</li>
                 
-                <li class="link-icon nav-item"><a class="link-icon" href="{% url 'main:tailors_list' %}"><span>Fashion Designers</span></a></li>
+                <!--<li class="link-icon nav-item"><a class="link-icon" href="{% url 'main:tailors_list' %}"><span>Fashion Designers</span></a></li>-->
                 <br>
                 <li title="help" class="header-icon small-icon"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
                 <li title="help" class="header-icon small-icon small-cap"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>                                

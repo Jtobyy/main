@@ -13,9 +13,11 @@ Profile
 <div class="content">
     <div class="navigation" id="nav">
         <ul>
-            <li class="nav-item" id="account" tabindex="0">My Account</li>
+            <li class="nav-item" id="account" tabindex="0">Account</li>
             <li class="nav-item" id="inbox" tabindex="0">Inbox</li>
             <li class="nav-item" id="order" tabindex="0">Orders</li>
+            <li class="nav-item" id="order" tabindex="0">Wishlist</li>
+            <li class="nav-item" id="order" tabindex="0">Recently Viewed</li>
             {% for group in request.user.groups.all %}
             {% if group.name == 'Customers' %}
             <input id="userId" type="hidden" name="userId" value="{{ request.user.customer.id }}">

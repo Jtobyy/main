@@ -19,6 +19,8 @@ div.main {
     position: relative;
     min-height: 70vh;
     padding: 30px 0px;
+    margin-right: 40px;
+    background-color: rgba(0, 0, 0, .03);
     flex: 1;
 }
 #navtoggle {
@@ -35,10 +37,11 @@ div.main {
 .logout{
     text-decoration: none;
     color: var(--themecolor);
+    cursor: pointer;
 }
 .active,
 .active:focus {
-    background-color: blanchedalmond;
+    background-color: rgba(0, 0, 0, .2);
 }
 
 .logout:hover{
@@ -46,9 +49,6 @@ div.main {
     text-decoration: none;    
     background-color: blanchedalmond;
 }    
-.navigation ul li {
-    cursor: pointer;
-}
 .logout {
     position: absolute;
     bottom: 10px;
@@ -58,6 +58,7 @@ div.main {
 }
 .overview {
     flex: 3;
+    background-color: rgba(0, 0, 0, .01);
 }
 .overview h2 {
     padding: 10px;
