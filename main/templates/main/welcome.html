@@ -176,6 +176,7 @@
             </div>
         </div>
     </div>
+    <img class="loading no-display" src="{% static 'main/images/Layo/transparentlogo.png' %}" alt="loading...">
     {% if request.user == AnonymousUser %}   
     <div onclick="submit_form(this)">
         <form class="staticpopup invisible" id="staticpopup" method="GET" action="{% url 'main:popauth' %}">

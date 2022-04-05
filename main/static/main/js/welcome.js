@@ -27,6 +27,14 @@ setTimeout(() => {
             }, 500);  
         }, 8000);   
 }, 1000);
+
+function showLoading() {
+    $('.loading').removeClass('no-display');
+}
+function removeLoading() {
+    $('.loading').addClass('no-display');
+}
+
 //15000
 /*
 gapi.load('auth2', function() {
@@ -58,9 +66,11 @@ function scrollV() {
 }
 
 function submit_form(el) {       
+    showLoading()    
     form = document.getElementById('staticpopup')
     $.get('popauth', function(page, textStatus) {    
         $('#popauth').toggleClass('no-display');
         $('.popauth').html(page);
+        removeLoading();
     });
 }

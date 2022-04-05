@@ -13,7 +13,7 @@ window.onload = function () {
             else if (page == 'addressdelete') addressdelete();
             else if (page == 'newaddress') newaddress();
         }
-    })    
+    })
     $('#account').addClass('active')
     userId = $('#userId').val()
     var xhttp = new XMLHttpRequest();
@@ -22,13 +22,25 @@ window.onload = function () {
             $('.overview').html(this.responseText)
             url = 'overview'
             history.pushState(url, null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
         }
     }
     xhttp.open("GET", userId+"?section=account&view=overview", true);
     xhttp.send();
 
     $('#account').click(account)
+    $('#inbox').click(inbox)
+    $('#payment').click(payment)
+    $('#order').click(order)
+    $('#wishlist').click(wishlist)
+    $('#viewed').click(viewed)
+    $('#measurement').click(measurement)
+    $('#logout').click(logout)
     
+
     function account() {
         $('#logout').removeClass('active')      
         $('.nav-item').removeClass('active')
@@ -38,14 +50,15 @@ window.onload = function () {
             if (this.readyState == 4 && this.status == 200) {
                 $('.overview').html(this.responseText)
                 history.pushState("overview", null, null);
+                removeLoading();
+            }
+            else {
+                showLoading();
             }
         }
         xhttp.open("GET", userId+"?section=account&view=overview", true);
         xhttp.send();    
     }
-
-
-    $('#inbox').click(inbox)
 
     function inbox() {
       $('#logout').removeClass('active')      
@@ -56,14 +69,15 @@ window.onload = function () {
             if (this.readyState == 4 && this.status == 200) {
                 $('.overview').html(this.responseText)
                 history.pushState("inbox", null, null);
+                removeLoading();
+            }
+            else {
+                showLoading();
             }
         }
         xhttp.open("GET", userId+"?section=inbox", true);
         xhttp.send();
     }
-
-
-    $('#payment').click(payment)
 
     function payment() {
         $('#logout').removeClass('active')      
@@ -74,14 +88,16 @@ window.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
             $('.overview').html(this.responseText)
             history.pushState("payment", null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
         }
     }
     xhttp.open("GET", userId+"?section=payment", true);
     xhttp.send();
     }
 
-    $('#order').click(order)
-    
     function order() {
         $('#logout').removeClass('active')      
         $('.nav-item').removeClass('active')
@@ -91,14 +107,74 @@ window.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
             $('.overview').html(this.responseText)
             history.pushState("order", null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
+        }
+    }
+    xhttp.open("GET", userId+"?section=orders", true);
+    xhttp.send();
+    }
+    
+    function wishlist() {
+        $('#logout').removeClass('active')      
+        $('.nav-item').removeClass('active')
+        $('#wishlist').addClass('active')  
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $('.overview').html(this.responseText)
+            history.pushState("order", null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
         }
     }
     xhttp.open("GET", userId+"?section=orders", true);
     xhttp.send();
     }
 
-    $('#logout').click(logout)
-    
+    function viewed() {
+        $('#logout').removeClass('active')      
+        $('.nav-item').removeClass('active')
+        $('#viewed').addClass('active')  
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $('.overview').html(this.responseText)
+            history.pushState("order", null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
+        }
+    }
+    xhttp.open("GET", userId+"?section=orders", true);
+    xhttp.send();
+    }
+
+    function measurement() {
+        $('#logout').removeClass('active')      
+        $('.nav-item').removeClass('active')
+        $('#measurement').addClass('active')  
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $('.overview').html(this.responseText)
+            history.pushState("measurement", null, null);
+            removeLoading();
+        }
+        else {
+            showLoading();
+        }
+    }
+    xhttp.open("GET", userId+"?section=measurement", true);
+    xhttp.send();
+    }    
+
+
     function logout() {
         $('.nav-item').removeClass('active')
         $('#logout').addClass('active')  
@@ -118,6 +194,13 @@ window.onload = function () {
       )    
 }
 
+function showLoading() {
+    $('.loading').removeClass('no-display');
+}
+function removeLoading() {
+    $('.loading').addClass('no-display');
+}
+
 // details section
 // basic accout details
 function edit1() {
@@ -126,6 +209,10 @@ function edit1() {
     if (this.readyState == 4 && this.status == 200) {
         $('.overview').html(this.responseText)
         history.pushState('accountdetails', null, null)
+        removeLoading();
+    }
+    else {
+        showLoading();
     }
 }
 xhttp.open("GET", userId+"?section=account&view=accountdetails", true);
@@ -139,6 +226,10 @@ function edit2() {
     if (this.readyState == 4 && this.status == 200) {
         $('.overview').html(this.responseText)
         history.pushState('addressbook', null, null)
+        removeLoading();
+    }
+    else {
+        showLoading();
     }
 }
 xhttp.open("GET", userId+"?section=account&view=addressbook", true);
@@ -150,6 +241,10 @@ function edit3() {
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         $('.overview').html(this.responseText);
+        removeLoading();
+    }
+    else {
+        showLoading();
     }
 }
 xhttp.open("GET", userId+"?section=account&view=accountdetails", true);
@@ -157,28 +252,36 @@ xhttp.send();
 }
 
 function addressedit(address) {
+    showLoading();
     $.get(userId+"?section=account&view=addressedit&id="+address['id'], function(page, textStatus) {    
         $('.overview').html(page);
         history.pushState('addressedit', null, null)
+        removeLoading();
     });
 };
 
 function addressdelete(address) {
+    showLoading();    
     $.get(userId+"?section=account&view=addressedit&action=delete&id="+address['id'], function(page, textStatus) {    
         $('.overview').html(page);
         history.pushState('addressdelete', null, null)
+        removeLoading();
     });
 };
 
 function newaddress() {
+    showLoading();        
     $.get(userId+"?section=account&view=newaddress", function(page, textStatus) {
         $('.overview').html(page);
         history.pushState('newaddress', null, null)
+        removeLoading();
     });
 };
 
 function changep() {
+    showLoading();
     $('#changep').toggleClass('changep');
+    removeLoading();
 }
 
 function validatepass() {
@@ -192,5 +295,5 @@ function validatepass() {
 }
 
 function navToggle() {
-    $('#nav').fadeToggle()
+    $('#nav').slideToggle()
 }

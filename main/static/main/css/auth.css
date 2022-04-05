@@ -1,6 +1,7 @@
 :root {  
   --themecolor: rgb(203 83 83);
   --headercolor: rgb(82,232,217);
+  --genfontfamily: 'Montserrat', serif;
 }
 
 body{
@@ -41,7 +42,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family:sans-serif;
+    font-family: var(--genfontfamily), sans-serif;
     color: black;
     font-size: 1.07em;
 }
@@ -54,7 +55,6 @@ input {
   font-size: 1.05em !important;
   margin-bottom: 10px;
 }
-
 #forgot_pass{
     position: relative;
     top: 40px;

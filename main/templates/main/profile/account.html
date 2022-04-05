@@ -44,13 +44,4 @@
                 {% endif %}
         {% endfor %}
     </div>
-    {% for group in request.user.groups.all %}
-        {% if group.name == 'Customers' %}
-            <div class="part col-sm-6"> 
-                <h3>Measurement details</h3>
-                <span></span>
-                <i onclick="edit2()" id="edit3" title="edit" class="bi-pencil-fill"></i>
-            </div>
-        {% endif %}
-    {% endfor %}
 </div> 

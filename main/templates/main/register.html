@@ -1,8 +1,12 @@
 <form id="sign-up" class="sign-up needs-validation" novalidate action="{% url 'main:register' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
-        <label for="username">Username </label>
-        {{ register_form.username }}
+        <label for="username">First Name </label>
+        {{ register_form.first_name }}
+    </div>
+    <div class="form-group">
+        <label for="username">Last Name </label>
+        {{ register_form.last_name }}
     </div>
     <div class="form-group">
         <label for="email">Email</label>    
@@ -16,7 +20,7 @@
         <label for="password2">Confirm Password</label>    
         {{ register_form.password2 }}
     </div>
-    <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Submit</button>
+    <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Register</button>
 </form>
 <div class="alt-sign">
     Already have an account?  <button type="button" class="btn btn-outline-dark" onclick="signIn()">Sign In</button>

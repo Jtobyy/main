@@ -487,6 +487,8 @@ def customer_profile_view(request, customer_id):
             return render(request, 'main/profile/payment.html', None)
         if section == 'orders':
             return render(request, 'main/profile/orders.html', None)
+        if section == 'measurement':
+            return render(request, 'main/profile/measurement1.html', None)
     except Exception as e:
         return render(request, 'main/profile/account.html', None)
     return render(request, 'main/profile.html', {'userdetails': userdetails})
@@ -691,16 +693,20 @@ def register_view(request):
         return redirect("/main/auth")
     else:
         if request.method == "POST":
-            form = RegForm(request.POST)    
-            if form.is_valid():
-                form.save()
+            form = RegForm(request.POST)
+            
+            if form.is_valid():    
+                user = form.save()    
+                if user == False:
+                    messages.add_message(request, messages.ERROR, "Email already registered")    
+                    return redirect(f'/main/auth?thisform=signup')
+                username = user.username
                 group = Group.objects.get(name='Customers')
-                group.user_set.add(User.objects.get(username = request.POST['username']))
-                #messages.add_message(request, messages.SUCCESS, "Registration successful")
-                user = authenticate(request, username=request.POST['username'], 
+                group.user_set.add(User.objects.get(username = username))
+                user = authenticate(request, username=username, 
                                     password=request.POST['password1'])
                 if user is not None:
-                    newcustomer = Customer(user=user)    
+                    newcustomer = Customer(user=user)
                     newcustomer.save()
                     login(request, user)
                 return redirect("/main/auth?thisform=measureopt")

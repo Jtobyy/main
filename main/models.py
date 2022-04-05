@@ -1,4 +1,4 @@
-from tkinter import N
+from tkinter import CHORD, N
 from unittest import defaultTestLoader
 from django.db import models
 from django.contrib.auth.models import User, Group
@@ -33,9 +33,14 @@ FABRICS = [
         ('T', 'Tulle'),
         ('V', 'Velvet'),
     ]
+GENDER = [
+    ('M', 'Male'),
+    ('F', 'Female')
+]
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=False)
+    gender = models.CharField(max_length=1, default='M', choices=GENDER)
     phone_no1 = models.CharField(max_length=15, null=True)
     phone_no2 = models.CharField(max_length=15, null=True)
     gen_size = models.IntegerField(null=True)

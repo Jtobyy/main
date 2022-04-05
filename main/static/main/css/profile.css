@@ -15,7 +15,7 @@ div.main {
     min-height: 100vh;
 }
 .navigation {
-    display: block;  
+    display: block;
     position: relative;
     min-height: 70vh;
     padding: 30px 0px;
@@ -113,7 +113,7 @@ div.main {
 .accp span {
     color: black;
     position: absolute;
-    right:100px;
+    right:80px;
     border-top: 0px;
     border-right: 0;
     border-left: 0;
@@ -122,7 +122,7 @@ div.main {
 }
 .code {
     position: absolute;    
-    left: 400px;
+    right: 250px;
 }
 .password {
     padding: 40px;
@@ -147,7 +147,7 @@ label {
     position: absolute;
     right: 20%;
     margin-top: 20px;
-    width: 70px;
+    width: fit-content;
     height: 30px;
     font-size: .8em;
 }
@@ -181,9 +181,20 @@ label {
     color: var(--themecolor);
     transition: color .3s;
     cursor: pointer;
-
 }
-
+.profile-image {
+ width: inherit;
+ padding: 20px;
+ margin-left: -40px;
+}
+.sidedrop {
+    display: none;
+}
+.bi-arrow-down-square {
+    position: absolute;
+    right: 0;
+    font-size: 1.3rem;
+}
 @media screen and (min-width: 850px){
     .overview{
         flex: 4;
@@ -191,9 +202,71 @@ label {
     div.main {
         padding: 10px 30px;
     }
+    .accin,mt
+    .accp span {
+        color: black;
+        position: absolute;
+        right:30px !important;
+        border-top: 0px;
+        border-right: 0;
+        border-left: 0;
+        width: 200px;
+        border-bottom: 1px solid #bebef6;
+}
 }
 
+@media screen and (max-width: 800px){
+    .overview {
+        padding: 0px;
+    }
+    .accin,
+    .accp span {
+        position: absolute;
+        right:0px;
+        border-top: 0px;
+        border-right: 0;
+        border-left: 0;
+        width: 200px;
+        border-bottom: 1px solid #bebef6;
+    }
+    .code {
+        position: absolute;    
+        right: 210px;
+    }
+}    
+@media screen and (max-width: 760px){
+    .accp {
+        margin-bottom: 60px;
+        padding: 0px;
+    }
+    .accin,
+    .accp span {
+        position: absolute;
+        left:0px;
+        top: 30px;
+        width: 200px;
+        border-bottom: 1px solid #bebef6;
+    }
+    .code {
+        position: relative;    
+        right: 0px;
+    }
+    .btn1 {
+        margin-top: 0px;
+    }
+}    
 @media screen and (max-width: 600px){
+    .sidedrop {
+        display: block;    
+        width: 160px;
+        height: 17px;
+        position: fixed;
+        left: 0;
+        top:50px;
+        background-color: rgba(0, 0, 0, .1);
+        cursor: pointer;
+    }
+    
     .navigation {
         opacity: .98;    
         z-index: 3;
@@ -201,10 +274,11 @@ label {
         padding: 10px;
         display: none;
         position: absolute;
-        background-color: bisque;
+        background-color: rgba(255, 255, 255, 1);
         margin-left: -10px;
-        margin-top: -10px;
+        margin-top: 5px;
         position: fixed;
+        width: 160px;
     }  
     #navtoggle {
       display: block;
@@ -228,3 +302,22 @@ label {
     text-align: center;
   }
 }
+
+@media screen and (max-width: 360px){
+    .btn1 {
+        box-sizing: border-box;
+        font-size: .8rem;
+        padding: 0px 5px;
+    }    
+}    
+@media screen and (max-width: 330px){
+    .btn1 {
+        box-sizing: border-box;
+        font-size: .5rem;
+    }    
+}    
+@media screen and (max-width: 300px){
+.sidedrop {
+    top: 40px;
+}
+}    

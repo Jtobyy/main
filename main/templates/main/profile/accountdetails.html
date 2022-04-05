@@ -5,15 +5,16 @@
   <div class="row">  
     <div class="col-12 accdiv"> 
         <h3 class="acch">Account details</h3>
-        <p class="accp">Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
         <p class="accp">Email address: 
           <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
         </p>
         <p class="accp">phone number: 
-          <i class="code">+234</i><input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
+          <i class="code">(+234)</i><input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
         </p>
         <p class="accp">alternative phone number:  
-          <i class="code">+234</i>
+          <i class="code">(+234)</i>
           <input class="accin" type="tel" placeholder="{{ userdetails.phone_no2 }}" name="phone_no2" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no2 }}" {% endif %}>
         </p>
         <button onclick="sessionStorage['view']='overview'" type="submit" class="btn btn1 btn-dark mbtn">Save changes</button>
@@ -27,12 +28,14 @@
   <div class="row">  
     <div class="col-12 accdiv"> 
         <h3 class="acch">Account details</h3>
-        <p class="accp">Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
         <p class="accp">Email address: 
           <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
         </p>
         <p class="accp">phone number: 
-          <i class="code">+234</i><input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
+          <i class="code">+234</i>
+          <input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
         </p>
         <p class="accp">alternative phone number:  
           <i class="code">+234</i>
@@ -49,7 +52,8 @@
   <div class="row">  
     <div class="col-12 accdiv"> 
         <h3 class="acch">Account details</h3>
-        <p class="accp">Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
+        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
         <p class="accp">Email address: 
           <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
         </p>
