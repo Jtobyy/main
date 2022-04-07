@@ -12,6 +12,7 @@ window.onload = function () {
             else if (page == 'addressedit') addressedit();
             else if (page == 'addressdelete') addressdelete();
             else if (page == 'newaddress') newaddress();
+            else if (page == 'steps') measureHowTo();
         }
     })
     $('#account').addClass('active')
@@ -296,4 +297,17 @@ function validatepass() {
 
 function navToggle() {
     $('#nav').slideToggle()
+}
+
+function measureHowTo() {
+    showLoading();        
+    $.get(userId+"?section=measurement&view=steps", function(page, textStatus) {
+        $('.overview').html(page);
+        history.pushState('steps', null, null)
+        window.location.hash = '#overview';
+        removeLoading();
+    });    
+}
+function measureRequest() {
+    window.location.hash = '#overview';
 }

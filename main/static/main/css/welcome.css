@@ -31,6 +31,7 @@ div.main {
       right: 60px;
       top: 530px;
       z-index: 2;
+      color:white
   }
 h1 {
     margin-bottom: 40px;
@@ -419,11 +420,13 @@ h1 {
 .pop {
     display: none;
 }
+}
+
 @media only screen and (max-width: 560px)
 {
-.page-content {
-    padding: 20px;
-}    
+    .page-content {
+        padding: 20px;
+    }    
     .category-item img{
         height: 250px;
     }
@@ -431,33 +434,33 @@ h1 {
         width: 130px;
         margin-left: 30px;
     }
-
 }
+
 @media only screen and (max-width: 480px)
 {
-div.main {
-    margin-right: 0;
-    margin-right: 0;
-}    
-.page-content {
-    padding: 0;
-    margin: 0;
-}    
-.random2 {
-    top: 480px !important;
-}
-.addinfo {
-    width: 100%;
-}
-.box {
-margin-left: 10px;
-}
-  .info {
-    padding-top: 0px;
-  }
-  .info h2 {
-    font-size: 2.5em;
-  }
+    div.main {
+        margin-right: 0;
+        margin-right: 0;
+    }    
+    .page-content {
+        padding: 0;
+        margin: 0;
+    }    
+    .random2 {
+        top: 480px !important;
+    }
+    .addinfo {
+        width: 100%;
+    }
+    .box {
+    margin-left: 10px;
+    }
+    .info {
+        padding-top: 0px;
+    }
+    .info h2 {
+        font-size: 2.5em;
+    }
     .step img {
         width: 5em;
         height: 5em;
@@ -475,6 +478,7 @@ margin-left: 10px;
         width: 100vw;
     }           
 }
+
 @media only screen and (max-width: 380px) 
 {
     .random1 {
@@ -502,10 +506,11 @@ margin-left: 10px;
     }
     
 }
+
 @media only screen and (max-width: 300px) 
 {
 .info,
-  .step {
+.step {
      opacity: 1 !important;
   }
   .step:hover {
@@ -518,5 +523,4 @@ margin-left: 10px;
   .step5 {
     margin-top: 40px;
   }
- 
 }

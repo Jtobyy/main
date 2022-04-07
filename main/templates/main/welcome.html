@@ -42,15 +42,14 @@
             </nav>
             <nav class="header-nav nav3">
                 <ul>
-                    <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
-                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>
                     <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                 </ul>    
             </nav>
             {% if request.user.is_authenticated %}   
             {% for group in request.user.groups.all %}
                 <div class="dropdown profileDropdown" tabindex="0">
-                    <span class="glyphicon glyphicon-user"></span> {{ request.user }}
+                    <span class="glyphicon glyphicon-user"></span>My Profile
                     <div class="drop-arrow">
                         <div class="div1"></div>
                         <div class="div2"></div>
@@ -121,7 +120,6 @@
                 
                 <!--<li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon">Fashion Designers</a></li>-->
                 </br>
-                <li title="help" class="header-icon small-icon"><a class="link-icon" href="{% url 'main:welcome' %}#info" onclick="scrollV()">How it works</a></li>
                 <li title="help" class="header-icon small-icon small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq" onclick="scrollV()">faq</a></li>
             </ul>
             {% endblock %}    
@@ -133,7 +131,7 @@
 <div class="popauth no-display" id="popauth">
         
 </div>
-<p class="random1 random"> Your dream clothe </p>
+<p class="random1 random"> Your dream clothing </p>
 <div class="wlcPic" id="slideShow">
     <div id="wrap">
         <div class="slideimg" id="slide1">

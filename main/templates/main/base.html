@@ -81,15 +81,14 @@
             </nav>
             <nav class="header-nav nav3">
                 <ul>
-                    <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
-                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>
+                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>
                     <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                 </ul>    
             </nav>
             {% if request.user.is_authenticated %}   
             {% for group in request.user.groups.all %}
                 <div class="dropdown profileDropdown" tabindex="0">
-                    <span class="glyphicon glyphicon-user"></span> {{ request.user }}
+                    <span class="glyphicon glyphicon-user"></span> My Profile
                     <div class="drop-arrow">
                         <div class="div1"></div>
                         <div class="div2"></div>
@@ -161,8 +160,7 @@
                 
                 <!--<li class="link-icon nav-item"><a class="link-icon" href="{% url 'main:tailors_list' %}"><span>Fashion Designers</span></a></li>-->
                 <br>
-                <li title="help" class="header-icon small-icon"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#info">How it works</a></li>
-                <li title="help" class="header-icon small-icon small-cap"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#faq">faq</a></li>                                
+                <li title="help" class="header-icon small-icon small-cap"><a onclick="scrollV()" class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>                                
             </ul>
             {% endblock %}    
             </div>

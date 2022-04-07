@@ -488,7 +488,10 @@ def customer_profile_view(request, customer_id):
         if section == 'orders':
             return render(request, 'main/profile/orders.html', None)
         if section == 'measurement':
-            return render(request, 'main/profile/measurement1.html', None)
+            view = details.get('view')    
+            if view == 'steps':
+                return render(request, 'main/profile/measurementsteps.html', None)    
+            return render(request, 'main/profile/measurementdetailsm.html', None)
     except Exception as e:
         return render(request, 'main/profile/account.html', None)
     return render(request, 'main/profile.html', {'userdetails': userdetails})

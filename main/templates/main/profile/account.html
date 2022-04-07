@@ -2,7 +2,7 @@
 <div class="row">
     <div class="part col-sm-6"> 
         <h3>Account details</h3>
-        <p>Name: <span>{{ userdetails.username }}</span></p>
+        <p>Name: <span>{{ userdetails.first_name }} {{ userdetails.last_name }}</span></p>
         {% if userdetails.email %}
         <p>Email address: <span>{{ userdetails.email }}</span></p>
         {% endif %}
