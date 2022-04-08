@@ -18,9 +18,9 @@ Profile
             <li class="nav-item" id="order" tabindex="0">Orders</li>
             {% for group in request.user.groups.all %}
             {% if group.name == 'Customers' %}
+            <li class="nav-item" id="measurement" tabindex="0">Measurement</li>
             <li class="nav-item" id="wishlist" tabindex="0">Wishlist</li>
             <li class="nav-item" id="viewed" tabindex="0">Recently Viewed</li>
-            <li class="nav-item" id="measurement" tabindex="0">Measurement</li>
             {% endif %}
             {% endfor %}
             {% for group in request.user.groups.all %}

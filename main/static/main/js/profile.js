@@ -12,6 +12,7 @@ window.onload = function () {
             else if (page == 'addressedit') addressedit();
             else if (page == 'addressdelete') addressdelete();
             else if (page == 'newaddress') newaddress();
+            else if (page == 'measurement') measurement();
             else if (page == 'steps') measureHowTo();
         }
     })
@@ -304,10 +305,22 @@ function measureHowTo() {
     $.get(userId+"?section=measurement&view=steps", function(page, textStatus) {
         $('.overview').html(page);
         history.pushState('steps', null, null)
-        window.location.hash = '#overview';
-        removeLoading();
+        let promise = new Promise((resolve, reject) => {
+            document.getElementById('topmost').scrollIntoView({
+            behavior: 'smooth'
+        })
+        resolve()}) 
+        promise.then(removeLoading)
     });    
 }
 function measureRequest() {
-    window.location.hash = '#overview';
+    showLoading();        
+    $.get(userId+"?section=measurement&view=requestpro", function(page, textStatus) {
+        $('.overview').html(page);
+        history.pushState('steps', null, null)
+        document.getElementById('topmost').scrollIntoView({
+            behavior: 'smooth'
+        })
+        removeLoading();
+    });        
 }

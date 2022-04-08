@@ -241,6 +241,16 @@ label {
 .or {
     color: white;
 }
+.request-div {
+    padding: 10px;
+    margin-top: 30px;
+}
+.request-header {
+    margin: 30px;
+    width: fit-content;
+    margin-bottom: 40px;
+    font-size: 1.5em
+}
 @media screen and (min-width: 850px){    
     .overview{
         flex: 4;

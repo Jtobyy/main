@@ -491,6 +491,8 @@ def customer_profile_view(request, customer_id):
             view = details.get('view')    
             if view == 'steps':
                 return render(request, 'main/profile/measurementsteps.html', None)    
+            elif view == 'requestpro':
+                return render(request, 'main/profile/requestpro.html', None)    
             return render(request, 'main/profile/measurementdetailsm.html', None)
     except Exception as e:
         return render(request, 'main/profile/account.html', None)
