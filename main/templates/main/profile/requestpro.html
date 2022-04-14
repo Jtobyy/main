@@ -19,6 +19,15 @@
                     <label for="time">Time</label>
                     <input class="form-control" type="time" id="time" required>
                 </div>
+                Select an address
+                <select>
+                    {% for address in addresses %}
+                        {% if address.default == true %}<
+                                <option selected>  address.address  </option>
+                        {% endif %}
+                        <option> address.address </option>
+                    {% endfor %}
+                </select>
                 <button type="submit" onclick="validate()" class="btn btn-dark mbtn">Next</button>
             </form>
         </div>

@@ -56,6 +56,9 @@ def welcome_view(request):
     }
     return render(request, 'main/welcome.html', context)
 
+def partner_view(request):
+    return render(request, 'main/partner.html', None)
+
 
 
 
@@ -492,7 +495,8 @@ def customer_profile_view(request, customer_id):
             if view == 'steps':
                 return render(request, 'main/profile/measurementsteps.html', None)    
             elif view == 'requestpro':
-                return render(request, 'main/profile/requestpro.html', None)    
+                addresses = Address.objects.filter(user=request.user)
+                return render(request, 'main/profile/requestpro.html', {'addresses': addresses})    
             return render(request, 'main/profile/measurementdetailsm.html', None)
     except Exception as e:
         return render(request, 'main/profile/account.html', None)
@@ -728,6 +732,18 @@ def register_view(request):
 def popauth_view(request):
     return render(request, 'main/popauth.html', {'test': 'test'})
 
+def poplogin_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:        
+            login(request, user)
+            messages.add_message(request, messages.SUCCESS, "Login successful")
+        else:
+            messages.add_message(request, messages.ERROR, "Invalid username or password")    
+        return redirect(request.META['HTTP_REFERER'])     
+
 def auth_view(request):
     try:    
         form_t = request.GET
@@ -744,8 +760,6 @@ def login_view(request):
         if request.method == 'POST':    
             username = request.POST['username']
             password = request.POST['password']
-            #print(username)
-            #print(password)
             try:
                 if request.POST['next']:
                     next = request.POST['next']
@@ -754,13 +768,13 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:    
                 login(request, user)
-                #messages.add_message(request, messages.SUCCESS, "Login successful")
                 try:
                     return redirect('/main/',next)
                 except UnboundLocalError:
                     return redirect('/main/')
             else:
-                return HttpResponse("Test successful, but not registered")
+                messages.add_message(request, messages.ERROR, "User not registered")    
+                return redirect('/main/auth')
         return render(request, 'main/login.html', None)
         
 @login_required(login_url='main/login.html')

@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="content">
+    <section class="content-section"> 
+        <p class="section-paragraph"> <span>Par</span>tner <span>wi</span>th <span>u</span>s</p>
+     </section>
+    <section class="content-section"> 
+        <h2 class="section-header"> Why sell on L'ayo? </h2>    
+        <ul class="reasons">
+            <li><span>More demands</span></li>
+            <li><span>Specialization</span></li>
+            <li><span>Convenient earnings</span></li>
+            <li><span>Branding</span></li>
+            <li><span>Experience</span></li>
+            <li><span>Training</span></li>
+        </ul>
+    </section>
+    <section class="content-section"> 
+            <h2 class="section-header2">How to register</h2>
+            <h3 class="section-header3"> <span>4 simple steps</span></h3>
+            <ul class="steps">
+                <li><div>1</div><span class="style1">Create an account</span></li>
+                <li><div>2</div><span class="style2">Find your niche</span></li>
+                <li><div>3</div><span class="style1">List jobs</span></li>
+                <li><div>4</div><span class="style2">Find your niche</span></li>
+            </ul>
+            <div class="get-started">
+                Get started
+            </div>
+    </section>
+</div>
+{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/partner.css' %}">
+{% endblock %}

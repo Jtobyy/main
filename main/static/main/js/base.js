@@ -52,6 +52,13 @@ function toggleSidebar() {
   else toggle.classList.remove('toggleclose');
 }
 
+function showLoading() {
+  $('.loading').removeClass('no-display');
+}
+function removeLoading() {
+  $('.loading').addClass('no-display');
+}
+
 function showDropdown() {
   document.getElementById('fabricDropdown').classList.remove('hidden')
 }

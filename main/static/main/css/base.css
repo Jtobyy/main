@@ -189,9 +189,9 @@ header .logo {
 
 
 div.main {
-  display: flex;
+/*  display: flex;
   justify-content: center;
-  margin: 0px 30px;
+  margin: 0px 30px; */
   min-height: 70vh;
 }
 
@@ -442,9 +442,11 @@ footer li {
 input {
   width: 80%;
 }
-.popsign-in div,
-.popsign-up div {
+.popsign-in div {
   padding: 10px;
+}
+.popsign-up div {  
+  padding: 5px;
 }
 .popsign-in {
   border: 1px solid black;  
