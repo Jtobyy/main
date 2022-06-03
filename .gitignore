@@ -4,3 +4,11 @@ main_old
 stderr.log
 db.sqlite3
 env
+
+node_modules
+*pickle
+pickle*
+*.pickle
+Fabric_*
+Tailor_*
+migrations
