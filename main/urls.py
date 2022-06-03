@@ -5,7 +5,6 @@ app_name = "main"
 
 urlpatterns = [ 
     path('', views.welcome_view, name="welcome"),
-    #path('index', views.home_view, name="home"),
     path('shop', views.shop_view, name="shop"),
     path('shopfilter/', views.shop_filter_view, name="shopfilter"),
     path('exshopfilter/<str:filter>', views.ex_shop_filter_view, name="exshopfilter"),
@@ -23,10 +22,12 @@ urlpatterns = [
     path('editTailorProfile/<int:tailor_id>/', views.edit_tailor_view, name="editTailorProfile"),
     path('editCustProfile<int:customer_id>', views.edit_customer_view, name="editCustProfile"),
     path('editSellerProfile<int:seller_id>', views.edit_seller_view, name="editSellerProfile"),
+
     path('tailorRegInfo', views.tailor_reg_info_view, name="tailorRegInfo"),
     path('sellerRegInfo', views.seller_reg_info_view, name="sellerRegInfo"),
     path('tailorReg', views.tailor_reg_view, name="tailorReg"),
     path('sellerReg', views.seller_reg_view, name="sellerReg"),
+
     path('partner', views.partner_view, name="partner"),
     path('popauth', views.popauth_view, name="popauth"),
     path('auth', views.auth_view, name="auth"),
@@ -44,4 +45,11 @@ urlpatterns = [
     path('cart', views.cart_view, name="cart"),
     path('changeaddress/<int:address_id>', views.change_address_view, name="changeaddress"),
     path('logout', views.logout_view, name="logout"),
+
+    path('profile/<str:user>', views.external_profile_view, 'profile', **('name',),)
+    path('partnerProfile/<int:partner_id>', views.partner_profile_view, 'partnerProfile', **('name',)),
+    path('partner_reg', views.partner_reg_view, 'partner_reg', **('name',)),
+    path('partner', views.partner_view, 'partner', **('name',)),
+    path('request_submitted', views.success_reg_view, 'request_submitted', **('name',)),
+    path('add_partner/<int:partner_id>', views.add_partner_view, 'add_partner', **('name',)),  
 ]
