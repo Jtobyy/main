@@ -1,11 +1,13 @@
-from tkinter import CHORD, N
-from unittest import defaultTestLoader
 from django.db import models
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey, OneToOneField
 from multiselectfield import MultiSelectField
 
+BANK = [
+    ('acc', 'Access Bank'),
+    ('uba', 'UBA Bank'),
+    ('zen', 'Zenith Bank') 
+]
 CATEGORIES = [
         ('M', 'Male'),
         ('F', 'Female'),
@@ -13,14 +15,31 @@ CATEGORIES = [
         ('T', 'Traditional'),
         ('O', 'Modern'),
         ('C', 'Classic'),
-    ]
+    ] 
+ENTITY = [
+    ('S', 'Sole Proprietorship'),
+    ('P', 'Partnership'),
+    ('C', 'Corporation')
+] 
+USERS = [
+    ('C', 'Custom Made'),
+    ('F', 'Fabrics'),
+    ('T', 'Tailors')
+]
 RATING = [
         (1, 'Bad'),
         (2, 'Fair'),
         (3, 'Good'),
         (4, 'Very Good'),
         (5, 'Excellent'),
-    ]
+]
+STATE = [
+    ('abi', 'Abia'),
+    ('lag', 'Lagos'),
+    ('ogu', 'Ogun'),
+    ('kog', 'Kogi')
+]
+
 FABRICS = [
         ('K', 'Ankara'),    
         ('A', 'Adire'),
@@ -44,8 +63,6 @@ class Customer(models.Model):
     phone_no1 = models.CharField(max_length=15, null=True)
     phone_no2 = models.CharField(max_length=15, null=True)
     gen_size = models.IntegerField(null=True)
-    #group = Group.objects.get(name='Customers')
-    #group.user_set.add(user)
 
 def tailor_profile_path(instance, filename):
     return f'Tailor_{instance.user.id}/profile_image/images/{filename}'
@@ -94,29 +111,51 @@ class Address(models.Model):
     zipcode = models.CharField(null=True, max_length=225)
     default = models.BooleanField(default=False)
 
-class PendingTailorReg(models.Model):
-    first_name = models.CharField(null=False, max_length=225)
-    last_name = models.CharField(null=False, max_length=225)
-    business_name = models.CharField(null=False, max_length=225)
-    ig_link = models.CharField(null=True, max_length=225)
-    what_i_do = models.TextField(null=False)
-    email = models.EmailField(null=False)
-    address = models.CharField(null=False, max_length=225)
-    city = models.CharField(null=False, max_length=225)
-    state = models.CharField(null=False, max_length=225)
-    zipcode = models.CharField(null=True, max_length=225)
+def id_image_path(instance, filename):
+    return f'''ID_{instance.business_name}/business_id/images/{filename}'''
+def Partner():
+    user = models.OneToOneField(User, on_delete=CASCADE, null=False)
+    business_entity = models.CharField(ENTITY, 1, 'S', **('choices', 'max_length', 'default'))
+    business_name = models.CharField(False, 225, **('null', 'max_length'))
+    email = models.EmailField(False, **('null',))
+    address = models.CharField(False, 225, **('null', 'max_length'))
+    city = models.CharField(False, 225, **('null', 'max_length'))
+    state = models.CharField(STATE, 3, 'lag', **('choices', 'max_length', 'default'))
+    zipcode = models.CharField(True, 225, **('null', 'max_length'))
+    brand_name = models.CharField(False, 255, **('null', 'max_length'))
+    legal_rep_first_name = models.CharField(False, 225, **('null', 'max_length'))
+    legal_rep_other_name = models.CharField(True, 225, None, **('null', 'max_length', 'default'))
+    legal_rep_last_name = models.CharField(False, 225, **('null', 'max_length'))
+    valid_id_card = models.ImageField(id_image_path, **('upload_to',))
+    tin = models.CharField(25, **('max_length',))
+    vat = models.CharField(25, **('max_length',))
+    brand_type = models.CharField(USERS, 'T', 1, **('choices', 'default', 'max_length'))
+    bank = models.CharField(BANK, 'acc', 3, **('choices', 'default', 'max_length'))
+    account_number = models.CharField(25, **('max_length',))
+    account_name = models.CharField(255, **('max_length',))
 
-class PendingSellerReg(models.Model):
-    first_name = models.CharField(null=False, max_length=225)
-    last_name = models.CharField(null=False, max_length=225)
-    business_name = models.CharField(null=False, max_length=225)
-    ig_link = models.CharField(null=True, max_length=225)
-    what_i_do = models.TextField(null=False)
-    email = models.EmailField(null=False)
-    address = models.CharField(null=False, max_length=225)
-    city = models.CharField(null=False, max_length=225)
-    state = models.CharField(null=False, max_length=225)
-    zipcode = models.CharField(null=True, max_length=225)
+def id_pending_image_path(instance, filename):
+    return f'''ID_pending_{instance.business_name}/business_id/images/{filename}'''
+def PendingReg():
+    '''PendingReg'''
+    business_entity = models.CharField(ENTITY, 1, 'S', **('choices', 'max_length', 'default'))
+    business_name = models.CharField(False, 225, **('null', 'max_length'))
+    email = models.EmailField(False, **('null',))
+    address = models.CharField(False, 225, **('null', 'max_length'))
+    city = models.CharField(False, 225, **('null', 'max_length'))
+    state = models.CharField(STATE, 3, 'lag', **('choices', 'max_length', 'default'))
+    zipcode = models.CharField(True, 225, **('null', 'max_length'))
+    brand_name = models.CharField(False, 255, **('null', 'max_length'))
+    legal_rep_first_name = models.CharField(False, 225, **('null', 'max_length'))
+    legal_rep_other_name = models.CharField(True, 225, None, **('null', 'max_length', 'default'))
+    legal_rep_last_name = models.CharField(False, 225, **('null', 'max_length'))
+    valid_id_card = models.ImageField(id_pending_image_path, **('upload_to',))
+    tin = models.CharField(25, **('max_length',))
+    vat = models.CharField(25, **('max_length',))
+    brand_type = models.CharField(USERS, 'T', 1, **('choices', 'default', 'max_length'))
+    bank = models.CharField(BANK, 'acc', 3, **('choices', 'default', 'max_length'))
+    account_number = models.CharField(25, **('max_length',))
+    account_name = models.CharField(255, **('max_length',))
 
 def fabrics_image_path(instance, filename):
     return f'Fabric_{instance.seller.id}/fabric_images/images/{filename}'
@@ -125,4 +164,3 @@ class Fabric(models.Model):
     type = models.CharField(choices=FABRICS, default='K', max_length=1)
     price = models.IntegerField()
     image = models.ImageField(upload_to = fabrics_image_path)
-    
