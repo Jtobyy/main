@@ -19,27 +19,29 @@ Profile
             {% for group in request.user.groups.all %}
             {% if group.name == 'Customers' %}
             <li class="nav-item" id="measurement" tabindex="0">Measurement</li>
-            <li class="nav-item" id="wishlist" tabindex="0">Wishlist</li>
-            <li class="nav-item" id="viewed" tabindex="0">Recently Viewed</li>
+            <!--<li class="nav-item" id="wishlist" tabindex="0">Wishlist</li>-->
+            <!--<li class="nav-item" id="viewed" tabindex="0">Recently Viewed</li>-->
             {% endif %}
             {% endfor %}
-            {% for group in request.user.groups.all %}
-            {% if group.name == 'Customers' %}
             <input id="userId" type="hidden" name="userId" value="{{ request.user.customer.id }}">
-            {% elif group.name == 'Tailors' %}
-            <input id="userId" type="hidden" name="userId" value="{{ request.user.tailor.id }}">
-            {% elif group.name == 'Sellers' %}
-            <input id="userId" type="hidden" name="userId" value="{{ request.user.seller.id }}">
-            {% endif %}
-            {% endfor %}
-            <div class="profile-image">
-                <img src="{% static 'main/images/blank-profile-picture-gc048af202_1280.png' %}"    
+            <div class="profile-image" onclick="profilePic()">
+                {% if request.user.customer.profile_image %}
+                    <img alt="profile picture" id="profileImage" src="{{ request.user.customer.profile_image.url }}" class="rounded-circle">
+                {% else %}
+                    <img alt="profile picture" id="profileImage" src="{% static 'main/images/blank-profile-picture-gc048af202_1280.png' %}" class="rounded-circle">
+                {% endif %}
             </div>
+            <form method="POST" enctype="multipart/form-data"
+                action="{% url 'main:custProfileImage' %}" id="profileImageForm" class="hidden">
+                    {% csrf_token %}
+                <input name="profile-image" type="file" id="profileImageInput">
+                <input type="submit" value="change" id="profileImageSubmit" accept="image/png, image/jpeg">
+            </form>
         </ul>
         <a href="{% url 'main:logout' %}"><p class="logout" id="logout" tabindex="0">Logout</p></a>
     </div>
     <div id="sideDrop" class="sidedrop" onclick="navToggle()">
-        <i class="bi-arrow-down-square"></i>
+        <i class="bi-arrow-bar-down toggle"></i>
     </div>
     <div class="container-fluid overview" id="overview">    
 

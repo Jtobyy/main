@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load main_extras %}
 {% load static %}
 
 {% block title %}
@@ -10,97 +11,221 @@ Shop
 {% endblock %}
 
 {% block main %}
-<div class="container mmain-container">
+<div class="container mmain-container align-items-center justify-content-start position-relative">
+    <!--
     <div class="row theme_cover">
-        <div class="col">
-            <div class="cover_img"></div>
+        <div class="col">    
+                {% if categories|first == 'M' %}             
+                    <div class="cover_img cover_img1"></div>
+                {% elif categories|first == 'F' %}    
+                    <div class="cover_img cover_img2"></div>
+                {% else %}
+                    <div class="cover_img cover_img3"></div>
+                {% endif %}
+        </div>
+    </div>-->
+    <div class="row p-5 mx-3 my-1 shop-cat-wrapper">
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item1">
+            <div class="icon"></div>
+            <p>Shirts</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item2">
+            <div class="icon"></div>
+            <p>Gowns</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item3">
+            <div class="icon"></div>
+            <p>Shirts</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item4">
+            <div class="icon"></div>
+            <p>Suits</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item5">
+            <div class="icon"></div>
+            <p>Trousers</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item6">
+            <div class="icon"></div>
+            <p>Jackets</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item7">
+            <div class="icon"></div>
+            <p>Native wears</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item8">
+            <div class="icon"></div>
+            <p>Shorts</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item9">
+            <div class="icon"></div>
+            <p>Pyjamas</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item10">
+            <div class="icon"></div>
+            <p>Hoodies & Sweaters</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item11">
+            <div class="icon"></div>
+            <p>Crop tops</p>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-4 border border-light shop-cat-item shop-cat-item12">
+            <div class="icon" title="https://www.flaticon.com/free-icons/woman"></div>
+            <p>Jumpsuits</p>
         </div>
     </div>
+
+    {% if t_orders %}
+        <div class="py-1 px-3 mx-3 my-1 cat-box trending bg-white border 
+        rounded">
+            <h3 class="small-cap mx-4 py-1" 
+            style="font-size: 3em; font-weight: 700;">trending</h3>
+            <div class="horizontal-scroll-wrapper">
+                {% for obj in t_orders %}    
+                <div class="col-lg-2 col-md-3 col-sm-4 col-6 hor_product position-relative
+                border rounded">
+                    <div class="img">
+                        <a href="{% url 'main:cloth_sample' cloth_id=obj.order_item.id %}"><img src="{{ obj.order_item.image.url }}"></a>
+                    </div>
+                    {% if obj.cloth_object.company.brand_type == 'T' %}
+                        <span class="tag p-1">Ready made</span>
+                    {% endif %}
+                    <div class="info">
+                        <span class="label p-2">{{ obj.order_item.label }}</span>    
+                        {% with ''|center:obj.order_item.rating as range %}
+                        <div class="rating">
+                        {% for val in range %}
+                            <i class="bi-star-fill rating" ></i>
+                        {% endfor %}
+                        </div>
+                        {% endwith %}
+                        <span class="price">  ₦ {{ obj.order_item.price }} </span>               
+                    </div>    
+                </div>
+                {% endfor %}
+            </div>        
+        </div>
+    {% endif %}
+    
+    {% if femaleclothes|length > 0 %}
+        <div class="py-1 px-3 mx-3 my-1 cat-box trending bg-light
+        border rounded border-white" style="background-color:rgb(207, 206, 206);" id="ladies_section">
+            <h3 class="small-cap mx-4 py-1" style="font-size: 3em; font-weight: 700;">ladies wear</h3>
+            <div class="horizontal-scroll-wrapper">
+                {% for obj in femaleclothes %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 hor_product position-relative 
+                    border border-light rounded bg-white">
+                        <div class="img">
+                            <a href="{% url 'main:cloth_sample' cloth_id=obj.cloth_object.id %}"><img src="{{ obj.cloth_object.image.url }}"></a>
+                        </div>
+                        {% if obj.cloth_object.company.brand_type == 'T' %}
+                            <span class="tag p-1">Ready made</span>
+                        {% endif %}
+                        <div class="info">
+                            <span class="label p-2">{{ obj.cloth_object.label }}</span>    
+                            {% with ''|center:obj.cloth_object.rating as range %}
+                            <div class="rating">
+                            {% for val in range %}
+                                <i class="bi-star-fill rating" ></i>
+                            {% endfor %}
+                            </div>
+                            {% endwith %}
+                            <span class="price">  ₦ {{ obj.cloth_object.price }} </span>               
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>        
+        </div>
+    {% endif %}
+
+    {% if maleclothes %}
+        <div class="py-1 px-3 mx-3 my-1 cat-box trending bg-light
+        border rounded bg-white" style="border-color: var(--lightcolor) ;">
+            <h3 class="small-cap mx-4 py-1" style="font-size: 3em; font-weight: 700;">men's wear</h3>
+            <div class="horizontal-scroll-wrapper">
+                {% for obj in maleclothes %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 hor_product position-relative 
+                    border rounded" style="border-color: var(--lightcolor);">
+                        <div class="img">
+                            <a href="{% url 'main:cloth_sample' cloth_id=obj.cloth_object.id %}"><img src="{{ obj.cloth_object.image.url }}"></a>
+                        </div>
+                        {% if obj.cloth_object.company.brand_type == 'T' %}
+                            <span class="tag p-1">Ready made</span>
+                        {% endif %}
+                        <div class="info">
+                            <span class="label p-2">{{ obj.cloth_object.label }}</span>    
+                            {% with ''|center:obj.cloth_object.rating as range %}
+                            <div class="rating">
+                            {% for val in range %}
+                                <i class="bi-star-fill rating" ></i>
+                            {% endfor %}
+                            </div>
+                            {% endwith %}
+                            <span class="price"> ₦ {{ obj.cloth_object.price }} </span>               
+                        </div>    
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if tribes|length > 0 %}
+        <div class="py-1 px-3 mx-3 my-1 cat-box trending bg-light
+        border rounded" style="background-color: var(--lightcolor);">
+            <h3 class="small-cap mx-4 py-1" style="font-size: 3em; font-weight: 700;">tribe</h3>
+            <div class="horizontal-scroll-wrapper">
+                {% for obj in tribes %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-6 hor_product position-relative 
+                    border rounded bg-white" style="border-color: var(--lightcolor);">
+                        <div class="img">
+                            <a href="{% url 'main:cloth_sample' cloth_id=obj.cloth_object.id %}"><img src="{{ obj.cloth_object.image.url }}"></a>
+                        </div>
+                        {% if obj.cloth_object.company.brand_type == 'T' %}
+                            <span class="tag p-1">Ready made</span>
+                        {% endif %}
+                        <div class="info">
+                            <span class="label p-2">{{ obj.cloth_object.label }}</span>    
+                            {% with ''|center:obj.cloth_object.rating as range %}
+                            <div class="rating">
+                            {% for val in range %}
+                                <i class="bi-star-fill rating" ></i>
+                            {% endfor %}
+                            </div>
+                            {% endwith %}
+                            <span class="price">  ₦ {{ obj.cloth_object.price }} </span>               
+                        </div>    
+                    </div>
+                {% endfor %}
+            </div>        
+        </div>    
+    {% endif %}
+    
     <div class="row" id="image_show">
         {% for obj in page_obj %}
-            <div class="col-md-4 col-sm-6 product">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6 product position-relative">
                 <div class="img">
-                    <a href="{% url 'main:clothe_sample' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
-                </div>    
+                    <a href="{% url 'main:cloth_sample' cloth_id=obj.cloth_object.id %}"><img src="{{ obj.cloth_object.image.url }}"></a>
+                </div>
+                {% if obj.cloth_object.company.brand_type == 'T' %}
+                    <span class="tag p-1">Ready made</span>
+                {% endif %}
                 <div class="info">
-                    <span class="price"> N {{ obj.price }} </span>
-                    {% with ''|center:obj.rating as range %}
+                    <span class="label p-2">{{ obj.cloth_object.label }}</span>    
+                    {% with ''|center:obj.cloth_object.rating as range %}
                     <div class="rating">
                     {% for val in range %}
                         <i class="bi-star-fill rating" ></i>
                     {% endfor %}
                     {% endwith %}
                     </div>
-                    <!--<div class="cart" onclick="cartadd(this)" id="{{ obj.id }}">
-                        Add to cart<i class="bi-cart4"></i>
-                    </div>-->
-                    <!--<a href='{% url "main:tailorProfile" tailor_id=obj.company_name.id %}'><span class="company"> {{ obj.company_name }} </span></a>-->
-                    <!--<span class="category"> {{ obj.category }} </span>-->
+                    <span class="price">  ₦ {{ obj.cloth_object.price }} </span>               
                 </div>    
             </div>
         {% endfor %}
     </div>
 </div>
-<div class="filter filter_more" id="filter_container">
-    <i class='bi-filter-right filterToggle' id="filter_toggle"></i>    
-    <form id="filter_form" action="{% url 'main:shopfilter' %}" method="POST">
-        {% csrf_token %}    
-        <ul class="list">    
-            <li>
-            {% if 'M' in categories %}    
-                <input type="checkbox" name="M" checked>
-            {% else %}
-                <input type="checkbox" name="M">
-            {% endif %}
-                <span> male </span>
-            </li>
-            <li>
-            {% if 'F' in categories %}        
-                <input type="checkbox" name="F" checked>
-            {% else %}
-                <input type="checkbox" name="F">
-            {% endif %}
-                <span> female </span>
-            </li>
-            <li>
-            {% if 'B' in categories %}    
-                <input type="checkbox" name="B" checked>
-            {% else %}
-                <input type="checkbox" name="B">
-            {% endif %}
-                <span> kids </span>
-            </li>
-            <li>
-            {% if 'T' in categories %}        
-                <input type="checkbox" name="T" checked>
-            {% else %}
-                <input type="checkbox" name="T">
-            {% endif %}
-                <span> traditional </span>
-            </li>
-            <li>
-            {% if 'O' in categories %}            
-                <input type="checkbox" name="O" checked>
-            {% else %}
-                <input type="checkbox" name="O">
-            {% endif %}
-                <span> modern </span>
-            </li>
-            <li>
-            {% if 'C' in categories %}                
-                <input type="checkbox" name="C">
-            {% else %}
-                <input type="checkbox" name="C">
-            {% endif %}
-                <span> classic </span>
-            <li class="reload">
-                <button type="submit"><i class='bi-arrow-clockwise'></i></button>
-            </li>
-        </ul>
-    </form>
-</div>
 
-<div class="loadMore">
+<div class="loadMore mx-auto">
     {% if page_obj.has_previous %}
         <a class="first" href="?page=1">&laquo; first</a>
         <a class="previous"href="?page={{ page_obj.previous_page_number }}">previous</a>

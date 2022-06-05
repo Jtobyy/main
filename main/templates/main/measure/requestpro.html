@@ -3,11 +3,11 @@
 <link rel="stylesheet" href="{% static 'main/css/measure/requestpro.css' %}">
 {% endblock %}
 <div>
-    <h2>
+    <h6 class="header1">
         You have requested for professional measurement,
         <br><br>
         Kindly fill in the details below
-    </h2>
+    </h6>
     <form method="POST" class="needs-validation" novalidate action="{% url 'main:promeasure' %}">
     {% csrf_token %}    
         <div class="form-row">
@@ -38,7 +38,7 @@
         </div>
         
         <br>
-        <p>When do you want to get measured?</p>
+        <p class="when">When do you want to get measured?</p>
         <div class="form-group date">
             <label for="date">Date</label>
             <input class="form-control" type="date" id="date" required>

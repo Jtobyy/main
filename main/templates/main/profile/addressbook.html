@@ -1,4 +1,4 @@
-<h2> My Address book</h2>
+<h4> My Address book</h4>
 <div class="row">
     {% for obj in userdetails.addresses %}
         <div class="part col-4">
@@ -11,7 +11,7 @@
             {% if obj.default is True %}
             <span style="color: var(--themecolor);"> Default Address </span>
             {% else %}
-            <a onclick="sessionStorage['view']='addressbook';" class="changeaddress" href="{% url 'main:changeaddress' address_id=obj.id %}"><span style="color: var(--themecolor);"> Set as default </span></a>
+            <a onclick="sessionStorage['view']='addressbook';" class="changeaddress" href="{% url 'main:changeaddress' address_id=obj.id %}"><span style="color: var(--oldthemecolor);"> Set as default </span></a>
             {% endif %}
             <i onclick="addressdelete(this)" id="{{ obj.id }}" title="delete" class="bi-bucket-fill"></i>
             <i onclick="addressedit(this)" id="{{ obj.id }}" title="edit" class="bi-pencil-fill"></i>
@@ -19,7 +19,7 @@
     {% empty %}
 
     {% endfor %}
-    <i onclick="newaddress()" class="bi-journal-plus" title="Add address"></i>
+    <i onclick="newaddress()" class="bi-journal-plus lead" title="Add address"></i>
 </div> 
 
 <!--

@@ -1,8 +1,8 @@
 <form id="sign-in" class="sign-in" action="{% url 'main:login' %}" method="POST">
     {% csrf_token %}
         <div class="form-group">
-            <label for="user_id">Email</label>
-            <input type="username" name="username" id="user_id" class="form-control">
+            <label for="email_id">Email</label>
+            <input type="email" name="email" id="email_id" class="form-control">
         </div>
         <div class="form-group">
             <label for="pass_id">Password</label>    

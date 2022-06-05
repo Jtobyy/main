@@ -1,33 +1,24 @@
 .form-container {
     border: 0;
 }
-h2 {
-    color: #e85656;
-    font-size: 1.5em;
+.header1 {
     font-family: cursive;
     font-variant: small-caps;
 }
-p {
+.when {
    margin-top: 30px;
    align-self: flex-start;
-    font-size: 1.2em;   
+   font-size: 1.2em;   
    font-family: cursive;
-   color: #e85656;
+   color: var(--oldthemecolor);
 }
 .date, .time {
     align-self: flex-start;
 }
-button {
+.mbtn {
     align-self: flex-end;
     width: 70px;
     height: 30px;
-}
-
-input {
-    width: initial !important;
-}
-#inputState, #inputCity, #inputAddress, #inputZip, #inputTel {
-    height: initial !important;
 }
 .inputTel {
     margin-left: 80px;

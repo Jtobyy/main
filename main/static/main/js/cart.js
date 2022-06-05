@@ -1,36 +1,23 @@
-
-window.onload = function () {
-    requestCart()    
-    /*
-      gapi.load('auth2', function() {
-          gapi.auth2.init();
-      })*/
-      $('.profileDropdown').hover(
-        () => { $('.profileItems').removeClass('hidden') },
-        () => { $('.profileItems').addClass('hidden') }
-      )
-      $('.profileItems').mouseover(
-        () => { $('.profileItems').removeClass('hidden') }
-      )
-}
-
-function requestCart() {
-console.log('got here')    
+$(document).ready(function () {
+    showLoading()
+    requestCart()
+    removeLoading()    
+})
+  
+function requestCart() {    
     basket = {
         'clothes':{},
         'fabrics':{}
     }
     keys = Object.keys(localStorage)   
     keys.forEach((key, index) => {
-        if (key.includes('clothe')) {
+        if (key.includes('cloth')) {
             basket['clothes'][key] = localStorage[key]
         }
         else if (key.includes('fabric')) {
             basket['fabrics'][key] = localStorage[key]
         }
     });
-    /* console.log(basket['fabrics'])
-    console.log(basket['clothes'])*/
     if (basket['clothes'] == {} && basket['fabrics'] == {}) {}
     else {
         thestorage = JSON.stringify(basket)
@@ -42,16 +29,25 @@ console.log('got here')
 
 function cartremove(div) {   
     category = div.dataset.name
+    console.log(category)
     if (category.includes('Fabric')) {
         id = div['id']
         key = "fabric_"+id
         localStorage.removeItem(key)
         requestCart()
     }
-    else if (category.includes('Clothe')) {
+    else if (category.includes('Cloth')) {
         id = div['id']
-        key = "fabric_"+id
+        key = "cloth_"+id
         localStorage.removeItem(key)
         requestCart()
     }
+}
+
+function showLoading() {
+    $('.loading').removeClass('no-display');
+}
+
+function removeLoading() {
+$('.loading').addClass('no-display');
 }

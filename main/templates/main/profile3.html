@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load notifications_tags %}
+{% block title %}
+Profile
+{% endblock %}
+
+{% notifications_unread as unread_count %}
+{% if unread_count %}
+<div class="alert alert-dismissible show fade alert-warning" role="alert">
+    You have <strong>{{ unread_count }}</strong> unread notifications.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+
+<link rel="stylesheet" href="{% static 'main/css/profile3.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="content">
+    <div class="navigation" id="nav">
+        <ul>
+            <li class="nav-item" id="account" tabindex="0">Account & Contact info</li>
+            <li class="nav-item" id="specialization" tabindex="0">Specialization</li>
+            <li class="nav-item" id="security" tabindex="0">Password & Security</li>
+            <li class="nav-item" id="notification" tabindex="0">Notifications</li>
+            <li class="nav-item" id="market" tabindex="0">Market</li>
+            <li class="nav-item" id="payment" tabindex="0">Payment</li>
+            <input id="userId" type="hidden" name="userId" value="{{ request.user.partner.id }}">
+            
+        </ul>
+        <a href="{% url 'main:logout' %}"><p class="logout" id="logout" tabindex="0">Logout</p></a>
+    </div>
+    <div id="sideDrop" class="sidedrop" onclick="navToggle()">
+        <i class="bi-arrow-bar-down toggle"></i>
+    </div>
+    <div class="container-fluid overview" id="overview">    
+
+    </div>
+    <div id="like_button_container"></div>
+</div>
+<img class="loading no-display" src="{% static 'main/images/Layo/transparentlogo.png' %}" alt="loading...">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/profile3.js' %}" ></script>
+<!--
+<script src="{% static 'plugins/react/react.development.js' %}"></script>
+<script src="{% static 'plugins/react/react-dom.development.js' %}"></script>
+-->
+<!-- JSX support-->
+<!--
+<script src="{% static 'plugins/react/babel.min.js' %}"></script>
+<script src="{% static 'main/reactProfile3.js' %}" type="text/babel"></script>
+-->
+{% endblock %} 

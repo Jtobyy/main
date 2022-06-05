@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block main %}
-<div class="content">
+<div class="content d-flex flex-column">
     <section class="content-section"> 
         <p class="section-paragraph"> <span>Par</span>tner <span>wi</span>th <span>u</span>s</p>
      </section>
     <section class="content-section"> 
-        <h2 class="section-header"> Why sell on L'ayo? </h2>    
+        <h3 class="section-header section-header1"> Why sell on L'ayo? </h3>    
         <ul class="reasons">
             <li><span>More demands</span></li>
             <li><span>Specialization</span></li>
@@ -26,9 +26,11 @@
                 <li><div>3</div><span class="style1">List jobs</span></li>
                 <li><div>4</div><span class="style2">Find your niche</span></li>
             </ul>
-            <div class="get-started">
-                Get started
-            </div>
+            <a href="{% url 'main:partner_reg' %}">
+                <div class="get-started">
+                    Get started
+                </div>
+            </a>
     </section>
 </div>
 {% endblock %}

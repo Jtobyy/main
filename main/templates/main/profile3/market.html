@@ -1,0 +1,47 @@
+<div>
+    <section class="transparent-sections">
+        <div class="section-header">
+            <h3>Market details</h3>
+        </div>
+        <div class="row justify-content-center align-items-center">    
+            <a onclick="pending()" class="col-md-4 col-sm-6 d-flex flex-column 
+            justify-content-center align-items-center section50 pointer
+            pending align-items-center">
+                <p class="lead">Pending Orders</p>
+                <span class="text-muted blockquote">{{ not_accepted_no }}</span>
+            </a>
+            <a onclick="accepted()" class="accepted-orders col-md-4 col-sm-6 d-flex flex-column 
+            justify-content-center align-items-center section50 pointer">
+                <p class="lead">Accepted Orders</p>
+                <span class="text-muted blockquote">{{ accepted_no }}</span>
+            </a>
+            <a onclick="readied()" class="ready col-md-4 col-sm-6 d-flex flex-column 
+            justify-content-center align-items-center section50 pointer">
+                <p class="lead">Orders ready for delivery</p>
+                <span class="text-muted blockquote">{{ ready_no }}</span>
+            </a>
+            <a onclick="delivered()" class="delivered col-md-4 col-sm-6 d-flex flex-column 
+            justify-content-center align-items-center section50 pointer">
+                <p class="lead">Delivered Orders</p>
+                <span class="text-muted blockquote">{{ delivered_no }}</span>
+            </a>
+            {% if request.user.partner.brand_type == 'F' %}    
+                <a onclick="quantity()" class="col-md-4 col-sm-6 d-flex flex-column 
+                justify-content-center align-items-center section50 pointer purple-gradient quantity">
+                    <p class="lead">My Fabrics</p>
+            {% elif request.user.partner.brand_type == 'C' %}    
+                <a onclick="quantity()" class="col-md-4 col-sm-6 d-flex flex-column 
+                justify-content-center align-items-center section50 pointer purple-gradient quantity">
+                    <p class="lead">My Clothes</p>
+            {% elif request.user.partner.brand_type == 'T' %}    
+                <a onclick="quantity()" class="col-md-4 col-sm-6 d-flex flex-column 
+                justify-content-center align-items-center section50 pointer purple-gradient quantity">
+                    <p class="lead">My Portfolio</p>
+            {% endif %}
+                    <span class="text-muted blockquote">{{ market }}</span>
+                </a>
+        </div>
+        <!--<i onclick="addFabric()" class="bi-plus-lg" title="Add fabric"></i>-->
+    </section>    
+    </div>
+</div>

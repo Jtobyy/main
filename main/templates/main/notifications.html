@@ -1,0 +1,57 @@
+{% load notifications_tags %}
+<div class="d-flex flex-column white-sections rounded p-5">
+    <p class="text-secondary">{% live_notify_badge %} unread notification(s)</p>    
+    {% live_notify_list %}
+    {% for notification in request.user.notifications.unread %}
+    <div>    
+        <div class="p-1 d-flex flex-column justify-content-start align-items-start">
+            <p class="text-dark">
+            {% if notification.level == 'info' %}
+            <img src="/main/static/main/images/Layo/info-icon-svg-transparent-background-information-icon-hd.png" class="icon"/>
+            {% elif notification.level == 'success' %}
+            <img src="/main/static/main/images/submit-successfully.png" class="icon"/>
+            {% elif notification.level == 'error' %}
+            <img src="/main/static/main/images/Error.svg.png" class="icon"/>
+            {% elif notification.level == 'warning' %}
+            <img src="/main/static/main/images/Layo/info-icon-svg-transparent-background-information-icon-hd.png" class="icon"/>
+            {% endif %}        
+            {% if request.user.partner.brand_type == 'F' %}
+            From <b>{{ notification.actor.first_name|default:notification.actor }} {{ notification.actor.last_name }}:  
+                 </b> <a class="align-self-center text-info pointer" onclick="fabricorderDetails({{notification.action_object_object_id}}, {{notification.id}});">{{ notification.description }}</a>
+            </p>
+            {% elif request.user.partner.brand_type == 'C' %}
+            From <b>{{ notification.actor.first_name|default:notification.actor }} {{ notification.actor.last_name }}:  
+                 </b> <a class="align-self-center text-info pointer" onclick="cclothorderDetails({{notification.action_object_object_id}}, {{notification.id}});">{{ notification.description }}</a>
+            </p>
+            {% elif request.user.partner.brand_type == 'T' %}
+            From <b>{{ notification.actor.first_name|default:notification.actor }} {{ notification.actor.last_name }}:  
+                 </b> <a class="align-self-center text-info pointer" onclick="sclothorderDetails({{notification.action_object_object_id}}, {{notification.id}});">{{ notification.description }}</a>
+            </p>
+            {% endif %}
+            <span class="align-self-end text-secondary">{{ notification.timestamp|timesince }} ago</span>
+        </div>
+    </div>
+    {% endfor %}
+    <div>
+        {% if read_notifications %}    
+        <p>Previous notifications</p>
+        {% for notification in read_notifications %}
+            <div class="p-1 d-flex flex-column justify-content-start align-items-start">
+                <p class="text-dark">
+                {% if notification.level == 'info' %}
+                <img src="/main/static/main/images/Layo/info-icon-svg-transparent-background-information-icon-hd.png" class="icon"/>
+                {% elif notification.level == 'success' %}
+                <img src="/main/static/main/images/submit-successfully.png" class="icon"/>
+                {% elif notification.level == 'error' %}
+                <img src="/main/static/main/images/Error.svg.png" class="icon"/>
+                {% elif notification.level == 'warning' %}
+                <img src="/main/static/main/images/Layo/info1.png" class="icon"/>
+                {% endif %}
+                From <b>{{ notification.actor.first_name|default:notification.actor }} {{ notification.actor.last_name }}:  
+                    </b> <a class="align-self-center text-info pointer" onclick="orderDetails({{notification.action_object_object_id}}, {{notification.id}});">{{ notification.description }}</a>
+                </p>
+            <span class="align-self-end text-secondary">{{ notification.timestamp|timesince }} ago</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>

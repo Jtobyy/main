@@ -1,0 +1,53 @@
+<form class="section-body" method="POST" action="{% url 'main:editPartnerProfile' partner_id=request.user.partner.id %}">
+    {% csrf_token %}
+    <div>
+        <p>Legal Representative</p>
+        <div class="form-group">
+            <label for="legal_rep_first_name">First name</label>   
+            <input type="text" id="legal_rep_first_name" name="legal_rep_first_name"
+            value="{{ userdetails.legal_rep_first_name|capfirst }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="legal_rep_other_name">Other names</label>   
+            <input type="text" id="legal_rep_other_name" name="legal_rep_other_name"
+            value="{{ userdetails.legal_rep_other_name|capfirst }}" class="form-control">
+        </div>  
+        <div class="form-group">
+            <label for="legal_rep_other_name">Last name</label>   
+            <input type="text" id="legal_rep_last_name" name="legal_rep_last_name"
+            value="{{ userdetails.legal_rep_last_name|capfirst }}" class="form-control">
+        </div>  
+    </div>    
+    <div class="form-group">
+        <label for="email" >Business Email</label>
+        <input type="email" name="email" disabled value="{{ userdetails.email }}" class="form-control">
+    </div>
+    <div class="form-group" >
+        <label for="address" >Business Address</label>
+        <input type="text" id="address" name="address"
+        value="{{ userdetails.address }}" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>City</label>
+        <input type="text" id="address" value="{{ userdetails.city }}"
+        name="city" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="state">State</label>
+        <select id="state" class="form-control" name="state">
+            <option default value="{{ userdetail.state }}">Lagos</option>
+            <option value="abi">Abia</option>
+            <option value="ogu">Ogun</option>
+            <option value="kog">Kogi</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Zipcode</label>
+        <input type="text" value="{{ userdetails.zipcode }}"
+        class="form-control" name="zipcode">
+    </div>
+    <div>
+        <div class="btn btn-dark mbtn" onclick="cancelEditContact()">Cancel</div>
+        <button type="submit" class="btn btn-primary mbtn">Update</button>
+    </div>
+</form>

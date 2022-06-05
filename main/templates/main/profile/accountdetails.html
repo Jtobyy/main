@@ -4,11 +4,17 @@
   {% csrf_token %}
   <div class="row">  
     <div class="col-12 accdiv"> 
-        <h3 class="acch">Account details</h3>
-        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
-        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
+        <h4 class="acch">Account details</h4>
+        <p class="accp">First Name:
+          <input class="accin" type="text" placeholder="{{ request.user.first_name }}" 
+          name="first_name" value="{{ request.user.first_name }}">
+        </p>
+        <p class="accp">Last Name:
+          <input class="accin" type="text" placeholder="{{ request.user.last_name }}" 
+          name="last_name" value="{{ request.user.last_name }}">
+        </p>
         <p class="accp">Email address: 
-          <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
+          <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}" disabled>
         </p>
         <p class="accp">phone number: 
           <i class="code">(+234)</i><input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
@@ -22,54 +28,6 @@
       </div>
     </div>
 </form>
-{% elif group.name == 'Tailors' %}
-<form method="POST" action="{% url 'main:editTailorProfile' tailor_id=request.user.tailor.id %}">
-  {% csrf_token %}
-  <div class="row">  
-    <div class="col-12 accdiv"> 
-        <h3 class="acch">Account details</h3>
-        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
-        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
-        <p class="accp">Email address: 
-          <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
-        </p>
-        <p class="accp">phone number: 
-          <i class="code">+234</i>
-          <input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
-        </p>
-        <p class="accp">alternative phone number:  
-          <i class="code">+234</i>
-          <input class="accin" type="tel" placeholder="{{ userdetails.phone_no2 }}" name="phone_no2" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no2 }}" {% endif %}>
-        </p>
-        <button onclick="sessionStorage['view']='overview'" type="submit" class="btn btn1 btn-dark mbtn">Save changes</button>
-        <p class="accp password" onclick="changep()">Change password?</p>
-      </div>
-    </div>
-</form>
-{% elif group.name == 'Sellers' %}
-<form method="POST" action="{% url 'main:editSellerProfile' seller_id=request.user.seller.id %}">
-  {% csrf_token %}
-  <div class="row">  
-    <div class="col-12 accdiv"> 
-        <h3 class="acch">Account details</h3>
-        <p class="accp">First Name: <span>{{ userdetails.username }}</span></p>
-        <p class="accp">Surname: <span>{{ userdetails.username }}</span></p>
-        <p class="accp">Email address: 
-          <input class="accin" type="email" placeholder="{{ userdetails.email }}" name="email" value="{{ userdetails.email }}">
-        </p>
-        <p class="accp">phone number: 
-          <i class="code">+234</i><input class="accin" type="tel" placeholder="{{ userdetails.phone_no1 }}" name="phone_no1" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no1 }}" {% endif %}>
-        </p>
-        <p class="accp">alternative phone number:  
-          <i class="code">+234</i>
-          <input class="accin" type="tel" placeholder="{{ userdetails.phone_no2 }}" name="phone_no2" {% if userdetails.phone_no1 %} value="{{ userdetails.phone_no2 }}" {% endif %}>
-        </p>
-        <button onclick="sessionStorage['view']='overview'" type="submit" class="btn btn1 btn-dark mbtn">Save changes</button>
-        <p class="accp password" onclick="changep()">Change password?</p>
-      </div>
-    </div>
-</form>
-
 {% endif %}
 {% endfor %}
 

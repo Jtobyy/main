@@ -1,32 +1,29 @@
-window.onload = function () {
-    /*
+$(document).ready(function () {
+   $('#profileDropdown').popover({    
+    container: 'body',
+    html: true,
+    content: $('#profileDropdownContent').html()
+  })
+  $('#popFabrics').popover({
+    container: 'body',
+    html: true,
+    content: $('#fabricsDropdownContent').html(),
+  })
+  $('.dropdown-toggle').dropdown()
+  $('.alert').alert()
+  $('#search-text').click(() => {
+    let searchLink = document.getElementById('search-link')
+    query = $('#query').val()
+    if (query == '') query = 'search'
+    searchLink.setAttribute('href', `/main/search/${query}`)
+    searchLink.click()
+  })
+})
+  /*
   gapi.load('auth2', function() {
       gapi.auth2.init();
-  })*/
-  $('.profileDropdown').hover(
-    () => { $('.profileItems').removeClass('hidden') },
-    () => { $('.profileItems').addClass('hidden') }
-  )
-  $('.profileItems').mouseover(
-    () => { $('.profileItems').removeClass('hidden') }
-  )
-}
-
-
-function toggleHeader() {
-    if (document.getElementById('header').style['top'] === '0em')
-    {
-        document.getElementById('header').style['top'] = '-3.5em';
-        document.getElementById('body-container').style['top'] = '-3.5em';
-        document.getElementById('body-container').style['margin-bottom'] = '-3.5em';
-    }
-    else
-    {
-      document.getElementById('header').style['top'] = '0em';
-      document.getElementById('body-container').style['top'] = '0em';
-      document.getElementById('body-container').style['margin-bottom'] = '0em';
-    }
-}
+  })
+})*/
 
 function scrollV() {
   let anchorlinks = document.querySelectorAll('a[href^="#"]')
@@ -88,11 +85,20 @@ function validate() {
   })
 }
 
-
 function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+function submit_form(el) {       
+  showLoading()    
+  form = document.getElementById('staticpopup')
+  $.get('popauth', function(page, textStatus) {    
+      $('#popauth').toggleClass('no-display');
+      $('.popauth').html(page);
+      removeLoading();
+  });
 }

@@ -1,32 +1,40 @@
-    {% for obj in cart %}
+{% for obj in cart %}
     <div class="row myrow">    
         <div class="col-6">
             <div class="img">
-                <a href="{% url 'main:sendmail' clothe_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+                <img src="{{ obj.image.url }}">
             </div>
         </div>
+        
         <div class="col-6 info">
-            {% if obj.type == 'Not specified' %}
-            <div class="name">fab{{obj.id}}</div>
-            {% else %}
-            <div class="name">{{ obj.type }}{{obj.id}}</div>
-            {% endif %}    
-            <span class="price"> N {{ obj.price }} </span>
-            <span class="price"> x{{ obj.amount }} </span>
+            {% if obj.item == 'fabric' %}    
+                {% if obj.type == 'Not specified' %}
+                <div class="name">fab{{obj.id}}</div>
+                {% else %}
+                <div class="name">Fabric {{ obj.type }}{{obj.id}}</div>
+                {% endif %}    
+                <span class="price"> N {{ obj.price }} per yard</span>
+                <span class="price"> x{{ obj.amount }} yards </span>
+            {% elif obj.item == 'cloth' %}
+                <div class="name"> {{ obj.label }}</div> 
+                <span class="price"> {{ obj.company.brand_name }}</span> 
+                <span class="price"> N{{ obj.price }}</span> 
+                <span class="price"> x{{ obj.amount }}</span> 
+            {% endif %}
         </div>
-        <div class="remove" onclick="cartremove(this)" id="{{ obj.id }}" data-name="{{ obj }}">
+        <div class="remove small" onclick="cartremove(this)" id="{{ obj.id }}" data-name="{{ obj }}">
             Remove from cart
         </div>
     </div>
-    {% empty %}
+{% empty %}
     <div class="empty">
         <p>Your Cart is empty</p>
         <a href="{% url 'main:shop' %}"><div class="shop-prompt d-inline-block"> 
             Start Shopping 
         </div></a>
     </div>
-    {% endfor %}
-    {% if cart %}
+{% endfor %}
+{% if cart %}
     <div class="row sumtotal">    
         <div class="col-6">
             Total
@@ -35,7 +43,48 @@
             <span class="price"> N {{ total }} </span>
         </div>
     </div>
-    <div onclick="payment()" class="checkout">
+    <input type="hidden" value="{{ request.user }}" id="user">
+    <div onclick="makePayment()" class="checkout">
         Checkout
     </div>
-    {% endif %}
+    <input type="hidden" id="email" value="{{ request.user.email }}">
+    <input type="hidden" id="phone_no" value="{{ request.user.customer.phone_no1 }}">
+    <input type="hidden" id="name" value="{{ request.user.customer.first_name }} {{ request.user.customer.last_name }}">
+    <input type="hidden" id="amount" value="{{ total }}">
+    <input type="hidden" id="tx_ref" value="{{ tx_ref }}">
+{% endif %}
+<p style="font-size: 1em" class="mx-auto text-center text-muted">
+    <span style="color: red;">*</span>Please note that orders would be delivered in line with the measurement details on your
+    profile. Update if necessary.
+</p>
+    <div class="rounded position-fixed no-display popauth" id="popauth">
+        
+    </div>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+    url = "cart"
+    function makePayment() {
+        if ($('#user').val() == '' || $('#user').val() == 'AnonymousUser')
+            submit_form()
+        else {
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK_TEST-32895376989f201aaacefcd375ba1a74-X",
+                tx_ref: $('#tx_ref').val(),
+                amount: $('#amount').val(),
+                currency: "NGN",
+                payment_options: "card, mobilemoneyghana, ussd",
+                redirect_url: url,
+                customer: {
+                email: $('#email').val(),
+                phone_number: $('#phone_no').val(),
+                name: $('#name').val(),
+                },
+                customizations: {
+                title: "Layongr",
+                description: "Payments",
+                logo: "https://main.layongr.com/static/main/images/Layo/transparentlogo.png",
+                },
+            });
+        }
+    }
+</script>  

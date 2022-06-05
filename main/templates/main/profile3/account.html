@@ -1,0 +1,68 @@
+<div>
+    <section class="white-sections section100">
+        <div class="section-header">
+            <h2>Contact Information</h2>
+            <i class="bi-pencil-square" title="edit" id="editContactInfo"
+            onclick="editContactInfo()"></i>
+        </div>     
+        <hr>
+        <div class="section-body" id="contactSection">
+            <p>Legal Representative
+                <span>{{ userdetails.legal_rep_first_name|capfirst }} {{ userdetails.legal_rep_other_name|capfirst }} {{ userdetails.legal_rep_last_name|capfirst }}</span>    
+            </p>    
+            <p>Business Email
+                <span>{{ userdetails.email }}</span>    
+            </p>    
+            <p>Business Address
+                <span>{{ userdetails.address }}</span>    
+            </p>
+            <p>City
+                <span>{{ userdetails.city }}</span>    
+            </p>
+            <p>State
+                <span>{{ userdetails.state }}</span>    
+            </p>
+            <p>Zipcode
+                <span>{{ userdetails.zipcode }}</span>
+            </p>
+        </div>
+    </section>    
+    <section class="white-sections section100">
+        <div class="section-header">
+            <h2>Business Account Information</h2>
+        </div> 
+        <hr>
+        <div class="section-body">
+            <p>Business Entity
+            {% if userdetails.business_entity == 'C' %}    
+                <span>Corporation</span>
+            {% elif userdetails.business_entity == 'P' %}    
+                <span>Partnership</span>
+            {% else %}    
+                <span>Sole Proprietorship</span>
+            {% endif %}
+            </p>
+            <p>Business Name
+                <span>{{ userdetails.business_name }}</span>
+            </p>
+            <p>Brand Name
+                <span>{{ userdetails.brand_name }}</span>    
+            </p>
+            <p>TIN number
+                <span>{{ userdetails.tin }}</span>    
+            </p>
+            <p>VAT number
+                <span>{{ userdetails.vat }}</span>    
+            </p>
+            <p>Account/Brand type
+            {% if userdetails.brand_type == 'T' %}    
+                <span>Tailors Account</span>
+            {% elif userdetails.brand_type == 'C' %}    
+                <span>Custom Made Clothes Seller Account</span>
+            {% elif userdetails.brand_type == 'F' %}    
+                <span>Frabic Seller Account</span>
+            {% endif %}
+            </p>
+        </div>
+    </section>    
+</div>

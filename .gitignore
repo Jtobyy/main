@@ -3,12 +3,17 @@ LAIYO
 main_old
 stderr.log
 db.sqlite3
-env
+*env
+.env
+env*
 
 node_modules
 *pickle
 pickle*
 *.pickle
-Fabric_*
-Tailor_*
+Fabric*
+Partner*
+Tailor*
+ID*
+media
 migrations

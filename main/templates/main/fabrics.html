@@ -6,13 +6,13 @@ Fabrics
 {% endblock %}
 
 {% block links %}
-<link rel="stylesheet" href="{% static 'main/css/shop.css' %}">
 <link rel="stylesheet" href="{% static 'main/css/fabrics.css' %}">
 {% endblock %}
 
 {% block main %}
 <div class="container">    
-    <h1 class="caption">Get quality fabrics at your doorstep</h1>    
+    {% if fabrics.number == 1 %}    
+    <h1 class="caption mx-auto lead">Get quality fabrics at your doorstep</h1>    
     <div class="row intro">
         {% for fabric in fabrics|slice:":3" %}    
         <div class="col-sm-4">
@@ -22,9 +22,10 @@ Fabrics
         </div>
         {% endfor %}
     </div>
+    {% endif %}
     <div class="row">
         {% for fabric in fabrics %}
-            <div class="col-sm-4 product">
+            <div class="col-sm-4 col-6 product">
                 <div class="img">    
                     <a href="{% url 'main:fabric_sample' fabric_id=fabric.id %}"><img src="{{ fabric.image.url }}"></a>
                     <div class="feats">
@@ -65,6 +66,78 @@ Fabrics
         {% endfor %}
     </div>
 </div>
+
+<div class="loadMore mx-auto">
+    {% if fabrics.has_previous %}
+        <a class="first" href="?page=1">&laquo; first</a>
+        <a class="previous"href="?page={{ fabrics.previous_page_number }}">previous</a>
+    {% endif %}
+    <span>
+        Page {{ fabrics.number }} of {{ fabrics.paginator.num_pages }}
+    </span>
+    {% if fabrics.has_next %}
+        <a class="next" href="?page={{ fabrics.next_page_number }}">next</a>
+        <a class="last" href="?page={{ fabrics.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'main/js/shop.js' %}"></script>
+<script src="{% static 'main/js/fabrics.js' %}"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <div class="filter filter_more" id="filter_container">
     <i class='bi-filter-right filterToggle' id="filter_toggle"></i>    
     <form id="filter_form" action="{% url 'main:fabricsfilter' %}" method="POST">
@@ -156,23 +229,4 @@ Fabrics
         </ul>
     </form>
 </div>
-
-<div class="loadMore">
-    {% if fabrics.has_previous %}
-        <a class="first" href="?page=1">&laquo; first</a>
-        <a class="previous"href="?page={{ fabrics.previous_page_number }}">previous</a>
-    {% endif %}
-    <span>
-        Page {{ fabrics.number }} of {{ fabrics.paginator.num_pages }}
-    </span>
-    {% if fabrics.has_next %}
-        <a class="next" href="?page={{ fabrics.next_page_number }}">next</a>
-        <a class="last" href="?page={{ fabrics.paginator.num_pages }}">last &raquo;</a>
-    {% endif %}
-</div>
-
-{% endblock %}
-{% block scripts %}
-<script src="{% static 'main/js/shop.js' %}"></script>
-<script src="{% static 'main/js/fabrics.js' %}"></script>
-{% endblock %}
+-->

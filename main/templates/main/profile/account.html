@@ -1,8 +1,8 @@
-<h2>Account overview</h2>
+<h4>Account overview</h4>
 <div class="row">
     <div class="part col-sm-6"> 
-        <h3>Account details</h3>
-        <p>Name: <span>{{ userdetails.first_name }} {{ userdetails.last_name }}</span></p>
+        <h5>Account details</h5>
+        <p>Name: <span>{{ request.user.first_name }} {{ request.user.last_name }}</span></p>
         {% if userdetails.email %}
         <p>Email address: <span>{{ userdetails.email }}</span></p>
         {% endif %}
@@ -16,10 +16,11 @@
     <div class="part col-sm-6">
         {% for group in request.user.groups.all %}
         {% if group.name == 'Customers' %}    
-            <h3>Address book</h3>
-            <h4 onclick="sessionStorage['view']='overview'; addressedit(this);" id="{{ userdetails.this_address.id }}" class="default">Your defualt address</h4></a>
+            <h5>Address book</h5>
+            <h6 onclick="addressedit(this);" 
+            id="{{ userdetails.this_address.id }}" class="default">Your defualt address</h6></a>
         {% else %}
-            <h3>Location</h3>
+            <h4>Location</h4>
         {% endif %}
                 {% if userdetails.this_address.address %}
                 <span>{{ userdetails.this_address.address }}</span>
@@ -34,12 +35,12 @@
                 <span>{{ userdetails.this_address.zipcode }}</span>
                 {% endif %}
                 {% if group.name == 'Customers' %}    
-                    <i onclick="edit2()" id="edit2" title="edit" class="bi-pencil-fill"></i>
+                    <i onclick="addressbook()" id="edit2" title="edit" class="bi-pencil-fill"></i>
                 {% else %}
                     {% if userdetails.this_address %}
-                        <i onclick="sessionStorage['view'] = 'overview'; addressedit(this)" id="{{ userdetails.this_address.id }}" title="edit" class="bi-pencil-fill"></i>
+                        <i onclick="addressedit(this)" id="{{ userdetails.this_address.id }}" title="edit" class="bi-pencil-fill"></i>
                     {% else %}
-                        <i onclick="sessionStorage['view'] = 'overview'; newaddress()" ti    tle="edit" class="bi-pencil-fill"></i>
+                        <i onclick="newaddress()" title="edit" class="bi-pencil-fill"></i>
                     {% endif %}
                 {% endif %}
         {% endfor %}

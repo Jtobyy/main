@@ -1,7 +1,7 @@
 var a = document.getElementsByClassName('request')[0]
-opt = {opt1: measuredetails, 
-      opt2: howtoselfmeasure,
-      opt3: requestpro,
+opt = { opt1: measuredetails, 
+        opt2: howtoselfmeasure,
+        opt3: requestpro,
 }
 
 window.onload = function() {
@@ -82,13 +82,7 @@ function requestpro(){
     xhttp.send();  
 }
 
-function malebtn() {
-  if ($('#maledetails').css('display') == 'none') {
-    $('#maledetails').slideToggle()
-    $('#femaledetails').slideToggle() }
-}
-function femalebtn() {  
-  if ($('#maledetails').css('display') != 'none') {
-    $('#femaledetails').slideToggle()
-    $('#maledetails').slideToggle() }
+function unitbtn() {  
+  $('#in').slideToggle()
+  $('#cm').slideToggle()   
 }

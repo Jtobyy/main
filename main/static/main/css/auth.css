@@ -1,6 +1,6 @@
 :root {  
-  --themecolor: rgb(203 83 83);
-  --headercolor: rgb(82,232,217);
+  --themecolor: black;  
+  --oldthemecolor: rgb(203 83 83);
   --genfontfamily: 'Montserrat', serif;
 }
 
@@ -10,25 +10,6 @@ body{
   background-size: cover;
   background-position:center;
 }
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;  
-  height: 4em;
-  position: relative;
-  border-bottom: 1px solid black;
-  transition: all 0.5s;
-  padding: 0 2em;
-}
-
-.link-icon {
-  color: rgb(251,237,211);
-  transition: all 0.15s;
-}
-  .link-icon:hover {
-    color: rgb(250,218,217);
-  }
-
 
 .form-container {
     margin: 30px;
@@ -42,18 +23,11 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: var(--genfontfamily), sans-serif;
     color: black;
     font-size: 1.07em;
 }
 .form-container label {
   font-weight: 400;
-}
-input {
-  width: 250px !important;
-  height: 34px !important;
-  font-size: 1.05em !important;
-  margin-bottom: 10px;
 }
 #forgot_pass{
     position: relative;
@@ -91,85 +65,53 @@ input {
  
  aside
   {
-   position: absolute;
-   top: 30px;
-   left: 50%;
-   margin-left: -20%;
    font-size: 1.5em;
    font-family: cursive;
    font-variant: small-caps;
    color: #e85656;
-   
  }
 .request {
   display: none; 
-  width: 30vw;
-  left: 25%;
-  top: 40%;
-}
-
-@media only screen and (max-width: 800px)
-{
- .request {
-  width: 20vw;
- }
 }
 
 @media only screen and (max-width: 700px)
 {
- aside, .request {
-  top: 30px;
-  left: 50%;
-  margin-left: -20%;
-  font-size: 1.2em;
-  width: fit-content; 
- }
  .form-container {
-  margin-top: 80px;
+  margin-top: 50px;
  }
  .form-container form {
     padding: 30px 50px;    
     font-size: 1.0em;
 }
- input {
-  width: 230px !important;
-  height: 32px !important;
-}
 }
 
-@media only screen and (max-width: 500px)
-{
- aside, .request {
-  left: 25%;
-  margin-left: -15px;
- }
- .form-container form {
-   padding: 30px 40px;
-   font-size: .9em;
-}
- input {
-  width: 200px !important;
-  height: 30px !important;
-}
+@media screen and (max-width:460px) {
+  .form-container {
+    margin: 10px;
+    border: 0;
+  }
+  .form-container form {
+    padding: 0;
+    padding: 20px 10px;
+    font-size: 1em;
+  }
+  input {
+    height: 25px !important;
+  }
+  .opt {
+    margin-bottom: .8em !important; 
+    margin-top: .8em !important; 
+  }
+  button {
+    font-size: inherit !important;
+  } 
 }
 
-@media only screen and (max-width: 350px)
-{
- aside, .request {
-  left: 20%;
-  margin-left: 0;
-  margin-bottom: 20px;
- }
- .form-container {
-  border: 0px;
-  margin-top: 60px;
- }
- .form-container form { 
-   padding: 30px 30px;
-   font-size: .8em;
- }
- input {
-  width: 200px !important;
-  height: 30px !important;
-}
+@media screen and (max-width:230px) {
+  .measureopt-aside {
+    font-size: 1.2em;
+  }  
+  .opt input {
+    height: 10px !important;
+  }
 }

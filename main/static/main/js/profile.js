@@ -1,4 +1,7 @@
-window.onload = function () {
+$(document).ready(function () {
+    current_url = window.location.href
+    let url = new URL(current_url);
+    let exsection = url.searchParams.get("exsection");
     window.addEventListener('popstate', (e) => {
         if (e.state != null) {
             page = e.state;
@@ -8,7 +11,7 @@ window.onload = function () {
             else if (page == 'order') order();
             else if (page == 'logout') logout();
             else if (page == 'accountdetails') edit1();
-            else if (page == 'addressbook') edit2();
+            else if (page == 'addressbook') addressbook();
             else if (page == 'addressedit') addressedit();
             else if (page == 'addressdelete') addressdelete();
             else if (page == 'newaddress') newaddress();
@@ -16,22 +19,57 @@ window.onload = function () {
             else if (page == 'steps') measureHowTo();
         }
     })
-    $('#account').addClass('active')
     userId = $('#userId').val()
-    var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            $('.overview').html(this.responseText)
-            url = 'overview'
-            history.pushState(url, null, null);
-            removeLoading();
-        }
-        else {
-            showLoading();
-        }
+    if (exsection == 'order') {
+        history.pushState("order", null, userId)    
+        order()
     }
-    xhttp.open("GET", userId+"?section=account&view=overview", true);
-    xhttp.send();
+    else if (exsection == 'inbox') {
+        history.pushState("inbox", null, userId)
+        inbox()
+    }
+    else if (sessionStorage['section'] == 'measurement') {
+        history.pushState("measurement", null, userId)        
+        measurement()
+        sessionStorage.setItem('section', '')
+    }
+    else if (sessionStorage['section'] == 'account') {
+        history.pushState("account", null, userId)        
+        account()
+        sessionStorage.setItem('section', '')
+    }
+    else if (sessionStorage['section'] == 'inbox') {
+        history.pushState("inbox", null, userId)        
+        inbox()
+        sessionStorage.setItem('section', '')
+    }
+    else if (sessionStorage['section'] == 'order') {
+        history.pushState("order", null, userId)        
+        order()
+        sessionStorage.setItem('section', '')
+    }
+    else if (sessionStorage['section'] == 'addressbook') {
+        history.pushState("order", null, userId)        
+        addressbook()
+        sessionStorage.setItem('section', '')
+    }
+    else {
+        $('#account').addClass('active')
+        var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                $('.overview').html(this.responseText)
+                url = 'overview'
+                history.pushState(url, null, null);
+                removeLoading();
+            }
+            else {
+                showLoading();
+            }
+        }
+        xhttp.open("GET", userId+"?section=account&view=overview", true);
+        xhttp.send();
+    }
 
     $('#account').click(account)
     $('#inbox').click(inbox)
@@ -41,160 +79,191 @@ window.onload = function () {
     $('#viewed').click(viewed)
     $('#measurement').click(measurement)
     $('#logout').click(logout)
-    
+})
 
-    function account() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#account').addClass('active')
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                $('.overview').html(this.responseText)
-                history.pushState("overview", null, null);
-                removeLoading();
-            }
-            else {
-                showLoading();
-            }
-        }
-        xhttp.open("GET", userId+"?section=account&view=overview", true);
-        xhttp.send();    
-    }
-
-    function inbox() {
-      $('#logout').removeClass('active')      
-      $('.nav-item').removeClass('active')
-      $('#inbox').addClass('active')
-      var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                $('.overview').html(this.responseText)
-                history.pushState("inbox", null, null);
-                removeLoading();
-            }
-            else {
-                showLoading();
-            }
-        }
-        xhttp.open("GET", userId+"?section=inbox", true);
-        xhttp.send();
-    }
-
-    function payment() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#payment').addClass('active')
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+function account() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#account').addClass('active')
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             $('.overview').html(this.responseText)
-            history.pushState("payment", null, null);
+            history.pushState("overview", null, null);
+            sessionStorage.setItem('section', 'account')
             removeLoading();
         }
         else {
             showLoading();
         }
     }
-    xhttp.open("GET", userId+"?section=payment", true);
-    xhttp.send();
-    }
+    xhttp.open("GET", userId+"?section=account&view=overview", true);
+    xhttp.send();    
+}
 
-    function order() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#order').addClass('active')  
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
+function inbox() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#inbox').addClass('active')
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             $('.overview').html(this.responseText)
-            history.pushState("order", null, null);
+            history.pushState("inbox", null, null);
+            sessionStorage.setItem('section', 'inbox')
             removeLoading();
         }
         else {
             showLoading();
         }
     }
-    xhttp.open("GET", userId+"?section=orders", true);
+    xhttp.open("GET", userId+"?section=inbox", true);
     xhttp.send();
-    }
-    
-    function wishlist() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#wishlist').addClass('active')  
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            $('.overview').html(this.responseText)
-            history.pushState("order", null, null);
-            removeLoading();
-        }
-        else {
-            showLoading();
-        }
-    }
-    xhttp.open("GET", userId+"?section=orders", true);
-    xhttp.send();
-    }
+}
 
-    function viewed() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#viewed').addClass('active')  
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            $('.overview').html(this.responseText)
-            history.pushState("order", null, null);
-            removeLoading();
-        }
-        else {
-            showLoading();
-        }
+function payment() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#payment').addClass('active')
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        $('.overview').html(this.responseText)
+        history.pushState("payment", null, null);
+        removeLoading();
     }
-    xhttp.open("GET", userId+"?section=orders", true);
-    xhttp.send();
+    else {
+        showLoading();
     }
+}
+xhttp.open("GET", userId+"?section=payment", true);
+xhttp.send();
+}
 
-    function measurement() {
-        $('#logout').removeClass('active')      
-        $('.nav-item').removeClass('active')
-        $('#measurement').addClass('active')  
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            $('.overview').html(this.responseText)
-            history.pushState("measurement", null, null);
-            removeLoading();
-        }
-        else {
-            showLoading();
-        }
+function order() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#order').addClass('active')
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        sessionStorage.setItem('section', 'order')
+        removeLoading();
     }
-    xhttp.open("GET", userId+"?section=measurement", true);
-    xhttp.send();
-    }    
+    else {
+        showLoading();
+    }
+}
+xhttp.open("GET", +userId+"?section=orders", true);
+xhttp.send();
+}
+
+function fabricorderDetails(id) {
+    showLoading();
+    $.get(userId+"?section=fabricorderdetails&orderid="+id, function(page, textStatus) {
+        $('.overview').html(page);
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        removeLoading();
+    });
+}
+function cclothorderDetails(id) {
+    showLoading();
+    $.get(userId+"?section=cclothorderdetails&orderid="+id, function(page, textStatus) {
+        $('.overview').html(page);
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        removeLoading();
+    });
+}
+function sclothorderDetails(id) {
+    showLoading();
+    $.get(userId+"?section=sclothorderdetails&orderid="+id, function(page, textStatus) {
+        $('.overview').html(page);
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        removeLoading();
+    });
+}
+
+function wishlist() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#wishlist').addClass('active')  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        removeLoading();
+    }
+    else {
+        showLoading();
+    }
+}
+xhttp.open("GET", userId+"?section=orders", true);
+xhttp.send();
+}
+
+function viewed() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#viewed').addClass('active')  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        $('.overview').html(this.responseText)
+        history.pushState("order", null, null);
+        removeLoading();
+    }
+    else {
+        showLoading();
+    }
+}
+xhttp.open("GET", userId+"?section=orders", true);
+xhttp.send();
+}
+
+function measurement() {
+    $('#logout').removeClass('active')      
+    $('.nav-item').removeClass('active')
+    $('#measurement').addClass('active')  
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        $('.overview').html(this.responseText)
+        history.pushState("measurement", null, null);
+        sessionStorage.setItem('section', 'measurement')
+        removeLoading();
+    }
+    else {
+        showLoading();
+    }
+}
+xhttp.open("GET", userId+"?section=measurement", true);
+xhttp.send();
+}    
 
 
-    function logout() {
-        $('.nav-item').removeClass('active')
-        $('#logout').addClass('active')  
-        history.pushState("logout", null, null);
-    }
+function logout() {
+    $('.nav-item').removeClass('active')
+    $('#logout').addClass('active')  
+    history.pushState("logout", null, null);
+}
 
 /*
-      gapi.load('auth2', function() {
-          gapi.auth2.init();
-      })*/
-      $('.profileDropdown').hover(
-        () => { $('.profileItems').removeClass('hidden') },
-        () => { $('.profileItems').addClass('hidden') }
-      )
-      $('.profileItems').mouseover(
-        () => { $('.profileItems').removeClass('hidden') }
-      )    
-}
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+    })*/
+    $('.profileDropdown').hover(
+    () => { $('.profileItems').removeClass('hidden') },
+    () => { $('.profileItems').addClass('hidden') }
+    )
+    $('.profileItems').mouseover(
+    () => { $('.profileItems').removeClass('hidden') }
+    )    
 
 function showLoading() {
     $('.loading').removeClass('no-display');
@@ -222,12 +291,13 @@ xhttp.send();
 }
 
 //address details
-function edit2() {
+function addressbook() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         $('.overview').html(this.responseText)
         history.pushState('addressbook', null, null)
+        sessionStorage.setItem('section', 'addressbook')
         removeLoading();
     }
     else {
@@ -258,6 +328,7 @@ function addressedit(address) {
     $.get(userId+"?section=account&view=addressedit&id="+address['id'], function(page, textStatus) {    
         $('.overview').html(page);
         history.pushState('addressedit', null, null)
+        sessionStorage.setItem('section', 'addressbook')
         removeLoading();
     });
 };
@@ -287,7 +358,6 @@ function changep() {
 }
 
 function validatepass() {
-    console.log('got here')
     $('#changepassbtn').click((event) => {
         if ($('#newp').text() !== $('#confirmp').text()) {
             event.preventDefault()
@@ -323,4 +393,18 @@ function measureRequest() {
         })
         removeLoading();
     });        
+}
+
+function profilePic() {
+    imageInput = document.getElementById('profileImageInput')    
+    
+    imageInput.click()
+    $('#profileImageInput').change(function() {
+        const reader = new FileReader()    
+        reader.readAsDataURL(imageInput.files[0])
+        reader.onload = function(e) {
+            $('#profileImage').attr('src', e.target.result)
+        }
+        $('#profileImageForm').submit()
+    })
 }

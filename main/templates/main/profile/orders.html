@@ -1,1 +1,61 @@
-<h2>Orders</h2>
+<div class="orders_wrapper d-flex flex-column justify-content-center mh-100">    
+    <h4 class="mx-auto">Orders</h4>
+    {% for obj in fabric_orders %}
+        <div class="d-flex flex-row flex-wrap justify-content-between order-item 
+        border rounded align-items-center" onclick="fabricorderDetails({{obj.id}})">
+            <span class="text-muted">{{obj.order_item.label}}</span>
+            <img src="{{ obj.order_item.image.url }}">
+            <span class="text-muted nimp">X{{ obj.order_quantity }} yard(s)</span>
+            <span class="text-muted nimp">{{ obj.order_item.price }} per yard</span>
+            <span class="text-muted">{{ obj.order_date|date:"d/m/y" }} </span>
+            {% if obj.order_status == 'P' %}
+            <span class="text-muted status">Pending...</span>
+            {% elif obj.order_status == 'C' %}
+            <span class="text-muted status">Order confirmed</span>
+            {% elif obj.order_status == 'R' %}
+            <span class="text-muted status">On it's way...</span>
+            {% elif obj.order_status == 'D' %}
+            <span class="text-muted status">Delivered</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% for obj in custom_cloth_orders %}
+        <div class="d-flex flex-row flex-wrap justify-content-between order-item 
+        border rounded align-items-center" onclick="cclothorderDetails({{obj.id}})">
+            <span class="text-muted">{{obj.order_item.label}}</span>
+            <img src="{{ obj.order_item.image.url }}">
+            <span class="text-muted nimp">X{{ obj.order_quantity }}</span>
+            <span class="text-muted nimp">{{ obj.order_item.price }}</span>
+            <span class="text-muted">{{ obj.order_date|date:"d/m/y" }} </span>
+            {% if obj.order_status == 'P' %}
+            <span class="text-muted status">Pending...</span>
+            {% elif obj.order_status == 'C' %}
+            <span class="text-muted status">Order confirmed</span>
+            {% elif obj.order_status == 'R' %}
+            <span class="text-muted status">On it's way...</span>
+            {% elif obj.order_status == 'D' %}
+            {% elif obj.order_status == 'D' %}
+            <span class="text-muted status">Delivered</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% for obj in sewed_cloth_orders %}
+        <div class="d-flex flex-row flex-wrap justify-content-between order-item 
+        border rounded align-items-center" onclick="sclothorderDetails({{obj.id}})">
+            <span class="text-muted">{{obj.order_item.label}}</span>
+            <img src="{{ obj.order_item.image.url }}">
+            <span class="text-muted nimp">X{{ obj.order_quantity }}</span>
+            <span class="text-muted nimp">{{ obj.order_item.price }}</span>
+            <span class="text-muted">{{ obj.order_date|date:"d/m/y" }} </span>
+            {% if obj.order_status == 'P' %}
+            <span class="text-muted status">Pending...</span>
+            {% elif obj.order_status == 'C' %}
+            <span class="text-muted status">Order confirmed</span>
+            {% elif obj.order_status == 'R' %}
+            <span class="text-muted status">On it's way...</span>
+            {% elif obj.order_status == 'D' %}
+            <span class="text-muted status">Delivered</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

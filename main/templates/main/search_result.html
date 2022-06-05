@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'main/css/shop.css' %}">
+{% endblock %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        {% for obj in clothes %}
+            <div class="col-sm-4 col-6 product">
+                <div class="img">
+                    <a href="{% url 'main:cloth_sample' cloth_id=obj.cloth_object.id %}"><img src="{{ obj.cloth_object.image.url }}"></a>
+                </div>    
+                <div class="info">
+                    <span class="label p-2">{{ obj.cloth_object.label }}</span>    
+                    <span class="price"> N {{ obj.cloth_object.price }} </span>
+                    {% with ''|center:obj.cloth_object.rating as range %}
+                    <div class="rating">
+                    {% for val in range %}
+                        <i class="bi-star-fill rating" ></i>
+                    {% endfor %}
+                    {% endwith %}
+                    </div>                  
+                </div>    
+            </div>
+        {% endfor %}
+        {% for obj in clothesR %}
+            <div class="col-sm-4 col-6 product">
+                <div class="img">
+                    <a href="{% url 'main:cloth_sample' cloth_id=obj.id %}"><img src="{{ obj.image.url }}"></a>
+                </div>    
+                <div class="info">
+                    <span class="label p-2">{{ obj.label }}</span>    
+                    <span class="price"> N {{ obj.price }} </span>
+                    {% with ''|center:obj.rating as range %}
+                    <div class="rating">
+                        {% for val in range %}
+                            <i class="bi-star-fill rating" ></i>
+                        {% endfor %}
+                        {% endwith %}
+                    </div>                  
+                </div>    
+            </div>
+        {% endfor %}
+        {% for fabric in fabrics %}
+            <div class="col-sm-4 col-6 product">
+                <div class="img">
+                    <a href="{% url 'main:fabric_sample' fabric_id=fabric.id %}"><img src="{{ fabric.image.url }}"></a>
+                </div>
+                <div class="info">
+                    {% if fabric.type == 'Not specified' %}
+                    <span>fab{{fabric.id}}</span>
+                    {% else %}
+                    <span>{{ fabric.type }}{{fabric.id}}</span>
+                    {% endif %}
+                    <span class="price"> N {{ fabric.price }} </span>
+                    <div class="rating">
+                        {% with ''|center:fabric.rating as range %}
+                            {% for val in range %}
+                                <i class="bi-star-fill rating" ></i>
+                            {% endfor %}
+                        {% endwith %}
+                    </div>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

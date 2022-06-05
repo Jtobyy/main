@@ -1,99 +1,25 @@
-body {
-  z-index: 1;
-  font-size: 10px;
-}
-.header-container {
-  margin: 7px;
-} 
-.link-icon {
-  font-size: 1.2em;
-  font-weight: 350;  
-  color: rgb(203 83 83);
-  transition: all 0.15s;
-}
-.link-icon:hover {
-  color: rgba(203, 83, 83, 0.5);
-}
-
 .mmain-container {
-  padding: 10px;
+  padding: 0 0 10px 0;
   background-color: transparent;
-  margin-top: 2em;
+  margin-top: 0;
   margin-bottom: 2em;
   border-radius: 3px;
+  overflow-x: hidden;
 }
 div.main {
     display: block;
     margin: 0px;
     padding: 0px;
     }
-    
-.filter {
-    position: fixed;
-    background-color: white;
-    left: 0px;
-    top: 15%;
-    min-width: 9em;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0px 6px 6px 0px;
-    padding: 40px 0px;
-    font-size: small;
-    z-index: 2;
-    transition: all 0.5s;
-    min-height: 70vh;
-}
-.fiter_more {
-  left: 0px;
-}
-.filter_less {
-  left: -7.5em;
-}
-.list {
-    list-style-type: none;
-    text-align: left;
-    margin-left: -20px;
-}
-.list li {
-    padding: 0.4em;
-    
-}
-.list span {
-    margin-left: 6px;
-}
-.reload {
-    position: relative;
-    left: 25%;
-    top: 40px;
-  }
-  .reload button{
-    border: 0px;
-    background-color: transparent;
-    font-size: 1.1em;
-  }
-  .reload button:hover {
-    opacity: .7;
-  }
 
   .img {
-    height: 50vh;
+    height: 40vh;
   }
 .product {
   margin-top: 10px;  
   margin-bottom: 15px;
   height: 60vh;
 }
-/*.info {
-display: flex;  
-flex-direction: row;
-height: 3em;
-border-radius: 10px;
-text-align: center;
-line-height: 1em;
-align-items: center;
-justify-content: center;
-background-color: transparent;
-*/
 .info {
 background-color: transparent;  
 display: flex;
@@ -118,22 +44,16 @@ justify-content: center;
 .mid {
   flex: 2;
 }
-/*.info span {
-  flex: 1;
-  font-weight: 100;
-  background:linear-gradient(to bottom right, rgba(255, 255, 255, .7) 70%,  transparent);
-  color: var(--themecolor);
-  height: 100%;
-  padding: 10px 0;
-}*/
+
 .price {
-  font-size: 2.2em;
+  font-size: 1.7em;
   align-items: center;
+  font-family: Lato;
 }
 .rating {
-  font-size: 1.2em;    
+  font-size: 1em;    
   display: flex;
-  color: rgb(247, 180, 55);
+  color: black;
   gap: 4px;
 }
 
@@ -145,42 +65,29 @@ justify-content: center;
   margin-bottom: 1em;  
 }
 .cover_img {
-  background: url(../images/Screenshot\ \(19\).png) no-repeat;
   height: 60vh;
   margin-bottom: 30px;
+}
+.cover_img1 {
+  background: url(../images/Layo/pexels-mike-250288.jpg) no-repeat;
   background-size: cover;
 }
-
-.filterToggle {
-  position: absolute;
-  right: -10px;
-  top: 0px;
-  font-size: 1.8em;
-  color: blue;
-  cursor: pointer;
-  background-color: white;
+.cover_img2 {
+  background: url(../images/pexels-connor-mcmanus-11912141.jpg) no-repeat;
+  background-size: cover;
+  background-position: center 30%;
 }
-
-.loadMore {
-  background-color: white; 
-  width: fit-content;
-  position: relative;
-  left:55%;
-  border: 5px;
-  margin: 20px 0px;
-  padding: 10px 20px;
-  font-size: 1.5em !important;
-}
-.loadMore a {
-  font-size: 1.2em;
+.cover_img3 {
+  background: url(../images/pexels-koolshooters-7330388.jpg) no-repeat;
+  background-size: cover;
+  background-position: center 40%;
+  padding: 200px;
 }
 .first {
   margin-right: 25px;
-  font-size: 1em;
 }
 .previous {
   margin-right: 10px;
-  font-size: 1em;
 }
 
 .next {
@@ -189,8 +96,160 @@ justify-content: center;
 .last {
   margin-left: 25px;
 }
-@media screen and (max-width: 576px){
-  .mmain-container {
-    padding: 30px;
+.tag {
+  background-color:blue;
+  color: white;
+  position: absolute;
+  top: 0px;
+  font-size: .6em;
+}
+.shop-cat-item {
+  height: 130px;
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.shop-cat-item:hover {
+  border-color: red !important;
+}
+.shop-cat-item p {
+  padding: 10px 0;
+}
+.shop-cat-item .icon {
+  background-position: center;
+  background-size:contain;
+  background-repeat: no-repeat ;
+  height: 70%;
+}  
+.shop-cat-item1 .icon {
+  background-image: url(../images/clipart2263201.png);
+}
+.shop-cat-item2 .icon {
+  background-image: url(../images/Layo/clipart710386.png);  
+}  
+.shop-cat-item3 .icon {
+  background-image: url(../images/Layo/clipart977322.png);  
+}  
+.shop-cat-item4 .icon {
+  background-image: url(../images/Layo/clipart25171.png);  
+}  
+.shop-cat-item5 .icon {
+  background-image: url(../images/Layo/clipart989531.png);  
+}  
+.shop-cat-item6 .icon {
+  background-image: url(../images/Layo/clipart270809.png);
+}  
+.shop-cat-item7 .icon {
+  background-image: url(../images/Layo/african-clothes.png);  
+}  
+.shop-cat-item8 .icon {
+  background-image: url(../images/clipart363822.png);  
+}  
+.shop-cat-item9 .icon {
+  background-image: url(../images/icons8-men-pajama-50.png);  
+}  
+.shop-cat-item10 .icon {
+  background-image: url(../images/clipart349990.png);    
+}  
+.shop-cat-item11 .icon {
+  background-image: url(../images/clipart340492.png);  
+}  .shop-cat-item12 .icon {
+  background-image: url(../images/jumpsuit.png);  
+}  
+
+.cat-box {
+  margin-bottom: 50px !important;
+  border-color: rgb(207, 206, 206);
+}
+.horizontal-scroll-wrapper {
+  display: flex;  
+  overflow: auto;
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+  flex-flow: row nowrap;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+/*
+::-webkit-scrollbar-thumb {
+  background-color: red;
+}*/
+.hor_product {
+  text-align: center;  
+  width: 100%;
+  height: fit-content;
+  scroll-snap-align: align;
+  padding: 0px;
+  margin: 8px;
+  margin-top: -15px;
+  border-color: rgb(207, 206, 206);
+}
+.hor_product .img {
+  height: 35vh !important;
+}
+.hor_product .tag {
+  left: 0;
+}
+.horizontal-scroll-wrapper .price {
+  font-size: 1.1em;
+}
+
+
+@media screen and (max-width: 800px){
+  .product {
+    height: 53vh;
+  }
+  .product .img {
+    height: 40vh;
+  }
+  .shop-cat-wrapper {
+    padding: 0 !important;
+    margin: 20px 0 20px 0 !important;
   }
 }
+@media screen and (max-width: 576px){
+  .mmain-container {
+    padding: 0px;
+  }
+  #image_show {
+    padding: 30px;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 480px){
+  .product {
+    height: 40vh;
+  }  
+  .product .img {
+    height: 30vh;  
+  }  
+}  
+@media screen and (max-width: 350px){
+.shop-cat-item {
+  height: 100px;
+}  
+}
+@media screen and (max-width: 300px){
+  .product {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .shop-cat-wrapper {
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 250px){
+  .shop-cat-item {
+    height: 80px;
+  }  
+  
+}  

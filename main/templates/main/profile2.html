@@ -9,48 +9,40 @@ profile
 {% endblock %}
 
 {% block main %}
-<div class="profile">
-    {% if tailor %}    
+<div class="profile d-flex flex-wrap align-items-center justify-content-center p-3">
     <div class="profile_pic">
-        <img src="{{ tailor.profile_image.url }}">  
+        <img src="{{ partner.profile_image.url }}" class="rounded-circle">  
     </div>
     <div class="info">
-        <h1 class="info-company">{{ tailor.user }}</h1>
-        <p class="spec-info"> Specification: <span>{{ tailor.gender_spec }}</span></p>
-        {% with ''|center:tailor.rating as range %}
+        <h1 class="info-company">{{ partner.brand_name }}</h1>
+        {% with ''|center:partner.tailor.rating as range %}
         <div class="rating">
             {% for val in range %}
             <i class="bi-star-fill rating" ></i>
             {% endfor %}
         </div>
+        <p class="spec-info"> Specification: <span>{{ partner.tailor.specs }}</span> clothes</p>
+        <p class="text-muted">Email: {{ partner.email }}</p>
+        <p class="text-muted">Address: {{ partner.address }} {{ partner.city }}</p>
         {% endwith %}
     </div>
-    <h1 class="info-company">{{ seller.user }}</h1>
-    {% elif seller %}
-    <div class="profile_pic">
-       <img src="{{ seller.image.url }}">
-    </div>
-    <div class="info">
-        <h1 class="info-company">{{ seller.user }}</h1>
-        {% with ''|center:seller.rating as range %}
-        <div class="rating">
-            {% for val in range %}
-            <i class="bi-star-fill rating" ></i>
-            {% endfor %}
-        {% endwith %}
-        </div>
-    </div>
-    {% endif %}
 </div>
-<div class="works">
-    <div class="works-header"><h3>Works</h3><i class="bi-grid-3x3-gap"></i></div>
+
+<div class="market">    
+    {% if partner.brand_type == 'T' %}
+    <div class="d-flex flex-row align-items-center justify-content-center text-muted market-header p-2"><p class="lead">Works</p><i class="bi-grid-3x3-gap"></i></div>
+    {% elif partner.brand_type == 'F' %}
+    <div class="market-header"><h4>Fabrics</h4><i class="bi-grid-3x3-gap"></i></div>
+    {% else %}
+    <div class="market-header"><h4>Clothes</h4><i class="bi-grid-3x3-gap"></i></div>
+    {% endif %}
     <div class="container">
-        <div class="row myrow">
-        {% for obj in clothes %}    
-            <div class="col-md-4 col-sm-6 mycol showitem">
-                <a href="{% url 'main:clothe_sample' clothe_id=obj.id %}"><img class="grid-item" src="{{ obj.image.url }}" alt=" " ></a>
-                <div class="clothe-info">
-                    <span class="price"> {{ obj.price_range }} </span>
+        <div class="row">
+        {% for obj in market %}
+            <div class="col-md-4 col-sm-6 showitem">
+                <a href="{% url 'main:cloth_sample' cloth_id=obj.id %}"><img src="{{ obj.image.url }}" alt="image-x" ></a>
+                <div class="cloth-info">
+                    <span class="price"> {{ obj.price }} </span>
                     {% with ''|center:obj.rating as range %}
                     <div class="rating">
                     {% for val in range %}
@@ -60,6 +52,8 @@ profile
                     </div>
                 </div>
             </div>
+        {% empty %}
+        <p class="mx-auto p-5 lead text-muted">No previous work available</p>
         {% endfor %}
         </div>
     </div>

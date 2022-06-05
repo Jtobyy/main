@@ -1,0 +1,246 @@
+
+i {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: purple;
+    transition: all .2s;
+}
+#bi-pencil-square:hover {
+    color: red;
+}
+
+#passwordSection {
+    box-shadow: 0px 0px 100vw 100vw rgba(0,0,0,.4);
+    position:fixed;
+    z-index: 4;
+    width: 50vw;
+    top: 0px;
+}
+#strength {
+    padding: 10px;
+}
+hr {
+    border-bottom: 1px solid rgb(238,238,238);
+    width: 100%;
+}
+.navigation {
+    background-color: transparent;
+    box-shadow: 4px 4px 10px -10px grey;
+}
+.nav-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.active,
+.active:focus {
+    background: linear-gradient(to right, lightgreen 2.5%, transparent 2.5%);
+}
+.white-sections {
+    background-color: white;
+}
+
+.section100 {
+    padding: 30px 0;
+    margin: 30px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+}
+.section100 div {
+    padding-left:50px;
+    padding-right:50px;
+}
+.section50 {
+    height: 30vh;
+    margin: 20px;
+    border-radius: 10px;
+    transition: all .3s;
+}
+.section50:hover {
+    opacity: .7;
+}
+.section50:active {
+    opacity: 1;
+}
+
+.myrow {
+    padding: 40px;
+    background-color: red;
+}
+.delivered {
+    background: linear-gradient(to right, green 2.5%, rgba(255, 255, 255, .7) 2.5%);    
+}
+.ready {
+    background: linear-gradient(to right, yellowgreen 2.5%, rgba(255, 255, 255, .7) 2.5%);    
+}
+.accepted-orders {
+    background: linear-gradient(to right, gold 2.5%, rgba(255, 255, 255, .7) 2.5%);    
+}
+.pending {
+    background: linear-gradient(to right, red 2.5%, rgba(255, 255, 255, .7) 2.5%);
+}
+.quantity {
+    background: linear-gradient(to right, purple 2.5%, rgba(255, 255, 255, .7) 2.5%);
+}
+.transparent-sections {
+    text-align: center;
+    width: 100%;
+    min-height: 100vh;
+}
+.transparent-sections h3{
+    border: 0 !important ;    
+    margin-bottom: 0px;    
+    text-align: center;  
+    width: 100%;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px;
+}
+.section-body {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.section-body p {
+    font-size: 1.2rem;    
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    padding: 7px;
+    font-weight:500;
+}
+p span {
+    font-size: .7em;
+    color: grey;
+}
+.form-group {
+    margin-bottom: 30px;
+}
+.mbtn {
+    padding: 10px;
+    width: fit-content;
+    cursor: pointer;
+}
+button.mbtn {
+    margin-left: 50px;
+}
+.icon {
+    width:12px;
+    height: 12px;
+    margin: 12px 5px; 
+    padding: 1px;
+}
+.verified {
+    width:13px;
+    height: 13px;
+    margin: 3px;
+}
+.set,
+.change {
+    display: flex;
+    flex-direction: row !important;
+}
+.change {
+    color: white;
+    align-items: space-between;
+    justify-content: space-around;
+}
+
+.preview {
+    color: purple !important;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    align-self: center;
+    cursor: pointer;
+  }
+.fabrics-wrapper {
+    text-align: center;
+    min-height: 50vh;
+}
+.fabrics-wrapper div {
+    height: 200px;
+    margin: 40px 0;
+}
+  .add-fabric
+  {
+   border-radius: 200px;
+   margin: 50px;
+   width: fit-content;
+   background-color: green;
+   color: white;
+   padding: 0px 20px;
+   transition: .2s; 
+}
+.add-fabric i {
+   color: white !important;
+}
+.add-fabric:hover {
+   color: rgba(255, 255, 255, .4) !important;
+}
+.add-fabric:active {
+   color: white !important;
+}
+.accepted {
+    border-radius: 200px;
+    margin: 10px;
+    background-color: rgb(203, 201, 201);
+    width: fit-content;
+    padding: 0 20px;
+    transition: .2s;
+}
+
+.crispy-wrapper {
+    padding: 30px;
+}
+.asteriskField {
+    color: red;
+    margin: 5px;
+}
+.preview-image {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  left: 100px;
+  bottom:70px;
+}
+.detail_image {
+    height: 100%;
+}
+.checkbox-margin {
+    background-color: red;
+}
+.sidedrop {
+    z-index: 5;
+}
+@media screen and (max-width: 500px)
+{
+   #nav {
+       background-color: aliceblue;
+   }    
+  .preview-image {
+    width: 50vw;
+    height: 50vh;
+  }
+}
+
+@media screen and (max-width: 300px)
+{
+  .preview-image {
+    width: 50vw;
+    height: 40vh;
+    left: 60px;
+  }
+}
+@media screen and (max-width: 250px)
+{
+  .preview-image {
+    width: 70vw;
+    height: 40vh;
+    bottom: 0;
+    left: 0;
+  }
+}

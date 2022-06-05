@@ -1,1 +1,20 @@
-<h2>Inbox Messages</h2>
+{% load notifications_tags %}
+<h4>Inbox Messages</h4>
+<div class="d-flex flex-row">
+    <p class="p-1 ">{% live_notify_badge %} unread messages</p>
+    {% live_notify_list %}
+    {% for notifications in request.user.notifications.unread %}    
+    <div>
+        From <b>{{ notification.actor }}</b> {{ notification.description }}
+    </div>
+    {% endfor %}
+    <!--
+        {% for obj in notifications %}
+        {% if obj.status == 'S' %}
+        <img src="/main/static/main/images/submit-successfully.png" class="verified"/>
+        {% elif obj.status == 'E' %}
+        <img src="/main/static/main/images/Error.svg.png" class="verified"/>
+        {% endif %}        
+        <span>{{ obj.text }}</span>    
+        {% endfor %}-->
+</div>

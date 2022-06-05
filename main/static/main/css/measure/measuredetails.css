@@ -2,32 +2,22 @@
     border: 0;
 }
    
- h2 {
-    font-size: 1.7em;
-    text-align: center;
-    font-size: 1.5em;
+ h4 {
     font-family: cursive;
     font-variant: small-caps;
     color: #e85656;
- 
 }
-.tutorial {
-    min-height: 80vh;
-    min-width: 80vw;
-    background-color: #7bbaf1;
-    margin-top: 30px;
+.form-container form {
+    padding: 0;
+    display: block ;
 }
 
-p {
-    font-size: 1.5em;
-    margin-top: 40px;
-    margin-left: 30px;
+/*
+.header {
+    position: relative;
 }
-span {
-    margin-left: 40px;
-}
-.control {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
+.unit {
+    right: 20px;
+    font-size: 1.4em;
+    bottom: -40px;
+}*/

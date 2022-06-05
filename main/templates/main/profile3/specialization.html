@@ -1,0 +1,47 @@
+{% load crispy_forms_tags %}
+<div>
+    <section class="white-sections section100">
+        <div class="section-header">
+            <h2>Specialization</h2>
+        </div>     
+        <hr>
+        <div class="section-body">
+            <form id="idfabricspecs" method="post" class="d-flex flex-column"
+            action="{% url 'main:updatespecs' %}">
+            {% csrf_token %}
+            {% if request.user.partner.brand_type == 'F' %}
+            <p>Types of fabrics you deal in </p>
+            {% elif request.user.partner.brand_type == 'C' %}
+            <p>Categories of Clothes you sell </p>
+            {% elif request.user.partner.brand_type == 'T' %}
+            <p>Categories of Clothes you sew </p>
+            {% endif %}
+            {% for value in form_values %}
+                <div class="form-check">
+                    <input class="form-check-input" name="specs" type="checkbox" value="{{ value|first }}" id="{{value|last}}">
+                    <label class="form-check-label" for="{{value|last}}">{{ value|last }}</label>
+                </div>
+            {% endfor %}
+                <input type="submit" class="btn btn-success align-self-center" value="update">
+            </form>
+        </div>
+        <input value="{{ seller.specs }}" type="hidden" id="hidden">
+    </section>    
+</div>
+<script>
+    console.log('got here')
+    $('.form-check-label').addClass('mx-3')
+    $('.form-check').addClass('my-3')
+    hidden = $('#hidden').val()
+    var myArray = hidden.split(", ")
+    myArray.forEach(element => {
+        document.getElementById(element).setAttribute('checked', true)
+        check()
+    });
+    
+    $("input:checkbox").click(check)
+    function check() {
+        var bol = $("input:checkbox:checked").length >= 4;
+        $("input:checkbox").not(":checked").attr("disabled",bol);
+    }
+</script>

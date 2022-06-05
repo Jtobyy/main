@@ -1,0 +1,190 @@
+{% load static %}
+<div class="m-3 my-4 d-flex flex-row align-items-between justify-content-between header">
+    <h4>Measurement details (Male)</h4>
+    <!-- 
+    <button id="change unit" onclick="unitbtn()" class="btn btn-outline-dark mx-5">
+        Change unit
+    </button>
+    <p id="cm" class="my-1 unit position-absolute unit"> centimeters (cm) </p>
+    <p id="in" class="hidden my-1 unit position-absolute unit"> inches (in) </p>
+    -->
+</div>
+
+<div class="container-fluid">
+    <form method="post" action="{% url 'main:updatemeasurementdetails' %}">
+        {% csrf_token %}    
+        <h3>Upper Torso Measurements (cm)</h3>
+        <div class="row">
+            <div class="col">
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="round-neck">Round Neck: </label></br>
+                        <input name="round-neck" id="round-neck" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_neck }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="shoulder-length">Shoulder Length:</label></br>
+                        <input name="shoulder-length" id="shoulder-length" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.shoulder_length }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="back-shoulder-width">Back Shoulder Width:</label></br>
+                        <input name="back-shoulder-width" id="back-shoulder-width" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.back_shoulder_width }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="front-shoulder-width">Front Shoulder Width:</label></br> 
+                        <input name="front-shoulder-width" id="front-shoulder-width" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.front_shoulder_width }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="back-width">Back Width:</label></br>
+                        <input name="back-width" id="back-width" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.back_width }}">
+                    </div>
+                </div>    
+                </br>
+                </br>
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="round-waist">Round Waist:</label></br>
+                        <input name="round-waist" id="round-waist" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_waist }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="waist-length">Waist Length:</label></br>
+                        <input name="waist-length" id="waist-length" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.waist_length }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="tunic/shirt-length">Tunic/Shirt Length:</label></br>   
+                        <input name="tunic/shirt-length" id="tunic/shirt-length" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.tunic_or_shirt_length }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="chest-depth">Chest Depth:</label></br>
+                        <input name="chest-depth" id="chest-depth" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.chest_depth }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="chest-width">Chest Width:</label></br>
+                        <input name="chest-width" id="chest-width" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.chest_width }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="round-chest">Round Chest:</label></br>
+                        <input name="round-chest" id="round-chest" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_chest }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br>
+        </br>
+        <h3>Lower Torso Measurements (cm)</h3> 
+        <div class="row">        
+            <div class="col">
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="round-waist">Round Waist:</label></br>
+                        <input name="round-waist" id="round-waist" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_waist }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="round-seat/hips">Round Seat/Hips:</label></br>
+                        <input name="round-seat/hips" id="round-seat/hips" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_seat_or_hips }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="round-thigh">Round Thigh:</label></br>
+                        <input name="round-thigh" id="round-thigh" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_thigh }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="round-knee">Round Knee:</label></br>
+                        <input name="round-knee" id="round-knee" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_knee }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="round-ankle">Round Ankle:</label></br> 
+                        <input name="round-ankle" id="round-ankle" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_ankle }}">
+                    </div>
+                </div>    
+            </div>
+            <div class="col">
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="waist-to-knee">Waist to Knee:</label></br>
+                        <input name="waist-to-knee" id="waist-to-knee" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.waist_to_knee }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="waist-to-ankle">Waist to Ankle:</label></br> 
+                        <input name="waist-to-ankle" id="waist-to-ankle" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.waist_to_ankle }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="outside-leg-length">Outside Leg Length:</label></br>
+                        <input name="outside-leg-length" id="outside-leg-length" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.outside_leg_length }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="inside-leg-length">Inside Leg Length:</label></br>
+                        <input name="inside-leg-length" id="inside-leg-length" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.inside_leg_length }}">
+                    </div>
+                </div>    
+            </div>
+        </div>
+        </br>
+        </br>
+        <h3>Sleeve Measurements</h3> 
+        <div class="row">        
+            <div class="col">
+                <div class="row-wrap">
+                    <div class="p-1 form-group">
+                        <label for="shoulder-to-elbow">Shoulder to Elbow:</label></br>
+                        <input name="shoulder-to-elbow" id="shoulder-to-elbow" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.shoulder_to_elbow }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="shoulder-to-wrist">Shoulder to Wrist:</label></br>
+                        <input name="shoulder-to-wrist" id="shoulder-to-wrist" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.shoulder_to_wrist }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="round-bicep">Round Bicep:</label></br>
+                        <input name="round-bicep" id="round-bicep" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_bicep }}">
+                    </div>
+                    <div class="p-1 form-group">
+                        <label for="round-arm">Round Arm:</label></br>
+                        <input name="round-arm" id="round-arm" type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_arm }}">
+                    </div>    
+                    <div class="p-1 form-group">
+                        <label for="round-wrist">Round Wrist:</label></br>
+                        <input name="round-wrist" id="round-wrist " type="number" min="0" max="999" step=".01"
+                        value="{{ measurement.round_wrist }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        </br>
+        <input type="submit" value="submit" class="btn btn-primary m-4">
+    </form>
+</div>
+</br>
+<p>
+    Tip: Always measure yourself as frequently as once every quarter depending on your body
+    changes.
+</p>
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/measure/measuredetails.css' %}">
+{% endblock %}

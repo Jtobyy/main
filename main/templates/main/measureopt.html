@@ -1,32 +1,26 @@
 {% load static %}
-<form id="measureopt" class="measureopt" action="{% url 'main:measureopt' %}" method="POST">
+<form id="measureopt" class="d-flex flex-column justify-content-center align-items-start" action="{% url 'main:measureopt' %}" method="POST">
     {% csrf_token %}
-    <aside>
+    <aside class="d-flex flex-row align-items-center justify-content-center m-3 measureopt-aside">
         Kindly select an option   
     </aside>
-    
-    <div class="optwrap">
-        <label for="opt1">  Enter measurement details </label>
-        <div class="radiowrap">
-            <input id="opt1" type="radio" name="measureopt" value="opt1">
-        </div>
+     
+    <div class="form-check form-check-inline m-4 opt">
+        <input class="form-check-input" id="opt1" type="radio" name="measureopt" value="opt1">
+        <label for="opt1" class="form-check-label">  Enter measurement details </label>
     </div>
-    <div class="optwrap">    
-        <label for="opt2"> Self measurement: How to? </label>
-        <input id="opt2" type="radio" name="measureopt" value="opt2">
+    <div class="form-check form-check-inline m-4 opt"> 
+        <input class="form-check-input" id="opt2" type="radio" name="measureopt" value="opt2">
+        <label for="opt2" class="form-check-label"> Self measurement: How to? </label>
     </div>
-    <div class="optwrap optwrap3">
-        <label for="opt3"> Request professional measurement (<strong>recommended</strong>) </label>
-        <input id="opt3" type="radio" name="measureopt" value="opt3" checked>
+    <div class="form-check form-check-inline m-4 opt">
+        <input class="form-check-input" id="opt3" type="radio" name="measureopt" value="opt3" checked>
+        <label for="opt3" class="form-check-label"> Request professional measurement (<strong>recommended</strong>) </label>
     </div>
-    <div class="optwrap optwrap3">
-        <label for="opt4"> Do this later </label>
-        <input id="opt4" type="radio" name="measureopt" value="opt4">
+    <div class="form-check form-check-inline m-4 opt">
+        <input class="form-check-input" id="opt4" type="radio" name="measureopt" value="opt4">
+        <label for="opt4" class="form-check-label"> Do this later </label>
     </div>
         
-    <button type="submit" class="btn btn-dark mbtn">Next</button>
+    <button type="submit" class="btn btn-dark mbtn align-self-end">Next</button>
 </form>
-{% block links %}
-    <link rel="stylesheet" href="{% static 'main/css/measureopt.css' %}">
-{% endblock %}
-

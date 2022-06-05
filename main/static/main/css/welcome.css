@@ -12,27 +12,27 @@ div.main {
 }
 .page-content {
     margin-top: 90px;
-    padding: 0 70px;
+    padding: 0 10px;
 }
 .random {
-    font-size: 1.5em;
-    text-align: center;
-    padding: 0px;
+    font-size: 2em;
+    font-weight: 600;
+    text-align: left;
     color: var(--themecolor);
-    box-shadow: 0 0 max(100vh, 100vw) rgba(0, 0, 0, .12);
   }
   .random1 {
     position: relative;
-    margin-top: 60px;
-    right: 300px;
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-bottom: -13px;
   }
   .random2 {
-      position: absolute;
-      right: 60px;
-      top: 530px;
-      z-index: 2;
-      color:white
-  }
+    position: relative;
+    z-index: 2;
+    margin-top: -150px;
+    text-align: right;
+    top: 50px;
+}
 h1 {
     margin-bottom: 40px;
     margin-left: 30px;
@@ -108,10 +108,11 @@ h1 {
     width: 100%;
     box-sizing: content-box;
     margin-top: 50px;
+    gap: 300px !important;
   }
 .catwrapper a,
 .catwrapper p {
-    text-align: right;    
+    text-align: right;  
     position:relative;
     color: var(--themecolor);
     font-size: 1.05em;
@@ -120,31 +121,42 @@ h1 {
     margin-bottom: 2em;
     text-align: center;
 }
-.category-item img {
-    border-radius: 10px;
-    height: 300px;
-    object-fit:cover;
+.category-item {
+    position: relative;
+    font-size: 1.3em;
 }
-.category-item img:hover {
+.category-item .cat-image:hover {
     filter: brightness(70%);
     transition: filter 0.5s;
 }
-.caption {
-    position: relative;
+.category-item .button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5px;
 }
 .box {
+    font-family: Lato;
     color: var(--themecolor);
-    position: relative;
-    display: block;
-    align-self: center;
-    margin: 20px;
-    font-size: 1em;
     cursor: pointer;
     border-radius: 10px;
+    background-color: rgba(0, 0, 255, 0.297);
+    font-size: 1.1em;
     width: 200px;
-    background-color: skyblue;
-    font-size: 1.3em;
+    transition: all .3s;
 }
+.box:hover {
+  background-color: rgba(0, 0, 255, 0.5);
+  color: white;
+}
+.caption {
+    position: relative;    
+    height: 4em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: Lato;
+ }
 
 .info, .faq {
     display: flex;    
@@ -160,19 +172,30 @@ h1 {
 }
 .addinfo {
     display: flex;
-    padding: 60px;
-    margin: 10px;
+    align-items: flex-start;
+    padding: 50px;
+    margin: 50px;
 }
 .addinfo img {
     width: 100px;
-    height: 200px;    
+    height: 300px;
+    object-fit: cover;    
     flex: 2;
 }
 .addinfo div {
     padding: 40px;
-    flex: 2;
+    padding-top: 0px;
 }
+.addinfo p {
+    width: 200px;
+    font-family: Lato;
+    line-height: 2em;
+    font-size: .9em;
+    margin-left: 25px;
+}
+
 .addinfo1 {
+    padding-right: 0px;    
     background-color: rgb(245, 245, 245);
 }
 .info {
@@ -259,28 +282,64 @@ h1 {
     text-align: right;
     text-decoration: none;
 }
-.re {
-    min-height: 40vh;
-    background: linear-gradient(to right,transparent, rgba(255,255,255,0.5),rgba(255,255,255,0.5),rgba(200,200,199, 0.5), transparent );
-    padding: 30 0px;
-}
 .re-item {
-    display: flex;
-    justify-content: center;
-    padding: 50px 0;
+    font-family: Lato;
+
 }
-.re-item div:first-child  {
-    width: 50%;
+.re-item p {
+    font-size: 19px;
 }
-.re-item img {
-    border-radius: 50%;
-    margin-top: 10px;
-    height: 60px;
-    width: 60px;
+.re-item2 .re-item-image {
+    background-image: url(../images/Layo/icons8-escrow-process-80.png);
+    background-repeat: no-repeat ;
+    background-position: center;
+    height: 100px;
+    width: 100px;
+}
+.re-item3 .re-item-image {
+    background-image: url(../images/Layo/noun-guaranteed-2928805.png);
+    background-size: contain;
+    background-repeat: no-repeat ;
+    background-position: 20% center;
+    height: 100px;
+    width: 100px;
+}
+
+.re-item h5 {
+    font-weight: 600;
 }
 .re-item i {
     border-radius: 50%;
     font-size: 50px;
+}
+.first-item .cat-image {
+    background-image: url(../images/Layo/IMG-20220109-WA0005.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 10%;
+    height: 350px;
+}
+.second-item .cat-image {
+    background-image: url(../images/Layo/IMG-20220109-WA0003.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100% 5%;
+    height: 350px;
+}
+
+.last-item .cat-image {
+    background-image: url(../images/Layo/Bnew.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 10%;
+    height: 350px;
+}
+.re-wrapper {
+    background-color: rgb(216,247,241);
+}
+.rating {
+    color: black;
+    font-size: 2em !important;
 }
 .learn-more {
     color: var(--themecolor);
@@ -326,54 +385,48 @@ h1 {
 
 @media only screen and (max-width: 768px)
 {   
+    .second-item .cat-image {
+        background-position: 80% center;
+    }    
+    .category-item img{
+        height: 300px;
+    }    
+    .staticpopup {
+    display: none;
+    }
     .page-content {
         padding: 0 0px;
     }
     .category-item {
-        margin-top: 30px;
+        margin-top: 0px;
         text-align: center;    
     }
-    .category-item:last-child {
-        margin-left: 150px;
-    }
-    .random1 {
-        right: 200px;
-    }
-    .box {    
-    background-color: skyblue;
+    .box {        
+    background-color: rgba(0, 0, 255, 0.297);
     font-size: 1.1em;
-    margin-left: 50px;
+      width: 100px;
     }
     .slideimg h1 {
         font-size: 3em;
     }
     .caption {
        font-size: 1em;
+       height: 6em;
+       display: flex;
+       align-items: flex-start;
+       justify-content: center;
     }
-    .re-item {
-    display: flex;
-    justify-content: center;
-    padding: 50px 0;
-}
-.re-item img {
-    margin-top: 10px;
-    height: 50px;
-    width: 50px;
-}
-.re-item i {
-    border-radius: 50%;
-    font-size: 40px;
-}
 }
 @media only screen and (max-width: 685px) {
     .step span{
         font-size: 1.3em;
     }    
-    .category-item:last-child {
-        margin-left: 120px;
-    }
 }
 @media only screen and (max-width: 600px) {
+    .category-item {
+      padding-right: 1px;
+      padding-left: 1px;
+    }
     .addinfo {
         display: flex;
         padding: 10px;
@@ -389,71 +442,47 @@ h1 {
         padding: 40px;
         flex: 2;
     }
-.random1 {
-    right: 100px !important;
-}    
-.addinfo2 {
-    margin-bottom: 60px !important;
-}
-.page-content {
-    padding: 30px !important;
-    margin: 0px ;
-  }
-  .box {
-      margin-left: 0px;
-  }
-  
-.re-item img {
-    margin-top: 10px;
-    height: 40px;
-    width: 40px;
-}
-.re-item i {
-    border-radius: 50%;
-    font-size: 30px;
-}
-.re-header,
-.re {
-    display: none;
-}
-.staticpopup,
-.pop {
-    display: none;
-}
+    .addinfo2 {
+        margin-bottom: 60px !important;
+    }
+    .staticpopup,
+    .pop {
+        display: none;
+    }
+    .re {
+      margin: 1px !important;
+      padding: 1px !important;
+    }
 }
 
 @media only screen and (max-width: 560px)
 {
-    .page-content {
-        padding: 20px;
-    }    
-    .category-item img{
-        height: 250px;
-    }
     .box {
-        width: 130px;
-        margin-left: 30px;
+        width: fit-content;
     }
+  .re-item p {
+    font-size: 1em;
+  }
+  .re-item h5 {
+    font-size: 1.3em;
+  }
+  .re-item-image {
+    width: 50px !important;
+    height: 80px !important;
+    background-size: contain;
+  }
 }
 
 @media only screen and (max-width: 480px)
 {
-    div.main {
-        margin-right: 0;
-        margin-right: 0;
+    .addinfo h2 {
+      font-size: 25px;
     }    
-    .page-content {
-        padding: 0;
-        margin: 0;
-    }    
-    .random2 {
-        top: 480px !important;
-    }
-    .addinfo {
-        width: 100%;
-    }
-    .box {
-    margin-left: 10px;
+  .cat-image {
+    height: 250px !important;
+  }
+    .caption {
+        font-size: .8em;
     }
     .info {
         padding-top: 0px;
@@ -476,51 +505,96 @@ h1 {
       }
     #slideShow {
         width: 100vw;
-    }           
+    }
+  .re-item {
+      margin: 1px !important;
+      padding: 1px !important;
+    }
+  .re {
+    padding: 10px !important;
+  }
 }
-
-@media only screen and (max-width: 380px) 
-{
-    .random1 {
-        margin-right: -30px;
+@media screen and (max-width: 380px){
+    .addinfo1 {
+      margin-top: 40px;
     }
-    .random2 {
-        top: 113vh !important;
-        right: 50px;
-    }    
-    .catwrapper {
-        margin-top: 0px;
+  .re-wrapper {
+      margin: 1px !important;
+      padding: 1px !important;
     }
-    .category-item:last-child {
-        margin-left: 70px;
-    }
-    .category-item img{
-        height: 150px !important;
-    }
-    .addinfo {
-        width: fit-content;
-        margin-left: -50px;
-    }
-    .box {
-        width: 100px;
-    }
-    
+}
+@media only screen and (max-width: 350px) {
+  .random {
+    font-weight: 400;
+  }
+  .box {
+    font-size: 1em;
+  }
+  .addinfo {
+    padding: 5px;
+    margin-top: 30px;
+    height: fit-content;
+    padding-bottom: 0px;
+    margin-left: -20px;
+    width: 100vw;
+  }
+  .addinfo h2 {
+    font-size: 15px;
+  }
+  .addinfo img {
+      width: 100px;
+      height: 100px;    
+      flex: 2;
+  }
+  .addinfo div {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      flex: 2;
+  }
+  .addinfo1 {
+      background-color: rgb(245, 245, 245);
+  }
 }
 
 @media only screen and (max-width: 300px) 
 {
-.info,
-.step {
-     opacity: 1 !important;
+ .second-item .cat-image {
+   background-position: 75% center;
+ }
+    .random1 {
+        left: 2px;
+        margin-top: 0;
+        width: fit-content;
+    }
+    .info,
+    .step {
+        opacity: 1 !important;
+    }
+    .step:hover {
+        width:inherit;
+        height:inherit;
+    }
+    .info h2 {
+        font-size: 2em;
+    }
+    .step5 {
+        margin-top: 40px;
+    }
+}
+@media only screen and (max-width: 250px)  {
+  .addinfo h2 {
+    font-size: 12px;
   }
-  .step:hover {
-    width:inherit;
-    height:inherit;
+ 
+}
+@media only screen and (max-width: 220px) {
+  .addinfo img {
+  width: 70px;
+    height: 70px;
   }
-  .info h2 {
-    font-size: 2em;
-  }
-  .step5 {
-    margin-top: 40px;
+  .addinfo div {
+    padding: 10px;
+    padding-right: 0;
+    padding-left: 1px;
   }
 }

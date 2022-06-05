@@ -1,0 +1,25 @@
+<div class="row fabrics-wrapper">
+    {% for obj in marketobjects %}    
+    <div class="col-4">
+        <img src="{{ obj.image.url }}">
+        {% if request.user.partner.brand_type == 'C' %}
+        <p class="text-muted">{{ obj.label | default:obj.custommadecloth.category  }}</p>
+        {% elif request.user.partner.brand_type == 'T' %}
+        <p class="text-muted p-1">{{ obj.label | default:obj.sewedcloth.category  }}</p>
+        {% endif %}
+        <span class="text-muted">N{{ obj.price }} </span>
+    </div>
+    {% empty %}
+    <p class="lead text-muted" >You have no markets to sell</p>
+    {% endfor %}
+</div>
+{% if request.user.partner.brand_type == 'F' %}
+    <div class="mx-auto border border-success add-fabric lead pointer" onclick="addFabric()"> <span>Add Fabric</span>
+        <i class="bi-plus-lg"></i> </div>
+{% elif request.user.partner.brand_type == 'C' %}
+    <div class="mx-auto border border-success add-fabric lead pointer my-3" onclick="addClothSample()"> <span>Add Clothe Sample</span>
+        <i class="bi-plus-lg"></i> </div>
+{% elif request.user.partner.brand_type == 'T' %}
+    <div class="mx-auto border border-success add-fabric lead pointer" onclick="addClothSample()"> <span>Add Clothe Sample</span>
+        <i class="bi-plus-lg"></i> </div>
+{% endif %} 

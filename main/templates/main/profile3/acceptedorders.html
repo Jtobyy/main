@@ -1,0 +1,24 @@
+<div class="orders_wrapper d-flex flex-column justify-content-center mh-100">    
+    <h4 class="mx-auto">Accepted Orders (Yet to be delivered)</h4>
+    {% for obj in accepted %}
+    {% if request.user.partner.brand_type == 'F' %}
+    <div class="d-flex flex-row justify-content-between order-item 
+    border rounded align-items-center" onclick="fabricorderDetails({{obj.id}})">
+    {% elif request.user.partner.brand_type == 'C' %}
+    <div class="d-flex flex-row justify-content-between order-item 
+    border rounded align-items-center" onclick="cclothorderDetails({{obj.id}})">
+    {% elif request.user.partner.brand_type == 'T' %}
+    <div class="d-flex flex-row justify-content-between order-item 
+    border rounded align-items-center" onclick="sclothorderDetails({{obj.id}})">
+    {% endif %}
+        <span class="text-muted">{{obj.order_item.label}}</span>
+        <img src="{{ obj.order_item.image.url }}">
+        <span class="text-muted">X{{ obj.order_quantity }} yard(s)</span>
+        <span class="text-muted">{{ obj.order_item.price }} per yard</span>
+        <span class="text-muted">{{ obj.order_date|date:"d/m/y" }} </span>
+        {% if obj.order_status == 'C' %}
+        <span class="text-muted status">Yet to be delivered</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>

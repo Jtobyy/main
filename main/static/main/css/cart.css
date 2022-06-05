@@ -1,5 +1,6 @@
 :root {
-    --themecolor: rgb(228, 72, 72);
+    --themecolor: black;  
+    --oldthemecolor: rgb(228, 72, 72);
     --headercolor: rgb(48, 174, 161);    
   }
   .content {
@@ -35,7 +36,6 @@
     cursor: pointer;
 }
 .sumtotal {
-    font-size: 1.4em;
     color: var(--themecolor);
     font-family: cursive;
     padding: 30px 0 30px 30px;
@@ -48,7 +48,6 @@
     background-color: rgba(255, 255, 255, .7);
 }
 .sumtotal .price {
-    font-size: 1em;
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -101,7 +100,7 @@
     margin-left: 25px;
   }
 .myrow {
-  height: 40vh !important;
+  height: 27vh !important;
   width: 80vw;
   margin-bottom: 30px;
   position: relative;
@@ -114,10 +113,13 @@
   position: absolute;
   right: 0;
   width: fit-content;
-  font-size: 1.3em;
   background-color: transparent;
 }
 .img {
-  height: 40vh; 
-  width: 80%;
+  height: 27vh; 
+  width: 40%;
+  padding: 5px;
+}
+.loading {
+  left: 42vw;
 }

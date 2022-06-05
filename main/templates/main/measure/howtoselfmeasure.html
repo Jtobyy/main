@@ -1,26 +1,25 @@
 {% load static %}
-<h2>    Kindly watch the tutorial video below to learn how to measure yourself
-</h2>    
+<h4 class="mx-auto text-center" style="font-family: cursive;color: #e85656;">    Kindly watch the tutorial video below to learn how to measure yourself
+</h4>    
 </aside>
 <iframe class="tutorial" src="https://www.youtube.com/embed/0lXDj1Q0q9U"></iframe>
-<form id="measureopt" class="needs-validation measureopt" action="{% url 'main:measurehowto' %}" method="POST">
+<form id="measureopt" class="needs-validation d-flex flex-column justify-content-center align-items-start" action="{% url 'main:measurehowto' %}" method="POST">
     {% csrf_token %}
-    <div class="optwrap">
-        <label for="opt1"> Enter your measurement details </label>
-        <input id="opt1"  type="radio" name="measureopt" value="opt1">
+    <div class="form-check form-check-inline m-4 opt">
+        <input id="opt1"  type="radio" name="measureopt" value="opt1" class="form-check-label m-2">    
+        <label for="opt1" class="form-check-input m-2"> Enter your measurement details </label>
     </div>
-    <div class="optwrap optwrap3">
-        <label for="opt3"> Request professional measurement (<strong>recommended</strong>) </label>
-        <input id="opt3" type="radio" name="measureopt" value="opt3" checked>
+    <div class="form-check form-check-inline m-4 opt">
+        <input id="opt3" type="radio" name="measureopt" value="opt3" checked class="form-check-label m-2">    
+        <label for="opt3" class="form-check-input m-2"> Request professional measurement (<strong>recommended</strong>) </label>
     </div>  
-    <div class="optwrap">
-        <label for="opt4"> Do this later </label>
-        <input id="opt4" type="radio" name="measureopt" value="opt4">
+    <div class="form-check form-check-inline m-4 opt">
+        <input id="opt4" type="radio" name="measureopt" value="opt4" class="form-check-label m-2">
+        <label for="opt4" class="form-check-input m-2"> Do this later </label>
     </div>
         
     <button onclick="validate()" id="next" class="btn btn-dark mbtn">Next</button>
 </form>
 {% block links %}
     <link rel="stylesheet" href="{% static 'main/css/measure/howtoselfmeasure.css' %}">
-    <link rel="stylesheet" href="{% static 'main/css/measureopt.css' %}">
 {% endblock %}

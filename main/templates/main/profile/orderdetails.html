@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row h-50 white-sections rounded p-3">
+        <div class="col-sm-6">
+            <img src="{{ order.order_item.image.url }}" >
+        </div>    
+        <div class="col-sm-6 d-flex flex-column" style="text-align: center;">
+            <p class="p-2 text-muted" style="font-size: 1.5em;">Order id: <span>{{ order.order_id }}</span></p>
+            {% if order.order_item.partner.brand_type == 'F' %}
+            <p class="p-1">Item price: <span>{{ order.order_item.price }} per yard</span></p>
+            <p class="p-1">Quantity ordered: <span>{{ order.order_quantity }} yard(s)</span></p>
+            {% else %}
+            <p class="p-1">Item price: <span>{{ order.order_item.price }}</span></p>
+            <p class="p-1">Quantity ordered: <span>{{ order.order_quantity }}</span></p>
+            {% endif %}
+            <p class="p-1">Total price: <span>{{ order.order_total_price }}</span></p>
+            {% if order.order_status == 'P' %}
+            <p class="p-1">Order Status: <span>Pending...</span></p>
+            {% endif %}
+            <p class="p-1">Date Ordered: {{ order.order_date }}</p>
+        </div>
+    </div>
+</div>    
+
+
+{% if request.user.partner %}
+    {% if order.order_status == 'P' %}
+        {% if request.user.partner.brand_type == 'F' %}
+        <div class="mx-auto border border-success add-fabric lead pointer m-5" id="acceptOrder" 
+        onclick="acceptfabricOrder({{order.id}})"> <span>Accept Order</span>
+        {% elif request.user.partner.brand_type == 'C' %}
+        <div class="mx-auto border border-success add-fabric lead pointer m-5" id="acceptOrder" 
+        onclick="acceptcclothOrder({{order.id}})"> <span>Accept Order</span>
+        {% elif request.user.partner.brand_type == 'T' %}
+        <div class="mx-auto border border-success add-fabric lead pointer m-5" id="acceptOrder" 
+        onclick="acceptsclothOrder({{order.id}})"> <span>Accept Order</span>
+        {% endif %}
+        <p class="mx-auto text-muted lead accepted hidden border border-success m-5" 
+        id="accepted">Order Accepted, Yet to be delivered</p>
+    {% elif order.order_status == 'R' %}
+        <p class="mx-auto text-muted lead accepted border m-5">Delivery in progress</p>
+    {% else %}
+        <p class="mx-auto text-muted lead border m-5 accepted">Order Accepted, Yet to be delivered</p>
+        {% if request.user.partner.brand_type == 'F' %}
+        <div class="mx-auto border border-success add-fabric lead pointer" onclick="readyfabricOrder({{order.id}})"> <span>
+            Click this button if this order is ready for delivery
+        </span></div>
+        {% elif request.user.partner.brand_type == 'C' %}
+        <div class="mx-auto border border-success add-fabric lead pointer" onclick="readycclothOrder({{order.id}})"> <span>
+            Click this button if this order is ready for delivery
+        </span></div>
+        {% elif request.user.partner.brand_type == 'T' %}
+        <div class="mx-auto border border-success add-fabric lead pointer" onclick="readysclothOrder({{order.id}})"> <span>
+            Click this button if this order is ready for delivery
+        </span></div>
+        {% endif %}
+            
+    {% endif %}
+{% endif %}

@@ -4,135 +4,16 @@
 <link rel="stylesheet" href="{% static 'main/css/welcome.css' %}">
 {% endblock %}
 
-{% block header %}
-<header tabindex="0">
-        <div class="header-container" id="header" style="top: 0em">
-            <div id="sidebartoggle" class="sidebartoggle" onclick="toggleSidebar()">
-                <div class='toggleline' id="toggleline1"></div>
-                <div class='toggleline' id="toggleline2"></div>
-                <div class='toggleline' id="toggleline3"></div>
-            </div>        
-            <div class="logo" tabindex="0">
-                <a href="{% url 'main:welcome' %}" class="black-link small-cap">L'AYO</a>
-            </div>
-            <nav class="header-nav nav1">    
-                <ul>
-                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li></a></li>
-                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F'%}">Women</a></li></a></li>
-                    <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li></a></li>
-                </ul>
-            </nav>
-            <nav class="header-nav nav2">
-                <ul>
-                    <li class="link-icon nav-item">
-                        <a class="link-icon" href="{% url 'main:fabrics' %}"><span>Fabrics</span></a>
-                        <ul class="dropdown" id='fabricDropdown' tabindex="0">
-                            <li><a href="{% url 'main:exfabricsfilter' filter='K' %}">Ankara</a></li>        
-                            <li><a href="{% url 'main:exfabricsfilter' filter='A' %}">Adire</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='K' %}">Aso Oke</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='T' %}">Atiku</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='S' %}">Silk</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='L' %}">Lace</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='B' %}">Brocades</a></li>
-                            <li><a href="{% url 'main:exfabricsfilter' filter='V' %}">Velvet</a></li>
-                        </ul>    
-                    </li>                       
-                    <!--<li class="link-icon nav-item"><a href="{% url 'main:tailors_list' %}" class="link-icon"><span>Fashion Designers</span></a></li>-->
-                </ul>
-            </nav>
-            <nav class="header-nav nav3">
-                <ul>
-                    <li title="help" class="small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>
-                    <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
-                </ul>    
-            </nav>
-            {% if request.user.is_authenticated %}   
-            {% for group in request.user.groups.all %}
-                <div class="dropdown profileDropdown" tabindex="0">
-                    <span class="glyphicon glyphicon-user"></span>My Profile
-                    <div class="drop-arrow">
-                        <div class="div1"></div>
-                        <div class="div2"></div>
-                        <div class="div3"></div>
-                    </div>
-                    {% if group.name == 'Customers' %}
-                        <ul class="drop-item hidden profileItems">
-                            <li><a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}">Account</a></li>
-                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
-                            <li><a href="{% url 'main:auth' %}">Wishlist</a></li>        
-                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
-                        </ul>
-                    {% elif group.name == 'Tailors' %}
-                        <ul class="drop-item hidden profileItems">
-                            <li><a href="{% url 'main:tailorProfile' tailor_id=request.user.tailor.id %}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
-                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
-                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
-                        </ul>
-                    {% elif group.name == 'Sellers' %}
-                        <ul class="drop-item hidden profileItems">
-                            <li><a href="{% url 'main:sellerProfile' seller_id=request.user.seller.id %}">Account</a></li>
-                            <li><a href="{% url 'main:auth' %}">Orders</a></li>
-                            <li><a href="{% url 'main:logout' %}">Logout</a></li>
-                        </ul>
-                    {% endif %}    
-                </div>    
-            {% empty %}
-                <div class="dropdown username pc" id='profileDropdown' tabindex="0">
-                    <span class="glyphicon glyphicon-user"></span> {{ request.user }}/nonuser
-                    <div class="drop-arrow">
-                        <div class="div1"></div>
-                        <div class="div2"></div>
-                        <div class="div3"></div>
-                    </div>
-                    <ul class="drop-item hidden" id="profileItems">
-                        <li><a href="{% url 'main:auth' %}">Account</a></li>    
-                        <li><a href="{% url 'main:auth' %}">Orders</a></li>
-                        <li><a href="{% url 'main:auth' %}">Wishlist</a></li>
-                        <li><a href="{% url 'main:logout' %}">Logout</a></li>
-                    </ul>
-                </div>
-            {% endfor %}
-            {% else %}
-                <div class="dropdown profileDropdown" tabindex="0">
-                    <span class="glyphicon glyphicon-user"></span> Profile
-                    <div class="drop-arrow">
-                        <div class="div1"></div>
-                        <div class="div2"></div>
-                        <div class="div3"></div>
-                    </div>
-                    <ul class="drop-item hidden profileItems">
-                        <li><a href="{% url 'main:auth' %}">Sign in</a></li>    
-                        <li><a href="{% url 'main:auth' %}">Sign up</a></li>
-                    </ul>
-                </div>
-            {% endif %}
-            <div class='sidebar closed' id='sidebar'>    
-            
-            {% block sidenav %}    
-            <ul>
-                <li title="shop" class="header-icon"><a class="link-icon" href="{% url 'main:shop' %}">Shop</a></li>
-                </br></br>
-                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
-                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
-                <li title="shop" tabindex="0"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
-                </br>
-                <li class="link-icon nav-item" tabindex="0">Fabrics</li>
-                
-                <!--<li class="link-icon nav-item" tabindex="0"><a href="{% url 'main:tailors_list' %}" class="link-icon">Fashion Designers</a></li>-->
-                </br>
-                <li title="help" class="header-icon small-icon small-cap"><a class="link-icon" href="{% url 'main:welcome' %}#faq" onclick="scrollV()">faq</a></li>
-            </ul>
-            {% endblock %}    
-            </div>
-        </div>
-    </header>
-{% endblock %}
 {% block main %}
-<div class="popauth no-display" id="popauth">
+<div class="border rounded position-fixed bottom-0 end-0 no-display popauth " id="popauth">
         
 </div>
-<p class="random1 random"> Your dream clothing </p>
+<p class="random1 random small-cap"> your dream clothing </p>
 <div class="wlcPic" id="slideShow">
+    <div class="slideimg">
+        <img src="{% static 'main/images/Layo/welcome_cover.jpg' %}">
+    </div>    
+    <!--
     <div id="wrap">
         <div class="slideimg" id="slide1">
             <img src="{% static 'main/images/Layo/IMG-20220109-WA0005.jpg' %}">
@@ -150,27 +31,44 @@
             <img src="{% static 'main/images/Layo/IMG-20220109-WA0006.jpg' %}">
             <h1><span> Attractive designs </span></h1>
         </div>
-    </div>
+    </div>-->
 </div>    
 <div class="page-content">
-    <p class="random2 random"> Made just for you <i class="bi-lightning-charge"></i></p>     
-        
+    <p class="random2 random small-cap"> made just for you</p>     
     <div class="catwrapper">
         <div class="row category">
-            <div class=" col-lg-4 col-6 category-item">
-                <img src="{% static 'main/images/Layo/IMG-20220109-WA0005.jpg' %}">
+            <div class=" col-4 category-item first-item">
+                <div class="cat-image">
+
+                </div>        
                 <span class="caption"> Select the finest fabrics </span>
-                <button class="box btn-primary"> Shop </button>
+                {% if not request.user.partner %}
+                <div class="button-wrapper">
+                    <a href="{% url 'main:fabrics' %}"><button class="box btn btn-primary"> Shop </button></a>
+                </div>
+                {% endif %}
             </div>
-            <div class="col-lg-4 col-6 category-item">
-                <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
+            <div class="col-4 category-item second-item">
+                <div class="cat-image">
+
+                </div>    
                 <span class="caption"> Discover the best tailors and fashion designers </span>
-                <button class="box btn-primary"> Connect </button>
+                {% if not request.user.partner %}
+                <div class="button-wrapper">
+                    <a href="{% url 'main:tailors_list' %}"><button class="box btn"> Connect </button></a>
+                </div>
+                {% endif %}
             </div>
-            <div class="col-lg-4 col-6 category-item">
-                <img src="{% static 'main/images/Layo/IMG-20220109-WA0013.jpg' %}">
+            <div class="col-4 category-item last-item">
+                <div class="cat-image">
+
+                </div>
                 <span class="caption"> Make the latest style </span>
-                <button class="box btn-primary"> Style </button>
+                {% if not request.user.partner %}
+                <div class="button-wrapper">
+                    <a href="{% url 'main:shop' %}"><button class="box btn"> Style </button></a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -178,7 +76,7 @@
     {% if request.user == AnonymousUser %}   
     <div onclick="submit_form(this)">
         <form class="staticpopup invisible" id="staticpopup" method="GET" action="{% url 'main:popauth' %}">
-            Sew your clothes with L'ayo    
+            Sew your clothes with L'ayo
             <input type="hidden" name="thisform" value="signup">
         </form>
     </div>
@@ -186,51 +84,53 @@
     <div class="addinfo1 addinfo">
         <img src="{% static 'main/images/Layo/a537ee0bdc12183ac6e297976ac8b363.jfif' %}">
         <div>
-            <h2> Door to Door Delivery </h2>
-            <p> All from the comfort of your home </p>
+            <h2> Door to Door Delivery</h2>
+            <p class="my-2"> We pick, we deliver and we connect. 
+                Everything comes to you </p>
         </div>
     </div>
     <div class="addinfo2 addinfo">
         <div>
             <h2> All in one place </h2>
-            <p> Seamless and efficient service </p>
+            <p class="my-2"> The perfect material, flawless sewing and the voguish styles synchronised
+                in a seameles and efficient manner </p>
+            
         </div>
         <img src="{% static 'main/images/Layo/addinfo2.jfif' %}">
     </div>
 
-    <div class="container">
-        <h2 class="re-header"> We've got you covered </h2>
-        <div class="row re">
-            <div class="col re-item">
+    <div class="p-5 re-wrapper rounded">
+        <div class="re d-flex flex-column bg-white m-5 align-items-center justify-content-center p-5">
+            <div class="re-item text-center p-4 d-flex flex-column align-items-center">
                 <div>
-                    <h3>Within 7 days</h3>
-                    <p>Orders are guranteed to be delivered within 7days</p>
-                    <p class="learn-more">learn more ></p>
-                </div>
-                <div>
-                    <i class="bi-minecart"></i>
+                    {% for val in '1234' %}
+                        <i class="bi-star-fill rating"></i>
+                    {% endfor %}
+                    <i class="bi-star-half rating"></i>
+                    <h5>Peer Reviewed</h5>
+                    <p>Each service rated by you, the customers</p>
                 </div>
             </div>
-            <div class="col re-item">
+            <div class="re-item re-item2 text-center p-4 d-flex flex-column align-items-center">
+                <div class="re-item-image">
+
+                </div>    
                 <div>
-                    <h3>Best Tailors</h3>
-                    <p>Our tailors are well seasoned and experienced</p>
-                    <p class="learn-more">learn more ></p>
+                    <h5>Escrow payments</h5>
+                    <p>We will hold payment until specific performance</p>
                 </div>
-                <img src="{% static 'main/images/Layo/IMG-20220109-WA0003.jpg' %}">
             </div>
-            <div class="col re-item">
+            <div class="re-item re-item3 text-center d-flex flex-column align-items-center p-4">
+                <div class="re-item-image">
+
+                </div>        
                 <div>
-                    <h3>Protected Financial</h3>
-                    <p>............................</p>
-                    <p class="learn-more">learn more ></p>
-                </div>
-                <div>
-                    <i class="bi-shield-check"></i>
+                    <h5>10-day Guarantee</h5>
+                    <p>We ensure delivery within 10 days</p>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
 {% endblock %}
 {% block scripts %}

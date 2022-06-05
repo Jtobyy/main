@@ -7,6 +7,18 @@ let j = 0;
 slideimgs = document.getElementsByClassName('slideimg')
 first = document.getElementById('slide1').classList.add('visible')
 
+$('#profileDropdown').popover({    
+    container: 'body',
+    html: true,
+    content: $('#profileDropdownContent').html()
+  })
+  $('#popFabrics').popover({
+    container: 'body',
+    html: true,
+    title: $('#title').html(),
+    content: $('#fabricsDropdownContent').html(),
+    trigger: 'focus'
+})
 setInterval(() => {
     if (i == 0) {    
         slideimgs[3].classList.remove('visible')    
@@ -34,19 +46,6 @@ function showLoading() {
 function removeLoading() {
     $('.loading').addClass('no-display');
 }
-
-//15000
-/*
-gapi.load('auth2', function() {
-    gapi.auth2.init();
-})*/
-$('.profileDropdown').hover(
-    () => { $('.profileItems').removeClass('hidden') },
-    () => { $('.profileItems').addClass('hidden') }
-)
-$('.profileItems').mouseover(
-    () => { $('.profileItems').removeClass('hidden') }
-)
 }
 
 function scrollV() {
@@ -63,14 +62,4 @@ function scrollV() {
         e.preventDefault()
     })
     }
-}
-
-function submit_form(el) {       
-    showLoading()    
-    form = document.getElementById('staticpopup')
-    $.get('popauth', function(page, textStatus) {    
-        $('#popauth').toggleClass('no-display');
-        $('.popauth').html(page);
-        removeLoading();
-    });
 }

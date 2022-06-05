@@ -1,75 +1,54 @@
 .profile {
-    height: 80vh;
     border-bottom: 1px solid black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90vw;
-}
-.profile_pic {
-    height: 60vh;
-    flex: 1;
 }
 .profile_pic img {
-    border-radius: 30px;
+    height: 300px;    
+    width: 300px;
 }
 .info {
     position: relative;    
     left: 30px;
     flex: 2;  
     background-color: transparent;
-    position: relative;
     padding: 50px;
 }
 .info-company {
     font-size: 3em;
-    color: var(--themecolor);    
+}
+.rating {
+    font-size: 1.2em;    
+    display: flex;
+    color: rgb(247, 180, 55);
+    gap: 4px;
 }
 .spec-info {
-    color: var(--themecolor);
     font-size: 2em;
     width: fit-content;
     padding: 10px 0;
 }
-.profile span {
-    color: black;
+.spec-info span {
+    color: var(--oldthemecolor);
 }
-.contact-table {
-    font-size: 1.1em;
-    color: gray;
-}
-.contact-table span {
-    color:black;
-}
-.contact-table td {
-    padding: 5px;
-}
-.profile h3 {
-    font-size: 2em;
-    color: var(--themecolor);
-}
-.works-header {
-    display: flex;
+.market-header {
     gap: 5px;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    font-weight: l00;
+    box-shadow: 0 0 max(100vh, 100vw) rgba(0, 0, 0, .12);
 }
 .bi-grid-3x3-gap {
-    margin-top: -4px;    
+    margin-top: -10px;
+    font-size: 1.3em;
 }
 .showitem {
     margin-bottom: 3.5em;
-}
-.mycol {
-    height: 60vh;
 }
 .showitem img {
     object-fit: fill;
     height: 50vh;
 }
-.clothe-info {
+.showitem img:hover {
+    filter: brightness(95%);
+    transition: filter 0.5s;
+}
+.cloth-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,87 +58,26 @@
     font-size: 2em;
     align-items: center;
 }
-.rating {
-    font-size: 1.2em;    
-    display: flex;
-    color: rgb(247, 180, 55);
-    gap: 4px;
-}
-.dim {
-    z-index: 1;
-    display: flex;
-}
-.pimage {
-    height: 50%;
-    border-radius: 50%;
-    margin-top: 80px;
-    align-self: flex-start;
-    object-fit: contain;
-}
-.display {
-    text-align: center;
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    height: 90vh;
-    background-color: rgb(29,34,38);
-    border-radius: 10px;
-    color: rgb(203 83 83);
-    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
-    width: 70%;
-    z-index: 3;
-    margin-top: 1em;
-    position: fixed;
-    transition: all 0.3s;
-}
-.display_hidden {
-    display: none;
-}
 
-@media screen and (max-width: 850px) {
-    .profile_pic{
-        flex: 2;    
-    } 
-}    
-@media screen and (max-width: 650px) {
-    .profile_pic{
-        height: 50vh;
-    } 
-}       
-@media screen and (max-width: 650px) {
-.info {
-    font-size: .8em;
-}    
-}
-@media screen and (max-width: 550px) {
-    .info {
-        font-size: .6em;
-    }
-    .profile_pic {
-        flex: 3;
-    }
-}
 @media screen and (max-width: 400px) {
-    .profile_pic {
-        flex: 2;
-        height: 40vh;
-    }    
-    .info {
-        padding: 0px;
-        font-size: .4em;
-    }   
-    .profile {
-        padding: 0 !important;
-        margin-top: -80px;
+    .profile_pic img {
+        width: 200px;
+        height: 200px;
     }
-}    
-@media screen and (max-width: 300px) {    
-    .profile_pic {
-        flex: 2;
-        height: 30vh;
-    }    
+
+}
+@media screen and (max-width: 280px) {
+    .profile_pic img {
+        width: 150px;
+        height: 150px;
+    }
     .info {
-        padding: 0px;
-        font-size: .4em;
-    }   
-}    
+        padding: 20px;
+    }
+    .profile {
+        font-size: .8em;
+    }        
+    .bi-grid-3x3-gap {
+        font-size: 1.5em;
+    }    
+}
