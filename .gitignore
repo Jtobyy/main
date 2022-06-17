@@ -12,7 +12,7 @@ node_modules
 pickle*
 *.pickle
 Fabric*
-Partner*
+Partner/*
 Tailor*
 ID*
 media

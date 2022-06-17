@@ -1,0 +1,202 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="form_wrapper">
+    <div class="steps position-relative d-flex flex-row justify-content-center align-items-center">
+        <div class="step">
+            <div class="circle circle1">1</div>    
+            <p>Business Information</p>
+        </div>
+        <hr class="step-line">
+        <div class="step">
+            <div class="circle circle2">2</div>    
+            <p>Seller/Tailor Profile</p>
+        </div>
+        <hr class="step-line">
+        <div class="step">
+            <div class="circle circle3">3</div>    
+            <p>Specialization</p>
+        </div>
+        <hr class="step-line">
+        <div class="step">
+            <div class="circle circle4">4</div>    
+            <p>Bank Details</p>
+        </div>
+    </div>
+    <form method="POST" action="{% url 'main:partner_reg' %}" enctype="multipart/form-data">
+        {% csrf_token %}    
+        <div class="form-step step1">
+            <h4 class="form-header">Business Information</h4>
+            <div class="form-items-wrapper">
+                <div class="form-group form-item">
+                    <label for="business_entity">Business Entity</label>
+                    <select class="form-control" id="business_entity" name="business_entity" required>
+                        <option disabled default class="form-control">Business Entity</option>  
+                        <option value="S">Sole Proprietorship</option>  
+                        <option value="P">Partnership</option>  
+                        <option value="C">Corporation</option>  
+                    </select>    
+                </div>
+                <div class="form-group form-item">
+                    <label for="business_name">Business Name</label>    
+                    <input class="form-control" type="text" id="business_name" name="business_name" required>
+                </div>    
+                <div class="form-group form-item">
+                    <label for="email">Business Email</label>    
+                    <input class="form-control" type="email" id="email" name="email" required>
+                </div>    
+                <div class="form-group form-item">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" value="" name="address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="city">City</label>
+                      <input type="text" class="form-control" id="city" name="city" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="state">State</label>
+                      <select id="state" class="form-control" name="state">
+                        <option default>Lagos</option>    
+                        <option value="abi">Abia</option>
+                        <option value="ogu">Ogun</option>
+                        <option value="kog">Kogi</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="zip">Zip</label>
+                      <input type="text" class="form-control" id="zip" name="zipcode">
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrapper1">
+                <div class="next btn btn-primary" tabindex="0">Next</div>
+            </div>
+        </div>
+        <div class="form-step step2">
+            <h4 class="form-header">Seller/Tailor Profile</h4>
+            <div class="form-items-wrapper">
+                <div class="form-group form-item">
+                    <label for="brand_name">Brand Name</label>
+                    <input class="form-control" type="text" id="brand_name" name="brand_name" required>
+                </div>
+                <div class="full-name">
+                    <p>Name of Legal Representative</p>        
+                    <div class="form-group form-item">                        
+                        <label for="first_name">First Name</label>
+                        <input class="form-control" type="text" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="form-group form-item">                        
+                        <label for="other_name">Other Name</label>
+                        <input class="form-control" type="text" id="other_name" name="other_name" >
+                    </div>
+                    <div class="form-group form-item">                        
+                        <label for="last_name">Last Name</label>
+                        <input class="form-control" type="text" id="last_name" name="last_name" required>
+                    </div>
+                </div>
+                <div class="valid-id">
+                    <p>Upload a valid ID card (PVC, Driver's License, NIN, International passport or CAC Incorporation certificate if need be)</p>    
+                    <div class="form-group form-item">
+                        <label for="img"></label>
+                        <input class="form-control" type="file" id="img" name="valid_id" accept="image/*"/>
+                    </div>
+                </div>
+                <div class="valid-id">
+                    <p>Passport photograph</p>    
+                    <div class="form-group form-item">
+                        <label for="img"></label>
+                        <input class="form-control" type="file" id="img" name="profile_image" accept="image/*"/>
+                    </div>
+                </div>
+                <div class="form-group form-item">
+                    <label for="tin">TIN number</label>
+                    <input class="form-control" type="text" id="tin" name="tin" required>
+                </div>  
+                <div class="form-group form-item">
+                    <label for="vat">VAT number</label>
+                    <input class="form-control" type="text" id="vat" name="vat" required>
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <div class="previous btn btn-primary" tabindex="0">Previous</div>    
+                <div class="next btn btn-primary" tabindex="0">Next</div>
+            </div>
+        </div>
+        <div class="form-step step3">
+            <h4 class="form-header">Specialization</h4>
+            <div class="form-items-wrapper">
+                <div class="form-group form-item">
+                    <label for="brand_type">Brand type</label>
+                    <select class="form-control" id="brand_type" name="brand_type" required>
+                        <option disabled default class="form-control">Brand type</option>    
+                        <option default class="form-control" value="F">Fabrics</option>    
+                        <option class="form-control" value="T">Tailor</option>    
+                        <option class="form-control" value="C">Custom Made</option>    
+                    </select>    
+                </div>
+                <!--
+                <div class="checklist">    
+                    <p>Select what you deal in</p>    
+                    <div class="form-group form-item">
+                        <label for="tailor" class="pre">Tailor    </label>
+                        <input type="checkbox">
+                    </div>
+                    <div class="form-group form-item">
+                        <label for="fabrics" class="pre">Fabrics </label>
+                        <input type="checkbox">
+                    </div>
+                    <div class="form-group form-item">
+                        <label for="clothes" class="pre">Clothes</label>
+                        <input type="checkbox">
+                    </div>    
+                </div>
+                -->
+            </div>
+            <div class="btn-wrapper">
+                <div class="previous btn btn-primary" tabindex="0">Previous</div>        
+                <div class="next btn btn-primary" tabindex="0">Next</div>
+            </div>
+        </div>
+        <div class="form-step step4">
+            <h4 class="form-header">Bank details</h4>    
+            <div class="form-items-wrapper">
+                <div class="form-group form-item">
+                    <label for="bank">Bank</label>
+                    <select class="form-control" id="bank" name="bank" required>
+                        <option disabled default class="form-control">Bank</option>  
+                        <option value="eco">Eco bank</option>    
+                        <option value="acc">Access bank</option>      
+                        <option value="fid">Fidelity bank</option>    
+                        <option value="fir">First bank</option>    
+                        <option value="uni">Union bank</option>    
+                        <option value="uba">UBA bank</option>    
+                    </select>    
+                </div>
+                <div class="form-group form-item">
+                    <label for="account_number">Account Number</label>    
+                    <input class="form-control" type="text" id="account_number" name="account_number" required>
+                </div>    
+                <div class="form-group form-item">
+                    <label for="account_name">Account Name</label>
+                    <input class="form-control" type="text" id="account_name" name="account_name" required>
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <div class="previous btn btn-primary" tabindex="0">Previous</div>        
+                <button class="submit btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+        <p class="nb text-muted" style="font-size: 1.3em;"><span style="color: red;">*</span>Please fill all fields before submitting</p>
+    </form>
+</div>
+{% endblock %}
+{% block links %}
+
+<link rel="stylesheet" href="{% static 'main/css/partner_reg.css' %}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'main/js/partner_reg.js' %}"></script>
+{% endblock %}

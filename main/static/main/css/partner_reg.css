@@ -1,0 +1,140 @@
+.form_wrapper {
+    width: 100%;
+    min-height: 80vh;
+    padding: 10px 5vw;
+}
+.steps {
+    padding: 30px;
+}
+.step {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    height: 60px;
+}
+.step-line {
+    background-color: #807b7b; 
+    margin-left: 0px;
+    width: 230px;
+}
+.circle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    text-align: center;
+    padding: 0px;
+    color: white
+}
+.step:nth-child(1) .circle{
+    background-color: cornflowerblue;    
+}    
+.step:nth-child(3) .circle{
+    background-color:tomato;
+}    
+.step:nth-child(5) .circle{
+    background-color:aliceblue;
+    color: cornflowerblue;
+}    
+.step:last-child .circle{
+    background-color:lightgreen;
+    color: white;
+}    
+.form-items-wrapper {
+    padding: 50px;
+    box-shadow: 4px 4px 30px -10px grey; /*h-radius v-radius blur(blurs shadow) spread(increase shadow/blur) color
+    inset initial inherit*/
+}
+.form-item {
+    padding: 10px 20px;
+}
+.checklist, .full-name, .valid-id {
+    padding: 23px;
+}
+.no-color {
+    background-color: white;
+    color: black;
+}
+
+.form-header {    
+    font-weight: 600;
+    padding: 20px 0;
+    font-variant: small-caps;
+}
+.pre {
+    white-space: pre;
+}
+.bi-file-plus{
+    cursor: pointer;    
+    font-size: 3rem;
+}
+i span {
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+.btn-wrapper1 {
+    display: block;
+    background-color: purple;
+    text-align: right;
+}
+.btn-wrapper {
+    height: fit-content;
+    display: flex;
+    background-color: purple;
+    justify-content: space-between;
+}
+.next,
+.submit,
+.previous {
+    font-size: 1.2rem;    
+    margin: 50px;
+    padding: 10px;
+}
+.colorless {
+    background-color: white !important;
+    color: black !important;
+}
+.grey {
+    background-color: grey !important;
+    color: white !important;
+}
+.form-row {
+    margin-top: 30px;
+}
+.nb {
+    padding: 30px;
+}
+
+@media screen and (max-width: 350px) {
+    .step-line {
+        display: none;
+    }
+    .circle {
+        width: 30px;
+        height: 30px;
+    }
+    .steps {
+        padding: 0px;
+    }
+    .step p {
+        display: none;
+    }
+    .form-items-wrapper {
+        padding: 10px;
+    }
+    .form-group {
+        padding: 0;
+    }
+    .form-group select,
+    .form-group input {
+        height: 30px;    
+        padding: 0;    
+    }
+    .next,
+    .submit,
+    .previous {
+        font-size: 1.2em;    
+        margin: 20px;
+        padding: 5px;
+    }
+}
