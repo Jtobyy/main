@@ -32,6 +32,33 @@ a:hover {
 i {
   color: var(--oldthemecolor);
 }
+/* .custom-dropdown {
+  height: 100px;
+  margin-top: 70px;
+  width: 90px;
+}*/
+.profile-dropdown-title {
+  background-color: #5D7979;
+  color: white;
+  width: 80px;
+}
+.profile-dropdown {
+  background-color: white;
+  border-right: 1px solid #5D7979;
+  border-left: 1px solid #5D7979;
+}
+.profile-dropdown-item {
+  cursor: pointer;  
+  width: 80px;
+  border-top: 1px solid #5D7979;
+  transition: all .3s;
+}
+.profile-dropdown-item:hover {
+  background-color: rgba(93, 121, 121, .3) !important;
+}  
+.profile-dropdown-item a {
+  color: black !important;
+}
 .pointer {
   cursor: pointer;
 }
@@ -247,7 +274,7 @@ div.main {
   color: rgba(203, 83, 83, 1);
 }
 .contact i {
-  height: 40px;
+  font-size: 2em;
   color: var(--headercolor);
 }
 .contact i:hover {
@@ -309,9 +336,10 @@ div.main {
   display: none;
 }
 
-.bi-cart4 {
-  font-size: 1.4em;
-  padding: 12px;
+.bi-cart4,
+.bi-bag-dash {
+  font-size: 1.1em;
+  
   color: var(--oldthemecolor);
 }
 .popauth {
@@ -330,20 +358,26 @@ div.main {
 .popsign-in,
 .popsign-up {
   background-color: white;  
-  padding: 50px;
-  border-radius: 1px;
-  width: 40vw;
+  border-radius: 1px solid #C4C4C4;
 }
-.g-signin2 img{
-  width: 150px;  
-  cursor: pointer;
-  transition: all .5s;
+.popsign-in {
+  left: -140px;
+}
+.popsign-up {
+  left: -500px;
+  top: 70px;
+}
+.g-signin2 {
   filter:brightness(95%);
+  transition: all .5s;
 }
-.g-signin2 img:hover {
+.g-signin2:hover {
   filter:brightness(105%);
 }
-
+.g-signin2 img{
+  width: 30px;
+  /* cursor: pointer; */
+}
 .close-popauth {
   font-size: 3em;
   position: absolute;
@@ -518,11 +552,11 @@ div.main {
 }
 
 @media screen and (max-width: 700px) {
-  .popsign-in,
+  /* .popsign-in,
   .popsign-up {
     padding-left: 30px;
     padding-right: 30px;
-  }  
+  }   */
 }
 @media screen and (max-width: 600px) {
   .loading {
@@ -537,11 +571,11 @@ div.main {
     width: 75vw;
     left: 12vw;
   }    
-  .popsign-in,
+  /* .popsign-in,
   .popsign-up {
     padding-left: 20px;
     padding-right: 20px;
-  }    
+  }     */
 }
 @media screen and (max-width: 500px) {
   body {
@@ -560,19 +594,19 @@ div.main {
   .popsign-up {
     padding-top: 30px;
   }      
-  .popsign-up,
+  /* .popsign-up,
   .popsign-in {
     width: 50vw;
     padding-left: 10px ;
     padding-right: 10px;
-  }
+  } */
 }
 @media screen and (max-width: 350px) {
-  .popsign-in,
+  /* .popsign-in,
   .popsign-up {
     padding-left: 1px;
     padding-right: 1px;
-  }
+  } */
 } 
 
 @media only screen and (max-width: 300px) {  

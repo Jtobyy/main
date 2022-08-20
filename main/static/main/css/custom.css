@@ -1,0 +1,24 @@
+.br-0 {
+    border-right: 0px !important;
+}
+.bl-0 {
+    border-left: 0px !important;
+}
+.brad-10px {
+    border-radius: 10px;
+}
+.brad-15px {
+    border-radius: 15px;
+}
+.brad-20px {
+    border-radius: 15px;
+}
+.fs-1p2rem {
+    font-size: 1.2rem;
+}
+.fs-2rem {
+    font-size: 2rem;
+}
+.font-small {
+    font-size: small;
+}

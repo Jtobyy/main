@@ -1,25 +1,4 @@
 {% load static %}
-<p class="close-popauth" onclick="submit_form(this)">&times;</p>
-
-<form class="border border-light sign-in popsign-in" action="{% url 'main:login2' %}" method="POST">
-    {% csrf_token %}
-        <div class="form-group">
-            <input type="email" name="email" id="user_id" class="form-control-sm" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <input type="password" name="password" id="pass_id" class="form-control-sm" placeholder="Password">
-        </div>
-        <button type="submit" class="btn-sm btn-outline-dark mbtn">Sign in</button>
-        <div class="form-group" id="forgot_pass">
-            <a href="#">Forgot Password</a>
-        </div>
-    
-        <p>Or</p>
-        <div class="g-signin2" data-onsuccess="onSignIn">
-            <img src="{% static 'main/images/btn_google_signin_dark_pressed_web@2x.png' %}">
-        </div>
-        <input type="hidden" name="next" value="{{ request.GET.next }}"/>
-</form>
 
 <form id="sign-up" class="border border-success sign-up popsign-up needs-validation" novalidate action="{% url 'main:register2' %}" method="POST">
     {% csrf_token %}

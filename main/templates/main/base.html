@@ -24,6 +24,7 @@
         <link rel="stylesheet" href="{% static 'main/css/font/bootstrap-icons.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'main/css/custom.css' %}">
         
         {% block links %}
         {% endblock %}
@@ -68,12 +69,14 @@
             </div>
             <div class="logo" tabindex="0">    
                 <a href="{% url 'main:welcome' %}" class="black-link">
-                    <span>L’ayọ̀</span>
+                    <span>L’ay<span style="font-size: 1.2em;">ọ̀</span></span>
                     <img src="{% static 'main/images/Layo/transparentlogo.png' %}">
                 </a>    
             </div>
+            <!-- Display Women, Men or Kids category only if user is a visitor
+            or logged in as a customer -->
             {% for group in request.user.groups.all %}
-                {% if group.name == 'Customers' %}        
+                {% if group.name == 'Customers' %}
                     <nav class="header-nav nav1">    
                         <ul>
                             <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>    
@@ -85,8 +88,8 @@
             {% empty %}
                 <nav class="header-nav nav1">    
                     <ul>
-                        <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
                         <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
+                        <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
                         <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                     </ul>
                 </nav>
@@ -94,10 +97,12 @@
             
             <nav class="header-nav nav2">
                 <ul>
+                <!-- Display Search optin only if user is a visitor
+                or logged in as a customer -->    
                     {% for group in request.user.groups.all %}
-                    {% if group.name == 'Customers' %}    
+                    {% if group.name == 'Customers' %}
                         <li>
-                            <div class="input-group mb-3 search">
+                            <div class="input-group search">
                                 <input placeholder="Search..." class="form-control query"
                                 aria-label="Search" aria-describedby="search-text" id="query"p>    
                                 <div class="input-group-append">
@@ -106,6 +111,24 @@
                                 </div>
                             </div>    
                         </li>
+                    {% endif %}
+                    {% empty %}
+                        <li >
+                            <div class="input-group ">
+                                <input placeholder="Search..." class="form-control brad-15px"
+                                aria-label="Search" aria-describedby="search-text">
+                                <div class="input-group-append ">
+                                    <span class="input-group-text bg-white
+                                    brad-15px" id="search-text"><i  class="bi-search"></i>
+                                    </span>
+                                </div>
+                            </div>    
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <nav class="header-nav nav3">
+                    <ul>
                         <li class="link-icon nav-item" tabindex="0" >
                             <a id="popFabrics" class="link-icon" 
                             data-toggle="popover" tabindex="0">
@@ -128,42 +151,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                    {% endif %}
-                    {% empty %}
-                        <li>
-                            <div class="input-group mb-3">
-                                <input placeholder="Search..." class="form-control"
-                                aria-label="Search" aria-describedby="search-text">    
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="search-text"><i class="bi-search"></i></span>
-                                </div>
-                            </div>    
-                        </li>
-                        <li class="link-icon nav-item" tabindex="0" >
-                            <a id="popFabrics" class="link-icon" 
-                            data-toggle="popover" tabindex="0">
-                            <span>Fabrics</span></a>
-                            <a id="title" href="{% url 'main:fabrics' %}" class="hidden">Fabrics</a>
-                            <div id="fabricsDropdownContent" class="hidden">
-                                <div class="fabrics-dropdown-items">
-                                    <a href="{% url 'main:exfabricsfilter' filter='K' %}"><p>Ankara</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='A' %}"><p>Adire</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='O' %}"><p>Aso Oke</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='T' %}"><p>Atiku</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='S' %}"><p>Silk</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='L' %}"><p>Lace</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='B' %}"><p>Brocades</p></a>
-                                    <a href="{% url 'main:exfabricsfilter' filter='V' %}"><p>Velvet</p></a>
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-            <nav class="header-nav nav3">
-                    <ul>
+                        </li>    
+                        <li>    
+                        <a class="link-icon" href="{% url 'main:cart' %}">
+                            <i class="bi-bag-dash pr-1"></i>Bag</a>
+                        </li>    
                         <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>
+                        <!-- Display notifications only if user is logged in as a customer as a partner -->    
                         {% for group in request.user.groups.all %}
                         {% if group.name == 'Customers' %}
                             <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
@@ -177,55 +171,112 @@
                                     <i class="bi-bell text-info"></i>{% live_notify_badge badge_class="badge text-danger position-absolute" %}</a>
                             </li>
                         {% endif %}
-                        {% empty %}
-                            <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                         {% endfor %}
                     </ul>          
             </nav>
+            <!-- If user is authenticated, dropdown shows link to their settings etc. else, it show the signup popup-->
             {% if request.user.is_authenticated %}   
                 {% for group in request.user.groups.all %}
                     {% if group.name == 'Customers' %}    
-                        <div class="dropdown">
-                            <button class="btn btn-info dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" 
-                            aria-haspopup="true" aria-expanded="false">
+                        <div class=" position-relative pointer bg-danger">
+                            <div class="px-2 py-1 profile-dropdown-title" >
                                 Profile
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'main:custProfile' customer_id=request.user.customer.id %}">
-                                    Settings</a>
-                                <a class="dropdown-item" href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=orders">Orders</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'main:logout' %}">Logout</a>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="popover-wrapper">
-                            <img class="profile-image rounded-circle" src="{{ request.user.partner.profile_image.url }}" id="profileDropdown"
-                                data-placement="right" data-trigger="focus" data-toggle="popover" title="profile">
-                            <div id="profileDropdownContent" class="hidden">
-                                <div  class="popover-content">
-                                    <p class="popover-item"><i class="bi-gear"></i>
-                                        <a href="{% url 'main:partnerProfile' partner_id=request.user.partner.id %}">Settings</a>
-                                    </p>
-                                    <p class="popover-item"><a href="{% url 'main:logout' %}">Logout</a></p>
+                            <div class="profile-dropdown hidden mt-2 position-absolute">
+                                <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
+                                <div class="px-2 py-1 profile-dropdown-item">
+                                    <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"> Settings</a>
+                                </div>
+                                <div class="px-2 py-1 profile-dropdown-item">
+                                    <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=orders">Orders</a>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <div class="px-2 py-1 profile-dropdown-item">
+                                    <a href="{% url 'main:logout' %}">Logout</a>
                                 </div>
                             </div>
-                        </div>    
+                        </div>  
+                    {% else %}
+                        <div class=" position-relative pointer bg-danger">
+                            <div class="px-2 py-1 profile-dropdown-title" >
+                                Profile
+                            </div>
+                            <div class="profile-dropdown hidden mt-2 position-absolute">
+                                <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
+                                <div class="px-2 py-1 profile-dropdown-item">
+                                    <a href="{% url 'main:partnerProfile' partner_id=request.user.partner.id %}">Settings</a>
+                                </div>
+
+                                <div class="dropdown-divider"></div>
+                                <div class="px-2 py-1 profile-dropdown-item">
+                                    <a href="{% url 'main:logout' %}">Logout</a>
+                                </div>
+                            </div>
+                        </div>  
                     {% endif %}    
                 {% empty %}
                     {{ request.user.first_name|default:request.user }}
                 {% endfor %}
             {% else %}
-                <div class="dropdown">
-                    <button class="btn btn-info dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" 
-                    aria-haspopup="true" aria-expanded="false">
+                <div class=" position-relative">
+                    <div class="px-2 py-1 profile-dropdown-title pointer">
                         Profile
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'main:auth' %}">Sign in</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'main:auth' %}">Sign up</a>
                     </div>
+
+                    <form class="profile-dropdown hidden mt-2 popsign-in position-absolute pb-2 pt-4 px-4" action="{% url 'main:login2' %}" method="POST">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" name="email" id="user_id" class="form-control-sm" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="pass_id" class="form-control-sm" placeholder="Password">
+                            </div>
+                            <div class="form-group text-right w-100" id="forgot_pass">
+                                <a href="#" class="font-small text-muted">Forgot Password</a>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100 brad-20px">SIGN IN</button>
+                        
+                            <p class="text-center py-2 my-0">OR</p>
+                            <div class="g-signin2 font-small text-center bg-light 
+                            border border-dark
+                            brad-20px pointer" data-onsuccess="onSignIn">
+                                <img src="{% static 'main/images/google-icon.png' %}">
+                                Sign in with google
+                            </div>
+                            <p class="text-center fs-1p2rem mt-3 py-0 mb-0 pointer" id="link-to-create-account">Create Account</p>
+                            <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                    </form>
+                    
+                    <form class="border border-dark popsign-up hidden py-4 px-5
+                    position-absolute needs-validation" novalidate action="{% url 'main:register2' %}" method="POST">
+                        <span class="fs-2rem position-absolute pointer" style="right: 20px;  top: 10px;" onclick='hidePopup(this)'>&times;</span>
+                        <p>Create an account</p>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" name="first_name" class="form-control border-dark" placeholder="First name">        
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="last_name" class="form-control border-dark" placeholder="Last name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="user_email" class="form-control border-dark" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password1" id="user_password1" class="form-control border-dark" placeholder="Password">   
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password2" id="user_password2" class="form-control border-dark" placeholder="Confirm password">   
+                        </div>
+                        <button type="submit" onclick="validate()" class="btn 
+                        btn-primary brad-20px w-100 mbtn">Register</button>
+                        <p class="text-center py-2 my-0">OR</p>
+                        <div class="g-signin2 font-small text-center bg-light 
+                        border border-dark
+                        brad-20px pointer" data-onsuccess="onSignIn">
+                            <img src="{% static 'main/images/google-icon.png' %}">
+                            Sign up with google
+                        </div>
+                    </form>
                 </div>
             {% endif %}
             
@@ -256,6 +307,19 @@
             <div class="container align-items-start justify-content-start">
                 <div class="row">
                     <div class="col-sm-3 p-2">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-row justify-content-start logo1">
+                                <h5 class="footer-header">L’ayọ̀</h5>
+                                <img src="{% static 'main/images/Layo/transparentlogo.png' %}">
+                            </div>
+                            <div class="d-flex flex-row justify-content-start logo2">
+                                <h5 class="order-2">Nigeria</h5>
+                                <img class="order-1" src="{% static 'main/images/Layo/nigerialogo.jfif' %}">
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="col-sm-2 p-2">
                         <h5 class="footer-header">Doing Business</h5>
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
@@ -279,7 +343,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-sm-3 p-2">
+                    <div class="col-sm-2 p-2">
                         <h5 class="footer-header">The Company</h5>
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
@@ -297,7 +361,7 @@
                         </ul>
                     </div>
         
-                    <div class="col-sm-3 p-2">
+                    <div class="col-sm-2 p-2">
                         <h5 class="footer-header">Support</h5>
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
@@ -312,19 +376,9 @@
                         </ul>
                     </div>
 
-                    <div class="col-sm-3 p-2 d-flex flex-column">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex flex-row justify-content-start logo1">
-                                <h5 class="footer-header">L’ayọ̀</h5>
-                                <img src="{% static 'main/images/Layo/transparentlogo.png' %}">
-                            </div>
-                            <div class="d-flex flex-row justify-content-start logo2">
-                                <h5 class="order-2">Nigeria</h5>
-                                <img class="order-1" src="{% static 'main/images/Layo/nigerialogo.jfif' %}">
-                            </div>
-                        </div>
+                    <div class="col-sm-3 p-2 d-flex flex-column
+                    align-items-center justify-content-end text-center">
                         <div>
-                            <h5 class="footer-header">Contact us</h5>
                             <ul class="list-group list-group-horizontal">
                                 <li class="list-group-item mlgi contact"><a href=""><i class="bi-twitter"></i></a></li>
                                 <li class="list-group-item mlgi contact"><a href=""><i class="bi-whatsapp"></i></a></li>
@@ -332,6 +386,7 @@
                                 <li class="list-group-item mlgi contact"><a href=""><i class="bi-facebook"></i></a></li>
                                 <li class="list-group-item mlgi contact"><a href=""><i class="bi-tiktok"></i></a></li>
                             </ul>
+                            <h5 class="footer-header">CONTACT US</h5>
                         </div>
                     </div>
                 </div>

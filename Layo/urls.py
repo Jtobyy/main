@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 import notifications.urls
 
 urlpatterns = [
+    path('', include('main.urls')),    
     path('admin/', admin.site.urls),
     path('main/', include('main.urls', namespace='main')),
     #path('blog/', include('blog.urls', namespace='blog')),

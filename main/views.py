@@ -18,7 +18,7 @@ from .forms import RegForm, FabricForm, CustomClothForm, SewedClothForm
 from .models import CATEGORIES, CUSTOMCLOTHES, FABRICS, USERS, Cloth, CustomMadeOrder, FemaleCustomerMeasurement, MaleCustomerMeasurement, SewedClothOrder
 from .models import Customer, Fabric, Address, PendingReg, CustomMadeCloth, SewedCloth
 from .models import Partner, FabricOrder, FabricSeller, CustomMadeSeller, Tailor, BANK
-from .tokens import account_activation_token
+# from .tokens import account_activation_token
 from django.conf import settings
 import json
 import re
@@ -34,12 +34,18 @@ def mail_view(request, cloth_id):
     sender = Customer.objects.get(user=request.user.id)    
     send_mail(
             'New Cloth Order',
-            f'This is an order for this cloth ... by {request.user} with email address {request.user.email}\
-                and phone number {sender.phone_no}, from: {sender.address}',
+            
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[settings.RECIPIENT_ADDRESS],
             fail_silently=False
             )
+    # Send an email if account creation was successful
+    subject = 'New Cloth Order'
+    message = f'This is an order for this cloth ... by {request.user} with email address {request.user.email}\
+                and phone number {sender.phone_no}, from: {sender.address}',
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [request.user.email]
+    send_mail(subject, message, email_from, recipient_list, fail_silently=False)
     
     return render(request, 'main/cloth.html', None)
 
@@ -1280,15 +1286,16 @@ def add_partner_view(request, partner_id):
         messages.add_message(request, messages.SUCCESS, 'Profile already created, you can\
                     delete the pending request object to avoid further confusion')
         return redirect('/admin/main/partner')
-    '''send_mail(
-    'Account Created Successfully',
-    'Thank you for registering with us.\
-    Your registration at layongr has been approved, you can login now and start your journey'
-    Your username is your email address and defult password is {password},
-    settings.EMAIL_HOST_USER,
-    ['jtobi8161@gmail.com'],
-    fail_silently=False,
-    )'''
+
+    # Send an email if account creation was successful
+    subject = 'Account Created Successfully Thank you for registering with us.\
+        Your registration at layongr has been approved, you can login now and start your journey'
+
+    message = f'Your username is your email address and defult password is {password}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [partner.email]
+    send_mail(subject, message, email_from, recipient_list, fail_silently=False)
+    
 
     messages.add_message(request, messages.SUCCESS, "Profile Created Successfully")    
     return redirect('/admin/main/partner')

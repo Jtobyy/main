@@ -1,9 +1,28 @@
 $(document).ready(function () {
-   $('#profileDropdown').popover({    
-    container: 'body',
-    html: true,
-    content: $('#profileDropdownContent').html()
+  //  $('#profileDropdown').popover({    
+  //   container: 'body',
+  //   html: true,
+  //   content: $('#profileDropdownContent').html()
+  // })
+  // Displays profile dropdown when hovered and hides it when not
+  $('.profile-dropdown-title').hover((el) => {
+    // el.target return a DOM object ont a jquery object so removeClass won't work here
+    el.target.nextElementSibling.classList.remove('hidden')
   })
+  $('.profile-dropdown').mouseleave((el) => {
+    // el.target return a DOM object ont a jquery object so removeClass won't work here
+    $('.profile-dropdown').addClass('hidden');
+    // // Make sure parent to hide is not the profile's title
+    // arr = Array.from(el.target.parentElement.classList)
+    // if (!arr.find((n) => n=='dropdown')) {
+    //   console.log('got here')  
+    //   el.target.parentElement.classList.add('hidden')
+    // }
+  })
+  $('#link-to-create-account').click(() => {
+    $('.popsign-up').removeClass('hidden')
+  })
+
   $('#popFabrics').popover({
     container: 'body',
     html: true,
@@ -101,4 +120,9 @@ function submit_form(el) {
       $('.popauth').html(page);
       removeLoading();
   });
+}
+
+// Hides the parent of the element passed to it
+function hidePopup(e) {
+  e.parentElement.classList.add('hidden')
 }
