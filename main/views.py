@@ -29,28 +29,6 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.core.paginator import Paginator
 # from django.utils.encoding import force_bytes, force_text
 
-@login_required(login_url='main/login.html')
-def mail_view(request, cloth_id):
-    sender = Customer.objects.get(user=request.user.id)    
-    send_mail(
-            'New Cloth Order',
-            
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[settings.RECIPIENT_ADDRESS],
-            fail_silently=False
-            )
-    # Send an email if account creation was successful
-    subject = 'New Cloth Order'
-    message = f'This is an order for this cloth ... by {request.user} with email address {request.user.email}\
-                and phone number {sender.phone_no}, from: {sender.address}',
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [request.user.email]
-    send_mail(subject, message, email_from, recipient_list, fail_silently=False)
-    
-    return render(request, 'main/cloth.html', None)
-
-
-
 
 
 # sample views
@@ -1116,7 +1094,7 @@ def register_view(request):
         if request.method == "POST":
             form = RegForm(request.POST)
 
-            if form.is_valid():    
+            if form.is_valid():
                 user = form.save()    
                 if user == False:
                     messages.add_message(request, messages.ERROR, "Email already registered")    
@@ -1158,6 +1136,7 @@ def poplogin_view(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:        
             login(request, user)
+            messages.add_message(request, messages.SUCCESS, "Log in successful")    
             if (user.customer):
                 return redirect(request.META['HTTP_REFERER'])
             else:
@@ -1165,6 +1144,42 @@ def poplogin_view(request):
         else:
             messages.add_message(request, messages.ERROR, "Invalid username or password")
             return redirect(request.META['HTTP_REFERER'])
+
+def popregister_view(request):
+    if request.method == 'POST':
+        form = RegForm(request.POST)
+        if form.is_valid():
+            user = form.save()    
+            if user == False:
+                messages.add_message(request, messages.ERROR, "Email already registered")    
+                return redirect(f'/main/auth?thisform=signup')
+            username = user.username
+            user = authenticate(request, username=username, 
+                                password=request.POST['password1'])
+            # Create a customer profile for user after login
+            if user is not None:    
+                if request.POST.get('gender'):
+                    newcustomer = Customer(user=user, gender=request.POST.get('gender'))
+                    newcustomer.save()
+                else:
+                    newcustomer = Customer(user=user)
+                    newcustomer.save()
+                    login(request, user)
+                    messages.add_message(request, messages.SUCCESS, "Log in successful")
+                    return redirect("/main/")
+
+                if request.POST.get('gender') == 'M':
+                    measurement = MaleCustomerMeasurement(customer=newcustomer)
+                    measurement.save()
+                elif request.POST.get('gender') == 'F':
+                    measurement = FemaleCustomerMeasurement(customer=newcustomer)
+                    measurement.save()
+                login(request, user)
+                return redirect("/main/auth?thisform=measureopt")
+        else:
+            messages.add_message(request, messages.ERROR, f"{form.errors}")
+            return redirect(f'/main/auth?thisform=signup')
+
 
 
 def auth_view(request):
@@ -1228,6 +1243,14 @@ def partner_reg_view(request):
         new_reg.bank = request.POST['bank']   
         new_reg.account_name = request.POST['account_name']
         new_reg.account_number = request.POST['account_number']
+        subject = 'Account creation with L\'ayo'
+        message = 'Your business profile is under review. Thank you.'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['jtobi8161@gmail.com',]
+        try:
+            send_mail(subject=subject, message=message, from_email=email_from, recipient_list=recipient_list, fail_silently=False)
+        except:
+            pass
         new_reg.save()
 
         return redirect('/main/request_submitted')
@@ -1283,23 +1306,20 @@ def add_partner_view(request, partner_id):
             new_fabric_seller = FabricSeller(partner=partner)
             new_fabric_seller.save()
         pending_partner.delete()
-    except IntegrityError:
+        # Send an email if account creation was successful
+        subject = 'Account Created Successfully Thank you for registering with us.\
+            Your registration at layongr has been approved, you can login now and start your journey'
+
+        message = f'Your username is your email address and defult password is {password}'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [partner.email]
+        send_mail(subject=subject, message=message, from_email=email_from, recipient_list=recipient_list, fail_silently=False)
         messages.add_message(request, messages.SUCCESS, 'Profile already created, you can\
                     delete the pending request object to avoid further confusion')
         return redirect('/admin/main/partner')
-
-    # Send an email if account creation was successful
-    subject = 'Account Created Successfully Thank you for registering with us.\
-        Your registration at layongr has been approved, you can login now and start your journey'
-
-    message = f'Your username is your email address and defult password is {password}'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = [partner.email]
-    send_mail(subject, message, email_from, recipient_list, fail_silently=False)
-    
-
-    messages.add_message(request, messages.SUCCESS, "Profile Created Successfully")
-    return redirect('/admin/main/partner')
+    except IntegrityError as e:
+        messages.add_message(request, messages.ERROR, 'Email or Username already in use')
+        return redirect(request.META['HTTP_REFERER'])
 
 
 '''

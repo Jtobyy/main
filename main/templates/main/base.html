@@ -45,14 +45,14 @@
         {% elif message.tags == 'debug' %}
         <div class="fixed-top w-50 alert alert-secondary fade alert-dismissible show" role="alert">
             <p class="text-center">{{ message }}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="hidePopup(this)">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         {% else %}
         <div class="fixed-top w-50 alert alert-{{message.tags}} fade alert-dismissible show" role="alert">
             <p class="text-center"  >{{ message }}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="hidePopup(this)">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -163,13 +163,12 @@
                             <div class="px-2 py-1 profile-dropdown-item">
                                 <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=orders">Orders</a>
                             </div>
-                            <div class="dropdown-divider"></div>
                             <div class="px-2 py-1 profile-dropdown-item">
                                 <a href="{% url 'main:logout' %}">Logout</a>
                             </div>
                         </div>
                     </div>  
-                {% else %}
+                {% elif request.user.partner %}
                     <div class=" position-relative pointer bg-danger">
                         <div class="px-2 py-1 profile-dropdown-title" >
                             Profile
@@ -294,13 +293,13 @@
                         <h5 class="footer-header">Partner</h5>
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
-                                <a href="{% url 'main:fabrics' %}" class="footer-link">Sew with us</a>
+                                <a href="{% url 'main:partner' %}" class="footer-link">Sew with us</a>
                             </li>
                             <li class="list-group-item mlgi">
                                 <a href="{% url 'main:partner' %}" class="footer-link">Sell with us</a>
                             </li>
                             <li class="list-group-item mlgi">
-                                <a href="{% url 'main:tailors_list' %}" class="footer-link">Join our logistics</a>
+                                <a href="{% url 'main:partner' %}" class="footer-link">Join our logistics</a>
                             </li>
                         </ul>
                     </div>

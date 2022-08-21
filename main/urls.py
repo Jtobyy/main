@@ -16,7 +16,7 @@ urlpatterns = [
     path('tailors', views.tailors_list_view, name="tailors_list"),
     path('cloth_sample/<int:cloth_id>', views.cloth_sample_view, name="cloth_sample"),
     path('fabric_sample/<int:fabric_id>', views.fabric_sample_view, name="fabric_sample"),
-    path('mail/<int:cloth_id>', views.mail_view, name="sendmail"),
+    # path('mail/<int:cloth_id>', views.mail_view, name="sendmail"),
     path('profile/<int:partner_id>', views.external_profile_view, name="profile"),
     path('custProfile/<int:customer_id>', views.customer_profile_view, name="custProfile"),
     path('custProfileImage/', views.customer_profile_image_view, name="custProfileImage"),
@@ -46,7 +46,7 @@ urlpatterns = [
     path('login', views.login_view, name="login"),
     path('login2', views.poplogin_view, name="login2"),
     path('register', views.register_view, name="register"),
-    path('register2', views.poplogin_view, name="register2"),
+    path('register2', views.popregister_view, name="register2"),
     path('logout', views.logout_view, name="logout"),
     #path('index', views.home_view, name="home"),
 ]
