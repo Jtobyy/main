@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -338,11 +340,13 @@ class SewedClothOrder(models.Model):
 
 class FabricSeller(models.Model):
     partner = models.OneToOneField(Partner, on_delete=CASCADE, null=False)
-    specs = MultiSelectField(max_length=4, max_choices=4, choices=FABRICS)
+    specs = MultiSelectField(choices=FABRICS, max_choices=4, null=True)
+    rating = models.IntegerField("fabric seller's rating", choices=RATING, default=3)
 
 class CustomMadeSeller(models.Model):
     partner = models.OneToOneField(Partner, on_delete=CASCADE, null=False)
-    specs = MultiSelectField(max_length=4, max_choices=4, choices=CUSTOMCLOTHES)
+    specs = MultiSelectField(choices=CUSTOMCLOTHES, max_choices=4, null=True)
+    rating = models.IntegerField("custom made seller's rating", choices=RATING, default=3)
 
 class Tailor(models.Model):
     partner = models.OneToOneField(Partner, on_delete=CASCADE, null=False)

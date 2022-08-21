@@ -5,6 +5,7 @@ $(document).ready(function () {
   //   content: $('#profileDropdownContent').html()
   // })
   // Displays profile dropdown when hovered and hides it when not
+  $('.alert').alert()
   $('.profile-dropdown-title').hover((el) => {
     // el.target return a DOM object ont a jquery object so removeClass won't work here
     el.target.nextElementSibling.classList.remove('hidden')
@@ -29,7 +30,6 @@ $(document).ready(function () {
     content: $('#fabricsDropdownContent').html(),
   })
   $('.dropdown-toggle').dropdown()
-  $('.alert').alert()
   $('#search-text').click(() => {
     let searchLink = document.getElementById('search-link')
     query = $('#query').val()

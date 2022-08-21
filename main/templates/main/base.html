@@ -37,21 +37,21 @@
         <!--<li class="alert {{message.tags}} alert-dismissible fade show" role="alert">-->
         {% if message.tags == 'error' %}
         <div class="fixed-top w-50 alert alert-danger fade alert-dismissible show" role="alert">
-        <p class="text-center">{{ message }}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <p class="text-center">{{ message }}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="hidePopup(this)">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         {% elif message.tags == 'debug' %}
         <div class="fixed-top w-50 alert alert-secondary fade alert-dismissible show" role="alert">
-        <p class="text-center">{{ message }}</p>
+            <p class="text-center">{{ message }}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         {% else %}
         <div class="fixed-top w-50 alert alert-{{message.tags}} fade alert-dismissible show" role="alert">
-        <p class="text-center"  >{{ message }}</p>
+            <p class="text-center"  >{{ message }}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -75,32 +75,21 @@
             </div>
             <!-- Display Women, Men or Kids category only if user is a visitor
             or logged in as a customer -->
-            {% for group in request.user.groups.all %}
-                {% if group.name == 'Customers' %}
-                    <nav class="header-nav nav1">    
-                        <ul>
-                            <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>    
-                            <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
-                            <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
-                        </ul>
-                    </nav>
-                {% endif %}
-            {% empty %}
+            {% if not request.user.partner %}
                 <nav class="header-nav nav1">    
                     <ul>
-                        <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>
+                        <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='F' %}">Women</a></li>    
                         <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='M' %}">Men</a></li>
                         <li title="shop"><a class="link-icon" href="{% url 'main:exshopfilter' filter='B' %}">Kids</a></li>
                     </ul>
                 </nav>
-            {% endfor %}
+            {% endif %}
             
             <nav class="header-nav nav2">
                 <ul>
-                <!-- Display Search optin only if user is a visitor
+                <!-- Display Search option only if user is a visitor
                 or logged in as a customer -->    
-                    {% for group in request.user.groups.all %}
-                    {% if group.name == 'Customers' %}
+                    {% if not request.user.partner %}
                         <li>
                             <div class="input-group search">
                                 <input placeholder="Search..." class="form-control query"
@@ -112,19 +101,6 @@
                             </div>    
                         </li>
                     {% endif %}
-                    {% empty %}
-                        <li >
-                            <div class="input-group ">
-                                <input placeholder="Search..." class="form-control brad-15px"
-                                aria-label="Search" aria-describedby="search-text">
-                                <div class="input-group-append ">
-                                    <span class="input-group-text bg-white
-                                    brad-15px" id="search-text"><i  class="bi-search"></i>
-                                    </span>
-                                </div>
-                            </div>    
-                        </li>
-                    {% endfor %}
                 </ul>
             </nav>
             <nav class="header-nav nav3">
@@ -158,65 +134,59 @@
                         </li>    
                         <li title="help"><a class="link-icon" href="{% url 'main:welcome' %}#faq">Help</a></li>
                         <!-- Display notifications only if user is logged in as a customer as a partner -->    
-                        {% for group in request.user.groups.all %}
-                        {% if group.name == 'Customers' %}
+                        {% if request.user.customer %}
                             <a class="link-icon" href="{% url 'main:cart' %}"><i class="bi-cart4"></i></a>
                             <li class="position-relative">
                                 <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=inbox">
                                     <i class="bi-bell text-info"></i>{% live_notify_badge badge_class="badge text-danger position-absolute" %}</a>
                             </li>
-                        {% else %}        
+                        {% elif request.user.partner %}
                             <li class="position-relative">
                                 <a href="{% url 'main:partnerProfile' partner_id=request.user.partner.id %}?exsection=notifications">
                                     <i class="bi-bell text-info"></i>{% live_notify_badge badge_class="badge text-danger position-absolute" %}</a>
                             </li>
                         {% endif %}
-                        {% endfor %}
                     </ul>          
             </nav>
             <!-- If user is authenticated, dropdown shows link to their settings etc. else, it show the signup popup-->
-            {% if request.user.is_authenticated %}   
-                {% for group in request.user.groups.all %}
-                    {% if group.name == 'Customers' %}    
-                        <div class=" position-relative pointer bg-danger">
-                            <div class="px-2 py-1 profile-dropdown-title" >
-                                Profile
+            {% if request.user.is_authenticated %}
+                {% if request.user.customer %}    
+                    <div class=" position-relative pointer bg-danger">
+                        <div class="px-2 py-1 profile-dropdown-title" >
+                            Profile
+                        </div>
+                        <div class="profile-dropdown hidden mt-2 position-absolute">
+                            <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
+                            <div class="px-2 py-1 profile-dropdown-item">
+                                <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"> Settings</a>
                             </div>
-                            <div class="profile-dropdown hidden mt-2 position-absolute">
-                                <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
-                                <div class="px-2 py-1 profile-dropdown-item">
-                                    <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}"> Settings</a>
-                                </div>
-                                <div class="px-2 py-1 profile-dropdown-item">
-                                    <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=orders">Orders</a>
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <div class="px-2 py-1 profile-dropdown-item">
-                                    <a href="{% url 'main:logout' %}">Logout</a>
-                                </div>
+                            <div class="px-2 py-1 profile-dropdown-item">
+                                <a href="{% url 'main:custProfile' customer_id=request.user.customer.id %}?exsection=orders">Orders</a>
                             </div>
-                        </div>  
-                    {% else %}
-                        <div class=" position-relative pointer bg-danger">
-                            <div class="px-2 py-1 profile-dropdown-title" >
-                                Profile
+                            <div class="dropdown-divider"></div>
+                            <div class="px-2 py-1 profile-dropdown-item">
+                                <a href="{% url 'main:logout' %}">Logout</a>
                             </div>
-                            <div class="profile-dropdown hidden mt-2 position-absolute">
-                                <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
-                                <div class="px-2 py-1 profile-dropdown-item">
-                                    <a href="{% url 'main:partnerProfile' partner_id=request.user.partner.id %}">Settings</a>
-                                </div>
+                        </div>
+                    </div>  
+                {% else %}
+                    <div class=" position-relative pointer bg-danger">
+                        <div class="px-2 py-1 profile-dropdown-title" >
+                            Profile
+                        </div>
+                        <div class="profile-dropdown hidden mt-2 position-absolute">
+                            <!-- <a class="custom-dropdown-item" href="{% url 'main:auth">Sign in</a> -->
+                            <div class="px-2 py-1 profile-dropdown-item">
+                                <a href="{% url 'main:partnerProfile' partner_id=request.user.partner.id %}">Settings</a>
+                            </div>
 
-                                <div class="dropdown-divider"></div>
-                                <div class="px-2 py-1 profile-dropdown-item">
-                                    <a href="{% url 'main:logout' %}">Logout</a>
-                                </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="px-2 py-1 profile-dropdown-item">
+                                <a href="{% url 'main:logout' %}">Logout</a>
                             </div>
-                        </div>  
-                    {% endif %}    
-                {% empty %}
-                    {{ request.user.first_name|default:request.user }}
-                {% endfor %}
+                        </div>
+                    </div>  
+                {% endif %}
             {% else %}
                 <div class=" position-relative">
                     <div class="px-2 py-1 profile-dropdown-title pointer">
@@ -304,38 +274,30 @@
             </main>
         </div>
         <footer class="footer">
-            <div class="container align-items-start justify-content-start">
-                <div class="row">
+            <hr />    
+            <div class="container m-0 w-100 py-0 pb-4 px-4 align-items-start justify-content-start">
+                <div class="row ">
                     <div class="col-sm-3 p-2">
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row justify-content-start logo1">
-                                <h5 class="footer-header">L’ayọ̀</h5>
+                                <h5 class="footer-header">L’ay<span style="font-size: 1.3em;">ọ̀</span></h5>
                                 <img src="{% static 'main/images/Layo/transparentlogo.png' %}">
                             </div>
                             <div class="d-flex flex-row justify-content-start logo2">
                                 <h5 class="order-2">Nigeria</h5>
-                                <img class="order-1" src="{% static 'main/images/Layo/nigerialogo.jfif' %}">
+                                <img class="order-1" src="{% static 'main/images/nigerian_flag.png' %}">
                             </div>
                         </div>    
                     </div>
 
                     <div class="col-sm-2 p-2">
-                        <h5 class="footer-header">Doing Business</h5>
+                        <h5 class="footer-header">Partner</h5>
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
-                                <a href="{% url 'main:fabrics' %}" class="footer-link">Success Stories</a>
+                                <a href="{% url 'main:fabrics' %}" class="footer-link">Sew with us</a>
                             </li>
                             <li class="list-group-item mlgi">
-                                <a href="{% url 'main:partner' %}" class="footer-link">Partner with us</a>
-                            </li>
-                            <li class="list-group-item mlgi">
-                                <a href="{% url 'main:tailors_list' %}" class="footer-link">Sew with us</a>
-                            </li>
-                            <li class="list-group-item mlgi">
-                                <a href="{% url 'main:tailors_list' %}" class="footer-link">Sell with us</a>
-                            </li>
-                            <li class="list-group-item mlgi">
-                                <a href="{% url 'main:tailors_list' %}" class="footer-link">Buy in Bulk</a>
+                                <a href="{% url 'main:partner' %}" class="footer-link">Sell with us</a>
                             </li>
                             <li class="list-group-item mlgi">
                                 <a href="{% url 'main:tailors_list' %}" class="footer-link">Join our logistics</a>
@@ -348,12 +310,6 @@
                         <ul class="list-group">
                             <li class="list-group-item mlgi">
                                 <a href="#!" class="footer-link">About us</a>
-                            </li>
-                            <li class="list-group-item mlgi">
-                                <a href="#!" class="footer-link">What we do</a>
-                            </li>
-                            <li class="list-group-item mlgi">
-                                <a href="#!" class="footer-link">Why we do it</a>
                             </li>
                             <li class="list-group-item mlgi">
                                 <a href="#!" class="footer-link">Our blog</a>
@@ -380,11 +336,11 @@
                     align-items-center justify-content-end text-center">
                         <div>
                             <ul class="list-group list-group-horizontal">
-                                <li class="list-group-item mlgi contact"><a href=""><i class="bi-twitter"></i></a></li>
-                                <li class="list-group-item mlgi contact"><a href=""><i class="bi-whatsapp"></i></a></li>
-                                <li class="list-group-item mlgi contact"><a href=""><i class="bi-instagram"></i></a></li>
-                                <li class="list-group-item mlgi contact"><a href=""><i class="bi-facebook"></i></a></li>
-                                <li class="list-group-item mlgi contact"><a href=""><i class="bi-tiktok"></i></a></li>
+                                <li class="list-group-item mlgi contact"><a href=""><img src="{% static '/main/images/pininterest_icon.png' %}" /></a></li>
+                                <li class="list-group-item mlgi contact"><a href=""><img src="{% static '/main/images/facebook_icon.png' %}" /></a></li>
+                                <li class="list-group-item mlgi contact"><a href=""><img src="{% static '/main/images/instagram_icon.png' %}" /></a></li>
+                                <li class="list-group-item mlgi contact"><a href=""><img src="{% static '/main/images/whatsapp_icon.png' %}" /></a></li>
+                                <li class="list-group-item mlgi contact"><a href=""><img src="{% static '/main/images/twitter_icon.png' %}" /></a></li>
                             </ul>
                             <h5 class="footer-header">CONTACT US</h5>
                         </div>

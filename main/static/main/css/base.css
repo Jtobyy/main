@@ -233,11 +233,18 @@ div.main {
 }
 
 .footer {
-  border-top: 0.5px solid black;
-  border-bottom: 0.5px solid black;
   position: relative;
   background-color: rgb(245,240,240);
-  padding: 30px;
+  padding: 0px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.footer hr {
+  border-color: black;
+}
+.footer .container {
+  
+  border-bottom: 1px solid black;
 }
 .footer-header {  
   font-weight: 600;
@@ -257,13 +264,13 @@ div.main {
   height: 100px !important;
 }
 .logo2 {
-  gap: 30px;
+  gap: 20px;
   margin-bottom: 20px;
 }
 .logo2 img {
   margin-top: -9px;
-  width: 50px !important;
-  height: 50px !important;
+  width: 40px !important;
+  height: 35px !important;
 }
 .footer-link{
   color:inherit;
@@ -272,6 +279,10 @@ div.main {
 
 .footer-link:hover {
   color: rgba(203, 83, 83, 1);
+}
+.contact img {
+  width: 35px;
+  height: 35px;
 }
 .contact i {
   font-size: 2em;

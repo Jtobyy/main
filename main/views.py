@@ -7,7 +7,7 @@ from django.db import IntegrityError
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import AnonymousUser, User, Group
+from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import hashers
 from django.core.mail import send_mail
@@ -1122,11 +1122,10 @@ def register_view(request):
                     messages.add_message(request, messages.ERROR, "Email already registered")    
                     return redirect(f'/main/auth?thisform=signup')
                 username = user.username
-                group = Group.objects.get(name='Customers')
-                group.user_set.add(User.objects.get(username = username))
                 user = authenticate(request, username=username, 
                                     password=request.POST['password1'])
-                if user is not None:
+                # Create a customer profile for user after login
+                if user is not None:    
                     if request.POST.get('gender'):
                         newcustomer = Customer(user=user, gender=request.POST.get('gender'))
                     else:
@@ -1138,7 +1137,7 @@ def register_view(request):
                         measurement = FemaleCustomerMeasurement(customer=newcustomer)
                     measurement.save()
                     login(request, user)
-                return redirect("/main/auth?thisform=measureopt")
+                    return redirect("/main/auth?thisform=measureopt")
             messages.add_message(request, messages.ERROR, f"{form.errors}")
             return redirect(f'/main/auth?thisform=signup')
         form = RegForm()
@@ -1159,15 +1158,13 @@ def poplogin_view(request):
         user = authenticate(request, username=email, password=password)
         if user is not None:        
             login(request, user)
-            group = request.user.groups.all()[0]
-            if (group.name == 'Customers'):
+            if (user.customer):
                 return redirect(request.META['HTTP_REFERER'])
             else:
                 return redirect("/main/")
         else:
             messages.add_message(request, messages.ERROR, "Invalid username or password")
             return redirect(request.META['HTTP_REFERER'])
-        
 
 
 def auth_view(request):
@@ -1194,8 +1191,7 @@ def login_view(request):
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)    
-                group = request.user.groups.all()[0]
-                if group.name == 'Customers':
+                if (user.customer):
                     try:
                         return redirect('/main/',next)
                     except UnboundLocalError:
@@ -1238,6 +1234,7 @@ def partner_reg_view(request):
     return render(request, 'main/partner_reg.html', None)
 
 def add_partner_view(request, partner_id):
+    # Create a new partner after review    
     pending_partner = PendingReg.objects.get(id = partner_id)
     partner = Partner()
     partner.business_entity = pending_partner.business_entity
@@ -1263,24 +1260,28 @@ def add_partner_view(request, partner_id):
     partner.account_name = pending_partner.account_name
     partner.account_number = pending_partner.account_number
 
-    for val in USERS:
-        if val[0] == partner.brand_type:
-            group = Group.objects.get(name=val[1])
-            break
     try:
+        # Create random password for the partner    
         password = partner.legal_rep_last_name.lower()+'admin2022'
+
         new_user = User.objects.create_user(username=partner.email,
                         password=password,
                         first_name=partner.legal_rep_first_name,
                         last_name=partner.legal_rep_last_name,
                         email=partner.email)
         new_user.save()
-        group.user_set.add(new_user)
         partner.user = new_user
         partner.save()
+        # Add partner to specific tables depending on their brand type
         if partner.brand_type == 'T':
             new_tailor = Tailor(partner=partner, specs='M')
             new_tailor.save()
+        elif partner.brand_type == 'C':
+            new_custom_made_seller = CustomMadeSeller(partner=partner)
+            new_custom_made_seller.save()
+        elif partner.brand_type == 'F':
+            new_fabric_seller = FabricSeller(partner=partner)
+            new_fabric_seller.save()
         pending_partner.delete()
     except IntegrityError:
         messages.add_message(request, messages.SUCCESS, 'Profile already created, you can\
@@ -1297,7 +1298,7 @@ def add_partner_view(request, partner_id):
     send_mail(subject, message, email_from, recipient_list, fail_silently=False)
     
 
-    messages.add_message(request, messages.SUCCESS, "Profile Created Successfully")    
+    messages.add_message(request, messages.SUCCESS, "Profile Created Successfully")
     return redirect('/admin/main/partner')
 
 
@@ -1349,13 +1350,12 @@ def change_user_pass(request):
             messages.add_message(request, messages.ERROR, 'Invalid password')
     else:
         messages.add_message(request, messages.ERROR, 'Old password incorrect')
-    customer_group = Group.objects.get(name='Customers')
-    if request.user in customer_group.user_set.all():
+    if request.user.cutomer:
         return redirect(f'/main/custProfile/{request.user.customer.id}')
     else:
         return redirect(f'/main/partnerProfile/{request.user.partner.id}')
     
-
+@login_required(login_url='main/login.html')
 def logout_view(request):
     logout(request)
     #messages.add_message(request, messages.SUCCESS, "Logged Out")

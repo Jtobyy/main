@@ -17,7 +17,7 @@ class RegForm(UserCreationForm):
         fields = ("first_name", "last_name", "email", "password1", "password2")
 
     def save(self, commit=True):
-        print(User.objects.values('email'))
+        # print(User.objects.values('email'))
         email = {'email': self.cleaned_data['email']}
         if email in User.objects.values('email'):
             return False
